@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Create Account — PawPal</title>
+
+
+<!-- GOOGLE FONTS -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- MAIN CSS -->
+
+<link
+    rel="stylesheet"
+    href="../css/style.css"
+>
+
+
+<style>
+
+    /* =====================================================
+       PAWPAL REGISTER PAGE
+    ===================================================== */
+
+
+    body {
+        min-height: 100vh;
+    }
+
+
+    /* =====================================================
+       AUTH LAYOUT
+    ===================================================== */
+
+    .register-page {
+
+        min-height:
+            calc(100vh - 82px);
+
+        display: grid;
+
+        grid-template-columns:
+            .9fr
+            1.1fr;
+
+        background: var(--cream);
+
+    }
+
+
+    /* =====================================================
+       LEFT DECORATIVE SIDE
+    ===================================================== */
+
+    .register-visual {
+
+        position: relative;
+
+        overflow: hidden;
+
+        min-height: 700px;
+
+        padding: 60px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+
+            radial-gradient(
+                circle at 20% 20%,
+                rgba(222,214,232,.65),
+                transparent 30%
+            ),
+
+            radial-gradient(
+                circle at 85% 75%,
+                rgba(244,222,160,.65),
+                transparent 32%
+            ),
+
+            var(--pink);
+
+    }
+
+
+    .register-visual::before {
+
+        content: "🐾";
+
+        position: absolute;
+
+        top: 40px;
+
+        left: 35px;
+
+        font-size: 110px;
+
+        opacity: .07;
+
+        transform: rotate(-20deg);
+
+    }
+
+
+    .register-visual::after {
+
+        content: "♡";
+
+        position: absolute;
+
+        right: -20px;
+
+        bottom: -55px;
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 230px;
+
+        color: var(--coral);
+
+        opacity: .07;
+
+    }
+
+
+    /* =====================================================
+       IMAGE CARD
+    ===================================================== */
+
+    .register-image-card {
+
+        width: min(440px, 90%);
+
+        height: 520px;
+
+        padding: 10px;
+
+        background:
+            rgba(255,255,255,.92);
+
+        border-radius: 35px;
+
+        box-shadow:
+            0 30px 75px
+            rgba(61,45,37,.15);
+
+        transform: rotate(3deg);
+
+        position: relative;
+
+        z-index: 2;
+
+        transition:
+            transform .4s ease,
+            box-shadow .4s ease;
+
+    }
+
+
+    .register-image-card:hover {
+
+        transform:
+            rotate(1deg)
+            translateY(-7px);
+
+        box-shadow:
+            0 38px 85px
+            rgba(61,45,37,.20);
+
+    }
+
+
+    .register-image-card img {
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: 27px;
+
+    }
+
+
+    /* =====================================================
+       IMAGE MESSAGE
+    ===================================================== */
+
+    .register-image-message {
+
+        position: absolute;
+
+        left: 25px;
+
+        right: 25px;
+
+        bottom: 25px;
+
+        padding: 16px 18px;
+
+        background:
+            rgba(255,255,255,.96);
+
+        border-radius: 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        box-shadow:
+            0 12px 30px
+            rgba(61,45,37,.12);
+
+    }
+
+
+    .register-message-icon {
+
+        width: 45px;
+
+        height: 45px;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: var(--yellow);
+
+        font-size: 22px;
+
+    }
+
+
+    .register-image-message strong {
+
+        display: block;
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 19px;
+
+    }
+
+
+    .register-image-message span {
+
+        display: block;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
+
+        line-height: 1.4;
+
+    }
+
+
+    /* =====================================================
+       RIGHT CONTENT
+    ===================================================== */
+
+    .register-content {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding:
+            60px 8%;
+
+    }
+
+
+    .register-box {
+
+        width: min(520px, 100%);
+
+    }
+
+
+    .register-label {
+
+        color: var(--coral);
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .register-box h1 {
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size:
+            clamp(42px, 5vw, 58px);
+
+        line-height: 1.05;
+
+        letter-spacing: -1.5px;
+
+        margin-top: 14px;
+
+    }
+
+
+    .register-box h1 em {
+
+        color: var(--coral);
+
+        font-weight: 500;
+
+    }
+
+
+    .register-intro {
+
+        color: var(--text-soft);
+
+        font-size: 15px;
+
+        line-height: 1.7;
+
+        margin-top: 15px;
+
+        max-width: 460px;
+
+    }
+
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
+    .register-form {
+
+        margin-top: 28px;
+
+    }
+
+
+    .form-row {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap: 15px;
+
+    }
+
+
+    .register-group {
+
+        margin-bottom: 17px;
+
+    }
+
+
+    .register-group label {
+
+        display: block;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .register-input-wrap {
+
+        position: relative;
+
+    }
+
+
+    .register-input-icon {
+
+        position: absolute;
+
+        left: 15px;
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+        font-size: 16px;
+
+        opacity: .65;
+
+    }
+
+
+    .register-group input,
+    .register-group select {
+
+        width: 100%;
+
+        height: 51px;
+
+        padding:
+            0 15px 0 43px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 13px;
+
+        background: white;
+
+        color: var(--text);
+
+        outline: none;
+
+        font-size: 14px;
+
+        transition: .25s;
+
+    }
+
+
+    .register-group select {
+
+        padding-left: 15px;
+
+        cursor: pointer;
+
+    }
+
+
+    .register-group input:focus,
+    .register-group select:focus {
+
+        border-color:
+            var(--coral);
+
+        box-shadow:
+            0 0 0 4px
+            rgba(233,130,104,.10);
+
+    }
+
+
+    .register-password-input {
+
+        padding-right: 50px !important;
+
+    }
+
+
+    .register-password-toggle {
+
+        position: absolute;
+
+        right: 13px;
+
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+        border: none;
+
+        background: transparent;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        opacity: .65;
+
+    }
+
+
+    /* =====================================================
+       ROLE SELECTOR
+    ===================================================== */
+
+    .role-title {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        margin-bottom: 9px;
+
+    }
+
+
+    .role-options {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .role-option {
+
+        position: relative;
+
+    }
+
+
+    .role-option input {
+
+        position: absolute;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+    }
+
+
+    .role-option label {
+
+        min-height: 78px;
+
+        padding: 10px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 15px;
+
+        background: white;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 3px;
+
+        cursor: pointer;
+
+        transition: .25s;
+
+    }
+
+
+    .role-option label span:first-child {
+
+        font-size: 23px;
+
+    }
+
+
+    .role-option label span:last-child {
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        color: var(--text-soft);
+
+    }
+
+
+    .role-option label:hover {
+
+        border-color:
+            var(--coral);
+
+    }
+
+
+    .role-option input:checked + label {
+
+        background:
+            var(--pink);
+
+        border-color:
+            var(--coral);
+
+        box-shadow:
+            0 5px 18px
+            rgba(233,130,104,.10);
+
+    }
+
+
+    .role-option input:checked + label span:last-child {
+
+        color:
+            var(--coral-dark);
+
+    }
+
+
+    /* =====================================================
+       TERMS
+    ===================================================== */
+
+    .terms {
+
+        display: flex;
+
+        align-items:
+            flex-start;
+
+        gap: 9px;
+
+        margin:
+            18px 0 20px;
+
+        color:
+            var(--text-soft);
+
+        font-size: 12px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .terms input {
+
+        margin-top: 3px;
+
+        flex-shrink: 0;
+
+        accent-color:
+            var(--coral);
+
+    }
+
+
+    .terms a {
+
+        color:
+            var(--coral);
+
+        font-weight: 600;
+
+        text-decoration: none;
+
+    }
+
+
+    .terms a:hover {
+
+        text-decoration: underline;
+
+    }
+
+
+    /* =====================================================
+       ERROR / SUCCESS MESSAGE
+    ===================================================== */
+
+    .register-message {
+
+        display: none;
+
+        padding:
+            11px 14px;
+
+        border-radius: 12px;
+
+        margin-bottom: 16px;
+
+        font-size: 13px;
+
+    }
+
+
+    .register-message.error {
+
+        background: #F9E4DE;
+
+        color: #8C4637;
+
+    }
+
+
+    .register-message.success {
+
+        background: #E5EFDF;
+
+        color: #58704F;
+
+    }
+
+
+    /* =====================================================
+       BUTTON
+    ===================================================== */
+
+    .register-submit {
+
+        width: 100%;
+
+        height: 54px;
+
+        border: none;
+
+        border-radius: 50px;
+
+        background:
+            var(--coral);
+
+        color: white;
+
+        font-size: 15px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: .3s;
+
+        box-shadow:
+            0 12px 25px
+            rgba(233,130,104,.18);
+
+    }
+
+
+    .register-submit:hover {
+
+        background:
+            var(--coral-dark);
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 17px 32px
+            rgba(233,130,104,.25);
+
+    }
+
+
+    /* =====================================================
+       BOTTOM LOGIN
+    ===================================================== */
+
+    .login-prompt {
+
+        text-align: center;
+
+        color:
+            var(--text-soft);
+
+        font-size: 14px;
+
+        margin-top: 20px;
+
+    }
+
+
+    .login-prompt a {
+
+        color:
+            var(--coral);
+
+        font-weight: 700;
+
+        text-decoration: none;
+
+    }
+
+
+    .login-prompt a:hover {
+
+        text-decoration: underline;
+
+    }
+
+
+    .register-back {
+
+        display: flex;
+
+        justify-content: center;
+
+        margin-top: 20px;
+
+    }
+
+
+    .register-back a {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        color:
+            var(--text-soft);
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+    }
+
+
+    .register-back a:hover {
+
+        color:
+            var(--coral);
+
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media(max-width: 950px) {
+
+        .register-page {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .register-visual {
+
+            min-height: 430px;
+
+            padding: 40px;
+
+        }
+
+
+        .register-image-card {
+
+            width: 300px;
+
+            height: 370px;
+
+        }
+
+
+        .register-content {
+
+            padding:
+                65px 25px
+                80px;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media(max-width: 600px) {
+
+        .register-visual {
+
+            min-height: 350px;
+
+        }
+
+
+        .register-image-card {
+
+            width: 245px;
+
+            height: 300px;
+
+        }
+
+
+        .register-image-message {
+
+            left: 12px;
+
+            right: 12px;
+
+            bottom: 12px;
+
+        }
+
+
+        .register-box h1 {
+
+            font-size: 42px;
+
+        }
+
+
+        .form-row {
+
+            grid-template-columns: 1fr;
+
+            gap: 0;
+
+        }
+
+
+        .role-options {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .role-option label {
+
+            min-height: 55px;
+
+            flex-direction: row;
+
+            justify-content: flex-start;
+
+            padding-left: 18px;
+
+            gap: 10px;
+
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<header class="navbar">
+
+    <a
+        href="../index.html"
+        class="brand"
+    >
+
+        <div class="brand-paw">
+            🐾
+        </div>
+
+        <div class="brand-name">
+            Paw<span>Pal</span>
+        </div>
+
+    </a>
+
+
+    <nav class="navigation">
+
+        <a href="../index.html">Home</a>
+        <a href="pets.html">
+            Find a Pet
+        </a>
+
+        <a href="how-it-works.html">
+            How It Works
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+    </nav>
+
+
+    <div class="nav-right">
+
+        <a
+            href="login.html"
+            class="login"
+        >
+            Log in
+        </a>
+
+        <a
+            href="register.html"
+            class="nav-button"
+        >
+            Get Started
+            <span>→</span>
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     REGISTER PAGE
+====================================================== -->
+
+<main class="register-page">
+
+
+    <!-- =================================================
+         VISUAL
+    ================================================== -->
+
+    <section class="register-visual">
+
+        <div class="register-image-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=85"
+                alt="Person spending time with a happy dog"
+            >
+
+
+            <div class="register-image-message">
+
+                <div class="register-message-icon">
+                    🏡
+                </div>
+
+                <div>
+
+                    <strong>
+                        Every journey starts here.
+                    </strong>
+
+                    <span>
+                        Create your PawPal account and
+                        find a friend to call family.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FORM CONTENT
+    ================================================== -->
+
+    <section class="register-content">
+
+        <div class="register-box">
+
+
+            <div class="register-label">
+                JOIN THE PAWPAL FAMILY
+            </div>
+
+
+            <h1>
+                Create your
+                <em>account.</em>
+            </h1>
+
+
+            <p class="register-intro">
+
+                Join PawPal and take the first step
+                towards finding a loving companion
+                or helping a pet find their forever home.
+
+            </p>
+
+
+            <form
+                class="register-form"
+                id="registerForm"
+            >
+
+
+                <div
+                    class="register-message"
+                    id="registerMessage"
+                ></div>
+
+
+                <!-- NAME -->
+
+                <div class="form-row">
+
+                    <div class="register-group">
+
+                        <label for="firstName">
+                            First name
+                        </label>
+
+                        <div class="register-input-wrap">
+
+                            <span class="register-input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Your first name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="register-group">
+
+                        <label for="lastName">
+                            Last name
+                        </label>
+
+                        <div class="register-input-wrap">
+
+                            <span class="register-input-icon">
+                                ✨
+                            </span>
+
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Your last name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="register-group">
+
+                    <label for="registerEmail">
+                        Email address
+                    </label>
+
+                    <div class="register-input-wrap">
+
+                        <span class="register-input-icon">
+                            ✉️
+                        </span>
+
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="register-group">
+
+                    <label for="phone">
+                        Phone number
+                    </label>
+
+                    <div class="register-input-wrap">
+
+                        <span class="register-input-icon">
+                            📱
+                        </span>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Your phone number"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="register-group">
+
+                    <div class="role-title">
+                        I want to join PawPal as a...
+                    </div>
+
+
+                    <div class="role-options">
+
+
+                        <div class="role-option">
+
+                            <input
+                                type="radio"
+                                id="adopter"
+                                name="role"
+                                value="adopter"
+                                checked
+                            >
+
+                            <label for="adopter">
+
+                                <span>🏡</span>
+
+                                <span>
+                                    Pet Adopter
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="role-option">
+
+                            <input
+                                type="radio"
+                                id="owner"
+                                name="role"
+                                value="owner"
+                            >
+
+                            <label for="owner">
+
+                                <span>🐾</span>
+
+                                <span>
+                                    Pet Owner
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="role-option">
+
+                            <input
+                                type="radio"
+                                id="shelter"
+                                name="role"
+                                value="shelter"
+                            >
+
+                            <label for="shelter">
+
+                                <span>🏢</span>
+
+                                <span>
+                                    Shelter
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-row">
+
+                    <div class="register-group">
+
+                        <label for="registerPassword">
+                            Password
+                        </label>
+
+                        <div class="register-input-wrap">
+
+                            <span class="register-input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="registerPassword"
+                                name="password"
+                                class="register-password-input"
+                                placeholder="Create a password"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="register-password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password"
+                            >
+                                👁️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="register-group">
+
+                        <label for="confirmPassword">
+                            Confirm password
+                        </label>
+
+                        <div class="register-input-wrap">
+
+                            <span class="register-input-icon">
+                                🔐
+                            </span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                class="register-password-input"
+                                placeholder="Repeat password"
+                                minlength="6"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <span>
+
+                        I agree to PawPal's
+                        <a href="#">
+                            Terms of Service
+                        </a>
+                        and
+                        <a href="#">
+                            Privacy Policy
+                        </a>.
+
+                    </span>
+
+                </label>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="register-submit"
+                >
+
+                    Create my PawPal account
+                    &nbsp; →
+
+                </button>
+
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <div class="login-prompt">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+            </div>
+
+
+            <div class="register-back">
+
+                <a href="">
+
+                    ← Back to PawPal
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       PASSWORD VISIBILITY
+    ===================================================== */
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+    const password =
+        document.getElementById("registerPassword");
+
+    const confirmPassword =
+        document.getElementById("confirmPassword");
+
+
+    passwordToggle.addEventListener(
+        "click",
+        function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                confirmPassword.type = "text";
+
+                passwordToggle.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                confirmPassword.type = "password";
+
+                passwordToggle.textContent = "👁️";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       FRONTEND REGISTRATION
+    ===================================================== */
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const registerMessage =
+        document.getElementById("registerMessage");
+
+
+    registerForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const firstName =
+                document
+                    .getElementById("firstName")
+                    .value
+                    .trim();
+
+
+            const lastName =
+                document
+                    .getElementById("lastName")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("registerEmail")
+                    .value
+                    .trim();
+
+
+            const passwordValue =
+                password.value;
+
+
+            const confirmPasswordValue =
+                confirmPassword.value;
+
+
+            const terms =
+                document
+                    .getElementById("terms")
+                    .checked;
+
+
+            /* RESET MESSAGE */
+
+            registerMessage.style.display =
+                "none";
+
+
+            registerMessage.className =
+                "register-message";
+
+
+            /* VALIDATION */
+
+            if (
+                !firstName ||
+                !lastName ||
+                !email ||
+                !passwordValue ||
+                !confirmPasswordValue
+            ) {
+
+                showError(
+                    "Please fill in all required fields."
+                );
+
+                return;
+
+            }
+
+
+            if (passwordValue.length < 6) {
+
+                showError(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                passwordValue !==
+                confirmPasswordValue
+            ) {
+
+                showError(
+                    "Passwords do not match. Please check them again."
+                );
+
+                return;
+
+            }
+
+
+            if (!terms) {
+
+                showError(
+                    "Please agree to the Terms of Service and Privacy Policy."
+                );
+
+                return;
+
+            }
+
+
+            /* SUCCESS */
+
+            registerMessage.textContent =
+                "Account details look good! 🎉 Backend registration can be connected later.";
+
+            registerMessage.className =
+                "register-message success";
+
+            registerMessage.style.display =
+                "block";
+
+
+            /*
+                IMPORTANT:
+
+                This is intentionally FRONTEND ONLY.
+
+                No Supabase/database is being used.
+                The actual account creation will be
+                connected later.
+            */
+
+        }
+    );
+
+
+    /* =====================================================
+       ERROR HELPER
+    ===================================================== */
+
+    function showError(message) {
+
+        registerMessage.textContent =
+            message;
+
+        registerMessage.className =
+            "register-message error";
+
+        registerMessage.style.display =
+            "block";
+
+    }
+
+</script>
+
+</body>
+
+</html>

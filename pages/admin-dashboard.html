@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PawPal | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard-app">
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+
+        <div class="sidebar-brand">
+            <div class="sidebar-brand-icon">🐾</div>
+            <div class="sidebar-brand-text">
+                Paw<span>Pal</span>
+            </div>
+        </div>
+
+        <div class="sidebar-profile">
+            <div class="sidebar-avatar">👩🏻</div>
+            <div>
+                <strong>Admin</strong>
+                <span>Administrator</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section-title">Management</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#overview" class="sidebar-link active">
+                <span class="sidebar-link-icon">⌂</span>
+                <span>Overview</span>
+            </a>
+
+            <a href="#pets" class="sidebar-link">
+                <span class="sidebar-link-icon">🐾</span>
+                <span>Pets</span>
+            </a>
+
+            <a href="#applications" class="sidebar-link">
+                <span class="sidebar-link-icon">📋</span>
+                <span>Applications</span>
+            </a>
+
+            <a href="#users" class="sidebar-link">
+                <span class="sidebar-link-icon">👥</span>
+                <span>Users</span>
+            </a>
+
+            <a href="#shelters" class="sidebar-link">
+                <span class="sidebar-link-icon">🏠</span>
+                <span>Shelters</span>
+            </a>
+
+            <a href="#reports" class="sidebar-link">
+                <span class="sidebar-link-icon">📊</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-section-title" style="margin-top:24px;">
+            Account
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#notifications" class="sidebar-link">
+                <span class="sidebar-link-icon">🔔</span>
+                <span>Notifications</span>
+            </a>
+
+            <a href="#profile" class="sidebar-link">
+                <span class="sidebar-link-icon">👤</span>
+                <span>Profile</span>
+            </a>
+
+            <a href="#settings" class="sidebar-link">
+                <span class="sidebar-link-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+                    <a href="../index.html" class="sidebar-link">
+                <span class="sidebar-link-icon">←</span>
+                <span>Back to PawPal</span>
+            </a>
+
+            <a href="../pages/login.html" class="sidebar-link">
+                <span class="sidebar-link-icon">↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    type="button">
+                    ☰
+                </button>
+
+                <div class="topbar-title">
+                    Admin Dashboard
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <button
+                    class="topbar-icon-btn"
+                    onclick="scrollToSection('notifications')"
+                    title="Notifications">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="topbar-avatar">
+                    👩🏻
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="dashboard-content">
+
+
+            <!-- =================================================
+                 OVERVIEW
+                 ================================================= -->
+
+            <section
+                id="overview"
+                class="dashboard-section"
+                style="margin-top:0;">
+
+                <div class="dashboard-heading">
+                    <h1>Good morning, Admin</h1>
+                    <p>Here's what's happening across PawPal today.</p>
+                </div>
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome-card">
+
+                    <div class="welcome-content">
+
+                        <div class="welcome-eyebrow">
+                            🐾 PawPal Administration
+                        </div>
+
+                        <h2>
+                            Helping more pets<br>
+                            find loving homes.
+                        </h2>
+
+                        <p>
+                            Manage pets, adoption applications, users
+                            and shelters from one simple place.
+                        </p>
+
+                    </div>
+
+                    <div class="welcome-illustration">
+                        🐶
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon coral">🐾</div>
+                            <span class="stat-change">+8%</span>
+                        </div>
+
+                        <div class="stat-number">124</div>
+                        <div class="stat-label">Total Pets</div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon sage">♥</div>
+                            <span class="stat-change">+12%</span>
+                        </div>
+
+                        <div class="stat-number">68</div>
+                        <div class="stat-label">Successful Adoptions</div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon yellow">📋</div>
+                            <span class="stat-change">+5%</span>
+                        </div>
+
+                        <div class="stat-number">42</div>
+                        <div class="stat-label">Pending Applications</div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+                            <div class="stat-icon lavender">👥</div>
+                            <span class="stat-change">+14%</span>
+                        </div>
+
+                        <div class="stat-number">286</div>
+                        <div class="stat-label">Registered Users</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT APPLICATIONS + ACTIVITY -->
+
+                <div class="dashboard-grid">
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Recent applications</h3>
+                                <p>Latest adoption requests</p>
+                            </div>
+
+                            <a href="#applications" class="view-all">
+                                View all
+                            </a>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="application-list">
+
+                                <div class="application-item">
+
+                                    <div class="application-avatar">👩🏻</div>
+
+                                    <div class="application-info">
+                                        <strong>Ananya Nair</strong>
+                                        <span>Interested in Bruno</span>
+                                    </div>
+
+                                    <span class="status pending">
+                                        Pending
+                                    </span>
+
+                                </div>
+
+
+                                <div class="application-item">
+
+                                    <div class="application-avatar">👨🏻</div>
+
+                                    <div class="application-info">
+                                        <strong>Arjun Menon</strong>
+                                        <span>Interested in Luna</span>
+                                    </div>
+
+                                    <span class="status approved">
+                                        Approved
+                                    </span>
+
+                                </div>
+
+
+                                <div class="application-item">
+
+                                    <div class="application-avatar">👩🏻</div>
+
+                                    <div class="application-info">
+                                        <strong>Meera Thomas</strong>
+                                        <span>Interested in Milo</span>
+                                    </div>
+
+                                    <span class="status pending">
+                                        Pending
+                                    </span>
+
+                                </div>
+
+
+                                <div class="application-item">
+
+                                    <div class="application-avatar">👨🏻</div>
+
+                                    <div class="application-info">
+                                        <strong>Rahul Kumar</strong>
+                                        <span>Interested in Coco</span>
+                                    </div>
+
+                                    <span class="status pending">
+                                        Pending
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+                                <h3>Recent activity</h3>
+                                <p>Latest platform updates</p>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="activity-list">
+
+                                <div class="activity-item">
+
+                                    <div class="activity-icon">🐶</div>
+
+                                    <div class="activity-text">
+                                        <strong>Bruno</strong> was added
+                                        to the adoption list.
+                                        <span class="activity-time">
+                                            15 minutes ago
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="activity-item">
+
+                                    <div class="activity-icon">♥</div>
+
+                                    <div class="activity-text">
+                                        <strong>Arjun Menon</strong>
+                                        completed an adoption.
+                                        <span class="activity-time">
+                                            1 hour ago
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="activity-item">
+
+                                    <div class="activity-icon">👤</div>
+
+                                    <div class="activity-text">
+                                        A new adopter registered.
+                                        <span class="activity-time">
+                                            2 hours ago
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="activity-item">
+
+                                    <div class="activity-icon">📋</div>
+
+                                    <div class="activity-text">
+                                        A new adoption application
+                                        was submitted.
+                                        <span class="activity-time">
+                                            3 hours ago
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT PETS -->
+
+                <div class="dashboard-section">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <h2>Recently added pets</h2>
+                            <p>Pets currently looking for homes.</p>
+                        </div>
+
+                        <a href="#pets" class="view-all">
+                            Manage pets
+                        </a>
+
+                    </div>
+
+
+                    <div class="pet-grid">
+
+                        <article class="pet-card">
+
+                            <div class="pet-image">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80"
+                                    alt="Bruno the dog">
+
+                                <div class="pet-status">
+                                    <span class="status available">
+                                        Available
+                                    </span>
+                                </div>
+
+                                <button class="pet-favourite">♡</button>
+
+                            </div>
+
+                            <div class="pet-content">
+
+                                <h4>Bruno</h4>
+
+                                <div class="pet-breed">
+                                    Golden Retriever
+                                </div>
+
+                                <div class="pet-meta">
+                                    <span>2 years</span>
+                                    <span>Male</span>
+                                    <span>Kollam</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="pet-card">
+
+                            <div class="pet-image">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=80"
+                                    alt="Luna the dog">
+
+                                <div class="pet-status">
+                                    <span class="status available">
+                                        Available
+                                    </span>
+                                </div>
+
+                                <button class="pet-favourite">♡</button>
+
+                            </div>
+
+                            <div class="pet-content">
+
+                                <h4>Luna</h4>
+
+                                <div class="pet-breed">
+                                    Labrador
+                                </div>
+
+                                <div class="pet-meta">
+                                    <span>1 year</span>
+                                    <span>Female</span>
+                                    <span>Kochi</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="pet-card">
+
+                            <div class="pet-image">
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80"
+                                    alt="Milo the dog">
+
+                                <div class="pet-status">
+                                    <span class="status available">
+                                        Available
+                                    </span>
+                                </div>
+
+                                <button class="pet-favourite">♡</button>
+
+                            </div>
+
+                            <div class="pet-content">
+
+                                <h4>Milo</h4>
+
+                                <div class="pet-breed">
+                                    Beagle
+                                </div>
+
+                                <div class="pet-meta">
+                                    <span>3 years</span>
+                                    <span>Male</span>
+                                    <span>Alappuzha</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PETS
+                 ================================================= -->
+
+            <section id="pets" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Pet management</h2>
+                        <p>View and manage pets listed on PawPal.</p>
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="showToast('Add pet feature is ready for frontend setup!')">
+                        + Add Pet
+                    </button>
+
+                </div>
+
+
+                <div class="pet-grid">
+
+                    <article class="pet-card">
+
+                        <div class="pet-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80"
+                                alt="Bruno">
+                            <div class="pet-status">
+                                <span class="status available">
+                                    Available
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pet-content">
+
+                            <h4>Bruno</h4>
+
+                            <div class="pet-breed">
+                                Golden Retriever
+                            </div>
+
+                            <div class="pet-meta">
+                                <span>2 years</span>
+                                <span>Male</span>
+                            </div>
+
+                            <div class="pet-actions">
+                                <button
+                                    class="btn btn-secondary btn-small"
+                                    onclick="showToast('Edit Bruno')">
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn btn-danger btn-small"
+                                    onclick="showToast('Delete action selected')">
+                                    Delete
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="pet-card">
+
+                        <div class="pet-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=80"
+                                alt="Luna">
+                            <div class="pet-status">
+                                <span class="status available">
+                                    Available
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pet-content">
+
+                            <h4>Luna</h4>
+
+                            <div class="pet-breed">
+                                Labrador
+                            </div>
+
+                            <div class="pet-meta">
+                                <span>1 year</span>
+                                <span>Female</span>
+                            </div>
+
+                            <div class="pet-actions">
+                                <button
+                                    class="btn btn-secondary btn-small"
+                                    onclick="showToast('Edit Luna')">
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="btn btn-danger btn-small"
+                                    onclick="showToast('Delete action selected')">
+                                    Delete
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="pet-card">
+
+                        <div class="pet-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80"
+                                alt="Milo">
+                            <div class="pet-status">
+                                <span class="status approved">
+                                    Adopted
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="pet-content">
+
+                            <h4>Milo</h4>
+
+                            <div class="pet-breed">
+                                Beagle
+                            </div>
+
+                            <div class="pet-meta">
+                                <span>3 years</span>
+                                <span>Male</span>
+                            </div>
+
+                            <div class="pet-actions">
+                                <button
+                                    class="btn btn-secondary btn-small"
+                                    onclick="showToast('Viewing Milo')">
+                                    View
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 APPLICATIONS
+                 ================================================= -->
+
+            <section id="applications" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Adoption applications</h2>
+                        <p>Review and manage adoption requests.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-body">
+
+                        <div class="table-wrap">
+
+                            <table class="dashboard-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Applicant</th>
+                                        <th>Pet</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👩🏻</div>
+                                                Ananya Nair
+                                            </div>
+                                        </td>
+
+                                        <td>Bruno</td>
+                                        <td>Today</td>
+
+                                        <td>
+                                            <span class="status pending">
+                                                Pending
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button
+                                                class="btn btn-primary btn-small"
+                                                onclick="showToast('Application approved')">
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👨🏻</div>
+                                                Arjun Menon
+                                            </div>
+                                        </td>
+
+                                        <td>Luna</td>
+                                        <td>Yesterday</td>
+
+                                        <td>
+                                            <span class="status approved">
+                                                Approved
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button
+                                                class="btn btn-secondary btn-small"
+                                                onclick="showToast('Viewing application')">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👩🏻</div>
+                                                Meera Thomas
+                                            </div>
+                                        </td>
+
+                                        <td>Milo</td>
+                                        <td>Aug 30</td>
+
+                                        <td>
+                                            <span class="status pending">
+                                                Pending
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <button
+                                                class="btn btn-primary btn-small"
+                                                onclick="showToast('Application opened')">
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 USERS
+                 ================================================= -->
+
+            <section id="users" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Users</h2>
+                        <p>Registered PawPal community members.</p>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <div class="card-body">
+
+                        <div class="table-wrap">
+
+                            <table class="dashboard-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Role</th>
+                                        <th>Joined</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👩🏻</div>
+                                                Ananya Nair
+                                            </div>
+                                        </td>
+                                        <td>Adopter</td>
+                                        <td>Aug 29</td>
+                                        <td>
+                                            <span class="status approved">
+                                                Active
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👨🏻</div>
+                                                Rahul Kumar
+                                            </div>
+                                        </td>
+                                        <td>Pet Owner</td>
+                                        <td>Aug 27</td>
+                                        <td>
+                                            <span class="status approved">
+                                                Active
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-avatar">👩🏻</div>
+                                                Meera Thomas
+                                            </div>
+                                        </td>
+                                        <td>Adopter</td>
+                                        <td>Aug 25</td>
+                                        <td>
+                                            <span class="status approved">
+                                                Active
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SHELTERS
+                 ================================================= -->
+
+            <section id="shelters" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Shelters</h2>
+                        <p>Organizations connected with PawPal.</p>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-grid equal">
+
+                    <div class="dashboard-card">
+                        <div class="card-body">
+
+                            <h3>Happy Tails Shelter</h3>
+
+                            <p style="color:var(--dash-muted); margin-top:5px;">
+                                Kollam, Kerala
+                            </p>
+
+                            <div class="pet-meta" style="margin-top:15px;">
+                                <span>24 Pets</span>
+                                <span>Active</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="dashboard-card">
+                        <div class="card-body">
+
+                            <h3>Paws & Care Foundation</h3>
+
+                            <p style="color:var(--dash-muted); margin-top:5px;">
+                                Kochi, Kerala
+                            </p>
+
+                            <div class="pet-meta" style="margin-top:15px;">
+                                <span>18 Pets</span>
+                                <span>Active</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 REPORTS
+                 ================================================= -->
+
+            <section id="reports" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Reports</h2>
+                        <p>Quick overview of PawPal performance.</p>
+                    </div>
+
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon sage">♥</div>
+                        </div>
+                        <div class="stat-number">68</div>
+                        <div class="stat-label">Pets adopted</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon coral">🐾</div>
+                        </div>
+                        <div class="stat-number">124</div>
+                        <div class="stat-label">Pets listed</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon yellow">📋</div>
+                        </div>
+                        <div class="stat-number">42</div>
+                        <div class="stat-label">Applications pending</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <div class="stat-icon lavender">👥</div>
+                        </div>
+                        <div class="stat-number">286</div>
+                        <div class="stat-label">Users</div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NOTIFICATIONS
+                 ================================================= -->
+
+            <section id="notifications" class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Notifications</h2>
+                        <p>Your latest PawPal alerts.</p>
+                    </div>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <div class="card-body">
+
+                        <div class="activity-list">
+
+                            <div class="activity-item">
+                                <div class="activity-icon">📋</div>
+                                <div class="activity-text">
+                                    <strong>New adoption application</strong>
+                                    received for Bruno.
+                                    <span class="activity-time">
+                                        15 minutes ago
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon">🐾</div>
+                                <div class="activity-text">
+                                    <strong>New pet listing</strong>
+                                    was submitted for review.
+                                    <span class="activity-time">
+                                        1 hour ago
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon">👥</div>
+                                <div class="activity-text">
+                                    <strong>New user registered</strong>
+                                    on PawPal.
+                                    <span class="activity-time">
+                                        2 hours ago
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE
+                 ================================================= -->
+
+            <section id="profile" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Admin profile</h2>
+                        <p>Manage your account information.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+
+                    <div class="card-body">
+
+                        <div class="profile-header">
+
+                            <div class="profile-avatar-large">
+                                👩🏻
+                            </div>
+
+                            <div>
+                                <h2>Admin</h2>
+                                <p>Administrator · PawPal</p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input
+                                    type="text"
+                                    value="PawPal Admin">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    value="admin@pawpal.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input
+                                    type="tel"
+                                    value="+91 98765 43210">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Role</label>
+                                <input
+                                    type="text"
+                                    value="Administrator"
+                                    disabled>
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button
+                                class="btn btn-primary"
+                                onclick="showToast('Profile saved successfully')">
+                                Save Changes
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SETTINGS
+                 ================================================= -->
+
+            <section id="settings" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Settings</h2>
+                        <p>Control your PawPal dashboard preferences.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+
+                    <div class="card-body">
+
+                        <div class="settings-list">
+
+                            <div class="setting-row">
+
+                                <div>
+                                    <strong>Email notifications</strong>
+                                    <p>
+                                        Receive important updates by email.
+                                    </p>
+                                </div>
+
+                                <button
+                                    class="toggle active"
+                                    onclick="toggleSetting(this)">
+                                </button>
+
+                            </div>
+
+
+                            <div class="setting-row">
+
+                                <div>
+                                    <strong>Application alerts</strong>
+                                    <p>
+                                        Get notified when a new application arrives.
+                                    </p>
+                                </div>
+
+                                <button
+                                    class="toggle active"
+                                    onclick="toggleSetting(this)">
+                                </button>
+
+                            </div>
+
+
+                            <div class="setting-row">
+
+                                <div>
+                                    <strong>New pet alerts</strong>
+                                    <p>
+                                        Receive notifications about new listings.
+                                    </p>
+                                </div>
+
+                                <button
+                                    class="toggle"
+                                    onclick="toggleSetting(this)">
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="dashboard-toast"
+    id="dashboardToast">
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+    /* Mobile sidebar */
+
+    const mobileMenuBtn =
+        document.getElementById('mobileMenuBtn');
+
+    const sidebar =
+        document.getElementById('dashboardSidebar');
+
+    const sidebarOverlay =
+        document.getElementById('sidebarOverlay');
+
+
+    if (mobileMenuBtn) {
+
+        mobileMenuBtn.addEventListener('click', () => {
+
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('show');
+
+        });
+
+    }
+
+
+    if (sidebarOverlay) {
+
+        sidebarOverlay.addEventListener('click', () => {
+
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('show');
+
+        });
+
+    }
+
+
+    /* Navigation */
+
+    const sidebarLinks =
+        document.querySelectorAll('.sidebar-link[href^="#"]');
+
+
+    sidebarLinks.forEach(link => {
+
+        link.addEventListener('click', () => {
+
+            sidebarLinks.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            link.classList.add('active');
+
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('show');
+
+        });
+
+    });
+
+
+    function scrollToSection(id) {
+
+        const section =
+            document.getElementById(id);
+
+        if (section) {
+            section.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+    }
+
+
+    /* Toast */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById('dashboardToast');
+
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+
+    }
+
+
+    /* Settings toggle */
+
+    function toggleSetting(button) {
+
+        button.classList.toggle('active');
+
+        showToast(
+            button.classList.contains('active')
+                ? 'Setting enabled'
+                : 'Setting disabled'
+        );
+
+    }
+
+
+    /* Favourite buttons */
+
+    document.querySelectorAll('.pet-favourite')
+        .forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                button.textContent =
+                    button.textContent === '♡'
+                        ? '♥'
+                        : '♡';
+
+            });
+
+        });
+
+</script>
+
+</body>
+</html>

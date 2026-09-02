@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us | PawPal</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+    rel="stylesheet">
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+    /* =====================================================
+       ABOUT PAGE
+    ===================================================== */
+
+    .about-page {
+        background:
+            radial-gradient(
+                circle at 5% 15%,
+                rgba(245, 213, 203, .30),
+                transparent 22%
+            ),
+            radial-gradient(
+                circle at 95% 40%,
+                rgba(222, 214, 232, .28),
+                transparent 24%
+            ),
+            var(--cream);
+    }
+
+
+    /* =====================================================
+       ABOUT HERO
+    ===================================================== */
+
+    .about-hero {
+        min-height: 560px;
+
+        padding: 95px 8% 85px;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        align-items: center;
+
+        gap: 70px;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .about-hero::before {
+        content: "🐾";
+
+        position: absolute;
+
+        left: -20px;
+        bottom: -55px;
+
+        font-size: 230px;
+
+        opacity: .035;
+
+        transform: rotate(-20deg);
+
+        pointer-events: none;
+    }
+
+
+    .about-hero-content {
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .about-hero h1 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size:
+            clamp(50px, 6vw, 76px);
+
+        line-height: 1.04;
+
+        letter-spacing: -2.5px;
+
+        margin-top: 18px;
+    }
+
+
+    .about-hero h1 em {
+        color: var(--coral);
+
+        font-weight: 500;
+    }
+
+
+    .about-hero p {
+        max-width: 540px;
+
+        color: var(--text-soft);
+
+        font-size: 17px;
+
+        line-height: 1.8;
+
+        margin-top: 25px;
+    }
+
+
+    .about-hero-buttons {
+        display: flex;
+
+        align-items: center;
+
+        gap: 18px;
+
+        margin-top: 32px;
+    }
+
+
+    /* =====================================================
+       HERO VISUAL
+    ===================================================== */
+
+    .about-visual {
+        height: 470px;
+
+        position: relative;
+    }
+
+
+    .about-main-image {
+        position: absolute;
+
+        width: 370px;
+
+        height: 430px;
+
+        right: 5%;
+
+        top: 10px;
+
+        padding: 9px;
+
+        background: white;
+
+        border-radius: 30px;
+
+        transform: rotate(3deg);
+
+        box-shadow:
+            0 30px 70px
+            rgba(61,45,37,.13);
+
+        z-index: 3;
+    }
+
+
+    .about-main-image img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+        border-radius: 23px;
+    }
+
+
+    .about-image-back {
+        position: absolute;
+
+        width: 340px;
+
+        height: 390px;
+
+        right: 12%;
+
+        top: 35px;
+
+        background: var(--yellow);
+
+        border-radius: 38px;
+
+        transform: rotate(-7deg);
+
+        opacity: .7;
+    }
+
+
+    .about-floating {
+        position: absolute;
+
+        left: 0;
+
+        bottom: 35px;
+
+        z-index: 5;
+
+        background: white;
+
+        padding: 14px 18px;
+
+        border-radius: 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        box-shadow: var(--shadow);
+    }
+
+
+    .about-floating-icon {
+        width: 45px;
+
+        height: 45px;
+
+        border-radius: 50%;
+
+        background: var(--pink);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 22px;
+    }
+
+
+    .about-floating strong {
+        display: block;
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 19px;
+    }
+
+
+    .about-floating span {
+        display: block;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
+
+        margin-top: 2px;
+    }
+
+
+    /* =====================================================
+       MISSION SECTION
+    ===================================================== */
+
+    .mission-section {
+        background: white;
+
+        padding:
+            110px 8%;
+
+        text-align: center;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .mission-section::after {
+        content: "♡";
+
+        position: absolute;
+
+        right: -35px;
+
+        top: 30px;
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 240px;
+
+        color: var(--coral);
+
+        opacity: .035;
+    }
+
+
+    .mission-section h2 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size:
+            clamp(42px, 5vw, 60px);
+
+        line-height: 1.08;
+
+        margin-top: 14px;
+    }
+
+
+    .mission-section h2 em {
+        color: var(--coral);
+
+        font-weight: 500;
+    }
+
+
+    .mission-section > p {
+        max-width: 680px;
+
+        margin: 22px auto 0;
+
+        color: var(--text-soft);
+
+        font-size: 17px;
+
+        line-height: 1.8;
+    }
+
+
+    /* =====================================================
+       VALUES
+    ===================================================== */
+
+    .values-section {
+        padding:
+            110px 8%
+            120px;
+
+        background: var(--cream);
+    }
+
+
+    .values-heading {
+        text-align: center;
+
+        margin-bottom: 55px;
+    }
+
+
+    .values-heading h2 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size:
+            clamp(40px, 5vw, 55px);
+
+        line-height: 1.1;
+
+        margin-top: 12px;
+    }
+
+
+    .values-heading h2 em {
+        color: var(--coral);
+
+        font-weight: 500;
+    }
+
+
+    .values-grid {
+        max-width: 1200px;
+
+        margin: auto;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 22px;
+    }
+
+
+    .value-card {
+        background: white;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 26px;
+
+        padding: 35px;
+
+        min-height: 290px;
+
+        position: relative;
+
+        overflow: hidden;
+
+        transition: .3s ease;
+    }
+
+
+    .value-card:hover {
+        transform:
+            translateY(-8px);
+
+        box-shadow:
+            var(--shadow-hover);
+    }
+
+
+    .value-card::after {
+        content: "🐾";
+
+        position: absolute;
+
+        right: -20px;
+
+        bottom: -35px;
+
+        font-size: 115px;
+
+        opacity: .035;
+
+        transform: rotate(-15deg);
+    }
+
+
+    .value-icon {
+        width: 62px;
+
+        height: 62px;
+
+        border-radius: 19px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: var(--pink);
+
+        font-size: 27px;
+
+        transition: .3s;
+    }
+
+
+    .value-card:nth-child(2)
+    .value-icon {
+        background: var(--yellow);
+    }
+
+
+    .value-card:nth-child(3)
+    .value-icon {
+        background: var(--lavender);
+    }
+
+
+    .value-card:hover
+    .value-icon {
+        transform:
+            rotate(-6deg)
+            scale(1.08);
+    }
+
+
+    .value-card h3 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 27px;
+
+        margin-top: 25px;
+    }
+
+
+    .value-card p {
+        color: var(--text-soft);
+
+        font-size: 14px;
+
+        line-height: 1.75;
+
+        margin-top: 8px;
+    }
+
+
+    /* =====================================================
+       COMMUNITY SECTION
+    ===================================================== */
+
+    .community-section {
+        margin:
+            20px 6%
+            110px;
+
+        border-radius: 35px;
+
+        overflow: hidden;
+
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        background: var(--sage);
+
+        color: white;
+
+        box-shadow:
+            0 25px 60px
+            rgba(61,45,37,.08);
+    }
+
+
+    .community-image {
+        min-height: 500px;
+    }
+
+
+    .community-image img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+    .community-content {
+        padding: 70px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+    }
+
+
+    .community-content .section-label {
+        color:
+            rgba(255,255,255,.7);
+    }
+
+
+    .community-content h2 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 48px;
+
+        line-height: 1.08;
+
+        margin-top: 15px;
+    }
+
+
+    .community-content h2 em {
+        color: var(--yellow);
+
+        font-weight: 500;
+    }
+
+
+    .community-content p {
+        max-width: 460px;
+
+        font-size: 16px;
+
+        line-height: 1.8;
+
+        opacity: .88;
+
+        margin-top: 22px;
+    }
+
+
+    .community-stats {
+        display: flex;
+
+        gap: 35px;
+
+        margin-top: 32px;
+    }
+
+
+    .community-stat {
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    .community-stat strong {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 27px;
+    }
+
+
+    .community-stat span {
+        font-size: 12px;
+
+        opacity: .75;
+    }
+
+
+    /* =====================================================
+       FINAL CTA
+    ===================================================== */
+
+    .about-cta {
+        text-align: center;
+
+        padding:
+            100px 20px
+            120px;
+
+        background: white;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .about-cta::before {
+        content: "🐾";
+
+        position: absolute;
+
+        left: 8%;
+
+        top: 30px;
+
+        font-size: 90px;
+
+        opacity: .035;
+
+        transform: rotate(-20deg);
+    }
+
+
+    .about-cta::after {
+        content: "♡";
+
+        position: absolute;
+
+        right: 8%;
+
+        bottom: 20px;
+
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size: 130px;
+
+        color: var(--coral);
+
+        opacity: .035;
+    }
+
+
+    .about-cta h2 {
+        font-family:
+            "Playfair Display",
+            Georgia,
+            serif;
+
+        font-size:
+            clamp(40px, 5vw, 58px);
+
+        line-height: 1.08;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .about-cta h2 em {
+        color: var(--coral);
+
+        font-weight: 500;
+    }
+
+
+    .about-cta p {
+        max-width: 550px;
+
+        margin: 18px auto 0;
+
+        color: var(--text-soft);
+
+        line-height: 1.7;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .about-cta .primary-button {
+        display: inline-flex;
+
+        margin-top: 30px;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media(max-width: 950px) {
+
+        .about-hero {
+            grid-template-columns: 1fr;
+
+            padding-top: 75px;
+        }
+
+
+        .about-visual {
+            max-width: 500px;
+
+            width: 100%;
+
+            margin: auto;
+        }
+
+
+        .values-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+
+        .community-section {
+            grid-template-columns: 1fr;
+        }
+
+
+        .community-image {
+            min-height: 400px;
+        }
+
+    }
+
+
+    @media(max-width: 700px) {
+
+        .about-hero {
+            padding:
+                65px 25px
+                80px;
+        }
+
+
+        .about-hero h1 {
+            font-size: 46px;
+        }
+
+
+        .about-hero p {
+            font-size: 15px;
+        }
+
+
+        .about-hero-buttons {
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
+
+
+        .about-visual {
+            height: 420px;
+        }
+
+
+        .about-main-image {
+            width: 300px;
+
+            height: 370px;
+
+            right: 0;
+        }
+
+
+        .about-image-back {
+            width: 275px;
+
+            height: 330px;
+
+            right: 7%;
+        }
+
+
+        .about-floating {
+            left: 0;
+
+            bottom: 15px;
+        }
+
+
+        .mission-section {
+            padding:
+                80px 25px;
+        }
+
+
+        .mission-section > p {
+            font-size: 15px;
+        }
+
+
+        .values-section {
+            padding:
+                80px 20px
+                90px;
+        }
+
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+
+        .value-card {
+            min-height: 250px;
+        }
+
+
+        .community-section {
+            margin:
+                20px
+                20px
+                80px;
+        }
+
+
+        .community-image {
+            min-height: 300px;
+        }
+
+
+        .community-content {
+            padding:
+                50px 30px;
+        }
+
+
+        .community-content h2 {
+            font-size: 40px;
+        }
+
+
+        .community-stats {
+            gap: 20px;
+        }
+
+
+        .about-cta {
+            padding:
+                80px 20px
+                100px;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body class="about-page">
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<header class="navbar">
+
+    <a href="../index.html" class="brand">
+
+        <div class="brand-paw">
+            🐾
+        </div>
+
+        <div class="brand-name">
+            Paw<span>Pal</span>
+        </div>
+
+    </a>
+
+
+    <nav class="navigation">
+
+        <a href="../index.html">Home</a>
+
+        <a href="pets.html">
+            Find a Pet
+        </a>
+
+        <a href="how-it-works.html">
+            How It Works
+        </a>
+
+        <a href="about.html" class="active">
+            About Us
+        </a>
+
+    </nav>
+
+
+    <div class="nav-right">
+
+        <a href="login.html" class="login">
+            Log in
+        </a>
+
+        <a href="register.html" class="nav-button">
+            Get Started
+            <span>→</span>
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <!-- =================================================
+         ABOUT HERO
+    ================================================== -->
+
+    <section class="about-hero">
+
+
+        <div class="about-hero-content">
+
+            <div class="section-label">
+                A LITTLE ABOUT PAWPAL
+            </div>
+
+
+            <h1>
+                Where love<br>
+                finds a <em>home.</em>
+            </h1>
+
+
+            <p>
+                PawPal is a friendly space created to bring
+                loving people and pets together. We believe
+                every animal deserves more than just a place
+                to stay — they deserve a family.
+            </p>
+
+
+            <div class="about-hero-buttons">
+
+                <a href="pets.html" class="primary-button">
+                    Meet our pets
+                    <span>→</span>
+                </a>
+
+
+                <a href="how-it-works.html" class="secondary-button">
+                    How adoption works
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO IMAGE -->
+
+        <div class="about-visual">
+
+            <div class="about-image-back"></div>
+
+
+            <div class="about-main-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=85"
+                    alt="Person spending time with a happy dog"
+                >
+
+            </div>
+
+
+            <div class="about-floating">
+
+                <div class="about-floating-icon">
+                    💕
+                </div>
+
+                <div>
+
+                    <strong>
+                        Love matters.
+                    </strong>
+
+                    <span>
+                        Every single paw deserves it.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MISSION
+    ================================================== -->
+
+    <section class="mission-section">
+
+        <div class="section-label">
+            OUR MISSION
+        </div>
+
+
+        <h2>
+            Making adoption feel<br>
+            <em>simple & special.</em>
+        </h2>
+
+
+        <p>
+            Finding a pet should be about discovering a connection,
+            not getting lost in complicated processes. PawPal brings
+            pet profiles, adoption applications and helpful information
+            together in one warm and welcoming experience.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         VALUES
+    ================================================== -->
+
+    <section class="values-section">
+
+
+        <div class="values-heading">
+
+            <div class="section-label">
+                WHAT WE BELIEVE IN
+            </div>
+
+
+            <h2>
+                Built with <em>heart.</em>
+            </h2>
+
+        </div>
+
+
+        <div class="values-grid">
+
+
+            <article class="value-card">
+
+                <div class="value-icon">
+                    🐾
+                </div>
+
+
+                <h3>
+                    Pets come first
+                </h3>
+
+
+                <p>
+                    Every decision starts with the wellbeing
+                    of the animals. Their comfort, happiness
+                    and safety always matter.
+                </p>
+
+            </article>
+
+
+            <article class="value-card">
+
+                <div class="value-icon">
+                    🤝
+                </div>
+
+
+                <h3>
+                    People & pets together
+                </h3>
+
+
+                <p>
+                    We want to make it easier for adopters,
+                    shelters and pet owners to find meaningful
+                    connections.
+                </p>
+
+            </article>
+
+
+            <article class="value-card">
+
+                <div class="value-icon">
+                    💗
+                </div>
+
+
+                <h3>
+                    Love for a lifetime
+                </h3>
+
+
+                <p>
+                    Adoption is not just about today. It is
+                    about creating a bond that can last for
+                    many happy years.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         COMMUNITY
+    ================================================== -->
+
+    <section class="community-section">
+
+
+        <div class="community-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=85"
+                alt="Happy dog enjoying time outdoors"
+            >
+
+        </div>
+
+
+        <div class="community-content">
+
+            <div class="section-label">
+                OUR COMMUNITY
+            </div>
+
+
+            <h2>
+                Small connections.<br>
+                <em>Big changes.</em>
+            </h2>
+
+
+            <p>
+                Behind every adoption is a story — a pet waiting
+                for someone, a person looking for a companion,
+                and a moment when two lives come together.
+                PawPal exists to make those moments easier to find.
+            </p>
+
+
+            <div class="community-stats">
+
+                <div class="community-stat">
+
+                    <strong>
+                        500+
+                    </strong>
+
+                    <span>
+                        Pets waiting
+                    </span>
+
+                </div>
+
+
+                <div class="community-stat">
+
+                    <strong>
+                        300+
+                    </strong>
+
+                    <span>
+                        Happy adoptions
+                    </span>
+
+                </div>
+
+
+                <div class="community-stat">
+
+                    <strong>
+                        ∞
+                    </strong>
+
+                    <span>
+                        Happy moments
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CTA
+    ================================================== -->
+
+    <section class="about-cta">
+
+        <div class="section-label">
+            YOUR STORY COULD START HERE
+        </div>
+
+
+        <h2>
+            Maybe your new best friend<br>
+            is <em>waiting for you.</em>
+        </h2>
+
+
+        <p>
+            Take a look at the wonderful pets waiting for
+            someone to call their own.
+        </p>
+
+
+        <a href="pets.html" class="primary-button">
+            Find a Pet
+            <span>→</span>
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-top">
+
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand">
+
+                <div class="brand-paw">
+                    🐾
+                </div>
+
+                <div class="brand-name">
+                    Paw<span>Pal</span>
+                </div>
+
+            </a>
+
+
+            <p>
+                Connecting loving people with
+                pets looking for a place to call home.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <strong>
+                Explore
+            </strong>
+
+            <a href="pets.html">
+                Find a Pet
+            </a>
+
+            <a href="how-it-works.html">
+                How It Works
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <strong>
+                Account
+            </strong>
+
+            <a href="login.html">
+                Log in
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <strong>
+                PawPal
+            </strong>
+
+            <a href="about.html">
+                Our Mission
+            </a>
+
+            <a href="how-it-works.html">
+                Adoption Guide
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 PawPal. Made with 🐾 & love.
+        </span>
+
+        <span>
+            Find a friend. Give love. 🐶
+        </span>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>
+

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rescue Story | PawPal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/rescue.css">
+    <link rel="stylesheet" href="../CSS/rescue-details.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="rescue-navbar">
+
+        <div class="rescue-nav-inner">
+
+            <a href="../index.html" class="rescue-brand">
+                <span class="rescue-brand-paw">🐾</span>
+                <span>PawPal</span>
+            </a>
+
+            <nav class="rescue-navigation">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="pets.html">
+                    Find a Pet
+                </a>
+
+                <a href="pet-care.html">
+                    Pet Care
+                </a>
+
+                <a href="rescue-adoption.html" class="active">
+                    Rescue &amp; Adopt
+                </a>
+
+                <a href="donation.html">
+                    PawFund
+                </a>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+            </nav>
+
+            <div class="rescue-nav-actions">
+
+                <a href="login.html" class="rescue-login">
+                    Log in
+                </a>
+
+                <a href="register.html" class="rescue-nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         BREADCRUMB
+         ===================================================== -->
+
+    <main>
+
+        <section class="rescue-details-page">
+
+            <div class="rescue-details-container">
+
+                <div class="rescue-breadcrumb">
+
+                    <a href="rescue-adoption.html">
+                        Rescue &amp; Adopt
+                    </a>
+
+                    <span>›</span>
+
+                    <span id="breadcrumbName">
+                        Rescue Story
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     HERO
+                     ================================================= -->
+
+                <section class="rescue-details-hero">
+
+                    <div class="rescue-details-image">
+
+                        <div
+                            id="animalVisual"
+                            class="animal-visual"
+                        >
+                            🐾
+                        </div>
+
+                        <span
+                            id="statusBadge"
+                            class="rescue-details-status recovering"
+                        >
+                            RECOVERING
+                        </span>
+
+                    </div>
+
+
+                    <div class="rescue-details-intro">
+
+                        <div class="details-eyebrow">
+                            RESCUE STORY
+                        </div>
+
+                        <h1 id="animalName">
+                            Rescue Animal
+                        </h1>
+
+                        <p
+                            id="animalSubtitle"
+                            class="details-subtitle"
+                        >
+                            Every rescued animal deserves
+                            safety, care and a second chance.
+                        </p>
+
+
+                        <div class="animal-quick-info">
+
+                            <div class="quick-info-item">
+
+                                <span class="quick-info-label">
+                                    ANIMAL
+                                </span>
+
+                                <strong id="animalType">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="quick-info-item">
+
+                                <span class="quick-info-label">
+                                    BREED
+                                </span>
+
+                                <strong id="animalBreed">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="quick-info-item">
+
+                                <span class="quick-info-label">
+                                    AGE
+                                </span>
+
+                                <strong id="animalAge">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="quick-info-item">
+
+                                <span class="quick-info-label">
+                                    GENDER
+                                </span>
+
+                                <strong id="animalGender">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="details-actions">
+
+                            <a
+    href="donation.html"
+    id="supportButton"
+    class="details-primary-button"
+>
+    Support This Rescue
+</a>
+
+                            <a
+                                href="#"
+                                id="adoptButton"
+                                class="details-secondary-button"
+                            >
+                                Adopt
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     STATUS JOURNEY
+                     ================================================= -->
+
+                <section class="rescue-journey-section">
+
+                    <div class="details-section-heading">
+
+                        <span class="details-section-label">
+                            THEIR JOURNEY
+                        </span>
+
+                        <h2>
+                            From rescue to a forever home.
+                        </h2>
+
+                        <p>
+                            Every step matters. Here's where
+                            this rescue currently stands.
+                        </p>
+
+                    </div>
+
+
+                    <div class="rescue-journey">
+
+                        <div
+                            class="journey-step completed"
+                            data-step="rescued"
+                        >
+
+                            <div class="journey-icon">
+                                🐾
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Rescued
+                                </strong>
+
+                                <span>
+                                    Found and brought to safety
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="journey-line"
+                        ></div>
+
+
+                        <div
+                            class="journey-step"
+                            data-step="recovering"
+                        >
+
+                            <div class="journey-icon">
+                                🩹
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Recovering
+                                </strong>
+
+                                <span>
+                                    Receiving medical attention
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="journey-line"
+                        ></div>
+
+
+                        <div
+                            class="journey-step"
+                            data-step="temporary"
+                        >
+
+                            <div class="journey-icon">
+                                🏠
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Temporary Care
+                                </strong>
+
+                                <span>
+                                    Safe while waiting
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="journey-line"
+                        ></div>
+
+
+                        <div
+                            class="journey-step"
+                            data-step="ready"
+                        >
+
+                            <div class="journey-icon">
+                                💚
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Adoption
+                                </strong>
+
+                                <span>
+                                    Ready for a forever family
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     STORY + SIDEBAR
+                     ================================================= -->
+
+                <section class="rescue-details-content">
+
+                    <div class="details-main-column">
+
+                        <article class="details-story-card">
+
+                            <div class="card-heading">
+
+                                <span class="card-heading-icon">
+                                    🐾
+                                </span>
+
+                                <div>
+
+                                    <span>
+                                        THE STORY
+                                    </span>
+
+                                    <h2>
+                                        How they found their way here
+                                    </h2>
+
+                                </div>
+
+                            </div>
+
+
+                            <p id="rescueStory">
+                                This rescue story will appear here.
+                            </p>
+
+                        </article>
+
+
+                        <!-- HEALTH -->
+
+                        <article class="details-info-card">
+
+                            <div class="info-card-heading">
+
+                                <span class="info-icon">
+                                    🩺
+                                </span>
+
+                                <h2>
+                                    Health &amp; Medical Care
+                                </h2>
+
+                            </div>
+
+
+                            <div class="info-grid">
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Health condition
+                                    </span>
+
+                                    <strong id="healthCondition">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Veterinary visit
+                                    </span>
+
+                                    <strong id="vetVisit">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        First aid
+                                    </span>
+
+                                    <strong id="firstAid">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Medication
+                                    </span>
+
+                                    <strong id="medications">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Vaccination
+                                    </span>
+
+                                    <strong id="vaccinationStatus">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Sterilization
+                                    </span>
+
+                                    <strong id="sterilizationStatus">
+                                        —
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- CARE -->
+
+                        <article class="details-info-card">
+
+                            <div class="info-card-heading">
+
+                                <span class="info-icon">
+                                    🏠
+                                </span>
+
+                                <h2>
+                                    Current Care
+                                </h2>
+
+                            </div>
+
+
+                            <div class="info-grid">
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Care type
+                                    </span>
+
+                                    <strong id="careType">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Care duration
+                                    </span>
+
+                                    <strong id="careDuration">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item full-width">
+
+                                    <span>
+                                        Current location
+                                    </span>
+
+                                    <strong id="currentLocation">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item full-width">
+
+                                    <span>
+                                        Special needs
+                                    </span>
+
+                                    <strong id="specialNeeds">
+                                        —
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- RESCUE DETAILS -->
+
+                        <article class="details-info-card">
+
+                            <div class="info-card-heading">
+
+                                <span class="info-icon">
+                                    📍
+                                </span>
+
+                                <h2>
+                                    Rescue Details
+                                </h2>
+
+                            </div>
+
+
+                            <div class="info-grid">
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Rescue date
+                                    </span>
+
+                                    <strong id="rescueDate">
+                                        —
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="info-item">
+
+                                    <span>
+                                        Found location
+                                    </span>
+
+                                    <strong id="foundLocation">
+                                        —
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         SIDEBAR
+                         ================================================= -->
+
+                    <aside class="rescue-details-sidebar">
+
+                        <div class="rescuer-card">
+
+                            <span class="sidebar-label">
+                                RESCUED BY
+                            </span>
+
+                            <div class="rescuer-avatar">
+                                🫶
+                            </div>
+
+                            <h3 id="rescuerName">
+                                Rescuer
+                            </h3>
+
+                            <p>
+                                A kind person who chose
+                                to help instead of walking by.
+                            </p>
+
+                            <div class="rescuer-contact">
+
+                                <div>
+                                    <span>
+                                        Contact
+                                    </span>
+
+                                    <strong id="rescuerContact">
+                                        —
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>
+                                        Preferred method
+                                    </span>
+
+                                    <strong id="contactPreference">
+                                        —
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ADOPTION -->
+
+                        <div
+                            id="adoptionCard"
+                            class="sidebar-action-card"
+                        >
+
+                            <span class="sidebar-action-icon">
+                                🏡
+                            </span>
+
+                            <h3>
+                                Could you be their
+                                forever home?
+                            </h3>
+
+                            <p>
+                                If this animal is ready,
+                                you could be the person
+                                who gives them their
+                                happy ending.
+                            </p>
+
+                            <a
+                                href="#"
+                                id="sidebarAdoptButton"
+                                class="sidebar-action-button"
+                            >
+                                Start Adoption
+                            </a>
+
+                        </div>
+
+
+                        <!-- SUPPORT -->
+
+                        <div class="sidebar-support-card">
+
+                            <span class="sidebar-action-icon">
+                                💛
+                            </span>
+
+                            <h3>
+                                Can't adopt right now?
+                            </h3>
+
+                            <p>
+                                You can still help with
+                                food, shelter and medical care.
+                            </p>
+
+                            <a
+                                href="donation.html"
+                                class="sidebar-support-button"
+                            >
+                                Help Them Heal →
+                            </a>
+
+                        </div>
+
+                    </aside>
+
+                </section>
+
+
+                <!-- =================================================
+                     FINAL CTA
+                     ================================================= -->
+
+                <section class="rescue-details-final">
+
+                    <div class="final-paw">
+                        🐾
+                    </div>
+
+                    <div>
+
+                        <span>
+                            EVERY RESCUE MATTERS
+                        </span>
+
+                        <h2>
+                            One small act can change
+                            an animal's entire life.
+                        </h2>
+
+                        <p>
+                            Rescue them. Support them.
+                            Give them a chance.
+                        </p>
+
+                    </div>
+
+                    <div class="final-actions">
+
+                        <a
+                            href="rescue-adoption.html#report-rescue"
+                            class="final-primary"
+                        >
+                            Report a Rescue
+                        </a>
+
+                        <a
+                            href="donation.html"
+                            class="final-secondary"
+                        >
+                            Support a Rescue
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="rescue-footer">
+
+        <div class="rescue-footer-inner">
+
+            <div class="rescue-footer-brand">
+
+                <span class="rescue-brand-paw">
+                    🐾
+                </span>
+
+                <strong>
+                    PawPal
+                </strong>
+
+                <p>
+                    Helping every pet find
+                    a safe place to call home.
+                </p>
+
+            </div>
+
+
+            <div class="rescue-footer-links">
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="pet-care.html">
+                    Pet Care
+                </a>
+
+                <a href="donation.html">
+                    PawFund
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="rescue-footer-bottom">
+
+            <span>
+                © 2026 PawPal. Made with care for animals.
+            </span>
+
+            <span>
+                🐾 Every paw deserves a home.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <div
+        id="rescueDetailsToast"
+        class="rescue-details-toast"
+    ></div>
+
+
+    <script src="../js/JS rescue-details.js"></script>
+
+</body>
+</html>

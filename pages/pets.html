@@ -1,0 +1,2994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Browse pets looking for their forever homes with PawPal."
+    >
+
+    <title>Find a Pet — PawPal</title>
+
+
+    <!-- =========================================================
+         FONTS
+         ========================================================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================================================
+         EXISTING PET CSS
+         ========================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="../css/pets.css"
+    >
+
+
+    <!-- =========================================================
+         PETS PAGE COMPLETE STYLES
+         
+         These styles intentionally live inside this page so
+         the page looks correct without requiring changes to
+         any other file.
+         ========================================================= -->
+
+    <style>
+
+        /* ========================================================
+           ROOT
+           ======================================================== */
+
+        :root {
+
+            --cream: #fff9f2;
+            --cream-dark: #f6ede3;
+            --white: #ffffff;
+
+            --text: #342a25;
+            --text-soft: #756861;
+            --text-light: #a0958e;
+
+            --coral: #e98268;
+            --coral-dark: #d86f56;
+
+            --sage: #a9b99f;
+            --sage-dark: #687960;
+
+            --yellow: #f4dea0;
+            --lavender: #ded6e8;
+            --pink: #f5d5cb;
+
+            --border: #e9ded4;
+
+            --shadow:
+                0 18px 50px rgba(75, 52, 41, 0.08);
+
+            --radius-lg: 28px;
+            --radius-md: 18px;
+
+        }
+
+
+        /* ========================================================
+           RESET
+           ======================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: var(--cream);
+
+            color: var(--text);
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            overflow-x: hidden;
+
+        }
+
+
+        img {
+
+            display: block;
+
+            max-width: 100%;
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font: inherit;
+
+        }
+
+
+
+        /* ========================================================
+           NAVBAR
+           ======================================================== */
+
+        .pets-navbar {
+
+            width: 100%;
+
+            min-height: 82px;
+
+            padding:
+                0 clamp(24px, 6vw, 90px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            background:
+                rgba(255, 249, 242, 0.96);
+
+            border-bottom:
+                1px solid var(--border);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 9999;
+
+            backdrop-filter:
+                blur(16px);
+
+            -webkit-backdrop-filter:
+                blur(16px);
+
+        }
+
+
+
+        /* ========================================================
+           BRAND
+           ======================================================== */
+
+        .pets-brand {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            flex-shrink: 0;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+
+            color: var(--text);
+
+            cursor: pointer;
+
+        }
+
+
+        .pets-brand-paw {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 13px;
+
+            background: var(--pink);
+
+            font-size: 21px;
+
+        }
+
+
+
+        /* ========================================================
+           NAVIGATION
+           ======================================================== */
+
+        .pets-navigation {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: clamp(18px, 2.8vw, 36px);
+
+            margin-left: auto;
+
+        }
+
+
+        .pets-navigation a {
+
+            position: relative;
+
+            padding: 8px 2px;
+
+            color: var(--text-soft);
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            transition:
+                color 0.2s ease;
+
+        }
+
+
+        .pets-navigation a:hover {
+
+            color: var(--text);
+
+        }
+
+
+        .pets-navigation a.active {
+
+            color: var(--text);
+
+        }
+
+
+        .pets-navigation a.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            height: 2px;
+
+            border-radius: 99px;
+
+            background: var(--coral);
+
+        }
+
+
+
+        /* ========================================================
+           NAV RIGHT
+           ======================================================== */
+
+        .pets-nav-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .pets-login {
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: var(--text-soft);
+
+            white-space: nowrap;
+
+            transition:
+                color 0.2s ease;
+
+        }
+
+
+        .pets-login:hover {
+
+            color: var(--text);
+
+        }
+
+
+        .pets-get-started {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            min-height: 44px;
+
+            padding: 11px 19px;
+
+            border-radius: 13px;
+
+            background: var(--text);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+
+        }
+
+
+        .pets-get-started:hover {
+
+            transform: translateY(-2px);
+
+            background: #241d19;
+
+        }
+
+
+
+        /* ========================================================
+           PAGE HERO
+           ======================================================== */
+
+        .pets-page {
+
+            width: 100%;
+
+        }
+
+
+        .pets-hero {
+
+            padding:
+                clamp(65px, 8vw, 105px)
+                clamp(24px, 7vw, 100px)
+                58px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff9f2 0%,
+                    #fff5ed 100%
+                );
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .pets-hero::before {
+
+            content: "🐾";
+
+            position: absolute;
+
+            left: 6%;
+
+            top: 60px;
+
+            font-size: 48px;
+
+            opacity: 0.10;
+
+            transform: rotate(-15deg);
+
+        }
+
+
+        .pets-hero::after {
+
+            content: "♡";
+
+            position: absolute;
+
+            right: 8%;
+
+            bottom: 35px;
+
+            font-size: 58px;
+
+            color: var(--coral);
+
+            opacity: 0.10;
+
+            transform: rotate(12deg);
+
+        }
+
+
+        .pets-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            color: var(--coral-dark);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.6px;
+
+        }
+
+
+        .pets-hero h1 {
+
+            margin: 0 auto;
+
+            max-width: 850px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(46px, 6vw, 76px);
+
+            line-height: 1.04;
+
+            letter-spacing: -2px;
+
+            font-weight: 600;
+
+            color: var(--text);
+
+        }
+
+
+        .pets-hero h1 em {
+
+            color: var(--coral);
+
+            font-style: italic;
+
+        }
+
+
+        .pets-hero p {
+
+            max-width: 600px;
+
+            margin:
+                22px auto 0;
+
+            color: var(--text-soft);
+
+            font-size:
+                clamp(15px, 1.5vw, 17px);
+
+            line-height: 1.75;
+
+        }
+
+
+
+        /* ========================================================
+           SEARCH / FILTER AREA
+           ======================================================== */
+
+        .pets-tools-wrapper {
+
+            max-width: 1200px;
+
+            margin:
+                -20px auto 0;
+
+            padding:
+                0 24px;
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+        .pets-tools {
+
+            background: var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 22px;
+
+            padding: 17px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(220px, 1.6fr)
+                repeat(3, minmax(140px, 1fr));
+
+            gap: 12px;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .search-box {
+
+            position: relative;
+
+        }
+
+
+        .search-box span {
+
+            position: absolute;
+
+            left: 16px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 17px;
+
+            pointer-events: none;
+
+        }
+
+
+        .search-box input,
+        .filter-select {
+
+            width: 100%;
+
+            height: 48px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 13px;
+
+            background: #fffdfb;
+
+            color: var(--text);
+
+            outline: none;
+
+            padding:
+                0 15px;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .search-box input {
+
+            padding-left: 43px;
+
+        }
+
+
+        .search-box input:focus,
+        .filter-select:focus {
+
+            border-color: var(--coral);
+
+            box-shadow:
+                0 0 0 4px rgba(233, 130, 104, 0.10);
+
+        }
+
+
+
+        /* ========================================================
+           PETS CONTENT
+           ======================================================== */
+
+        .pets-content {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding:
+                65px 24px 100px;
+
+        }
+
+
+        .pets-content-header {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .pets-content-header h2 {
+
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(29px, 4vw, 40px);
+
+            line-height: 1.15;
+
+            font-weight: 600;
+
+            letter-spacing: -1px;
+
+        }
+
+
+        .pets-content-header h2 em {
+
+            color: var(--coral);
+
+            font-style: italic;
+
+        }
+
+
+        .pets-count {
+
+            color: var(--text-soft);
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* ========================================================
+           PET GRID
+           ======================================================== */
+
+        .pets-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 25px;
+
+        }
+
+
+
+        /* ========================================================
+           PET CARD
+           ======================================================== */
+
+        .pet-card {
+
+            min-width: 0;
+
+            background: var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius-lg);
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 30px
+                rgba(75, 52, 41, 0.045);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+
+            cursor: pointer;
+
+        }
+
+
+        .pet-card:hover {
+
+            transform:
+                translateY(-6px);
+
+            box-shadow:
+                0 20px 45px
+                rgba(75, 52, 41, 0.11);
+
+        }
+
+
+        .pet-image {
+
+            position: relative;
+
+            height: 285px;
+
+            overflow: hidden;
+
+            background:
+                var(--cream-dark);
+
+        }
+
+
+        .pet-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.45s ease;
+
+        }
+
+
+        .pet-card:hover .pet-image img {
+
+            transform: scale(1.045);
+
+        }
+
+
+        .pet-status {
+
+            position: absolute;
+
+            left: 15px;
+
+            bottom: 15px;
+
+            padding:
+                7px 11px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(255, 255, 255, 0.93);
+
+            color: var(--sage-dark);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            backdrop-filter:
+                blur(8px);
+
+        }
+
+
+        .pet-heart {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 15px;
+
+            width: 42px;
+
+            height: 42px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.93);
+
+            color: var(--text);
+
+            display: grid;
+
+            place-items: center;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 18px
+                rgba(0,0,0,0.08);
+
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease;
+
+        }
+
+
+        .pet-heart:hover {
+
+            transform: scale(1.08);
+
+        }
+
+
+        .pet-heart.favourite {
+
+            color: var(--coral);
+
+        }
+
+
+        .pet-info {
+
+            padding: 21px 21px 22px;
+
+        }
+
+
+        .pet-top-line {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+        }
+
+
+        .pet-info h3 {
+
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 25px;
+
+            font-weight: 600;
+
+            line-height: 1.1;
+
+        }
+
+
+        .pet-age {
+
+            flex-shrink: 0;
+
+            color: var(--text-light);
+
+            font-size: 12px;
+
+            padding-top: 4px;
+
+        }
+
+
+        .pet-info p {
+
+            margin:
+                8px 0 15px;
+
+            color: var(--text-soft);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .pet-details {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding-top: 14px;
+
+            border-top:
+                1px solid #f0e7df;
+
+        }
+
+
+        .pet-location {
+
+            color: var(--text-soft);
+
+            font-size: 12px;
+
+        }
+
+
+        .pet-view {
+
+            color: var(--coral-dark);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* ========================================================
+           NO RESULTS
+           ======================================================== */
+
+        .no-results {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            color: var(--text-soft);
+
+        }
+
+
+        .no-results.show {
+
+            display: block;
+
+        }
+
+
+        .no-results-icon {
+
+            font-size: 50px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .no-results h3 {
+
+            margin:
+                0 0 8px;
+
+            color: var(--text);
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+
+        }
+
+
+        .no-results p {
+
+            margin: 0;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* ========================================================
+           CTA
+           ======================================================== */
+
+        .pets-cta {
+
+            margin-top: 70px;
+
+            padding:
+                60px 30px;
+
+            border-radius: 30px;
+
+            background:
+                var(--sage);
+
+            text-align: center;
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+        .pets-cta::before {
+
+            content: "🐾";
+
+            position: absolute;
+
+            left: 7%;
+
+            bottom: -15px;
+
+            font-size: 90px;
+
+            opacity: 0.12;
+
+            transform: rotate(-15deg);
+
+        }
+
+
+        .pets-cta::after {
+
+            content: "♥";
+
+            position: absolute;
+
+            right: 8%;
+
+            top: 20px;
+
+            font-size: 75px;
+
+            opacity: 0.10;
+
+            transform: rotate(15deg);
+
+        }
+
+
+        .pets-cta > * {
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+
+        .pets-cta h2 {
+
+            margin: 0;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(32px, 4vw, 48px);
+
+            font-weight: 600;
+
+            letter-spacing: -1px;
+
+        }
+
+
+        .pets-cta h2 em {
+
+            font-style: italic;
+
+            color: white;
+
+        }
+
+
+        .pets-cta p {
+
+            max-width: 520px;
+
+            margin:
+                14px auto 25px;
+
+            color:
+                rgba(52,42,37,0.72);
+
+            line-height: 1.65;
+
+            font-size: 14px;
+
+        }
+
+
+        .pets-cta-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 46px;
+
+            padding:
+                12px 22px;
+
+            border-radius: 13px;
+
+            background: var(--text);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease;
+
+        }
+
+
+        .pets-cta-button:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+
+        /* ========================================================
+           FOOTER
+           ======================================================== */
+
+        .pets-footer {
+
+            background: #342a25;
+
+            color: white;
+
+            padding:
+                55px clamp(24px, 7vw, 100px) 25px;
+
+        }
+
+
+        .pets-footer-main {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.3fr 2fr;
+
+            gap: 70px;
+
+        }
+
+
+        .pets-footer-brand .pets-brand {
+
+            color: white;
+
+        }
+
+
+        .pets-footer-brand p {
+
+            margin-top: 17px;
+
+            color:
+                rgba(255,255,255,0.60);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .pets-footer-links {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 30px;
+
+        }
+
+
+        .pets-footer-links h4 {
+
+            margin:
+                0 0 15px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .pets-footer-links a,
+        .pets-footer-links span {
+
+            display: block;
+
+            margin-bottom: 9px;
+
+            color:
+                rgba(255,255,255,0.58);
+
+            font-size: 12px;
+
+            transition:
+                color 0.2s ease;
+
+        }
+
+
+        .pets-footer-links a:hover {
+
+            color: white;
+
+        }
+
+
+        .pets-footer-bottom {
+
+            max-width: 1200px;
+
+            margin:
+                45px auto 0;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.10);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color:
+                rgba(255,255,255,0.42);
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* ========================================================
+           RESPONSIVE — TABLET
+           ======================================================== */
+
+        @media (max-width: 1000px) {
+
+            .pets-navigation {
+
+                gap: 18px;
+
+            }
+
+
+            .pets-navigation a {
+
+                font-size: 13px;
+
+            }
+
+
+            .pets-tools {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .search-box {
+
+                grid-column:
+                    1 / -1;
+
+            }
+
+
+            .pets-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+
+            .pets-footer-main {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 40px;
+
+            }
+
+        }
+
+
+
+        /* ========================================================
+           RESPONSIVE — MOBILE
+           ======================================================== */
+
+        @media (max-width: 720px) {
+
+            .pets-navbar {
+
+                min-height: auto;
+
+                padding:
+                    15px 20px;
+
+                flex-wrap: wrap;
+
+                gap: 13px;
+
+            }
+
+
+            .pets-navigation {
+
+                order: 3;
+
+                width: 100%;
+
+                overflow-x: auto;
+
+                justify-content: flex-start;
+
+                padding:
+                    2px 0 4px;
+
+                scrollbar-width: none;
+
+            }
+
+
+            .pets-navigation::-webkit-scrollbar {
+
+                display: none;
+
+            }
+
+
+            .pets-navigation a {
+
+                font-size: 12px;
+
+            }
+
+
+            .pets-login {
+
+                display: none;
+
+            }
+
+
+            .pets-get-started {
+
+                min-height: 40px;
+
+                padding:
+                    9px 14px;
+
+                font-size: 12px;
+
+            }
+
+
+            .pets-hero {
+
+                padding:
+                    58px 20px 48px;
+
+            }
+
+
+            .pets-hero h1 {
+
+                font-size: 47px;
+
+                letter-spacing: -1.5px;
+
+            }
+
+
+            .pets-tools-wrapper {
+
+                padding:
+                    0 16px;
+
+            }
+
+
+            .pets-tools {
+
+                grid-template-columns:
+                    1fr;
+
+                padding: 13px;
+
+            }
+
+
+            .search-box {
+
+                grid-column:
+                    auto;
+
+            }
+
+
+            .pets-content {
+
+                padding:
+                    50px 16px 70px;
+
+            }
+
+
+            .pets-content-header {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .pets-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .pet-image {
+
+                height: 300px;
+
+            }
+
+
+            .pets-footer {
+
+                padding:
+                    45px 20px 22px;
+
+            }
+
+
+            .pets-footer-links {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .pets-footer-bottom {
+
+                flex-direction:
+                    column;
+
+            }
+
+        }
+
+
+
+        /* ========================================================
+           VERY SMALL SCREENS
+           ======================================================== */
+
+        @media (max-width: 400px) {
+
+            .pets-brand {
+
+                font-size: 20px;
+
+            }
+
+
+            .pets-brand-paw {
+
+                width: 34px;
+
+                height: 34px;
+
+                font-size: 18px;
+
+            }
+
+
+            .pets-hero h1 {
+
+                font-size: 40px;
+
+            }
+
+
+            .pet-image {
+
+                height: 260px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <!-- =========================================================
+         NAVBAR
+         ========================================================= -->
+
+    <header class="pets-navbar">
+
+
+        <!-- BRAND -->
+
+        <a
+            href="../index.html"
+            class="pets-brand"
+            aria-label="Go to PawPal home"
+            onclick="window.location.href='../index.html'; return false;"
+        >
+
+            <span
+                class="pets-brand-paw"
+                aria-hidden="true"
+            >
+                🐾
+            </span>
+
+            <span>
+                PawPal
+            </span>
+
+        </a>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav
+            class="pets-navigation"
+            aria-label="Main navigation"
+        >
+
+
+            <a
+                href="../index.html"
+                onclick="window.location.href='../index.html'; return false;"
+            >
+                Home
+            </a>
+
+            <a
+                href="./pets.html"
+                class="active"
+                aria-current="page"
+            >
+                Find a Pet
+            </a>
+
+
+            <a
+                href="./how-it-works.html"
+            >
+                How It Works
+            </a>
+
+
+            <a
+                href="./about.html"
+            >
+                About Us
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="pets-nav-right">
+
+
+            <a
+                href="./login.html"
+                class="pets-login"
+            >
+                Log in
+            </a>
+
+
+            <a
+                href="./register.html"
+                class="pets-get-started"
+            >
+
+                <span>
+                    Get Started
+                </span>
+
+                <span aria-hidden="true">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="pets-page">
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="pets-hero">
+
+
+            <div class="pets-eyebrow">
+
+                <span aria-hidden="true">
+                    ✦
+                </span>
+
+                FIND YOUR NEW BEST FRIEND
+
+                <span aria-hidden="true">
+                    ✦
+                </span>
+
+            </div>
+
+
+            <h1>
+
+                Someone special
+                <br>
+                is <em>waiting.</em>
+
+            </h1>
+
+
+            <p>
+
+                Browse our adorable pets and discover
+                the one who might just steal your heart.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SEARCH + FILTERS
+             ===================================================== -->
+
+        <div class="pets-tools-wrapper">
+
+
+            <div class="pets-tools">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <span aria-hidden="true">
+                        🔍
+                    </span>
+
+                    <input
+                        type="search"
+                        id="pet-search"
+                        placeholder="Search by pet name..."
+                        aria-label="Search pets"
+                    >
+
+                </div>
+
+
+
+                <!-- TYPE -->
+
+                <select
+                    class="filter-select"
+                    id="type-filter"
+                    aria-label="Filter by type"
+                >
+
+                    <option value="all">
+                        All pets
+                    </option>
+
+                    <option value="dog">
+                        Dogs
+                    </option>
+
+                    <option value="cat">
+                        Cats
+                    </option>
+
+                    <option value="rabbit">
+                        Rabbits
+                    </option>
+
+                </select>
+
+
+
+                <!-- AGE -->
+
+                <select
+                    class="filter-select"
+                    id="age-filter"
+                    aria-label="Filter by age"
+                >
+
+                    <option value="all">
+                        Any age
+                    </option>
+
+                    <option value="young">
+                        Young
+                    </option>
+
+                    <option value="adult">
+                        Adult
+                    </option>
+
+                </select>
+
+
+
+                <!-- LOCATION -->
+
+                <select
+                    class="filter-select"
+                    id="location-filter"
+                    aria-label="Filter by location"
+                >
+
+                    <option value="all">
+                        All locations
+                    </option>
+
+                    <option value="kollam">
+                        Kollam
+                    </option>
+
+                    <option value="kochi">
+                        Kochi
+                    </option>
+
+                    <option value="trivandrum">
+                        Thiruvananthapuram
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             PET CONTENT
+             ===================================================== -->
+
+        <section class="pets-content">
+
+
+            <div class="pets-content-header">
+
+
+                <div>
+
+                    <h2>
+                        Meet the <em>cuties.</em>
+                    </h2>
+
+                </div>
+
+
+                <span
+                    class="pets-count"
+                    id="pets-count"
+                >
+                    Showing 6 pets
+                </span>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PET GRID
+                 ================================================= -->
+
+            <div
+                class="pets-grid"
+                id="pets-grid"
+            >
+
+
+                <!-- =================================================
+                     MILO
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="milo"
+                    data-type="dog"
+                    data-age="young"
+                    data-location="kollam"
+                    data-pet="milo"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=90"
+                            alt="Milo, a Golden Retriever"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Milo to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Milo
+                            </h3>
+
+                            <span class="pet-age">
+                                2 years
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Golden Retriever · Male
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Kollam
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     LUNA
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="luna"
+                    data-type="cat"
+                    data-age="young"
+                    data-location="kochi"
+                    data-pet="luna"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=90"
+                            alt="Luna, a domestic shorthair cat"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Luna to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Luna
+                            </h3>
+
+                            <span class="pet-age">
+                                1 year
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Domestic Shorthair · Female
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Kochi
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     BRUNO
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="bruno"
+                    data-type="dog"
+                    data-age="adult"
+                    data-location="trivandrum"
+                    data-pet="bruno"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=90"
+                            alt="Bruno, an Indie dog"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Bruno to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Bruno
+                            </h3>
+
+                            <span class="pet-age">
+                                3 years
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Indie · Male
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Thiruvananthapuram
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     DAISY
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="daisy"
+                    data-type="dog"
+                    data-age="young"
+                    data-location="kollam"
+                    data-pet="daisy"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=90"
+                            alt="Daisy, a Labrador"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Daisy to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Daisy
+                            </h3>
+
+                            <span class="pet-age">
+                                1.5 years
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Labrador · Female
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Kollam
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     OLIVER
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="oliver"
+                    data-type="cat"
+                    data-age="adult"
+                    data-location="kochi"
+                    data-pet="oliver"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=90"
+                            alt="Oliver, a grey cat"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Oliver to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Oliver
+                            </h3>
+
+                            <span class="pet-age">
+                                3 years
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Domestic Cat · Male
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Kochi
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     COOKIE
+                     ================================================= -->
+
+                <article
+                    class="pet-card"
+                    data-name="cookie"
+                    data-type="rabbit"
+                    data-age="young"
+                    data-location="trivandrum"
+                    data-pet="cookie"
+                >
+
+                    <div class="pet-image">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=90"
+                            alt="Cookie, a cute rabbit"
+                            loading="lazy"
+                        >
+
+
+                        <button
+                            class="pet-heart"
+                            type="button"
+                            aria-label="Add Cookie to favourites"
+                        >
+                            ♡
+                        </button>
+
+
+                        <span class="pet-status">
+                            Available
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="pet-info">
+
+
+                        <div class="pet-top-line">
+
+                            <h3>
+                                Cookie
+                            </h3>
+
+                            <span class="pet-age">
+                                8 months
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Holland Lop · Female
+                        </p>
+
+
+                        <div class="pet-details">
+
+                            <span class="pet-location">
+                                📍 Thiruvananthapuram
+                            </span>
+
+                            <span class="pet-view">
+                                View profile →
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NO RESULTS
+                 ================================================= -->
+
+            <div
+                class="no-results"
+                id="no-results"
+            >
+
+                <div class="no-results-icon">
+                    🐾
+                </div>
+
+                <h3>
+                    No furry friends found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CTA
+                 ================================================= -->
+
+            <div class="pets-cta">
+
+
+                <h2>
+
+                    Have a pet looking for a
+                    <br>
+                    <em>loving home?</em>
+
+                </h2>
+
+
+                <p>
+
+                    You can help another furry friend
+                    find their forever family by listing
+                    them on PawPal.
+
+                </p>
+
+
+                <a
+                    href="./register.html"
+                    class="pets-cta-button"
+                >
+                    List a Pet →
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="pets-footer">
+
+
+        <div class="pets-footer-main">
+
+
+            <!-- BRAND -->
+
+            <div class="pets-footer-brand">
+
+
+                <a
+                    href="../index.html"
+                    class="pets-brand"
+                    onclick="window.location.href='../index.html'; return false;"
+                >
+
+                    <span
+                        class="pets-brand-paw"
+                        aria-hidden="true"
+                    >
+                        🐾
+                    </span>
+
+                    <span>
+                        PawPal
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Connecting loving people
+                    <br>
+                    with pets who need them.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div class="pets-footer-links">
+
+
+                <div>
+
+                    <h4>
+                        Explore
+                    </h4>
+
+
+                    <a href="../index.html">Home</a>
+
+
+                    <a href="./pets.html">
+                        Find a Pet
+                    </a>
+
+
+                    <a href="./how-it-works.html">
+                        How It Works
+                    </a>
+
+
+                    <a href="./about.html">
+                        About Us
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <h4>
+                        Account
+                    </h4>
+
+
+                    <a href="./login.html">
+                        Log in
+                    </a>
+
+
+                    <a href="./register.html">
+                        Create account
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <h4>
+                        Get in touch
+                    </h4>
+
+
+                    <a href="mailto:hello@pawpal.com">
+                        hello@pawpal.com
+                    </a>
+
+
+                    <span>
+                        Kerala, India
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="pets-footer-bottom">
+
+
+            <span>
+
+                ©
+                <span id="current-year">
+                    2026
+                </span>
+
+                PawPal.
+                Made with ♥ for animals.
+
+            </span>
+
+
+            <span>
+                Pet adoption made with love.
+            </span>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         PAGE JAVASCRIPT
+         ========================================================= -->
+
+    <script>
+
+        /* ========================================================
+           CURRENT YEAR
+           ======================================================== */
+
+        const yearElement =
+            document.getElementById("current-year");
+
+        if (yearElement) {
+
+            yearElement.textContent =
+                new Date().getFullYear();
+
+        }
+
+
+
+        /* ========================================================
+           SEARCH + FILTER
+           ======================================================== */
+
+        const searchInput =
+            document.getElementById("pet-search");
+
+        const typeFilter =
+            document.getElementById("type-filter");
+
+        const ageFilter =
+            document.getElementById("age-filter");
+
+        const locationFilter =
+            document.getElementById("location-filter");
+
+        const petCards =
+            Array.from(
+                document.querySelectorAll(".pet-card")
+            );
+
+        const countElement =
+            document.getElementById("pets-count");
+
+        const noResults =
+            document.getElementById("no-results");
+
+
+
+        function filterPets() {
+
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const type =
+                typeFilter.value;
+
+
+            const age =
+                ageFilter.value;
+
+
+            const location =
+                locationFilter.value;
+
+
+            let visibleCount = 0;
+
+
+            petCards.forEach(function (card) {
+
+
+                const name =
+                    card.dataset.name || "";
+
+
+                const cardType =
+                    card.dataset.type || "";
+
+
+                const cardAge =
+                    card.dataset.age || "";
+
+
+                const cardLocation =
+                    card.dataset.location || "";
+
+
+                const matchesSearch =
+                    name.includes(search);
+
+
+                const matchesType =
+                    type === "all" ||
+                    cardType === type;
+
+
+                const matchesAge =
+                    age === "all" ||
+                    cardAge === age;
+
+
+                const matchesLocation =
+                    location === "all" ||
+                    cardLocation === location;
+
+
+                const visible =
+                    matchesSearch &&
+                    matchesType &&
+                    matchesAge &&
+                    matchesLocation;
+
+
+                card.style.display =
+                    visible ? "" : "none";
+
+
+                if (visible) {
+                    visibleCount++;
+                }
+
+            });
+
+
+            countElement.textContent =
+                `Showing ${visibleCount} pet${visibleCount === 1 ? "" : "s"}`;
+
+
+            noResults.classList.toggle(
+                "show",
+                visibleCount === 0
+            );
+
+        }
+
+
+
+        searchInput.addEventListener(
+            "input",
+            filterPets
+        );
+
+
+        typeFilter.addEventListener(
+            "change",
+            filterPets
+        );
+
+
+        ageFilter.addEventListener(
+            "change",
+            filterPets
+        );
+
+
+        locationFilter.addEventListener(
+            "change",
+            filterPets
+        );
+
+
+
+        /* ========================================================
+           FAVOURITES
+           ======================================================== */
+
+        document
+            .querySelectorAll(".pet-heart")
+            .forEach(function (button) {
+
+
+                button.addEventListener(
+                    "click",
+                    function (event) {
+
+
+                        event.stopPropagation();
+
+
+                        const favourite =
+                            button.classList.toggle(
+                                "favourite"
+                            );
+
+
+                        button.textContent =
+                            favourite ? "♥" : "♡";
+
+
+                        button.setAttribute(
+                            "aria-label",
+                            favourite
+                                ? "Remove from favourites"
+                                : "Add to favourites"
+                        );
+
+
+                    }
+                );
+
+
+            });
+
+
+
+        /* ========================================================
+           PET CARD → DETAILS PAGE
+           ======================================================== */
+
+        petCards.forEach(function (card) {
+
+
+            card.addEventListener(
+                "click",
+                function (event) {
+
+
+                    if (
+                        event.target.closest(
+                            ".pet-heart"
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    const pet =
+                        card.dataset.pet;
+
+
+                    if (!pet) {
+                        return;
+                    }
+
+
+                    window.location.href =
+                        "./pet-details.html?pet=" +
+                        encodeURIComponent(pet);
+
+
+                }
+            );
+
+
+        });
+
+
+
+        /* ========================================================
+           KEYBOARD ACCESSIBILITY
+           ======================================================== */
+
+        petCards.forEach(function (card) {
+
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+
+                        event.preventDefault();
+
+                        card.click();
+
+
+                    }
+
+                }
+            );
+
+
+        });
+
+
+
+        /* ========================================================
+           IMPORTANT HOME NAVIGATION FALLBACK
+           
+           This intentionally uses a direct page navigation so
+           another JS file cannot interfere with the Home link.
+           ======================================================== */
+
+        document
+            .querySelectorAll(
+                'a[href="../index.html"]'
+            )
+            .forEach(function (link) {
+
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+
+                        event.preventDefault();
+
+
+                        window.location.assign(
+                            "../index.html"
+                        );
+
+
+                    }
+                );
+
+
+            });
+
+
+    </script>
+
+
+
+</body>
+
+</html>

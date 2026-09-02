@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PawFund | Give a Paw. Give a Chance.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/donation.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-inner">
+
+        <a href="../index.html" class="brand">
+            <span class="brand-paw">🐾</span>
+            <span>PawPal</span>
+        </a>
+
+        <nav class="navigation">
+            <a href="../index.html">Home</a>
+            <a href="pets.html">Find a Pet</a>
+            <a href="pet-care.html">Pet Care</a>
+            <a href="rescue-adoption.html">Rescue & Adopt</a>
+            <a href="donation.html" class="active">PawFund</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="about.html">About Us</a>
+        </nav>
+
+        <div class="nav-right">
+            <a href="login.html" class="login">Log in</a>
+            <a href="register.html" class="nav-button">
+                Get Started <span>→</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- HERO -->
+<main>
+
+<section class="fund-hero">
+
+    <div class="fund-hero-content">
+
+        <div class="fund-eyebrow">
+            <span>♡</span>
+            PAWFUND
+        </div>
+
+        <h1>
+            You don't have to adopt
+            <em>to make a difference.</em>
+        </h1>
+
+        <p>
+            Every rescued animal deserves food, medical care, shelter,
+            and time to heal. Help give them a second chance while they
+            wait for their forever home.
+        </p>
+
+        <div class="fund-hero-actions">
+
+            <a href="#fundraisers" class="fund-primary-btn">
+                Find a Fundraiser <span>→</span>
+            </a>
+
+            <a href="start-fundraiser.html" class="fund-secondary-btn">
+                Start a Fundraiser
+            </a>
+
+        </div>
+
+        <div class="fund-trust">
+            <span>✓</span> Rescue-focused fundraising
+            <span class="trust-divider"></span>
+            <span>🐾</span> Every story matters
+        </div>
+
+    </div>
+
+
+    <div class="fund-hero-card">
+
+        <div class="hero-card-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=85"
+                alt="Rescued dog"
+            >
+
+            <span class="hero-verified">
+                ✓ Verified rescue
+            </span>
+
+        </div>
+
+        <div class="hero-card-body">
+
+            <div class="hero-card-label">
+                URGENT RESCUE
+            </div>
+
+            <h3>Help Bruno Heal</h3>
+
+            <p>
+                Bruno is recovering from injuries and needs continued
+                veterinary care before he can find his forever home.
+            </p>
+
+            <div class="hero-progress">
+
+                <div class="progress-track">
+                    <span style="width: 72%;"></span>
+                </div>
+
+                <div class="progress-info">
+                    <strong>₹36,000 raised</strong>
+                    <span>₹50,000 goal</span>
+                </div>
+
+            </div>
+
+            <a
+                href="fundraiser-details.html?id=bruno"
+                class="hero-card-link"
+            >
+                Help Bruno recover →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+<section class="fund-stats">
+
+    <div class="fund-stat">
+        <strong>₹8.4L+</strong>
+        <span>Raised for rescues</span>
+    </div>
+
+    <div class="fund-stat">
+        <strong>120+</strong>
+        <span>Animals supported</span>
+    </div>
+
+    <div class="fund-stat">
+        <strong>640+</strong>
+        <span>Kind donors</span>
+    </div>
+
+    <div class="fund-stat">
+        <strong>100%</strong>
+        <span>Rescue focused</span>
+    </div>
+
+</section>
+
+
+<!-- FUNDRAISERS -->
+<section class="fundraisers-section" id="fundraisers">
+
+    <div class="section-heading-row">
+
+        <div>
+
+            <span class="section-label">
+                MAKE AN IMPACT
+            </span>
+
+            <h2>
+                Rescue stories that
+                <em>need your help.</em>
+            </h2>
+
+            <p>
+                Support animals receiving medical care, food, temporary
+                shelter, and rehabilitation before adoption.
+            </p>
+
+        </div>
+
+        <a
+            href="start-fundraiser.html"
+            class="start-fundraiser-btn"
+        >
+            + Start a Fundraiser
+        </a>
+
+    </div>
+
+
+    <!-- FILTERS -->
+    <div class="fund-filter-bar">
+
+        <div class="fund-search">
+
+            <span>⌕</span>
+
+            <input
+                type="text"
+                id="fundSearch"
+                placeholder="Search fundraisers..."
+            >
+
+        </div>
+
+        <select id="animalFilter">
+
+            <option value="all">
+                All animals
+            </option>
+
+            <option value="dog">
+                Dogs
+            </option>
+
+            <option value="cat">
+                Cats
+            </option>
+
+            <option value="rabbit">
+                Rabbits
+            </option>
+
+            <option value="other">
+                Other
+            </option>
+
+        </select>
+
+
+        <select id="causeFilter">
+
+            <option value="all">
+                All causes
+            </option>
+
+            <option value="medical">
+                Medical care
+            </option>
+
+            <option value="food">
+                Food & nutrition
+            </option>
+
+            <option value="shelter">
+                Temporary shelter
+            </option>
+
+            <option value="recovery">
+                Recovery
+            </option>
+
+        </select>
+
+
+        <select id="sortFilter">
+
+            <option value="urgent">
+                Most urgent
+            </option>
+
+            <option value="recent">
+                Recently added
+            </option>
+
+            <option value="progress">
+                Almost funded
+            </option>
+
+            <option value="donors">
+                Most supported
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- CARDS -->
+    <div
+        class="fundraiser-grid"
+        id="fundraiserGrid"
+    >
+
+
+        <!-- BRUNO -->
+        <article
+            class="fundraiser-card"
+            data-id="bruno"
+            data-animal="dog"
+            data-cause="medical"
+            data-progress="72"
+            data-donors="38"
+            data-name="Bruno"
+            data-created="1"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+                    alt="Bruno the rescued dog"
+                >
+
+                <span class="urgent-badge">
+                    URGENT
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Bruno's Road to Recovery
+                </h3>
+
+                <p>
+                    Bruno was rescued injured and malnourished.
+                    He is currently receiving veterinary treatment.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:72%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹36,000</strong>
+                        <span>of ₹50,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>38 donors</span>
+                    <span>72% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=bruno"
+                    class="fundraiser-btn"
+                >
+                    Help Bruno →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- LUNA -->
+        <article
+            class="fundraiser-card"
+            data-id="luna"
+            data-animal="cat"
+            data-cause="recovery"
+            data-progress="61"
+            data-donors="24"
+            data-name="Luna"
+            data-created="2"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85"
+                    alt="Luna the rescued cat"
+                >
+
+                <span class="cause-badge">
+                    RECOVERY
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Luna Needs a Safe Recovery
+                </h3>
+
+                <p>
+                    Luna was found abandoned and needs medication,
+                    nutritious food and temporary shelter.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:61%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹18,200</strong>
+                        <span>of ₹30,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>24 donors</span>
+                    <span>61% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=luna"
+                    class="fundraiser-btn"
+                >
+                    Help Luna →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ROCKY -->
+        <article
+            class="fundraiser-card"
+            data-id="rocky"
+            data-animal="dog"
+            data-cause="medical"
+            data-progress="90"
+            data-donors="52"
+            data-name="Rocky"
+            data-created="3"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=85"
+                    alt="Rocky the rescued dog"
+                >
+
+                <span class="almost-badge">
+                    ALMOST THERE
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Rocky's Medical Fund
+                </h3>
+
+                <p>
+                    Rocky needs continued veterinary treatment
+                    before he is ready for adoption.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:90%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹67,800</strong>
+                        <span>of ₹75,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>52 donors</span>
+                    <span>90% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=rocky"
+                    class="fundraiser-btn"
+                >
+                    Help Rocky →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- BUNBUN -->
+        <article
+            class="fundraiser-card"
+            data-id="bunbun"
+            data-animal="rabbit"
+            data-cause="food"
+            data-progress="48"
+            data-donors="16"
+            data-name="Bunbun"
+            data-created="4"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Bunbun the rescued rabbit"
+                >
+
+                <span class="cause-badge">
+                    FOOD & CARE
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Bunbun's Safe Recovery
+                </h3>
+
+                <p>
+                    Bunbun needs nutritious food and a safe temporary
+                    space while recovering with a rescuer.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:48%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹9,600</strong>
+                        <span>of ₹20,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>16 donors</span>
+                    <span>48% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=bunbun"
+                    class="fundraiser-btn"
+                >
+                    Help Bunbun →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- MIMI -->
+        <article
+            class="fundraiser-card"
+            data-id="mimi"
+            data-animal="cat"
+            data-cause="shelter"
+            data-progress="37"
+            data-donors="12"
+            data-name="Mimi"
+            data-created="5"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=900&q=85"
+                    alt="Mimi the rescued cat"
+                >
+
+                <span class="cause-badge">
+                    SHELTER
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Mimi's Temporary Home
+                </h3>
+
+                <p>
+                    Mimi is safe after being rescued from the streets,
+                    but needs temporary care until adoption.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:37%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹7,400</strong>
+                        <span>of ₹20,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>12 donors</span>
+                    <span>37% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=mimi"
+                    class="fundraiser-btn"
+                >
+                    Help Mimi →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- TOBY -->
+        <article
+            class="fundraiser-card"
+            data-id="toby"
+            data-animal="dog"
+            data-cause="recovery"
+            data-progress="55"
+            data-donors="29"
+            data-name="Toby"
+            data-created="6"
+        >
+
+            <div class="fundraiser-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85"
+                    alt="Toby the rescued dog"
+                >
+
+                <span class="cause-badge">
+                    RECOVERY
+                </span>
+
+                <button
+                    class="save-fundraiser"
+                    aria-label="Save fundraiser"
+                    type="button"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="fundraiser-body">
+
+                <div class="verified-label">
+                    ✓ Verified rescue
+                </div>
+
+                <h3>
+                    Toby's Second Chance
+                </h3>
+
+                <p>
+                    Toby is learning to trust again after being rescued.
+                    Your support can help cover his daily care.
+                </p>
+
+                <div class="fundraiser-progress">
+
+                    <div class="progress-track">
+                        <span style="width:55%"></span>
+                    </div>
+
+                    <div class="fundraiser-money">
+                        <strong>₹22,000</strong>
+                        <span>of ₹40,000</span>
+                    </div>
+
+                </div>
+
+                <div class="fundraiser-meta">
+                    <span>29 donors</span>
+                    <span>55% funded</span>
+                </div>
+
+                <a
+                    href="fundraiser-details.html?id=toby"
+                    class="fundraiser-btn"
+                >
+                    Help Toby →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <div
+        class="empty-fundraisers"
+        id="emptyFundraisers"
+    >
+
+        <div>🐾</div>
+
+        <h3>
+            No fundraisers found
+        </h3>
+
+        <p>
+            Try changing your search or filters.
+        </p>
+
+        <button
+            id="clearFilters"
+            type="button"
+        >
+            Clear filters
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- WHY DONATE -->
+<section class="why-fund-section">
+
+    <div class="why-fund-heading">
+
+        <span class="section-label">
+            WHERE YOUR KINDNESS GOES
+        </span>
+
+        <h2>
+            Small donations can make
+            <em>a real difference.</em>
+        </h2>
+
+        <p>
+            During the journey from rescue to adoption, animals often
+            need more care than people realise.
+        </p>
+
+    </div>
+
+
+    <div class="impact-grid">
+
+        <div class="impact-card">
+            <span class="impact-icon">🏥</span>
+
+            <h3>
+                Medical Care
+            </h3>
+
+            <p>
+                Veterinary consultations, treatments, medicines,
+                wound care and emergency procedures.
+            </p>
+        </div>
+
+
+        <div class="impact-card">
+            <span class="impact-icon">🍲</span>
+
+            <h3>
+                Food & Nutrition
+            </h3>
+
+            <p>
+                Nutritious meals and special diets for animals
+                recovering from illness or malnutrition.
+            </p>
+        </div>
+
+
+        <div class="impact-card">
+            <span class="impact-icon">🏠</span>
+
+            <h3>
+                Temporary Care
+            </h3>
+
+            <p>
+                Safe temporary shelter, bedding, cleaning supplies
+                and everyday essentials.
+            </p>
+        </div>
+
+
+        <div class="impact-card">
+            <span class="impact-icon">❤️</span>
+
+            <h3>
+                Recovery
+            </h3>
+
+            <p>
+                Rehabilitation, grooming, socialisation and
+                other support before adoption.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DONATION MESSAGE -->
+<section class="donation-message-section">
+
+    <div class="donation-message-card">
+
+        <div class="message-paw">
+            🐾
+        </div>
+
+        <div>
+
+            <span class="section-label">
+                CAN'T ADOPT RIGHT NOW?
+            </span>
+
+            <h2>
+                You can still help them
+                <em>get home.</em>
+            </h2>
+
+            <p>
+                Not everyone can foster or adopt an animal. A small
+                contribution can still help pay for the care they need
+                while they wait for their forever family.
+            </p>
+
+        </div>
+
+        <a
+            href="#fundraisers"
+            class="fund-primary-btn"
+        >
+            Give a Paw <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="fund-final-cta">
+
+    <div class="final-cta-content">
+
+        <span class="final-heart">
+            ♡
+        </span>
+
+        <h2>
+            Have you rescued an animal
+            that needs support?
+        </h2>
+
+        <p>
+            Start a PawFund campaign and give people around the world
+            a way to become part of their recovery story.
+        </p>
+
+        <a
+            href="start-fundraiser.html"
+            class="fund-primary-btn"
+        >
+            Start a Fundraiser <span>→</span>
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand">
+                <span class="brand-paw">🐾</span>
+                <span>PawPal</span>
+            </a>
+
+            <p>
+                Helping pets find loving homes,
+                one paw at a time.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div>
+
+                <h4>Explore</h4>
+
+                <a href="pets.html">
+                    Find a Pet
+                </a>
+
+                <a href="rescue-adoption.html">
+                    Rescue & Adopt
+                </a>
+
+                <a href="donation.html">
+                    PawFund
+                </a>
+
+                <a href="pet-care.html">
+                    Pet Care
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>PawPal</h4>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+                <a href="register.html">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 PawPal. Made with love for every paw.
+        </span>
+
+        <span>🐾</span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/JS donation.js"></script>
+
+</body>
+</html>

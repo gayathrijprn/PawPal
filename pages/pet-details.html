@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pet Details — PawPal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --cream: #fff9f2;
+        --cream-dark: #f6ede3;
+        --white: #ffffff;
+        --text: #342a25;
+        --soft: #756861;
+        --coral: #e98268;
+        --coral-dark: #d86f56;
+        --sage: #a9b99f;
+        --sage-dark: #687960;
+        --pink: #f5d5cb;
+        --lavender: #ded6e8;
+        --border: #e9ded4;
+        --shadow: 0 20px 50px rgba(61,45,37,.09);
+    }
+
+    body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    button {
+        font-family: inherit;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+        height: 82px;
+        padding: 0 7%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255,249,242,.96);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .brand-paw {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: var(--pink);
+        display: grid;
+        place-items: center;
+        font-size: 22px;
+    }
+
+    .brand-name {
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: -.8px;
+    }
+
+    .brand-name span {
+        color: var(--coral);
+    }
+
+    .navigation {
+        display: flex;
+        gap: 34px;
+    }
+
+    .navigation a {
+        color: var(--soft);
+        font-size: 14px;
+        font-weight: 600;
+        transition: .2s ease;
+    }
+
+    .navigation a:hover,
+    .navigation a.active {
+        color: var(--coral);
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+
+    .login {
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .nav-button,
+    .primary-button {
+        background: var(--coral);
+        color: white;
+        padding: 13px 20px;
+        border-radius: 13px;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+    .nav-button:hover,
+    .primary-button:hover {
+        background: var(--coral-dark);
+        transform: translateY(-2px);
+    }
+
+    .nav-button span,
+    .primary-button span {
+        margin-left: 7px;
+    }
+
+    /* PAGE */
+
+    .details-page {
+        max-width: 1180px;
+        margin: auto;
+        padding: 55px 25px 80px;
+    }
+
+    .back-link {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--soft);
+        font-weight: 700;
+        margin-bottom: 28px;
+        transition: .2s;
+    }
+
+    .back-link:hover {
+        color: var(--coral);
+    }
+
+    .details-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 50px;
+        box-shadow: var(--shadow);
+    }
+
+    .pet-photo-wrap {
+        position: relative;
+    }
+
+    .pet-photo {
+        width: 100%;
+        height: 580px;
+        object-fit: cover;
+        border-radius: 24px;
+        display: block;
+    }
+
+    .available-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255,255,255,.94);
+        padding: 9px 14px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--sage-dark);
+    }
+
+    .favorite {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        border: 0;
+        border-radius: 50%;
+        background: white;
+        font-size: 25px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0,0,0,.12);
+    }
+
+    .favorite.active {
+        color: var(--coral);
+    }
+
+    .details-content {
+        padding: 28px 20px 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .eyebrow {
+        color: var(--coral);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    .details-content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(45px, 6vw, 68px);
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .details-content h1 em {
+        color: var(--coral);
+        font-weight: 500;
+    }
+
+    .breed {
+        font-size: 19px;
+        color: var(--soft);
+        margin-bottom: 28px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 13px;
+        margin-bottom: 28px;
+    }
+
+    .info-box {
+        background: var(--cream);
+        border-radius: 17px;
+        padding: 16px;
+    }
+
+    .info-box span {
+        display: block;
+        color: var(--soft);
+        font-size: 12px;
+        margin-bottom: 3px;
+    }
+
+    .info-box strong {
+        font-size: 16px;
+    }
+
+    .description {
+        color: var(--soft);
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 28px;
+    }
+
+    .tag {
+        padding: 8px 12px;
+        border-radius: 30px;
+        background: var(--lavender);
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .actions {
+        display: flex;
+        gap: 12px;
+    }
+
+    .adopt-button {
+        flex: 1;
+        text-align: center;
+        background: var(--coral);
+        color: white;
+        padding: 16px 20px;
+        border-radius: 15px;
+        font-weight: 800;
+        transition: .2s;
+    }
+
+    .adopt-button:hover {
+        background: var(--coral-dark);
+        transform: translateY(-2px);
+    }
+
+    .message-button {
+        padding: 16px 20px;
+        border-radius: 15px;
+        background: var(--cream-dark);
+        font-weight: 800;
+        border: 0;
+        cursor: pointer;
+    }
+
+    /* WHY */
+
+    .why-section {
+        margin-top: 65px;
+        text-align: center;
+    }
+
+    .section-label {
+        color: var(--coral);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 9px;
+    }
+
+    .why-section h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        margin-bottom: 35px;
+    }
+
+    .why-section h2 em {
+        color: var(--coral);
+        font-weight: 500;
+    }
+
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .why-box {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 28px;
+        text-align: left;
+    }
+
+    .why-icon {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .why-box h3 {
+        margin-bottom: 7px;
+    }
+
+    .why-box p {
+        color: var(--soft);
+        font-size: 14px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+
+        .navigation {
+            display: none;
+        }
+
+        .details-card {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .pet-photo {
+            height: 450px;
+        }
+
+        .details-content {
+            padding: 10px;
+        }
+
+        .why-grid {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .navbar {
+            padding: 0 18px;
+        }
+
+        .nav-button {
+            padding: 10px 13px;
+        }
+
+        .login {
+            display: none;
+        }
+
+        .details-page {
+            padding: 30px 15px 60px;
+        }
+
+        .details-card {
+            padding: 12px;
+            border-radius: 22px;
+        }
+
+        .pet-photo {
+            height: 360px;
+            border-radius: 17px;
+        }
+
+        .details-content h1 {
+            font-size: 48px;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<a href="../index.html" class="brand">
+
+    <div class="brand-paw">🐾</div>
+
+    <div class="brand-name">
+        Paw<span>Pal</span>
+    </div>
+
+</a>
+
+
+<nav class="navigation">
+
+    <a href="../index.html">Home</a>
+
+    <a href="pets.html" class="active">
+        Find a Pet
+    </a>
+
+    <a href="how-it-works.html">
+        How It Works
+    </a>
+
+    <a href="about.html">
+        About Us
+    </a>
+
+</nav>
+
+
+<div class="nav-right">
+
+    <a href="login.html" class="login">
+        Log in
+    </a>
+
+    <a href="register.html" class="nav-button">
+        Get Started <span>→</span>
+    </a>
+
+</div>
+
+</header>
+
+<main class="details-page">
+
+<a href="pets.html" class="back-link">
+    ← Back to all pets
+</a>
+
+
+<section class="details-card">
+
+    <div class="pet-photo-wrap">
+
+        <img
+            id="petImage"
+            class="pet-photo"
+            src=""
+            alt=""
+        >
+
+        <span class="available-badge">
+            ● Available for adoption
+        </span>
+
+        <button
+            class="favorite"
+            id="favoriteButton"
+            aria-label="Add to favorites"
+            type="button"
+        >
+            ♡
+        </button>
+
+    </div>
+
+
+    <div class="details-content">
+
+        <div class="eyebrow">
+            PAWPAL COMPANION
+        </div>
+
+        <h1 id="petName">
+            Bruno
+        </h1>
+
+        <p class="breed" id="petBreed">
+            Labrador
+        </p>
+
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                <span>Age</span>
+                <strong id="petAge">3 years</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Gender</span>
+                <strong id="petGender">Male</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Location</span>
+                <strong id="petLocation">Trivandrum</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Size</span>
+                <strong id="petSize">Large</strong>
+            </div>
+
+        </div>
+
+
+        <p class="description" id="petDescription">
+            Bruno is a friendly and playful companion who
+            loves spending time with people. He is looking
+            for a loving family where he can feel safe,
+            happy and cared for.
+        </p>
+
+
+        <div class="tags" id="petTags">
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="adoption-form.html"
+                class="adopt-button"
+                id="adoptButton"
+            >
+                Start adoption
+                →
+            </a>
+
+            <button
+                class="message-button"
+                id="messageButton"
+                type="button"
+            >
+                💬 Message
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="why-section">
+
+    <div class="section-label">
+        WHY ADOPT?
+    </div>
+
+    <h2>
+        A new friend is
+        <em>waiting.</em>
+    </h2>
+
+
+    <div class="why-grid">
+
+        <article class="why-box">
+
+            <div class="why-icon">🏡</div>
+
+            <h3>
+                Give them a home
+            </h3>
+
+            <p>
+                Adoption gives a loving animal
+                the safe and caring home they deserve.
+            </p>
+
+        </article>
+
+
+        <article class="why-box">
+
+            <div class="why-icon">💕</div>
+
+            <h3>
+                Gain a best friend
+            </h3>
+
+            <p>
+                Pets bring companionship, happiness
+                and countless unforgettable moments.
+            </p>
+
+        </article>
+
+
+        <article class="why-box">
+
+            <div class="why-icon">🐾</div>
+
+            <h3>
+                Make a difference
+            </h3>
+
+            <p>
+                Choosing adoption means giving one
+                more deserving pet a second chance.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+</main>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const petData = {
+
+        milo: {
+            name: "Milo",
+            breed: "Golden Retriever",
+            age: "2 years",
+            gender: "Male",
+            location: "Kollam",
+            size: "Large",
+            image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Milo is a cheerful Golden Retriever who loves playing outdoors and being around people. He is affectionate, energetic and ready to become part of a loving family.",
+            tags: ["Friendly", "Playful", "Energetic", "People lover"]
+        },
+
+        luna: {
+            name: "Luna",
+            breed: "Persian",
+            age: "1 year",
+            gender: "Female",
+            location: "Kochi",
+            size: "Small",
+            image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Luna is a gentle Persian cat with a sweet personality. She enjoys calm surroundings, cosy naps and gentle attention from her favourite humans.",
+            tags: ["Gentle", "Calm", "Affectionate", "Indoor"]
+        },
+
+        bruno: {
+            name: "Bruno",
+            breed: "Labrador",
+            age: "3 years",
+            gender: "Male",
+            location: "Trivandrum",
+            size: "Large",
+            image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Bruno is a friendly and playful Labrador who loves spending time with people. He is looking for a loving family where he can feel safe, happy and cared for.",
+            tags: ["Friendly", "Playful", "Loyal", "Family friendly"]
+        },
+
+        coco: {
+            name: "Coco",
+            breed: "Indie Puppy",
+            age: "6 months",
+            gender: "Female",
+            location: "Kollam",
+            size: "Small",
+            image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Coco is a lovable little puppy full of curiosity and energy. She would be happiest with a family ready to give her plenty of love, playtime and care.",
+            tags: ["Puppy", "Playful", "Curious", "Sweet"]
+        },
+
+        oreo: {
+            name: "Oreo",
+            breed: "Domestic Shorthair",
+            age: "2 years",
+            gender: "Male",
+            location: "Kottayam",
+            size: "Small",
+            image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Oreo is a charming cat with a relaxed personality. He enjoys quiet moments, gentle attention and having a cosy place to call his own.",
+            tags: ["Calm", "Sweet", "Independent", "Indoor"]
+        },
+
+        daisy: {
+            name: "Daisy",
+            breed: "Beagle",
+            age: "4 years",
+            gender: "Female",
+            location: "Kochi",
+            size: "Medium",
+            image: "https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Daisy is a loving Beagle with a warm and cheerful personality. She enjoys walks, attention and being around people who make her feel at home.",
+            tags: ["Loving", "Active", "Friendly", "Walks"]
+        },
+
+        simba: {
+            name: "Simba",
+            breed: "Orange Tabby",
+            age: "8 months",
+            gender: "Male",
+            location: "Trivandrum",
+            size: "Small",
+            image: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Simba is a playful young kitten who loves exploring and discovering new things. He is looking for a patient and loving family to grow up with.",
+            tags: ["Kitten", "Playful", "Curious", "Adorable"]
+        },
+
+        max: {
+            name: "Max",
+            breed: "Indie Dog",
+            age: "5 years",
+            gender: "Male",
+            location: "Kollam",
+            size: "Medium",
+            image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=90",
+            description:
+                "Max is a loyal Indie dog with a gentle heart. He would love a family who can give him the attention, care and forever home he has been waiting for.",
+            tags: ["Loyal", "Gentle", "Smart", "Loving"]
+        }
+
+    };
+
+
+    const params = new URLSearchParams(window.location.search);
+
+    const requestedPet = (params.get("pet") || "bruno").toLowerCase();
+
+    const pet = petData[requestedPet] || petData.bruno;
+
+
+    document.title = pet.name + " — PawPal";
+
+
+    document.getElementById("petImage").src = pet.image;
+    document.getElementById("petImage").alt = pet.name + " the " + pet.breed;
+
+    document.getElementById("petName").innerHTML =
+        pet.name;
+
+    document.getElementById("petBreed").textContent =
+        pet.breed;
+
+    document.getElementById("petAge").textContent =
+        pet.age;
+
+    document.getElementById("petGender").textContent =
+        pet.gender;
+
+    document.getElementById("petLocation").textContent =
+        pet.location;
+
+    document.getElementById("petSize").textContent =
+        pet.size;
+
+    document.getElementById("petDescription").textContent =
+        pet.description;
+
+
+    const tagsContainer =
+        document.getElementById("petTags");
+
+    tagsContainer.innerHTML = "";
+
+    pet.tags.forEach(function (tag) {
+
+        const span = document.createElement("span");
+
+        span.className = "tag";
+
+        span.textContent = tag;
+
+        tagsContainer.appendChild(span);
+
+    });
+
+
+    /*
+       Pass the selected pet to the adoption form.
+    */
+
+    document.getElementById("adoptButton").href =
+        "adoption-form.html?pet=" + requestedPet;
+
+
+    /*
+       Favourite
+    */
+
+    const favoriteButton =
+        document.getElementById("favoriteButton");
+
+    const favoriteKey =
+        "pawpal-favorite-" + requestedPet;
+
+    if (localStorage.getItem(favoriteKey) === "true") {
+
+        favoriteButton.classList.add("active");
+
+        favoriteButton.textContent = "♥";
+
+    }
+
+
+    favoriteButton.addEventListener("click", function () {
+
+        const isFavorite =
+            favoriteButton.classList.toggle("active");
+
+        favoriteButton.textContent =
+            isFavorite ? "♥" : "♡";
+
+        localStorage.setItem(
+            favoriteKey,
+            isFavorite
+        );
+
+    });
+
+
+    /*
+       Message button
+    */
+
+    document.getElementById("messageButton")
+        .addEventListener("click", function () {
+
+            alert(
+                "Messaging for " +
+                pet.name +
+                " will be available after login."
+            );
+
+        });
+
+});
+
+</script>
+
+</body>
+</html>

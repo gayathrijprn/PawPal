@@ -1,0 +1,1270 @@
+/* =========================================================
+   PAWFUND
+   Warm editorial pastel fundraising experience
+   ========================================================= */
+
+:root {
+    --fund-bg: #FBF7F1;
+    --fund-surface: #FFFFFF;
+    --fund-text: #302824;
+    --fund-text-soft: #756A63;
+    --fund-muted: #9D9189;
+
+    --fund-coral: #C96B55;
+    --fund-coral-dark: #A95340;
+    --fund-coral-soft: #F3DED7;
+
+    --fund-peach: #F7E8DF;
+    --fund-gold: #D8B46A;
+    --fund-gold-soft: #F4E8C9;
+
+    --fund-sage: #71806B;
+    --fund-sage-soft: #E7ECE3;
+
+    --fund-border: #E8DED4;
+
+    --fund-shadow: 0 18px 50px rgba(67, 48, 39, 0.08);
+    --fund-shadow-small: 0 8px 28px rgba(67, 48, 39, 0.065);
+}
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+body {
+    background: var(--fund-bg);
+    color: var(--fund-text);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    background: rgba(251, 247, 241, 0.96);
+    border-bottom: 1px solid var(--fund-border);
+}
+
+.nav-inner {
+    width: min(1280px, calc(100% - 64px));
+    margin: auto;
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--fund-text);
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.brand-paw {
+    font-size: 21px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    flex: 1;
+}
+
+.navigation a {
+    position: relative;
+
+    color: var(--fund-text-soft);
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 8px 0;
+    transition: 0.2s ease;
+}
+
+.navigation a:hover {
+    color: var(--fund-coral);
+}
+
+.navigation a.active {
+    color: var(--fund-coral-dark);
+}
+
+.navigation a.active::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 2px;
+    border-radius: 5px;
+
+    background: var(--fund-coral);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.login {
+    color: var(--fund-text-soft);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.nav-button {
+    background: var(--fund-coral);
+    color: white;
+
+    padding: 11px 18px;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.nav-button:hover {
+    background: var(--fund-coral-dark);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.fund-hero {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+
+    min-height: 650px;
+
+    display: grid;
+    grid-template-columns: 1.02fr 0.98fr;
+    align-items: center;
+    gap: 85px;
+
+    padding: 75px 0 65px;
+}
+
+.fund-hero-content {
+    max-width: 600px;
+}
+
+.fund-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--fund-coral-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+.fund-eyebrow span {
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--fund-coral-soft);
+    border-radius: 50%;
+
+    font-size: 15px;
+}
+
+.fund-hero h1 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+    font-size: clamp(46px, 5vw, 70px);
+    line-height: 1.03;
+    letter-spacing: -2px;
+    font-weight: 600;
+}
+
+.fund-hero h1 em,
+.fund-hero h2 em,
+.why-fund-section h2 em,
+.donation-message-card h2 em {
+    color: var(--fund-coral);
+    font-style: italic;
+}
+
+.fund-hero-content > p {
+    max-width: 570px;
+
+    margin: 25px 0 30px;
+
+    color: var(--fund-text-soft);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.fund-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fund-primary-btn,
+.fund-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 48px;
+    padding: 0 21px;
+
+    border-radius: 11px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.fund-primary-btn {
+    background: var(--fund-coral);
+    color: white;
+    box-shadow: 0 8px 20px rgba(201, 107, 85, 0.18);
+}
+
+.fund-primary-btn:hover {
+    background: var(--fund-coral-dark);
+    transform: translateY(-2px);
+}
+
+.fund-secondary-btn {
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    color: var(--fund-text);
+}
+
+.fund-secondary-btn:hover {
+    border-color: var(--fund-coral);
+    color: var(--fund-coral-dark);
+}
+
+.fund-trust {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-top: 23px;
+
+    color: var(--fund-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.fund-trust > span:first-child {
+    color: var(--fund-sage);
+}
+
+.trust-divider {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+    background: var(--fund-border);
+}
+
+
+/* =========================================================
+   HERO FUNDRAISER CARD
+   ========================================================= */
+
+.fund-hero-card {
+    width: 100%;
+    max-width: 470px;
+    justify-self: end;
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow: var(--fund-shadow);
+
+    transform: rotate(1deg);
+    transition: 0.3s ease;
+}
+
+.fund-hero-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+}
+
+.hero-card-image {
+    height: 290px;
+    position: relative;
+}
+
+.hero-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-verified {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    padding: 8px 11px;
+
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--fund-sage);
+
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.hero-card-body {
+    padding: 25px 27px 27px;
+}
+
+.hero-card-label {
+    color: var(--fund-coral-dark);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+.hero-card-body h3 {
+    margin: 8px 0 8px;
+
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+}
+
+.hero-card-body p {
+    margin: 0 0 20px;
+
+    color: var(--fund-text-soft);
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.progress-track {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    background: var(--fund-peach);
+    border-radius: 20px;
+}
+
+.progress-track span {
+    display: block;
+    height: 100%;
+
+    background: var(--fund-coral);
+    border-radius: inherit;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 9px;
+
+    font-size: 11px;
+}
+
+.progress-info strong {
+    color: var(--fund-text);
+}
+
+.progress-info span {
+    color: var(--fund-muted);
+}
+
+.hero-card-link {
+    display: inline-block;
+
+    margin-top: 19px;
+
+    color: var(--fund-coral-dark);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.fund-stats {
+    width: min(1100px, calc(100% - 48px));
+    margin: 0 auto 90px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 17px;
+
+    box-shadow: var(--fund-shadow-small);
+}
+
+.fund-stat {
+    text-align: center;
+    padding: 25px 18px;
+
+    border-right: 1px solid var(--fund-border);
+}
+
+.fund-stat:last-child {
+    border-right: 0;
+}
+
+.fund-stat strong {
+    display: block;
+
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    color: var(--fund-coral-dark);
+}
+
+.fund-stat span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--fund-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FUNDRAISERS SECTION
+   ========================================================= */
+
+.fundraisers-section {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+
+    padding-bottom: 100px;
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+
+    margin-bottom: 34px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--fund-coral-dark);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.section-heading-row h2,
+.why-fund-section h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.08;
+    font-weight: 600;
+}
+
+.section-heading-row p {
+    max-width: 560px;
+
+    margin: 13px 0 0;
+
+    color: var(--fund-text-soft);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.start-fundraiser-btn {
+    flex-shrink: 0;
+
+    padding: 12px 18px;
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 10px;
+
+    color: var(--fund-text);
+    font-size: 12px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.start-fundraiser-btn:hover {
+    border-color: var(--fund-coral);
+    color: var(--fund-coral-dark);
+}
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.fund-filter-bar {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 10px;
+
+    margin-bottom: 28px;
+}
+
+.fund-search,
+.fund-filter-bar select {
+    height: 46px;
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 10px;
+}
+
+.fund-search {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 0 14px;
+}
+
+.fund-search span {
+    color: var(--fund-muted);
+    font-size: 21px;
+}
+
+.fund-search input,
+.fund-filter-bar select {
+    width: 100%;
+
+    border: 0;
+    outline: 0;
+
+    color: var(--fund-text);
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.fund-filter-bar select {
+    padding: 0 13px;
+}
+
+
+/* =========================================================
+   FUNDRAISER GRID
+   ========================================================= */
+
+.fundraiser-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.fundraiser-card {
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 17px;
+
+    overflow: hidden;
+
+    box-shadow: var(--fund-shadow-small);
+
+    transition: 0.25s ease;
+}
+
+.fundraiser-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--fund-shadow);
+}
+
+.fundraiser-image {
+    position: relative;
+    height: 230px;
+}
+
+.fundraiser-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.urgent-badge,
+.cause-badge,
+.almost-badge {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.urgent-badge {
+    color: var(--fund-coral-dark);
+}
+
+.cause-badge {
+    color: var(--fund-sage);
+}
+
+.almost-badge {
+    color: #8B6C30;
+}
+
+.save-fundraiser {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    color: var(--fund-text);
+    font-size: 19px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.save-fundraiser:hover,
+.save-fundraiser.saved {
+    color: var(--fund-coral);
+}
+
+.fundraiser-body {
+    padding: 21px;
+}
+
+.verified-label {
+    margin-bottom: 8px;
+
+    color: var(--fund-sage);
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.fundraiser-body h3 {
+    margin: 0 0 9px;
+
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    line-height: 1.15;
+}
+
+.fundraiser-body > p {
+    min-height: 64px;
+
+    margin: 0 0 19px;
+
+    color: var(--fund-text-soft);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.fundraiser-money {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+
+    margin-top: 10px;
+}
+
+.fundraiser-money strong {
+    color: var(--fund-text);
+    font-size: 13px;
+}
+
+.fundraiser-money span {
+    color: var(--fund-muted);
+    font-size: 11px;
+}
+
+.fundraiser-meta {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 8px 0 17px;
+
+    color: var(--fund-muted);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.fundraiser-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 42px;
+
+    background: var(--fund-peach);
+    border-radius: 9px;
+
+    color: var(--fund-coral-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    transition: 0.2s ease;
+}
+
+.fundraiser-btn:hover {
+    background: var(--fund-coral);
+    color: white;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-fundraisers {
+    display: none;
+
+    text-align: center;
+    padding: 60px 20px;
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 15px;
+}
+
+.empty-fundraisers.show {
+    display: block;
+}
+
+.empty-fundraisers > div {
+    font-size: 38px;
+}
+
+.empty-fundraisers h3 {
+    margin: 10px 0 5px;
+
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+}
+
+.empty-fundraisers p {
+    color: var(--fund-text-soft);
+    font-size: 13px;
+}
+
+.empty-fundraisers button {
+    margin-top: 10px;
+
+    padding: 10px 17px;
+
+    background: var(--fund-coral-soft);
+    border: 0;
+    border-radius: 8px;
+
+    color: var(--fund-coral-dark);
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   WHY FUND
+   ========================================================= */
+
+.why-fund-section {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+
+    padding: 90px 0;
+
+    border-top: 1px solid var(--fund-border);
+}
+
+.why-fund-heading {
+    max-width: 680px;
+    margin-bottom: 35px;
+}
+
+.why-fund-heading p {
+    max-width: 580px;
+
+    margin-top: 14px;
+
+    color: var(--fund-text-soft);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.impact-card {
+    padding: 25px;
+
+    background: var(--fund-surface);
+    border: 1px solid var(--fund-border);
+    border-radius: 15px;
+
+    transition: 0.2s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--fund-shadow-small);
+}
+
+.impact-icon {
+    display: block;
+
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 18px;
+
+    background: var(--fund-peach);
+    border-radius: 12px;
+
+    font-size: 21px;
+}
+
+.impact-card h3 {
+    margin: 0 0 8px;
+
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+}
+
+.impact-card p {
+    margin: 0;
+
+    color: var(--fund-text-soft);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DONATION MESSAGE
+   ========================================================= */
+
+.donation-message-section {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+
+    padding-bottom: 90px;
+}
+
+.donation-message-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 25px;
+
+    padding: 36px 42px;
+
+    background: var(--fund-coral-soft);
+    border-radius: 20px;
+}
+
+.message-paw {
+    width: 65px;
+    height: 65px;
+
+    display: grid;
+    place-items: center;
+
+    background: rgba(255,255,255,0.65);
+    border-radius: 17px;
+
+    font-size: 28px;
+}
+
+.donation-message-card h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+}
+
+.donation-message-card p {
+    max-width: 650px;
+
+    margin: 9px 0 0;
+
+    color: var(--fund-text-soft);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+
+.fund-final-cta {
+    padding: 100px 20px;
+
+    background: var(--fund-sage-soft);
+}
+
+.final-cta-content {
+    max-width: 650px;
+    margin: auto;
+
+    text-align: center;
+}
+
+.final-heart {
+    display: inline-grid;
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 15px;
+
+    background: white;
+    border-radius: 50%;
+
+    color: var(--fund-coral);
+    font-size: 24px;
+}
+
+.final-cta-content h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1.1;
+}
+
+.final-cta-content p {
+    max-width: 550px;
+    margin: 17px auto 25px;
+
+    color: var(--fund-text-soft);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    background: #3B302A;
+    color: white;
+}
+
+.footer-inner {
+    width: min(1180px, calc(100% - 48px));
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+
+    padding: 55px 0;
+}
+
+.footer .brand {
+    color: white;
+}
+
+.footer-brand p {
+    max-width: 260px;
+
+    margin-top: 13px;
+
+    color: rgba(255,255,255,0.62);
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.footer-links {
+    display: flex;
+    gap: 90px;
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.footer-links h4 {
+    margin: 0 0 7px;
+
+    color: white;
+    font-size: 11px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+
+    transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    width: min(1180px, calc(100% - 48px));
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 18px 0;
+
+    border-top: 1px solid rgba(255,255,255,0.12);
+
+    color: rgba(255,255,255,0.45);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navigation {
+        gap: 15px;
+    }
+
+    .navigation a {
+        font-size: 11px;
+    }
+
+    .fund-hero {
+        gap: 45px;
+    }
+
+    .fundraiser-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .nav-inner {
+        width: min(100% - 32px, 650px);
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .fund-hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+    }
+
+    .fund-hero-content {
+        max-width: 650px;
+    }
+
+    .fund-hero-card {
+        justify-self: start;
+        max-width: 560px;
+    }
+
+    .fund-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fund-stat:nth-child(2) {
+        border-right: 0;
+    }
+
+    .fund-stat:nth-child(-n+2) {
+        border-bottom: 1px solid var(--fund-border);
+    }
+
+    .fund-filter-bar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section-heading-row {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .donation-message-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    .donation-message-card .fund-primary-btn {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .nav-inner {
+        min-height: 70px;
+    }
+
+    .nav-right .login {
+        display: none;
+    }
+
+    .nav-button {
+        padding: 10px 13px;
+    }
+
+    .fund-hero,
+    .fundraisers-section,
+    .why-fund-section,
+    .donation-message-section {
+        width: min(100% - 30px, 500px);
+    }
+
+    .fund-hero {
+        padding-top: 42px;
+        gap: 40px;
+    }
+
+    .fund-hero h1 {
+        font-size: 43px;
+    }
+
+    .fund-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fund-primary-btn,
+    .fund-secondary-btn {
+        width: 100%;
+    }
+
+    .fund-trust {
+        flex-wrap: wrap;
+    }
+
+    .fund-stats {
+        width: calc(100% - 30px);
+        margin-bottom: 65px;
+    }
+
+    .fundraiser-grid,
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fund-filter-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading-row h2,
+    .why-fund-section h2 {
+        font-size: 35px;
+    }
+
+    .donation-message-card {
+        grid-template-columns: 1fr;
+        padding: 28px;
+    }
+
+    .message-paw {
+        margin-bottom: 3px;
+    }
+
+    .donation-message-card .fund-primary-btn {
+        width: 100%;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .footer-links {
+        gap: 55px;
+    }
+
+}

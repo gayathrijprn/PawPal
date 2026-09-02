@@ -1,0 +1,632 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PawFund Campaign | PawPal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/donation.css">
+    <link rel="stylesheet" href="../CSS/fundraiser-details.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <!-- Navigation intentionally left unchanged for now -->
+
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-paw">🐾</span>
+                <span>PawPal</span>
+            </a>
+
+            <nav class="navigation">
+                <a href="../index.html">Home</a>
+                <a href="pets.html">Find a Pet</a>
+                <a href="pet-care.html">Pet Care</a>
+                <a href="rescue-adoption.html">Rescue & Adopt</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="about.html">About Us</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="nav-login">Log in</a>
+                <a href="register.html" class="nav-button">Get Started</a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ================= BREADCRUMB ================= -->
+
+    <main>
+
+        <section class="fund-detail-breadcrumb">
+            <div class="fund-detail-container">
+                <a href="donation.html">PawFund</a>
+                <span>/</span>
+                <span id="breadcrumbName">Bruno's Road to Recovery</span>
+            </div>
+        </section>
+
+
+        <!-- ================= CAMPAIGN HEADER ================= -->
+
+        <section class="fund-detail-header">
+            <div class="fund-detail-container">
+
+                <div class="campaign-heading">
+
+                    <div class="campaign-verified">
+                        <span>✓</span>
+                        Verified Rescue
+                    </div>
+
+                    <h1 id="campaignTitle">
+                        Bruno's Road to Recovery
+                    </h1>
+
+                    <p id="campaignSubtitle">
+                        Help this rescued pup receive the treatment, food and care he needs to recover.
+                    </p>
+
+                    <div class="campaign-meta">
+                        <span>🐾 <strong id="campaignAnimal">Bruno</strong></span>
+                        <span>•</span>
+                        <span id="campaignCause">Medical Care</span>
+                        <span>•</span>
+                        <span>📍 Kerala, India</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= MAIN CAMPAIGN ================= -->
+
+        <section class="fund-detail-main">
+
+            <div class="fund-detail-container campaign-layout">
+
+                <!-- LEFT COLUMN -->
+
+                <div class="campaign-content">
+
+                    <!-- Campaign Image -->
+
+                    <div class="campaign-image-wrapper">
+                        <img
+                            id="campaignImage"
+                            src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1200&q=85"
+                            alt="Rescued dog Bruno"
+                        >
+
+                        <div class="campaign-image-label">
+                            🐾 Bruno
+                        </div>
+                    </div>
+
+
+                    <!-- Story -->
+
+                    <article class="campaign-section">
+
+                        <div class="campaign-section-heading">
+                            <span class="section-small-label">THE STORY</span>
+                            <h2>Every rescue deserves a chance.</h2>
+                        </div>
+
+                        <div id="campaignStory" class="campaign-story">
+
+                            <p>
+                                Bruno was found alone and injured after being rescued from the roadside.
+                                He was frightened, weak and in need of immediate medical attention.
+                            </p>
+
+                            <p>
+                                A local rescuer stepped in and arranged temporary shelter, food and
+                                veterinary care. Bruno is now safe, but his recovery still requires
+                                ongoing treatment and daily care.
+                            </p>
+
+                            <p>
+                                Your contribution can help cover his medical expenses, nutritious food,
+                                medicines and temporary shelter while he gets stronger.
+                            </p>
+
+                            <p class="story-highlight">
+                                <strong>Our goal is simple:</strong> help Bruno recover completely and
+                                find a loving forever home.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Expenses -->
+
+                    <article class="campaign-section">
+
+                        <div class="campaign-section-heading">
+                            <span class="section-small-label">TRANSPARENCY</span>
+                            <h2>Where the money goes</h2>
+                        </div>
+
+                        <p class="section-intro">
+                            Every contribution is intended to support Bruno's recovery and temporary care.
+                        </p>
+
+                        <div class="expense-list">
+
+                            <div class="expense-row">
+                                <div class="expense-info">
+                                    <span class="expense-icon">🩺</span>
+                                    <div>
+                                        <strong>Veterinary treatment</strong>
+                                        <small>Consultations, tests and procedures</small>
+                                    </div>
+                                </div>
+                                <strong>₹20,000</strong>
+                            </div>
+
+                            <div class="expense-row">
+                                <div class="expense-info">
+                                    <span class="expense-icon">💊</span>
+                                    <div>
+                                        <strong>Medicines</strong>
+                                        <small>Prescribed medication and recovery supplies</small>
+                                    </div>
+                                </div>
+                                <strong>₹8,000</strong>
+                            </div>
+
+                            <div class="expense-row">
+                                <div class="expense-info">
+                                    <span class="expense-icon">🍚</span>
+                                    <div>
+                                        <strong>Food & nutrition</strong>
+                                        <small>Nutritious meals during recovery</small>
+                                    </div>
+                                </div>
+                                <strong>₹12,000</strong>
+                            </div>
+
+                            <div class="expense-row">
+                                <div class="expense-info">
+                                    <span class="expense-icon">🏠</span>
+                                    <div>
+                                        <strong>Temporary care</strong>
+                                        <small>Shelter and daily maintenance</small>
+                                    </div>
+                                </div>
+                                <strong>₹10,000</strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Updates -->
+
+                    <article class="campaign-section">
+
+                        <div class="campaign-section-heading">
+                            <span class="section-small-label">CAMPAIGN UPDATES</span>
+                            <h2>Bruno's recovery journey</h2>
+                        </div>
+
+                        <div class="updates-list">
+
+                            <div class="update-item">
+                                <div class="update-dot"></div>
+
+                                <div class="update-content">
+                                    <span class="update-date">September 2, 2026</span>
+                                    <h3>Bruno is eating well again ❤️</h3>
+                                    <p>
+                                        Bruno has started eating properly and is becoming more active.
+                                        His rescuer says he is responding well to treatment.
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="update-item">
+                                <div class="update-dot"></div>
+
+                                <div class="update-content">
+                                    <span class="update-date">August 29, 2026</span>
+                                    <h3>First veterinary check-up completed</h3>
+                                    <p>
+                                        Bruno received his first complete examination and treatment
+                                        following the rescue.
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="update-item">
+                                <div class="update-dot"></div>
+
+                                <div class="update-content">
+                                    <span class="update-date">August 27, 2026</span>
+                                    <h3>Bruno was rescued</h3>
+                                    <p>
+                                        A local rescuer found Bruno injured and arranged immediate
+                                        temporary care.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Donors -->
+
+                    <article class="campaign-section">
+
+                        <div class="campaign-section-heading donor-heading">
+                            <div>
+                                <span class="section-small-label">COMMUNITY</span>
+                                <h2>People helping Bruno</h2>
+                            </div>
+
+                            <span class="donor-count">
+                                <strong id="donorCount">38</strong> donors
+                            </span>
+                        </div>
+
+
+                        <div class="donor-list" id="donorList">
+
+                            <div class="donor-row">
+                                <div class="donor-avatar">A</div>
+                                <div>
+                                    <strong>Anonymous</strong>
+                                    <span>₹2,500</span>
+                                </div>
+                                <small>2 days ago</small>
+                            </div>
+
+                            <div class="donor-row">
+                                <div class="donor-avatar">R</div>
+                                <div>
+                                    <strong>Riya</strong>
+                                    <span>₹1,000</span>
+                                </div>
+                                <small>3 days ago</small>
+                            </div>
+
+                            <div class="donor-row">
+                                <div class="donor-avatar">S</div>
+                                <div>
+                                    <strong>Anonymous</strong>
+                                    <span>₹500</span>
+                                </div>
+                                <small>4 days ago</small>
+                            </div>
+
+                            <div class="donor-row">
+                                <div class="donor-avatar">M</div>
+                                <div>
+                                    <strong>Meera</strong>
+                                    <span>₹2,000</span>
+                                </div>
+                                <small>5 days ago</small>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Rescue Information -->
+
+                    <article class="rescue-info-card">
+
+                        <div class="rescue-info-icon">🐾</div>
+
+                        <div>
+                            <span class="section-small-label">RESCUER</span>
+
+                            <h3>Community Rescue Network</h3>
+
+                            <p>
+                                This fundraiser was created to support an animal currently receiving
+                                temporary care after being rescued.
+                            </p>
+
+                            <div class="rescue-info-meta">
+                                <span>✓ Identity reviewed</span>
+                                <span>✓ Rescue details submitted</span>
+                            </div>
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- RIGHT COLUMN -->
+
+                <aside class="donation-sidebar">
+
+                    <div class="donation-card">
+
+                        <div class="donation-raised">
+
+                            <span>Raised so far</span>
+
+                            <div class="raised-amount">
+                                <span>₹</span>
+                                <strong id="raisedAmount">36,000</strong>
+                            </div>
+
+                            <span class="goal-text">
+                                of ₹<strong id="goalAmount">50,000</strong> goal
+                            </span>
+
+                        </div>
+
+
+                        <!-- Progress -->
+
+                        <div class="campaign-progress">
+
+                            <div class="progress-track">
+                                <div
+                                    class="progress-fill"
+                                    id="progressFill"
+                                    style="width:72%;">
+                                </div>
+                            </div>
+
+                            <div class="progress-meta">
+                                <strong id="progressPercent">72%</strong>
+                                <span id="sidebarDonors">38 donors</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Donate -->
+
+                        <div class="donation-divider"></div>
+
+                        <h3>Choose an amount</h3>
+
+                        <div class="amount-options">
+
+                            <button type="button" class="amount-button" data-amount="250">
+                                ₹250
+                            </button>
+
+                            <button type="button" class="amount-button active" data-amount="500">
+                                ₹500
+                            </button>
+
+                            <button type="button" class="amount-button" data-amount="1000">
+                                ₹1,000
+                            </button>
+
+                            <button type="button" class="amount-button" data-amount="2500">
+                                ₹2,500
+                            </button>
+
+                        </div>
+
+
+                        <label class="custom-amount-label">
+                            Or enter another amount
+
+                            <div class="custom-amount-input">
+                                <span>₹</span>
+
+                                <input
+                                    type="number"
+                                    id="customAmount"
+                                    min="1"
+                                    placeholder="Enter amount"
+                                >
+                            </div>
+                        </label>
+
+
+                        <label class="anonymous-option">
+
+                            <input type="checkbox" id="anonymousDonation">
+
+                            <span class="custom-check"></span>
+
+                            <span>
+                                Make my donation anonymous
+                            </span>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="donate-main-button"
+                            id="donateButton"
+                        >
+                            Donate ₹500
+                        </button>
+
+
+                        <p class="donation-note">
+                            🔒 This is a secure demo donation flow. No real payment is processed.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Why donate -->
+
+                    <div class="sidebar-note">
+
+                        <div class="sidebar-note-icon">💛</div>
+
+                        <div>
+                            <strong>Every amount matters.</strong>
+
+                            <p>
+                                ₹250 can help with food.
+                                ₹500 can help with medicines.
+                                ₹1,000 can help cover veterinary care.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Share -->
+
+                    <button
+                        type="button"
+                        class="share-campaign"
+                        id="shareCampaign"
+                    >
+                        <span>↗</span>
+                        Share this fundraiser
+                    </button>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FINAL CTA ================= -->
+
+        <section class="fund-detail-final">
+
+            <div class="fund-detail-container">
+
+                <div class="final-paw">🐾</div>
+
+                <div>
+                    <span class="section-small-label">CAN'T DONATE?</span>
+
+                    <h2>Sharing helps too.</h2>
+
+                    <p>
+                        You never know who might be able to give Bruno the helping hand he needs.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="final-share-button"
+                    id="finalShareButton"
+                >
+                    Share Bruno's Story
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= DONATION MODAL ================= -->
+
+    <div class="donation-modal" id="donationModal">
+
+        <div class="donation-modal-backdrop"></div>
+
+        <div class="donation-modal-card">
+
+            <button
+                type="button"
+                class="modal-close"
+                id="modalClose"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <div class="modal-success-icon">
+                ✓
+            </div>
+
+            <span class="section-small-label">THANK YOU</span>
+
+            <h2>Your kindness matters.</h2>
+
+            <p id="donationSuccessText">
+                Your demo donation of ₹500 has been recorded.
+            </p>
+
+            <div class="modal-paw">
+                🐾
+            </div>
+
+            <button
+                type="button"
+                class="modal-done-button"
+                id="modalDone"
+            >
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="fund-detail-footer">
+
+        <div class="fund-detail-container footer-inner">
+
+            <div>
+                <a href="../index.html" class="footer-brand">
+                    <span>🐾</span>
+                    PawPal
+                </a>
+
+                <p>
+                    Helping pets find people,<br>
+                    and people find their pets.
+                </p>
+            </div>
+
+            <div class="footer-links">
+
+                <a href="pets.html">Find a Pet</a>
+                <a href="rescue-adoption.html">Rescue & Adopt</a>
+                <a href="donation.html">PawFund</a>
+                <a href="pet-care.html">Pet Care</a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 PawPal. Made with love for every paw.
+        </div>
+
+    </footer>
+
+
+    <script src="../js/JS fundraiser-details.js"></script>
+
+</body>
+</html>
+```

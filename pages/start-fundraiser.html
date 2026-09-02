@@ -1,0 +1,1041 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Start a Fundraiser | PawPal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/donation.css">
+    <link rel="stylesheet" href="../CSS/start-fundraiser.css">
+</head>
+
+<body>
+
+    <main class="start-fundraiser-page">
+
+        <!-- HERO -->
+        <section class="fundraiser-hero">
+            <div class="fundraiser-hero-inner">
+
+                <div class="hero-copy">
+                    <span class="hero-label">PAWFUND</span>
+
+                    <h1>
+                        Give their story
+                        <span>a helping hand.</span>
+                    </h1>
+
+                    <p>
+                        Start a fundraiser to help cover medical care, food,
+                        temporary shelter and everything a rescued animal
+                        needs on the way to a safe home.
+                    </p>
+
+                    <div class="hero-points">
+                        <div>
+                            <span class="point-icon">✓</span>
+                            Verified rescue stories
+                        </div>
+
+                        <div>
+                            <span class="point-icon">✓</span>
+                            Transparent funding goals
+                        </div>
+
+                        <div>
+                            <span class="point-icon">✓</span>
+                            Supporters from anywhere
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="hero-card-paw">🐾</div>
+
+                    <span>THE PAWFUND PROMISE</span>
+
+                    <h3>
+                        Every rupee should have
+                        a purpose.
+                    </h3>
+
+                    <p>
+                        Tell people exactly what this animal needs
+                        and how their kindness can help.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FORM -->
+        <section class="fundraiser-form-section">
+
+            <div class="form-container">
+
+                <div class="form-intro">
+                    <span class="section-label">CREATE CAMPAIGN</span>
+
+                    <h2>Tell us about the rescue.</h2>
+
+                    <p>
+                        The more details you provide, the easier it is for
+                        people to understand the animal's story and support
+                        their recovery.
+                    </p>
+                </div>
+
+
+                <form id="fundraiserForm" novalidate>
+
+                    <!-- RESCUE CONNECTION -->
+                    <input
+                        type="hidden"
+                        id="rescueId"
+                        name="rescueId"
+                    >
+
+                    <div
+                        id="rescueConnection"
+                        class="rescue-connection"
+                        style="display: none;"
+                    >
+
+                        <div class="rescue-connection-icon">
+                            🐾
+                        </div>
+
+                        <div>
+
+                            <span>LINKED RESCUE</span>
+
+                            <strong id="linkedRescueName">
+                                Rescue Case
+                            </strong>
+
+                            <p>
+                                This fundraiser will be connected to this
+                                rescue case automatically.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 1 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                01
+                            </div>
+
+                            <div>
+                                <span>THE ANIMAL</span>
+
+                                <h3>
+                                    Who are you helping?
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="animalName">
+                                    Animal name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="animalName"
+                                    placeholder="e.g. Bruno"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="animalType">
+                                    Animal type <span>*</span>
+                                </label>
+
+                                <select
+                                    id="animalType"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select type
+                                    </option>
+
+                                    <option value="Dog">
+                                        Dog
+                                    </option>
+
+                                    <option value="Cat">
+                                        Cat
+                                    </option>
+
+                                    <option value="Rabbit">
+                                        Rabbit
+                                    </option>
+
+                                    <option value="Bird">
+                                        Bird
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="animalBreed">
+                                    Breed
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="animalBreed"
+                                    placeholder="e.g. Indie / Mixed"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="animalAge">
+                                    Approximate age
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="animalAge"
+                                    placeholder="e.g. 2 years"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="animalGender">
+                                    Gender
+                                </label>
+
+                                <select id="animalGender">
+
+                                    <option value="">
+                                        Select gender
+                                    </option>
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Unknown">
+                                        Unknown
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="rescueDate">
+                                    Rescue date <span>*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="rescueDate"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="rescueLocation">
+                                    Where was the animal rescued?
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="rescueLocation"
+                                    placeholder="e.g. Near Perumon, Kollam"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 2 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                02
+                            </div>
+
+                            <div>
+                                <span>THE STORY</span>
+
+                                <h3>
+                                    What happened?
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group full-width">
+
+                                <label for="rescueCircumstances">
+                                    Rescue circumstances
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="rescueCircumstances"
+                                    rows="5"
+                                    placeholder="Tell us where and how you found the animal..."
+                                    required
+                                ></textarea>
+
+                                <small>
+                                    Explain what happened before the rescue.
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="healthCondition">
+                                    Current health condition
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="healthCondition"
+                                    rows="5"
+                                    placeholder="Describe injuries, illness or other health concerns..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="treatmentDetails">
+                                    Treatment received
+                                </label>
+
+                                <textarea
+                                    id="treatmentDetails"
+                                    rows="4"
+                                    placeholder="Mention vet visits, procedures, medicines or first aid..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="currentCare">
+                                    Current care arrangement
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="currentCare"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select arrangement
+                                    </option>
+
+                                    <option value="My home">
+                                        My home
+                                    </option>
+
+                                    <option value="Foster home">
+                                        Foster home
+                                    </option>
+
+                                    <option value="Shelter">
+                                        Animal shelter
+                                    </option>
+
+                                    <option value="Veterinary clinic">
+                                        Veterinary clinic
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="careDuration">
+                                    Expected care duration
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="careDuration"
+                                    placeholder="e.g. 3 weeks"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 3 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                03
+                            </div>
+
+                            <div>
+                                <span>THE FUND</span>
+
+                                <h3>
+                                    What does the money cover?
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="fundraisingGoal">
+                                    Fundraising goal
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-with-prefix">
+
+                                    <span>₹</span>
+
+                                    <input
+                                        type="number"
+                                        id="fundraisingGoal"
+                                        min="100"
+                                        placeholder="50000"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="fundraisingDeadline">
+                                    Fundraising deadline
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="fundraisingDeadline"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="fundCause">
+                                    Main reason for fundraising
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="fundCause"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select a cause
+                                    </option>
+
+                                    <option value="Medical care">
+                                        Medical care
+                                    </option>
+
+                                    <option value="Food & nutrition">
+                                        Food & nutrition
+                                    </option>
+
+                                    <option value="Temporary shelter">
+                                        Temporary shelter
+                                    </option>
+
+                                    <option value="Medication">
+                                        Medication
+                                    </option>
+
+                                    <option value="Surgery">
+                                        Surgery
+                                    </option>
+
+                                    <option value="Recovery & rehabilitation">
+                                        Recovery & rehabilitation
+                                    </option>
+
+                                    <option value="Multiple needs">
+                                        Multiple needs
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="fundUsage">
+                                    How will the funds be used?
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="fundUsage"
+                                    rows="5"
+                                    placeholder="Break down how the money will help..."
+                                    required
+                                ></textarea>
+
+                                <small>
+                                    Example: ₹20,000 surgery + ₹10,000 medicines + ₹20,000 temporary care.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 4 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                04
+                            </div>
+
+                            <div>
+                                <span>PROOF & VERIFICATION</span>
+
+                                <h3>
+                                    Help us build trust.
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="verification-box">
+
+                            <label class="check-row">
+
+                                <input
+                                    type="checkbox"
+                                    id="vetVisit"
+                                >
+
+                                <span class="checkmark"></span>
+
+                                <span>
+
+                                    <strong>
+                                        Veterinary care has been received
+                                    </strong>
+
+                                    <small>
+                                        A vet has examined the animal or
+                                        treatment is scheduled.
+                                    </small>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="check-row">
+
+                                <input
+                                    type="checkbox"
+                                    id="receiptsAvailable"
+                                >
+
+                                <span class="checkmark"></span>
+
+                                <span>
+
+                                    <strong>
+                                        Medical bills / receipts are available
+                                    </strong>
+
+                                    <small>
+                                        Receipts can be provided for verification.
+                                    </small>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="check-row">
+
+                                <input
+                                    type="checkbox"
+                                    id="identityVerified"
+                                >
+
+                                <span class="checkmark"></span>
+
+                                <span>
+
+                                    <strong>
+                                        I can provide identification if required
+                                    </strong>
+
+                                    <small>
+                                        This helps PawPal verify legitimate campaigns.
+                                    </small>
+
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-group full-width documents-field">
+
+                            <label for="supportingDocuments">
+                                Supporting documents
+                            </label>
+
+
+                            <div class="document-upload">
+
+                                <input
+                                    type="file"
+                                    id="supportingDocuments"
+                                    multiple
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                >
+
+
+                                <div class="upload-content">
+
+                                    <div class="upload-icon">
+                                        📄
+                                    </div>
+
+                                    <strong>
+                                        Add medical bills or supporting documents
+                                    </strong>
+
+                                    <span>
+                                        JPG, PNG or PDF
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="documentList"
+                                class="document-list"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 5 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                05
+                            </div>
+
+                            <div>
+
+                                <span>RESCUE PHOTOS</span>
+
+                                <h3>
+                                    Show their journey.
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="photo-upload"
+                            id="photoUpload"
+                        >
+
+                            <input
+                                type="file"
+                                id="rescuePhotos"
+                                multiple
+                                accept="image/*"
+                            >
+
+
+                            <div class="photo-upload-content">
+
+                                <div class="photo-upload-icon">
+                                    📷
+                                </div>
+
+                                <strong>
+                                    Add rescue photos
+                                </strong>
+
+                                <p>
+                                    Upload clear photos of the animal,
+                                    treatment or current recovery.
+                                </p>
+
+                                <span>
+                                    You can select multiple photos
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="photoPreview"
+                            class="photo-preview"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- SECTION 6 -->
+                    <div class="form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                06
+                            </div>
+
+                            <div>
+
+                                <span>YOUR DETAILS</span>
+
+                                <h3>
+                                    Who is organizing this?
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="rescuerName">
+                                    Your name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="rescuerName"
+                                    placeholder="Your full name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="rescuerEmail">
+                                    Email address <span>*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="rescuerEmail"
+                                    placeholder="you@example.com"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="rescuerPhone">
+                                    Phone number <span>*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="rescuerPhone"
+                                    placeholder="+91 XXXXX XXXXX"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="contactPreference">
+                                    Preferred contact method
+                                </label>
+
+                                <select id="contactPreference">
+
+                                    <option value="Email">
+                                        Email
+                                    </option>
+
+                                    <option value="Phone">
+                                        Phone
+                                    </option>
+
+                                    <option value="WhatsApp">
+                                        WhatsApp
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECTION 7 -->
+                    <div class="form-section final-form-section">
+
+                        <div class="form-section-heading">
+
+                            <div class="section-number">
+                                07
+                            </div>
+
+                            <div>
+
+                                <span>FINAL STEP</span>
+
+                                <h3>
+                                    Ready to ask for a little help?
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <label class="consent-row">
+
+                            <input
+                                type="checkbox"
+                                id="fundraiserConsent"
+                            >
+
+                            <span class="consent-check"></span>
+
+                            <span>
+                                I confirm that the information provided is
+                                accurate to the best of my knowledge and
+                                understand that this fundraiser will be
+                                reviewed before publication.
+                            </span>
+
+                        </label>
+
+
+                        <div
+                            id="formMessage"
+                            class="form-message"
+                        ></div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                class="draft-button"
+                                id="saveDraft"
+                            >
+                                Save Draft
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="submit-button"
+                            >
+                                Submit for Review
+
+                                <span>
+                                    →
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <p class="submission-note">
+                            PawFund campaigns are reviewed before appearing
+                            publicly. This demo currently stores information
+                            locally in your browser.
+                        </p>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUCCESS -->
+        <section
+            id="successSection"
+            class="success-section"
+        >
+
+            <div class="success-card">
+
+                <div class="success-icon">
+                    🐾
+                </div>
+
+
+                <span class="success-label">
+                    CAMPAIGN RECEIVED
+                </span>
+
+
+                <h2>
+                    Their story is now
+                    one step closer to being heard.
+                </h2>
+
+
+                <p>
+                    Your fundraiser has been saved and submitted for
+                    review. Once approved, supporters will be able to
+                    discover and help this rescue.
+                </p>
+
+
+                <div class="success-actions">
+
+                    <button
+                        type="button"
+                        id="backToForm"
+                        class="success-secondary"
+                    >
+                        Back to form
+                    </button>
+
+
+                    <a
+                        href="donation.html"
+                        class="success-primary"
+                    >
+                        Explore PawFund →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TOAST -->
+    <div
+        id="fundraiserToast"
+        class="fundraiser-toast"
+    ></div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="../js/JS start-fundraiser.js"></script>
+
+</body>
+</html>
+```
