@@ -1919,28 +1919,181 @@
 
             <div class="pets-content-header">
 
+            <div>
+            <h2>
+                Meet the <em>cuties.</em>
+            </h2>
+            </div>
 
-                <div>
+            <div class="pets-header-actions">
 
-                    <h2>
-                        Meet the <em>cuties.</em>
-                    </h2>
+            <span
+                class="pets-count"
+                id="pets-count"
+            >
+                Showing 6 pets
+            </span>
 
-                </div>
+            <button
+                type="button"
+                class="find-match-button"
+                id="find-match-button"
+            >
+                ❤️ Find My Match
+            </button>
 
-
-                <span
-                    class="pets-count"
-                    id="pets-count"
-                >
-                    Showing 6 pets
-                </span>
-
+            </div>
 
             </div>
 
 
+<!-- =================================================
+     SWIPE MATCH MODE
+     ================================================= -->
 
+<section
+    class="match-section"
+    id="match-section"
+    aria-hidden="true"
+>
+
+    <div class="match-header">
+
+        <div>
+            <span class="match-eyebrow">
+                PAWPAL MATCH
+            </span>
+
+            <h2>
+                Swipe your way to
+                <em>your best friend.</em>
+            </h2>
+
+            <p>
+                Swipe right if you would love to meet them.
+                Swipe left to see another furry friend.
+            </p>
+        </div>
+
+        <button
+            type="button"
+            class="close-match-button"
+            id="close-match-button"
+        >
+            ✕ Close
+        </button>
+
+    </div>
+
+
+    <div class="swipe-area">
+
+        <div
+            class="swipe-card-container"
+            id="swipe-card-container"
+        ></div>
+
+
+        <div
+            class="swipe-empty"
+            id="swipe-empty"
+        >
+
+            <div class="swipe-empty-icon">
+                🐾
+            </div>
+
+            <h3>
+                You've met everyone!
+            </h3>
+
+            <p>
+                Check out your matches below.
+            </p>
+
+            <button
+                type="button"
+                class="see-matches-button"
+                id="see-matches-button"
+            >
+                See My Matches
+            </button>
+
+        </div>
+
+
+        <div class="swipe-actions">
+
+            <button
+                type="button"
+                class="swipe-action pass"
+                id="pass-pet"
+                aria-label="Pass on this pet"
+            >
+                ✕
+            </button>
+
+            <button
+                type="button"
+                class="swipe-action like"
+                id="like-pet"
+                aria-label="Like this pet"
+            >
+                ♥
+            </button>
+
+        </div>
+
+
+        <div class="swipe-hint">
+            ← Pass &nbsp;&nbsp;&nbsp;
+            <strong>Swipe</strong>
+            &nbsp;&nbsp;&nbsp; Like →
+        </div>
+
+    </div>
+
+
+    <!-- MATCH RESULTS -->
+
+    <div
+        class="matches-result"
+        id="matches-result"
+    >
+
+        <div class="matches-result-heading">
+
+            <div>
+
+                <span class="match-eyebrow">
+                    YOUR PAWPAL MATCHES
+                </span>
+
+                <h2>
+                    These little ones
+                    <em>caught your eye.</em>
+                </h2>
+
+            </div>
+
+            <span
+                id="matches-count"
+                class="matches-count"
+            >
+                0 matches
+            </span>
+
+        </div>
+
+
+        <div
+            class="matches-grid"
+            id="matches-grid"
+        ></div>
+
+    </div>
+
+</section>
             <!-- =================================================
                  PET GRID
                  ================================================= -->
@@ -2663,329 +2816,994 @@
 
     <script>
 
-        /* ========================================================
-           CURRENT YEAR
-           ======================================================== */
+/* ========================================================
+   CURRENT YEAR
+   ======================================================== */
 
-        const yearElement =
-            document.getElementById("current-year");
+const yearElement =
+    document.getElementById("current-year");
 
-        if (yearElement) {
+if (yearElement) {
 
-            yearElement.textContent =
-                new Date().getFullYear();
+    yearElement.textContent =
+        new Date().getFullYear();
 
+}
+
+
+
+/* ========================================================
+   PET DATA
+   ======================================================== */
+
+const petCards =
+    Array.from(
+        document.querySelectorAll(".pet-card")
+    );
+
+
+const petData =
+    petCards.map(function(card) {
+
+        return {
+
+            id:
+                card.dataset.pet,
+
+            name:
+                card.querySelector("h3")?.textContent.trim(),
+
+            type:
+                card.dataset.type,
+
+            age:
+                card.dataset.age,
+
+            ageText:
+                card.querySelector(".pet-age")?.textContent.trim(),
+
+            location:
+                card.dataset.location,
+
+            locationText:
+                card.querySelector(".pet-location")?.textContent.trim(),
+
+            description:
+                card.querySelector(".pet-info p")?.textContent.trim(),
+
+            image:
+                card.querySelector("img")?.src
+
+        };
+
+    });
+
+
+
+/* ========================================================
+   SEARCH + FILTER
+   ======================================================== */
+
+const searchInput =
+    document.getElementById("pet-search");
+
+const typeFilter =
+    document.getElementById("type-filter");
+
+const ageFilter =
+    document.getElementById("age-filter");
+
+const locationFilter =
+    document.getElementById("location-filter");
+
+const countElement =
+    document.getElementById("pets-count");
+
+const noResults =
+    document.getElementById("no-results");
+
+
+function filterPets() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+    const type =
+        typeFilter.value;
+
+    const age =
+        ageFilter.value;
+
+    const location =
+        locationFilter.value;
+
+    let visibleCount = 0;
+
+    petCards.forEach(function(card) {
+
+        const name =
+            card.dataset.name || "";
+
+        const cardType =
+            card.dataset.type || "";
+
+        const cardAge =
+            card.dataset.age || "";
+
+        const cardLocation =
+            card.dataset.location || "";
+
+        const visible =
+            name.includes(search) &&
+            (type === "all" || cardType === type) &&
+            (age === "all" || cardAge === age) &&
+            (location === "all" || cardLocation === location);
+
+        card.style.display =
+            visible ? "" : "none";
+
+        if (visible) {
+            visibleCount++;
         }
 
+    });
 
+    countElement.textContent =
+        `Showing ${visibleCount} pet${visibleCount === 1 ? "" : "s"}`;
 
-        /* ========================================================
-           SEARCH + FILTER
-           ======================================================== */
+    noResults.classList.toggle(
+        "show",
+        visibleCount === 0
+    );
 
-        const searchInput =
-            document.getElementById("pet-search");
+}
 
-        const typeFilter =
-            document.getElementById("type-filter");
 
-        const ageFilter =
-            document.getElementById("age-filter");
+searchInput.addEventListener(
+    "input",
+    filterPets
+);
 
-        const locationFilter =
-            document.getElementById("location-filter");
+typeFilter.addEventListener(
+    "change",
+    filterPets
+);
 
-        const petCards =
-            Array.from(
-                document.querySelectorAll(".pet-card")
-            );
+ageFilter.addEventListener(
+    "change",
+    filterPets
+);
 
-        const countElement =
-            document.getElementById("pets-count");
+locationFilter.addEventListener(
+    "change",
+    filterPets
+);
 
-        const noResults =
-            document.getElementById("no-results");
 
 
+/* ========================================================
+   FAVOURITES
+   ======================================================== */
 
-        function filterPets() {
+document
+    .querySelectorAll(".pet-heart")
+    .forEach(function(button) {
 
+        button.addEventListener(
+            "click",
+            function(event) {
 
-            const search =
-                searchInput.value
-                    .trim()
-                    .toLowerCase();
+                event.stopPropagation();
 
+                const favourite =
+                    button.classList.toggle(
+                        "favourite"
+                    );
 
-            const type =
-                typeFilter.value;
+                button.textContent =
+                    favourite ? "♥" : "♡";
 
-
-            const age =
-                ageFilter.value;
-
-
-            const location =
-                locationFilter.value;
-
-
-            let visibleCount = 0;
-
-
-            petCards.forEach(function (card) {
-
-
-                const name =
-                    card.dataset.name || "";
-
-
-                const cardType =
-                    card.dataset.type || "";
-
-
-                const cardAge =
-                    card.dataset.age || "";
-
-
-                const cardLocation =
-                    card.dataset.location || "";
-
-
-                const matchesSearch =
-                    name.includes(search);
-
-
-                const matchesType =
-                    type === "all" ||
-                    cardType === type;
-
-
-                const matchesAge =
-                    age === "all" ||
-                    cardAge === age;
-
-
-                const matchesLocation =
-                    location === "all" ||
-                    cardLocation === location;
-
-
-                const visible =
-                    matchesSearch &&
-                    matchesType &&
-                    matchesAge &&
-                    matchesLocation;
-
-
-                card.style.display =
-                    visible ? "" : "none";
-
-
-                if (visible) {
-                    visibleCount++;
-                }
-
-            });
-
-
-            countElement.textContent =
-                `Showing ${visibleCount} pet${visibleCount === 1 ? "" : "s"}`;
-
-
-            noResults.classList.toggle(
-                "show",
-                visibleCount === 0
-            );
-
-        }
-
-
-
-        searchInput.addEventListener(
-            "input",
-            filterPets
-        );
-
-
-        typeFilter.addEventListener(
-            "change",
-            filterPets
-        );
-
-
-        ageFilter.addEventListener(
-            "change",
-            filterPets
-        );
-
-
-        locationFilter.addEventListener(
-            "change",
-            filterPets
-        );
-
-
-
-        /* ========================================================
-           FAVOURITES
-           ======================================================== */
-
-        document
-            .querySelectorAll(".pet-heart")
-            .forEach(function (button) {
-
-
-                button.addEventListener(
-                    "click",
-                    function (event) {
-
-
-                        event.stopPropagation();
-
-
-                        const favourite =
-                            button.classList.toggle(
-                                "favourite"
-                            );
-
-
-                        button.textContent =
-                            favourite ? "♥" : "♡";
-
-
-                        button.setAttribute(
-                            "aria-label",
-                            favourite
-                                ? "Remove from favourites"
-                                : "Add to favourites"
-                        );
-
-
-                    }
+                button.setAttribute(
+                    "aria-label",
+                    favourite
+                        ? "Remove from favourites"
+                        : "Add to favourites"
                 );
 
+            }
+        );
 
-            });
-
-
-
-        /* ========================================================
-           PET CARD → DETAILS PAGE
-           ======================================================== */
-
-        petCards.forEach(function (card) {
+    });
 
 
-            card.addEventListener(
-                "click",
-                function (event) {
+
+/* ========================================================
+   PET CARD → DETAILS
+   ======================================================== */
+
+petCards.forEach(function(card) {
+
+    card.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target.closest(
+                    ".pet-heart"
+                )
+            ) {
+                return;
+            }
+
+            const pet =
+                card.dataset.pet;
+
+            if (!pet) {
+                return;
+            }
+
+            window.location.href =
+                "./pet-details.html?pet=" +
+                encodeURIComponent(pet);
+
+        }
+    );
 
 
-                    if (
-                        event.target.closest(
-                            ".pet-heart"
-                        )
-                    ) {
-                        return;
-                    }
+    card.setAttribute(
+        "tabindex",
+        "0"
+    );
 
 
-                    const pet =
-                        card.dataset.pet;
+    card.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                card.click();
+
+            }
+
+        }
+    );
+
+});
 
 
-                    if (!pet) {
-                        return;
-                    }
+
+/* ========================================================
+   SWIPE MATCH SYSTEM
+   ======================================================== */
+
+const findMatchButton =
+    document.getElementById(
+        "find-match-button"
+    );
+
+const matchSection =
+    document.getElementById(
+        "match-section"
+    );
+
+const closeMatchButton =
+    document.getElementById(
+        "close-match-button"
+    );
+
+const swipeContainer =
+    document.getElementById(
+        "swipe-card-container"
+    );
+
+const swipeEmpty =
+    document.getElementById(
+        "swipe-empty"
+    );
+
+const passButton =
+    document.getElementById(
+        "pass-pet"
+    );
+
+const likeButton =
+    document.getElementById(
+        "like-pet"
+    );
+
+const matchesResult =
+    document.getElementById(
+        "matches-result"
+    );
+
+const matchesGrid =
+    document.getElementById(
+        "matches-grid"
+    );
+
+const matchesCount =
+    document.getElementById(
+        "matches-count"
+    );
+
+const seeMatchesButton =
+    document.getElementById(
+        "see-matches-button"
+    );
 
 
-                    window.location.href =
-                        "./pet-details.html?pet=" +
-                        encodeURIComponent(pet);
+
+/* ========================================================
+   LOCAL STORAGE
+   ======================================================== */
+
+let likedPets =
+    JSON.parse(
+        localStorage.getItem(
+            "pawpalLikedPets"
+        ) || "[]"
+    );
 
 
-                }
-            );
+let passedPets =
+    JSON.parse(
+        localStorage.getItem(
+            "pawpalPassedPets"
+        ) || "[]"
+    );
 
 
+function saveSwipeData() {
+
+    localStorage.setItem(
+        "pawpalLikedPets",
+        JSON.stringify(likedPets)
+    );
+
+    localStorage.setItem(
+        "pawpalPassedPets",
+        JSON.stringify(passedPets)
+    );
+
+}
+
+
+
+/* ========================================================
+   SWIPE SESSION
+   ======================================================== */
+
+let swipePets = [];
+
+let currentSwipeIndex = 0;
+
+let currentSwipeCard = null;
+
+
+
+/* ========================================================
+   START MATCHING
+   ======================================================== */
+
+function startMatching() {
+
+    matchSection.classList.add(
+        "active"
+    );
+
+    matchSection.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    swipePets =
+        [...petData];
+
+
+    currentSwipeIndex = 0;
+
+
+    swipeEmpty.classList.remove(
+        "show"
+    );
+
+    matchesResult.classList.remove(
+        "show"
+    );
+
+
+    document
+        .querySelector(".pets-grid")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
 
+    setTimeout(function() {
 
-        /* ========================================================
-           KEYBOARD ACCESSIBILITY
-           ======================================================== */
-
-        petCards.forEach(function (card) {
-
-
-            card.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-
-            card.addEventListener(
-                "keydown",
-                function (event) {
-
-
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
-
-
-                        event.preventDefault();
-
-                        card.click();
-
-
-                    }
-
-                }
-            );
-
-
+        matchSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
+    }, 100);
 
 
-        /* ========================================================
-           IMPORTANT HOME NAVIGATION FALLBACK
-           
-           This intentionally uses a direct page navigation so
-           another JS file cannot interfere with the Home link.
-           ======================================================== */
+    createSwipeCard();
 
-        document
-            .querySelectorAll(
-                'a[href="../index.html"]'
+    renderMatches();
+
+}
+
+
+
+/* ========================================================
+   CREATE SWIPE CARD
+   ======================================================== */
+
+function createSwipeCard() {
+
+    swipeContainer.innerHTML = "";
+
+    currentSwipeCard = null;
+
+
+    if (
+        currentSwipeIndex >=
+        swipePets.length
+    ) {
+
+        showSwipeFinished();
+
+        return;
+
+    }
+
+
+    const pet =
+        swipePets[currentSwipeIndex];
+
+
+    const card =
+        document.createElement("div");
+
+
+    card.className =
+        "swipe-card";
+
+
+    card.innerHTML = `
+
+        <div class="swipe-card-image">
+
+            <img
+                src="${pet.image}"
+                alt="${pet.name}"
+            >
+
+            <div
+                class="swipe-label like-label"
+            >
+                LIKE ♥
+            </div>
+
+            <div
+                class="swipe-label nope-label"
+            >
+                PASS ✕
+            </div>
+
+        </div>
+
+
+        <div class="swipe-card-info">
+
+            <div class="swipe-card-top">
+
+                <h3>
+                    ${pet.name}
+                </h3>
+
+                <span class="swipe-card-age">
+                    ${pet.ageText}
+                </span>
+
+            </div>
+
+            <p>
+                ${pet.description}
+            </p>
+
+            <span class="swipe-card-location">
+                ${pet.locationText}
+            </span>
+
+        </div>
+
+    `;
+
+
+    swipeContainer.appendChild(card);
+
+
+    currentSwipeCard =
+        card;
+
+
+    setupDrag(card);
+
+}
+
+
+
+/* ========================================================
+   DRAG / TOUCH SWIPING
+   ======================================================== */
+
+function setupDrag(card) {
+
+    let startX = 0;
+
+    let currentX = 0;
+
+    let dragging = false;
+
+
+    function pointerStart(event) {
+
+        dragging = true;
+
+        startX =
+            event.clientX;
+
+        currentX =
+            event.clientX;
+
+        card.classList.add(
+            "dragging"
+        );
+
+        card.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+
+
+    function pointerMove(event) {
+
+        if (!dragging) {
+            return;
+        }
+
+
+        currentX =
+            event.clientX;
+
+
+        const difference =
+            currentX - startX;
+
+
+        const rotation =
+            difference / 15;
+
+
+        card.style.transform =
+            `translateX(${difference}px) rotate(${rotation}deg)`;
+
+
+        const likeLabel =
+            card.querySelector(
+                ".like-label"
+            );
+
+        const nopeLabel =
+            card.querySelector(
+                ".nope-label"
+            );
+
+
+        if (difference > 20) {
+
+            likeLabel.style.opacity =
+                Math.min(
+                    difference / 100,
+                    1
+                );
+
+            nopeLabel.style.opacity =
+                0;
+
+        }
+        else if (difference < -20) {
+
+            nopeLabel.style.opacity =
+                Math.min(
+                    Math.abs(difference) / 100,
+                    1
+                );
+
+            likeLabel.style.opacity =
+                0;
+
+        }
+        else {
+
+            likeLabel.style.opacity =
+                0;
+
+            nopeLabel.style.opacity =
+                0;
+
+        }
+
+    }
+
+
+    function pointerEnd() {
+
+        if (!dragging) {
+            return;
+        }
+
+
+        dragging = false;
+
+        card.classList.remove(
+            "dragging"
+        );
+
+
+        const difference =
+            currentX - startX;
+
+
+        if (difference > 110) {
+
+            swipePet(
+                "like"
+            );
+
+        }
+        else if (difference < -110) {
+
+            swipePet(
+                "pass"
+            );
+
+        }
+        else {
+
+            card.style.transform =
+                "";
+
+        }
+
+    }
+
+
+    card.addEventListener(
+        "pointerdown",
+        pointerStart
+    );
+
+    card.addEventListener(
+        "pointermove",
+        pointerMove
+    );
+
+    card.addEventListener(
+        "pointerup",
+        pointerEnd
+    );
+
+    card.addEventListener(
+        "pointercancel",
+        pointerEnd
+    );
+
+}
+
+
+
+/* ========================================================
+   SWIPE PET
+   ======================================================== */
+
+function swipePet(action) {
+
+    if (!currentSwipeCard) {
+        return;
+    }
+
+
+    const pet =
+        swipePets[currentSwipeIndex];
+
+
+    if (action === "like") {
+
+        if (
+            !likedPets.includes(
+                pet.id
             )
-            .forEach(function (link) {
+        ) {
+
+            likedPets.push(
+                pet.id
+            );
+
+        }
+
+        currentSwipeCard.classList.add(
+            "swipe-out-right"
+        );
+
+    }
+    else {
+
+        if (
+            !passedPets.includes(
+                pet.id
+            )
+        ) {
+
+            passedPets.push(
+                pet.id
+            );
+
+        }
+
+        currentSwipeCard.classList.add(
+            "swipe-out-left"
+        );
+
+    }
 
 
-                link.addEventListener(
-                    "click",
-                    function (event) {
+    saveSwipeData();
 
 
-                        event.preventDefault();
+    currentSwipeIndex++;
 
 
-                        window.location.assign(
-                            "../index.html"
-                        );
+    setTimeout(function() {
+
+        createSwipeCard();
+
+        renderMatches();
+
+    }, 250);
+
+}
 
 
-                    }
+
+/* ========================================================
+   FINISHED SWIPING
+   ======================================================== */
+
+function showSwipeFinished() {
+
+    swipeContainer.innerHTML = "";
+
+    currentSwipeCard = null;
+
+    swipeEmpty.classList.add(
+        "show"
+    );
+
+    renderMatches();
+
+}
+
+
+
+/* ========================================================
+   MATCH RESULTS
+   ======================================================== */
+
+function renderMatches() {
+
+    matchesGrid.innerHTML = "";
+
+
+    const matches =
+        petData.filter(function(pet) {
+
+            return likedPets.includes(
+                pet.id
+            );
+
+        });
+
+
+    matchesCount.textContent =
+        `${matches.length} match${matches.length === 1 ? "" : "es"}`;
+
+
+    if (matches.length === 0) {
+
+        matchesResult.classList.remove(
+            "show"
+        );
+
+        return;
+
+    }
+
+
+    matches.forEach(function(pet) {
+
+        const card =
+            document.createElement("article");
+
+
+        card.className =
+            "match-mini-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${pet.image}"
+                alt="${pet.name}"
+                loading="lazy"
+            >
+
+            <div class="match-mini-info">
+
+                <h3>
+                    ${pet.name}
+                </h3>
+
+                <p>
+                    ${pet.description}
+                </p>
+
+                <p>
+                    ${pet.locationText}
+                </p>
+
+            </div>
+
+        `;
+
+
+        card.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "./pet-details.html?pet=" +
+                    encodeURIComponent(
+                        pet.id
+                    );
+
+            }
+        );
+
+
+        matchesGrid.appendChild(
+            card
+        );
+
+    });
+
+
+    matchesResult.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* ========================================================
+   BUTTON CONTROLS
+   ======================================================== */
+
+findMatchButton.addEventListener(
+    "click",
+    startMatching
+);
+
+
+passButton.addEventListener(
+    "click",
+    function() {
+
+        swipePet(
+            "pass"
+        );
+
+    }
+);
+
+
+likeButton.addEventListener(
+    "click",
+    function() {
+
+        swipePet(
+            "like"
+        );
+
+    }
+);
+
+
+seeMatchesButton.addEventListener(
+    "click",
+    function() {
+
+        matchesResult.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        renderMatches();
+
+    }
+);
+
+
+closeMatchButton.addEventListener(
+    "click",
+    function() {
+
+        matchSection.classList.remove(
+            "active"
+        );
+
+        matchSection.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+);
+
+
+
+/* ========================================================
+   HOME NAVIGATION
+   ======================================================== */
+
+document
+    .querySelectorAll(
+        'a[href="../index.html"]'
+    )
+    .forEach(function(link) {
+
+        link.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                window.location.assign(
+                    "../index.html"
                 );
 
+            }
+        );
 
-            });
+    });
 
 
-    </script>
+</script>
 
 
 
