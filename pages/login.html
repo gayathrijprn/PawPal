@@ -1,739 +1,301 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log In — PawPal</title>
+    <title>Log In | PawPal</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
-    rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-<link rel="stylesheet" href="../css/style.css">
-
-<style>
-    /* =====================================================
-       PAWPAL LOGIN PAGE
-    ===================================================== */
-
-    .auth-page {
-        min-height: calc(100vh - 82px);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        background: var(--cream);
-    }
-
-    /* LEFT SIDE */
-
-    .auth-visual {
-        position: relative;
-        min-height: 650px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 60px;
-        background:
-            radial-gradient(
-                circle at 20% 20%,
-                rgba(244, 222, 160, .55),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 85% 75%,
-                rgba(222, 214, 232, .55),
-                transparent 30%
-            ),
-            var(--pink);
-    }
-
-    .auth-visual::before {
-        content: "🐾";
-        position: absolute;
-        top: 45px;
-        left: 40px;
-        font-size: 100px;
-        opacity: .08;
-        transform: rotate(-20deg);
-    }
-
-    .auth-visual::after {
-        content: "♡";
-        position: absolute;
-        right: 40px;
-        bottom: 20px;
-        font-family: "Playfair Display", Georgia, serif;
-        font-size: 190px;
-        color: var(--coral);
-        opacity: .08;
-    }
-
-    .auth-image-wrap {
-        width: min(430px, 90%);
-        height: 500px;
-        padding: 10px;
-        background: rgba(255,255,255,.9);
-        border-radius: 35px;
-        box-shadow: 0 30px 70px rgba(61,45,37,.14);
-        transform: rotate(-3deg);
-        position: relative;
-        z-index: 2;
-    }
-
-    .auth-image-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 27px;
-    }
-
-    .auth-image-note {
-        position: absolute;
-        left: 25px;
-        right: 25px;
-        bottom: 25px;
-        background: rgba(255,255,255,.96);
-        padding: 15px 18px;
-        border-radius: 18px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        box-shadow: 0 12px 30px rgba(61,45,37,.12);
-    }
-
-    .auth-note-icon {
-        width: 43px;
-        height: 43px;
-        border-radius: 50%;
-        background: var(--yellow);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 21px;
-    }
-
-    .auth-image-note strong {
-        display: block;
-        font-family: "Playfair Display", Georgia, serif;
-        font-size: 19px;
-    }
-
-    .auth-image-note span {
-        display: block;
-        color: var(--text-soft);
-        font-size: 12px;
-    }
-
-    /* RIGHT SIDE */
-
-    .auth-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 70px 8%;
-    }
-
-    .auth-box {
-        width: min(460px, 100%);
-    }
-
-    .auth-small-label {
-        color: var(--coral);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 2px;
-    }
-
-    .auth-box h1 {
-        font-family: "Playfair Display", Georgia, serif;
-        font-size: clamp(42px, 5vw, 58px);
-        line-height: 1.05;
-        letter-spacing: -1.5px;
-        margin-top: 14px;
-    }
-
-    .auth-box h1 em {
-        color: var(--coral);
-        font-weight: 500;
-    }
-
-    .auth-intro {
-        color: var(--text-soft);
-        font-size: 15px;
-        line-height: 1.7;
-        margin-top: 15px;
-        max-width: 410px;
-    }
-
-    .auth-form {
-        margin-top: 35px;
-    }
-
-    .form-group {
-        margin-bottom: 19px;
-    }
-
-    .form-group label {
-        display: block;
-        font-size: 13px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    .input-wrap {
-        position: relative;
-    }
-
-    .input-icon {
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 17px;
-        opacity: .65;
-    }
-
-    .form-group input {
-        width: 100%;
-        height: 53px;
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        background: white;
-        color: var(--text);
-        padding: 0 16px 0 45px;
-        outline: none;
-        transition: .25s;
-    }
-
-    .form-group input:focus {
-        border-color: var(--coral);
-        box-shadow: 0 0 0 4px rgba(233,130,104,.10);
-    }
-
-    .password-input {
-        padding-right: 52px !important;
-    }
-
-    .password-toggle {
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        font-size: 17px;
-        opacity: .65;
-    }
-
-    .form-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin-top: 3px;
-        margin-bottom: 25px;
-    }
-
-    .remember {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--text-soft);
-        font-size: 13px;
-        cursor: pointer;
-    }
-
-    .remember input {
-        accent-color: var(--coral);
-    }
-
-    .forgot-password {
-        color: var(--coral);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .forgot-password:hover {
-        text-decoration: underline;
-    }
-
-    .login-submit {
-        width: 100%;
-        height: 54px;
-        border: none;
-        border-radius: 50px;
-        background: var(--coral);
-        color: white;
-        font-size: 15px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: .3s;
-        box-shadow: 0 12px 25px rgba(233,130,104,.18);
-    }
-
-    .login-submit:hover {
-        background: var(--coral-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 17px 32px rgba(233,130,104,.25);
-    }
-
-    .auth-message {
-        display: none;
-        padding: 12px 15px;
-        border-radius: 12px;
-        margin-bottom: 18px;
-        font-size: 13px;
-        background: #F9E4DE;
-        color: #8C4637;
-    }
-
-    .auth-divider {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 27px 0;
-        color: #A49790;
-        font-size: 12px;
-    }
-
-    .auth-divider::before,
-    .auth-divider::after {
-        content: "";
-        height: 1px;
-        flex: 1;
-        background: var(--border);
-    }
-
-    .register-prompt {
-        text-align: center;
-        color: var(--text-soft);
-        font-size: 14px;
-    }
-
-    .register-prompt a {
-        color: var(--coral);
-        font-weight: 700;
-        text-decoration: none;
-    }
-
-    .register-prompt a:hover {
-        text-decoration: underline;
-    }
-
-    .back-home {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        margin-top: 27px;
-        color: var(--text-soft);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .back-home:hover {
-        color: var(--coral);
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-
-        .auth-page {
-            grid-template-columns: 1fr;
-        }
-
-        .auth-visual {
-            min-height: 430px;
-            padding: 40px;
-        }
-
-        .auth-image-wrap {
-            width: 300px;
-            height: 360px;
-        }
-
-        .auth-content {
-            padding: 65px 25px 80px;
-        }
-    }
-
-    @media (max-width: 500px) {
-
-        .auth-visual {
-            min-height: 350px;
-        }
-
-        .auth-image-wrap {
-            width: 245px;
-            height: 300px;
-        }
-
-        .auth-image-note {
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-        }
-
-        .auth-box h1 {
-            font-size: 42px;
-        }
-
-        .form-options {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 10px;
-        }
-    }
-</style>
-
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/login.css">
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
+    <!-- NAVBAR -->
 
-<header class="navbar">
+    <header class="navbar">
 
-    <a href="../index.html" class="brand">
+        <div class="nav-inner">
 
-        <div class="brand-paw">🐾</div>
+            <a href="../index.html" class="brand">
+                <span class="brand-paw">🐾</span>
+                <span>PawPal</span>
+            </a>
 
-        <div class="brand-name">
-            Paw<span>Pal</span>
-        </div>
+            <div class="nav-right">
 
-    </a>
+                <span class="login-question">
+                    Don't have an account?
+                </span>
 
-    <nav class="navigation">
-
-        <a href="../index.html">Home</a>
-    
-
-        <a href="pets.html">Find a Pet</a>
-
-        <a href="how-it-works.html">How It Works</a>
-
-        <a href="about.html">About Us</a>
-
-    </nav>
-
-    <div class="nav-right">
-
-        <a href="login.html" class="login">
-            Log in
-        </a>
-
-        <a href="register.html" class="nav-button">
-            Get Started
-            <span>→</span>
-        </a>
-
-    </div>
-
-</header>
-
-
-<main class="auth-page">
-
-    <!-- LEFT VISUAL -->
-
-    <section class="auth-visual">
-
-        <div class="auth-image-wrap">
-
-            <img
-                src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
-                alt="Happy dog waiting for a loving home"
-            >
-
-            <div class="auth-image-note">
-
-                <div class="auth-note-icon">
-                    💕
-                </div>
-
-                <div>
-                    <strong>Welcome back!</strong>
-                    <span>Your next furry friend may be waiting.</span>
-                </div>
+                <a href="register.html" class="nav-button">
+                    Sign Up <span>→</span>
+                </a>
 
             </div>
 
         </div>
 
-    </section>
+    </header>
 
 
-    <!-- LOGIN CONTENT -->
+    <!-- LOGIN -->
 
-    <section class="auth-content">
+    <main class="login-page">
 
-        <div class="auth-box">
-
-            <div class="auth-small-label">
-                WELCOME BACK
-            </div>
-
-            <h1>
-                Let's find your
-                <em>paw-fect</em> match.
-            </h1>
-
-            <p class="auth-intro">
-                Log in to your PawPal account and continue
-                your journey towards finding a loving companion.
-            </p>
+        <section class="login-container">
 
 
-            <form class="auth-form" id="loginForm">
+            <!-- LEFT SIDE -->
 
-                <div
-                    class="auth-message"
-                    id="loginMessage">
+            <div class="login-story">
+
+                <div class="story-paw">
+                    🐾
+                </div>
+
+                <span class="story-label">
+                    WELCOME BACK
+                </span>
+
+                <h1>
+                    Every paw
+                    <em>needs someone.</em>
+                </h1>
+
+                <p>
+                    Sign in to continue helping animals find
+                    safety, care and loving homes.
+                </p>
+
+
+                <div class="story-points">
+
+                    <div class="story-point">
+                        <span>✓</span>
+                        Discover animals waiting for homes
+                    </div>
+
+                    <div class="story-point">
+                        <span>✓</span>
+                        Support rescue fundraisers
+                    </div>
+
+                    <div class="story-point">
+                        <span>✓</span>
+                        Track your adoption applications
+                    </div>
+
                 </div>
 
 
-                <div class="form-group">
+                <div class="story-decoration">
+                    <span>🐶</span>
+                    <span>🐱</span>
+                    <span>🐰</span>
+                </div>
 
-                    <label for="email">
-                        Email address
-                    </label>
+            </div>
 
-                    <div class="input-wrap">
 
-                        <span class="input-icon">
-                            ✉️
-                        </span>
+            <!-- RIGHT SIDE -->
+
+            <div class="login-card">
+
+                <div class="login-heading">
+
+                    <span class="section-label">
+                        PAWPAL ACCOUNT
+                    </span>
+
+                    <h2>
+                        Welcome back.
+                    </h2>
+
+                    <p>
+                        Log in to your PawPal account to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm" novalidate>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="login-field">
+
+                        <label for="loginEmail">
+                            Email address
+                        </label>
 
                         <input
                             type="email"
-                            id="email"
+                            id="loginEmail"
                             name="email"
                             placeholder="you@example.com"
+                            autocomplete="email"
                             required
                         >
 
                     </div>
 
-                </div>
+
+                    <!-- PASSWORD -->
+
+                    <div class="login-field">
+
+                        <div class="password-label-row">
+
+                            <label for="loginPassword">
+                                Password
+                            </label>
+
+                            <a
+                                href="forgot-password.html"
+                                class="forgot-link"
+                            >
+                                Forgot password?
+                            </a>
+
+                        </div>
 
 
-                <div class="form-group">
+                        <div class="password-wrapper">
 
-                    <label for="password">
-                        Password
-                    </label>
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
 
-                    <div class="input-wrap">
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
 
-                        <span class="input-icon">
-                            🔒
-                        </span>
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="password-input"
-                            placeholder="Enter your password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            id="passwordToggle"
-                            aria-label="Show password">
-                            👁️
-                        </button>
+                        </div>
 
                     </div>
 
-                </div>
 
+                    <!-- REMEMBER -->
 
-                <div class="form-options">
-
-                    <label class="remember">
+                    <label class="remember-row">
 
                         <input
                             type="checkbox"
                             id="rememberMe"
                         >
 
-                        Remember me
+                        <span class="custom-checkbox"></span>
+
+                        <span>
+                            Remember me
+                        </span>
 
                     </label>
 
 
-                    <a
-                        href="#"
-                        class="forgot-password"
-                        id="forgotPassword">
-                        Forgot password?
+                    <!-- ERROR / SUCCESS -->
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                    ></div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-submit"
+                    >
+                        <span>Log In</span>
+                        <span>→</span>
+                    </button>
+
+
+                </form>
+
+
+                <!-- SIGN UP -->
+
+                <div class="signup-prompt">
+
+                    <span>
+                        New to PawPal?
+                    </span>
+
+                    <a href="register.html">
+                        Create an account
                     </a>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="login-submit">
+                <!-- TRUST -->
 
-                    Log in to PawPal
-                    &nbsp; →
+                <div class="login-trust">
 
-                </button>
+                    <span>🔒</span>
 
-            </form>
+                    <p>
+                        Your account is securely managed
+                        by PawPal's authentication system.
+                    </p>
 
-
-            <div class="auth-divider">
-                OR
-            </div>
-
-
-            <div class="register-prompt">
-
-                Don't have an account?
-
-                <a href="register.html">
-                    Create one
-                </a>
+                </div>
 
             </div>
 
+        </section>
 
-            <a
-                href="../index.html"
-                class="back-home">
-
-                ← Back to PawPal
-
-            </a>
-
-        </div>
-
-    </section>
-
-</main>
+    </main>
 
 
-<script src="../js/JS auth.js"></script>
+    <!-- FOOTER -->
 
-<script>
+    <footer class="login-footer">
 
-    /* PASSWORD VISIBILITY */
+        <a href="../index.html">
+            ← Back to PawPal
+        </a>
 
-    const passwordToggle =
-        document.getElementById("passwordToggle");
+        <span>
+            © 2026 PawPal
+        </span>
 
-    const password =
-        document.getElementById("password");
-
-    passwordToggle.addEventListener("click", function () {
-
-        if (password.type === "password") {
-
-            password.type = "text";
-
-            passwordToggle.textContent = "🙈";
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Hide password"
-            );
-
-        } else {
-
-            password.type = "password";
-
-            passwordToggle.textContent = "👁️";
-
-            passwordToggle.setAttribute(
-                "aria-label",
-                "Show password"
-            );
-
-        }
-
-    });
+    </footer>
 
 
-    /* DEMO FRONTEND LOGIN */
+    <!-- SUPABASE -->
 
-    const loginForm =
-        document.getElementById("loginForm");
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    const loginMessage =
-        document.getElementById("loginMessage");
-
-    loginForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const passwordValue =
-            document.getElementById("password").value.trim();
-
-
-        if (!email || !passwordValue) {
-
-            loginMessage.textContent =
-                "Please enter your email and password.";
-
-            loginMessage.style.display = "block";
-
-            return;
-
-        }
-
-
-        loginMessage.style.display = "none";
-
-
-        /*
-            FRONTEND DEMO ONLY
-
-            No Supabase/database is being used.
-            This will later be connected to the
-            actual authentication system.
-        */
-
-        alert(
-            "Login interface is working! 🎉\n\n" +
-            "Backend authentication can be connected later."
-        );
-
-    });
-
-
-    /* FORGOT PASSWORD */
-
-    document
-        .getElementById("forgotPassword")
-        .addEventListener("click", function (event) {
-
-            event.preventDefault();
-
-            alert(
-                "Password reset will be connected later. 💕"
-            );
-
-        });
-
-</script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/login.js"></script>
 
 </body>
 
