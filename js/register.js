@@ -224,7 +224,7 @@ form.addEventListener("submit", async (event) => {
 
 
         showMessage(
-            "Account created successfully! 🎉 Check your email to verify your account.",
+            "Account created successfully! 🎉 You can now log in.",
             "success"
         );
 

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>PawPal — My Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="../CSS/style.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="../index.html" class="brand">
+
+            <div class="brand-paw">
+                🐾
+            </div>
+
+            <div class="brand-name">
+                Paw<span>Pal</span>
+            </div>
+
+        </a>
+
+        <div class="nav-right">
+
+            <button
+                id="logoutButton"
+                class="nav-button"
+                type="button">
+
+                Log Out
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-container">
+
+                <div class="section-label">
+                    MY PAWPAL
+                </div>
+
+                <h1>
+                    Welcome,
+                    <span id="userName">...</span>! 🐾
+                </h1>
+
+                <p>
+                    Your PawPal account and profile.
+                </p>
+
+
+                <div class="dashboard-card">
+
+                    <div class="dashboard-card-icon">
+                        🐾
+                    </div>
+
+                    <div>
+
+                        <h2 id="profileName">
+                            Loading...
+                        </h2>
+
+                        <p id="profileRole">
+                            Loading...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-details">
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+                    <div class="profile-detail-row">
+
+                        <strong>
+                            Full Name
+                        </strong>
+
+                        <span id="profileFullName">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-detail-row">
+
+                        <strong>
+                            Email
+                        </strong>
+
+                        <span id="profileEmail">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-detail-row">
+
+                        <strong>
+                            Phone
+                        </strong>
+
+                        <span id="profilePhone">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-detail-row">
+
+                        <strong>
+                            Account Type
+                        </strong>
+
+                        <span id="profileRole">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase-config.js"></script>
+
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

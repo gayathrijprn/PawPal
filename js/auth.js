@@ -1,251 +1,408 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =====================================================
-       PAWPAL FRONTEND AUTHENTICATION
-       -----------------------------------------------------
-       This version uses localStorage only.
-       No Supabase / backend required yet.
-    ====================================================== */
+```
+/* =====================================================
+   PAWPAL FRONTEND AUTHENTICATION
+   -----------------------------------------------------
+   Frontend-only authentication using localStorage.
+====================================================== */
 
 
-    /* =====================================================
-       STORAGE KEYS
-    ====================================================== */
+/* =====================================================
+   STORAGE KEYS
+====================================================== */
 
-    const USERS_KEY = "pawpal-users";
-    const CURRENT_USER_KEY = "pawpal-current-user";
-
-
-    /* =====================================================
-       GET USERS
-    ====================================================== */
-
-    function getUsers() {
-
-        try {
-
-            return JSON.parse(
-                localStorage.getItem(USERS_KEY)
-            ) || [];
-
-        } catch (error) {
-
-            console.error(
-                "Unable to read PawPal users:",
-                error
-            );
-
-            return [];
-
-        }
-
-    }
+const USERS_KEY = "pawpal-users";
+const CURRENT_USER_KEY = "pawpal-current-user";
 
 
-    /* =====================================================
-       SAVE USERS
-    ====================================================== */
+/* =====================================================
+   GET USERS
+====================================================== */
 
-    function saveUsers(users) {
+function getUsers() {
 
-        localStorage.setItem(
-            USERS_KEY,
-            JSON.stringify(users)
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(USERS_KEY)
+        ) || [];
+
+    } catch (error) {
+
+        console.error(
+            "Unable to read PawPal users:",
+            error
         );
 
-    }
-
-
-    /* =====================================================
-       GET CURRENT USER
-    ====================================================== */
-
-    function getCurrentUser() {
-
-        try {
-
-            return JSON.parse(
-                localStorage.getItem(
-                    CURRENT_USER_KEY
-                )
-            );
-
-        } catch (error) {
-
-            return null;
-
-        }
+        return [];
 
     }
 
+}
 
-    /* =====================================================
-       SAVE CURRENT USER
-    ====================================================== */
 
-    function saveCurrentUser(user) {
+/* =====================================================
+   SAVE USERS
+====================================================== */
 
-        localStorage.setItem(
-            CURRENT_USER_KEY,
-            JSON.stringify(user)
+function saveUsers(users) {
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+}
+
+
+/* =====================================================
+   GET CURRENT USER
+====================================================== */
+
+function getCurrentUser() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                CURRENT_USER_KEY
+            )
         );
 
-    }
+    } catch (error) {
 
-
-    /* =====================================================
-       REMOVE CURRENT USER
-    ====================================================== */
-
-    function logoutUser() {
-
-        localStorage.removeItem(
-            CURRENT_USER_KEY
+        console.error(
+            "Unable to read current PawPal user:",
+            error
         );
 
-        window.location.href =
-            "login.html";
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE CURRENT USER
+====================================================== */
+
+function saveCurrentUser(user) {
+
+    if (!user) {
+        return;
+    }
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
+        JSON.stringify(user)
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+====================================================== */
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        CURRENT_USER_KEY
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   NORMALIZE EMAIL
+====================================================== */
+
+function normalizeEmail(email) {
+
+    return String(email || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =====================================================
+   VALIDATE EMAIL
+====================================================== */
+
+function isValidEmail(email) {
+
+    const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return emailPattern.test(email);
+
+}
+
+
+/* =====================================================
+   GENERATE USER ID
+====================================================== */
+
+function generateUserId() {
+
+    return (
+        "USER-" +
+        Date.now() +
+        "-" +
+        Math.floor(
+            Math.random() * 10000
+        )
+    );
+
+}
+
+
+/* =====================================================
+   DASHBOARD PATHS
+   -----------------------------------------------------
+   Your dashboard files are:
+
+   dashboard-admin.html
+   dashboard-owner.html
+   dashboard-adopter.html
+====================================================== */
+
+function getDashboardPath(role) {
+
+    const normalizedRole =
+        String(role || "")
+            .trim()
+            .toLowerCase()
+            .replace(/_/g, " ");
+
+
+    switch (normalizedRole) {
+
+        case "admin":
+
+            return "dashboard-admin.html";
+
+
+        case "owner":
+
+        case "pet owner":
+
+        case "shelter":
+
+            return "dashboard-owner.html";
+
+
+        case "adopter":
+
+        default:
+
+            return "dashboard-adopter.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   FORMAT ROLE
+====================================================== */
+
+function formatRole(role) {
+
+    const normalizedRole =
+        String(role || "")
+            .trim()
+            .toLowerCase()
+            .replace(/_/g, " ");
+
+
+    if (normalizedRole === "admin") {
+
+        return "Admin";
 
     }
 
 
-    /* =====================================================
-       DASHBOARD PATHS
-    ====================================================== */
-
-    function getDashboardPath(role) {
-
-        switch (
-            String(role).toLowerCase()
-        ) {
-
-            case "admin":
-
-                return "admin-dashboard.html";
-
-
-            case "owner":
-
-            case "pet owner":
-
-            case "pet_owner":
-
-            case "shelter":
-
-                return "owner-dashboard.html";
-
-
-            case "adopter":
-
-            default:
-
-                return "adopter-dashboard.html";
-
-        }
-
-    }
-
-
-    /* =====================================================
-       SHOW MESSAGE
-    ====================================================== */
-
-    function showMessage(
-        message,
-        type = "error"
+    if (
+        normalizedRole === "owner" ||
+        normalizedRole === "pet owner"
     ) {
 
-        let messageBox =
-            document.getElementById(
-                "authMessage"
+        return "Pet Owner";
+
+    }
+
+
+    if (normalizedRole === "shelter") {
+
+        return "Shelter";
+
+    }
+
+
+    return "Adopter";
+
+}
+
+
+/* =====================================================
+   GET INITIALS
+====================================================== */
+
+function getInitials(name) {
+
+    if (!name) {
+        return "PP";
+    }
+
+
+    const parts =
+        String(name)
+            .trim()
+            .split(/\s+/);
+
+
+    if (parts.length === 1) {
+
+        return parts[0]
+            .substring(0, 2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =====================================================
+   SHOW AUTH MESSAGE
+====================================================== */
+
+function showMessage(
+    message,
+    type = "error"
+) {
+
+    let messageBox =
+        document.getElementById(
+            "authMessage"
+        );
+
+
+    if (!messageBox) {
+
+        messageBox =
+            document.createElement(
+                "div"
+            );
+
+        messageBox.id =
+            "authMessage";
+
+
+        messageBox.style.marginTop =
+            "15px";
+
+        messageBox.style.padding =
+            "12px 16px";
+
+        messageBox.style.borderRadius =
+            "12px";
+
+        messageBox.style.fontSize =
+            "14px";
+
+        messageBox.style.fontWeight =
+            "600";
+
+        messageBox.style.textAlign =
+            "center";
+
+
+        const form =
+            document.querySelector(
+                "form"
             );
 
 
-        if (!messageBox) {
+        if (form) {
 
-            messageBox =
-                document.createElement(
-                    "div"
-                );
-
-            messageBox.id =
-                "authMessage";
-
-            messageBox.style.marginTop =
-                "15px";
-
-            messageBox.style.padding =
-                "12px 16px";
-
-            messageBox.style.borderRadius =
-                "12px";
-
-            messageBox.style.fontSize =
-                "14px";
-
-            messageBox.style.fontWeight =
-                "600";
-
-            messageBox.style.textAlign =
-                "center";
-
-
-            const form =
-                document.querySelector(
-                    "form"
-                );
-
-
-            if (form) {
-
-                form.appendChild(
-                    messageBox
-                );
-
-            } else {
-
-                document.body.appendChild(
-                    messageBox
-                );
-
-            }
-
-        }
-
-
-        messageBox.textContent =
-            message;
-
-
-        if (type === "success") {
-
-            messageBox.style.background =
-                "#e7eee3";
-
-            messageBox.style.color =
-                "#60745a";
-
-            messageBox.style.border =
-                "1px solid #cbdcc6";
+            form.appendChild(
+                messageBox
+            );
 
         } else {
 
-            messageBox.style.background =
-                "#fcefeb";
-
-            messageBox.style.color =
-                "#b95742";
-
-            messageBox.style.border =
-                "1px solid #f1c8bd";
+            document.body.appendChild(
+                messageBox
+            );
 
         }
 
-
-        messageBox.style.display =
-            "block";
+    }
 
 
+    messageBox.textContent =
+        message;
+
+
+    if (type === "success") {
+
+        messageBox.style.background =
+            "#e7eee3";
+
+        messageBox.style.color =
+            "#60745a";
+
+        messageBox.style.border =
+            "1px solid #cbdcc6";
+
+    } else if (type === "info") {
+
+        messageBox.style.background =
+            "#eef4f8";
+
+        messageBox.style.color =
+            "#527084";
+
+        messageBox.style.border =
+            "1px solid #cbdce5";
+
+    } else {
+
+        messageBox.style.background =
+            "#fcefeb";
+
+        messageBox.style.color =
+            "#b95742";
+
+        messageBox.style.border =
+            "1px solid #f1c8bd";
+
+    }
+
+
+    messageBox.style.display =
+        "block";
+
+
+    clearTimeout(
+        window.pawpalAuthMessageTimer
+    );
+
+
+    window.pawpalAuthMessageTimer =
         setTimeout(function () {
 
             if (messageBox) {
@@ -257,574 +414,761 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }, 4500);
 
-    }
+}
 
 
-    /* =====================================================
-       NORMALIZE EMAIL
-    ====================================================== */
+/* =====================================================
+   REGISTER USER
+====================================================== */
 
-    function normalizeEmail(email) {
-
-        return String(email)
-            .trim()
-            .toLowerCase();
-
-    }
+const registerForm =
+    document.getElementById(
+        "registerForm"
+    );
 
 
-    /* =====================================================
-       GENERATE USER ID
-    ====================================================== */
+if (registerForm) {
 
-    function generateUserId() {
+    registerForm.addEventListener(
+        "submit",
+        function (event) {
 
-        return (
-            "USER-" +
-            Date.now() +
-            "-" +
-            Math.floor(
-                Math.random() * 10000
-            )
-        );
-
-    }
+            event.preventDefault();
 
 
-    /* =====================================================
-       REGISTER USER
-    ====================================================== */
+            /* -----------------------------------------
+               FIND FIELDS
+            ------------------------------------------ */
 
-    const registerForm =
-        document.getElementById(
-            "registerForm"
-        );
-
-
-    if (registerForm) {
-
-        registerForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
+            const nameInput =
+                registerForm.querySelector(
+                    'input[name="name"],' +
+                    'input[name="fullName"],' +
+                    'input[id="name"],' +
+                    'input[id="fullName"]'
+                );
 
 
-                /* -----------------------------------------
-                   FIND FORM FIELDS
-                ------------------------------------------ */
+            const emailInput =
+                registerForm.querySelector(
+                    'input[name="email"],' +
+                    'input[type="email"],' +
+                    'input[id="email"]'
+                );
 
-                const nameInput =
-                    document.querySelector(
-                        '#registerForm input[name="name"],' +
-                        '#registerForm input[name="fullName"],' +
-                        '#registerForm input[id="name"],' +
-                        '#registerForm input[id="fullName"]'
+
+            const passwordInput =
+                registerForm.querySelector(
+                    'input[name="password"],' +
+                    'input[type="password"][id="password"]'
+                );
+
+
+            const confirmPasswordInput =
+                registerForm.querySelector(
+                    'input[name="confirmPassword"],' +
+                    'input[name="confirm-password"],' +
+                    'input[id="confirmPassword"],' +
+                    'input[id="confirm-password"]'
+                );
+
+
+            const roleInput =
+                registerForm.querySelector(
+                    'select[name="role"],' +
+                    'select[id="role"],' +
+                    'input[name="role"]:checked'
+                );
+
+
+            /* -----------------------------------------
+               READ VALUES
+            ------------------------------------------ */
+
+            const name =
+                nameInput
+                    ? nameInput.value.trim()
+                    : "";
+
+
+            const email =
+                emailInput
+                    ? normalizeEmail(
+                        emailInput.value
+                    )
+                    : "";
+
+
+            const password =
+                passwordInput
+                    ? passwordInput.value
+                    : "";
+
+
+            const confirmPassword =
+                confirmPasswordInput
+                    ? confirmPasswordInput.value
+                    : "";
+
+
+            let role =
+                roleInput
+                    ? roleInput.value
+                    : "adopter";
+
+
+            role =
+                String(role || "")
+                    .trim()
+                    .toLowerCase()
+                    .replace(
+                        /_/g,
+                        " "
                     );
 
 
-                const emailInput =
-                    document.querySelector(
-                        '#registerForm input[name="email"],' +
-                        '#registerForm input[type="email"],' +
-                        '#registerForm input[id="email"]'
-                    );
+            /* -----------------------------------------
+               VALIDATION
+            ------------------------------------------ */
 
+            if (!name) {
 
-                const passwordInput =
-                    document.querySelector(
-                        '#registerForm input[name="password"],' +
-                        '#registerForm input[type="password"][id="password"]'
-                    );
+                showMessage(
+                    "Please enter your name."
+                );
 
-
-                const confirmPasswordInput =
-                    document.querySelector(
-                        '#registerForm input[name="confirmPassword"],' +
-                        '#registerForm input[name="confirm-password"],' +
-                        '#registerForm input[id="confirmPassword"],' +
-                        '#registerForm input[id="confirm-password"]'
-                    );
-
-
-                const roleInput =
-                    document.querySelector(
-                        '#registerForm select[name="role"],' +
-                        '#registerForm select[id="role"],' +
-                        '#registerForm input[name="role"]:checked'
-                    );
-
-
-                /* -----------------------------------------
-                   READ VALUES
-                ------------------------------------------ */
-
-                const name =
-                    nameInput
-                        ? nameInput.value.trim()
-                        : "";
-
-
-                const email =
-                    emailInput
-                        ? normalizeEmail(
-                            emailInput.value
-                        )
-                        : "";
-
-
-                const password =
-                    passwordInput
-                        ? passwordInput.value
-                        : "";
-
-
-                const confirmPassword =
-                    confirmPasswordInput
-                        ? confirmPasswordInput.value
-                        : "";
-
-
-                let role =
-                    roleInput
-                        ? roleInput.value
-                        : "adopter";
-
-
-                role =
-                    String(role)
-                        .trim()
-                        .toLowerCase();
-
-
-                /* -----------------------------------------
-                   VALIDATION
-                ------------------------------------------ */
-
-                if (!name) {
-
-                    showMessage(
-                        "Please enter your name."
-                    );
-
-                    if (nameInput) {
-                        nameInput.focus();
-                    }
-
-                    return;
-
+                if (nameInput) {
+                    nameInput.focus();
                 }
 
+                return;
 
-                if (!email) {
+            }
 
-                    showMessage(
-                        "Please enter your email address."
-                    );
 
-                    if (emailInput) {
-                        emailInput.focus();
-                    }
+            if (!email) {
 
-                    return;
+                showMessage(
+                    "Please enter your email address."
+                );
 
+                if (emailInput) {
+                    emailInput.focus();
                 }
 
+                return;
 
-                if (!isValidEmail(email)) {
+            }
 
-                    showMessage(
-                        "Please enter a valid email address."
-                    );
 
-                    if (emailInput) {
-                        emailInput.focus();
-                    }
+            if (!isValidEmail(email)) {
 
-                    return;
+                showMessage(
+                    "Please enter a valid email address."
+                );
 
+                if (emailInput) {
+                    emailInput.focus();
                 }
 
+                return;
 
-                if (!password) {
+            }
 
-                    showMessage(
-                        "Please create a password."
-                    );
 
-                    if (passwordInput) {
-                        passwordInput.focus();
-                    }
+            if (!password) {
 
-                    return;
+                showMessage(
+                    "Please create a password."
+                );
 
+                if (passwordInput) {
+                    passwordInput.focus();
                 }
 
+                return;
 
-                if (password.length < 6) {
+            }
 
-                    showMessage(
-                        "Password must contain at least 6 characters."
-                    );
 
-                    if (passwordInput) {
-                        passwordInput.focus();
-                    }
+            if (password.length < 6) {
 
-                    return;
+                showMessage(
+                    "Password must contain at least 6 characters."
+                );
 
+                if (passwordInput) {
+                    passwordInput.focus();
                 }
 
+                return;
 
-                if (
-                    confirmPasswordInput &&
-                    password !== confirmPassword
-                ) {
-
-                    showMessage(
-                        "Passwords do not match."
-                    );
-
-                    confirmPasswordInput.focus();
-
-                    return;
-
-                }
+            }
 
 
-                /* -----------------------------------------
-                   CHECK EXISTING USER
-                ------------------------------------------ */
+            if (
+                confirmPasswordInput &&
+                password !== confirmPassword
+            ) {
 
-                const users =
-                    getUsers();
+                showMessage(
+                    "Passwords do not match."
+                );
+
+                confirmPasswordInput.focus();
+
+                return;
+
+            }
 
 
-                const existingUser =
-                    users.find(function (user) {
+            /* -----------------------------------------
+               CHECK EXISTING USER
+            ------------------------------------------ */
 
-                        return normalizeEmail(
+            const users =
+                getUsers();
+
+
+            const existingUser =
+                users.find(function (user) {
+
+                    return (
+                        normalizeEmail(
                             user.email
-                        ) === email;
-
-                    });
-
-
-                if (existingUser) {
-
-                    showMessage(
-                        "An account with this email already exists. Please log in."
+                        ) === email
                     );
 
-                    return;
-
-                }
+                });
 
 
-                /* -----------------------------------------
-                   CREATE USER
-                ------------------------------------------ */
+            if (existingUser) {
 
-                const newUser = {
-
-                    id:
-                        generateUserId(),
-
-                    name:
-                        name,
-
-                    email:
-                        email,
-
-                    password:
-                        password,
-
-                    role:
-                        role || "adopter",
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
-
-
-                users.push(
-                    newUser
+                showMessage(
+                    "An account with this email already exists. Please log in."
                 );
 
+                return;
 
-                saveUsers(
-                    users
-                );
+            }
 
 
-                /* -----------------------------------------
-                   AUTOMATIC LOGIN
-                ------------------------------------------ */
+            /* -----------------------------------------
+               CREATE USER
+            ------------------------------------------ */
 
-                const loggedInUser = {
+            const newUser = {
 
-                    id:
-                        newUser.id,
+                id:
+                    generateUserId(),
 
-                    name:
-                        newUser.name,
+                name:
+                    name,
 
-                    email:
-                        newUser.email,
+                email:
+                    email,
 
-                    role:
+                password:
+                    password,
+
+                role:
+                    role || "adopter",
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            users.push(
+                newUser
+            );
+
+
+            saveUsers(
+                users
+            );
+
+
+            /* -----------------------------------------
+               CREATE SESSION
+            ------------------------------------------ */
+
+            const loggedInUser = {
+
+                id:
+                    newUser.id,
+
+                name:
+                    newUser.name,
+
+                email:
+                    newUser.email,
+
+                role:
+                    newUser.role
+
+            };
+
+
+            saveCurrentUser(
+                loggedInUser
+            );
+
+
+            showMessage(
+                "Account created successfully! Welcome to PawPal 🐾",
+                "success"
+            );
+
+
+            /* -----------------------------------------
+               REDIRECT
+            ------------------------------------------ */
+
+            setTimeout(function () {
+
+                window.location.href =
+                    getDashboardPath(
                         newUser.role
+                    );
 
-                };
+            }, 1000);
+
+        }
+    );
+
+}
 
 
-                saveCurrentUser(
-                    loggedInUser
+/* =====================================================
+   LOGIN USER
+====================================================== */
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            /* -----------------------------------------
+               FIND FIELDS
+            ------------------------------------------ */
+
+            const emailInput =
+                loginForm.querySelector(
+                    'input[name="email"],' +
+                    'input[type="email"],' +
+                    'input[id="email"]'
                 );
 
+
+            const passwordInput =
+                loginForm.querySelector(
+                    'input[name="password"],' +
+                    'input[type="password"][id="password"]'
+                );
+
+
+            /* -----------------------------------------
+               READ VALUES
+            ------------------------------------------ */
+
+            const email =
+                emailInput
+                    ? normalizeEmail(
+                        emailInput.value
+                    )
+                    : "";
+
+
+            const password =
+                passwordInput
+                    ? passwordInput.value
+                    : "";
+
+
+            /* -----------------------------------------
+               VALIDATION
+            ------------------------------------------ */
+
+            if (!email) {
 
                 showMessage(
-                    "Account created successfully! Welcome to PawPal 🐾",
-                    "success"
+                    "Please enter your email address."
                 );
 
+                if (emailInput) {
+                    emailInput.focus();
+                }
 
-                /* -----------------------------------------
-                   REDIRECT
-                ------------------------------------------ */
-
-                setTimeout(function () {
-
-                    window.location.href =
-                        getDashboardPath(
-                            newUser.role
-                        );
-
-                }, 1000);
+                return;
 
             }
-        );
-
-    }
 
 
-    /* =====================================================
-       LOGIN USER
-    ====================================================== */
+            if (!isValidEmail(email)) {
 
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
+                showMessage(
+                    "Please enter a valid email address."
+                );
 
-
-    if (loginForm) {
-
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                /* -----------------------------------------
-                   FIND LOGIN FIELDS
-                ------------------------------------------ */
-
-                const emailInput =
-                    document.querySelector(
-                        '#loginForm input[name="email"],' +
-                        '#loginForm input[type="email"],' +
-                        '#loginForm input[id="email"]'
-                    );
-
-
-                const passwordInput =
-                    document.querySelector(
-                        '#loginForm input[name="password"],' +
-                        '#loginForm input[type="password"][id="password"]'
-                    );
-
-
-                /* -----------------------------------------
-                   READ VALUES
-                ------------------------------------------ */
-
-                const email =
-                    emailInput
-                        ? normalizeEmail(
-                            emailInput.value
-                        )
-                        : "";
-
-
-                const password =
-                    passwordInput
-                        ? passwordInput.value
-                        : "";
-
-
-                /* -----------------------------------------
-                   VALIDATION
-                ------------------------------------------ */
-
-                if (!email) {
-
-                    showMessage(
-                        "Please enter your email address."
-                    );
-
-                    if (emailInput) {
-                        emailInput.focus();
-                    }
-
-                    return;
-
+                if (emailInput) {
+                    emailInput.focus();
                 }
 
+                return;
 
-                if (!isValidEmail(email)) {
+            }
 
-                    showMessage(
-                        "Please enter a valid email address."
-                    );
 
-                    if (emailInput) {
-                        emailInput.focus();
-                    }
+            if (!password) {
 
-                    return;
+                showMessage(
+                    "Please enter your password."
+                );
 
+                if (passwordInput) {
+                    passwordInput.focus();
                 }
 
+                return;
 
-                if (!password) {
+            }
 
-                    showMessage(
-                        "Please enter your password."
+
+            /* -----------------------------------------
+               FIND USER
+            ------------------------------------------ */
+
+            const users =
+                getUsers();
+
+
+            const user =
+                users.find(function (account) {
+
+                    return (
+                        normalizeEmail(
+                            account.email
+                        ) === email &&
+                        account.password === password
                     );
 
-                    if (passwordInput) {
-                        passwordInput.focus();
-                    }
-
-                    return;
-
-                }
+                });
 
 
-                /* -----------------------------------------
-                   FIND USER
-                ------------------------------------------ */
+            if (!user) {
 
-                const users =
-                    getUsers();
+                showMessage(
+                    "Email or password is incorrect."
+                );
 
+                return;
 
-                const user =
-                    users.find(function (account) {
-
-                        return (
-                            normalizeEmail(
-                                account.email
-                            ) === email &&
-                            account.password ===
-                                password
-                        );
-
-                    });
+            }
 
 
-                if (!user) {
+            /* -----------------------------------------
+               CREATE SESSION
+            ------------------------------------------ */
 
-                    showMessage(
-                        "Email or password is incorrect."
-                    );
+            const loggedInUser = {
 
-                    return;
+                id:
+                    user.id,
 
-                }
+                name:
+                    user.name,
+
+                email:
+                    user.email,
+
+                role:
+                    user.role
+
+            };
 
 
-                /* -----------------------------------------
-                   CREATE SESSION
-                ------------------------------------------ */
+            saveCurrentUser(
+                loggedInUser
+            );
 
-                const loggedInUser = {
 
-                    id:
-                        user.id,
+            showMessage(
+                "Login successful! Welcome back 🐾",
+                "success"
+            );
 
-                    name:
-                        user.name,
 
-                    email:
-                        user.email,
+            /* -----------------------------------------
+               REDIRECT
+            ------------------------------------------ */
 
-                    role:
+            setTimeout(function () {
+
+                window.location.href =
+                    getDashboardPath(
                         user.role
+                    );
 
-                };
+            }, 700);
 
+        }
+    );
 
-                saveCurrentUser(
-                    loggedInUser
-                );
-
-
-                showMessage(
-                    "Login successful! Welcome back 🐾",
-                    "success"
-                );
+}
 
 
-                /* -----------------------------------------
-                   REDIRECT TO ROLE DASHBOARD
-                ------------------------------------------ */
+/* =====================================================
+   DASHBOARD PROTECTION
+   -----------------------------------------------------
+   Protects:
 
-                setTimeout(function () {
+   dashboard-admin.html
+   dashboard-owner.html
+   dashboard-adopter.html
+====================================================== */
 
-                    window.location.href =
-                        getDashboardPath(
-                            user.role
-                        );
+const currentPage =
+    window.location.pathname
+        .split("/")
+        .pop()
+        .toLowerCase();
 
-                }, 700);
+
+const dashboardPages = [
+
+    "dashboard-admin.html",
+
+    "dashboard-owner.html",
+
+    "dashboard-adopter.html"
+
+];
+
+
+if (
+    dashboardPages.includes(
+        currentPage
+    )
+) {
+
+    const dashboardUser =
+        getCurrentUser();
+
+
+    /* -----------------------------------------
+       NOT LOGGED IN
+    ------------------------------------------ */
+
+    if (!dashboardUser) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       REQUIRED ROLE
+    ------------------------------------------ */
+
+    let requiredRole;
+
+
+    if (
+        currentPage ===
+        "dashboard-admin.html"
+    ) {
+
+        requiredRole =
+            "admin";
+
+    } else if (
+        currentPage ===
+        "dashboard-owner.html"
+    ) {
+
+        requiredRole =
+            "owner";
+
+    } else {
+
+        requiredRole =
+            "adopter";
+
+    }
+
+
+    /* -----------------------------------------
+       NORMALIZE USER ROLE
+    ------------------------------------------ */
+
+    const userRole =
+        String(
+            dashboardUser.role || ""
+        )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /_/g,
+            " "
+        );
+
+
+    /* -----------------------------------------
+       CHECK ROLE
+    ------------------------------------------ */
+
+    let allowedRole = false;
+
+
+    if (
+        requiredRole ===
+        "owner"
+    ) {
+
+        allowedRole =
+            userRole === "owner" ||
+            userRole === "pet owner" ||
+            userRole === "shelter";
+
+    } else {
+
+        allowedRole =
+            userRole ===
+            requiredRole;
+
+    }
+
+
+    /* -----------------------------------------
+       WRONG DASHBOARD
+    ------------------------------------------ */
+
+    if (!allowedRole) {
+
+        window.location.href =
+            getDashboardPath(
+                dashboardUser.role
+            );
+
+        return;
+
+    }
+
+}
+
+
+/* =====================================================
+   DISPLAY CURRENT USER
+====================================================== */
+
+const loggedInUser =
+    getCurrentUser();
+
+
+if (loggedInUser) {
+
+    /* -----------------------------------------
+       USER NAME
+    ------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            "[data-user-name]"
+        )
+        .forEach(
+            function (element) {
+
+                element.textContent =
+                    loggedInUser.name || "PawPal User";
 
             }
         );
 
-    }
 
+    /* -----------------------------------------
+       USER EMAIL
+    ------------------------------------------ */
 
-    /* =====================================================
-       EMAIL VALIDATION
-    ====================================================== */
+    document
+        .querySelectorAll(
+            "[data-user-email]"
+        )
+        .forEach(
+            function (element) {
 
-    function isValidEmail(email) {
+                element.textContent =
+                    loggedInUser.email || "";
 
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        return emailPattern.test(
-            email
-        );
-
-    }
-
-
-    /* =====================================================
-       LOGOUT BUTTONS
-    ====================================================== */
-
-    const logoutButtons =
-        document.querySelectorAll(
-            ".logout-btn, [data-logout]"
+            }
         );
 
 
-    logoutButtons.forEach(
+    /* -----------------------------------------
+       USER ROLE
+    ------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            "[data-user-role]"
+        )
+        .forEach(
+            function (element) {
+
+                element.textContent =
+                    formatRole(
+                        loggedInUser.role
+                    );
+
+            }
+        );
+
+
+    /* -----------------------------------------
+       USER AVATAR
+    ------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            "[data-user-avatar]"
+        )
+        .forEach(
+            function (element) {
+
+                element.textContent =
+                    getInitials(
+                        loggedInUser.name
+                    );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   LOGOUT BUTTONS
+====================================================== */
+
+document
+    .querySelectorAll(
+        ".logout-btn, [data-logout]"
+    )
+    .forEach(
         function (button) {
 
             button.addEventListener(
@@ -832,6 +1176,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 function (event) {
 
                     event.preventDefault();
+
+
+                    const confirmed =
+                        confirm(
+                            "Are you sure you want to log out?"
+                        );
+
+
+                    if (!confirmed) {
+                        return;
+                    }
+
 
                     logoutUser();
 
@@ -842,500 +1198,232 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    /* =====================================================
-       PROTECT DASHBOARD PAGES
-    ====================================================== */
+/* =====================================================
+   DEMO ADMIN ACCOUNT
+====================================================== */
 
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop()
-            .toLowerCase();
+function createDemoAdmin() {
 
-
-    const dashboardPages = [
-
-        "admin-dashboard.html",
-
-        "adopter-dashboard.html",
-
-        "owner-dashboard.html"
-
-    ];
+    const users =
+        getUsers();
 
 
-    if (
-        dashboardPages.includes(
-            currentPage
-        )
-    ) {
+    const adminExists =
+        users.some(function (user) {
 
-        const currentUser =
-            getCurrentUser();
-
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        /* -----------------------------------------
-           ROLE PROTECTION
-        ------------------------------------------ */
-
-        const requiredRole =
-            currentPage ===
-            "admin-dashboard.html"
-
-                ? "admin"
-
-                : currentPage ===
-                  "owner-dashboard.html"
-
-                    ? "owner"
-
-                    : "adopter";
-
-
-        const userRole =
-            String(
-                currentUser.role
-            )
-            .toLowerCase()
-            .replace(
-                "_",
-                " "
+            return (
+                normalizeEmail(
+                    user.email
+                ) ===
+                "admin@pawpal.com"
             );
 
-
-        const allowedRole =
-            requiredRole === "owner"
-
-                ? (
-                    userRole === "owner" ||
-                    userRole === "pet owner" ||
-                    userRole === "shelter"
-                )
-
-                : userRole ===
-                  requiredRole;
+        });
 
 
-        if (!allowedRole) {
+    if (!adminExists) {
 
-            window.location.href =
-                getDashboardPath(
-                    currentUser.role
-                );
+        users.push({
 
-            return;
+            id:
+                "ADMIN-DEMO-001",
 
-        }
+            name:
+                "PawPal Admin",
 
-    }
+            email:
+                "admin@pawpal.com",
 
+            password:
+                "admin123",
 
-    /* =====================================================
-       DISPLAY CURRENT USER INFORMATION
-    ====================================================== */
+            role:
+                "admin",
 
-    const currentUser =
-        getCurrentUser();
+            createdAt:
+                new Date().toISOString(),
 
+            demo:
+                true
 
-    if (currentUser) {
-
-        const userNameElements =
-            document.querySelectorAll(
-                "[data-user-name]"
-            );
+        });
 
 
-        userNameElements.forEach(
-            function (element) {
-
-                element.textContent =
-                    currentUser.name;
-
-            }
-        );
-
-
-        const userEmailElements =
-            document.querySelectorAll(
-                "[data-user-email]"
-            );
-
-
-        userEmailElements.forEach(
-            function (element) {
-
-                element.textContent =
-                    currentUser.email;
-
-            }
-        );
-
-
-        const userRoleElements =
-            document.querySelectorAll(
-                "[data-user-role]"
-            );
-
-
-        userRoleElements.forEach(
-            function (element) {
-
-                element.textContent =
-                    formatRole(
-                        currentUser.role
-                    );
-
-            }
-        );
-
-
-        const avatarElements =
-            document.querySelectorAll(
-                "[data-user-avatar]"
-            );
-
-
-        avatarElements.forEach(
-            function (element) {
-
-                element.textContent =
-                    getInitials(
-                        currentUser.name
-                    );
-
-            }
+        saveUsers(
+            users
         );
 
     }
 
-
-    /* =====================================================
-       FORMAT ROLE
-    ====================================================== */
-
-    function formatRole(role) {
-
-        const normalizedRole =
-            String(role)
-                .toLowerCase()
-                .replace(
-                    "_",
-                    " "
-                );
+}
 
 
-        if (
-            normalizedRole ===
-            "pet owner"
-        ) {
-
-            return "Pet Owner";
-
-        }
+createDemoAdmin();
 
 
-        if (
-            normalizedRole ===
-            "admin"
-        ) {
+/* =====================================================
+   DEMO OWNER ACCOUNT
+====================================================== */
 
-            return "Admin";
+function createDemoOwner() {
 
-        }
-
-
-        if (
-            normalizedRole ===
-            "owner"
-        ) {
-
-            return "Pet Owner";
-
-        }
+    const users =
+        getUsers();
 
 
-        if (
-            normalizedRole ===
-            "shelter"
-        ) {
+    const ownerExists =
+        users.some(function (user) {
 
-            return "Shelter";
-
-        }
-
-
-        return "Adopter";
-
-    }
-
-
-    /* =====================================================
-       GET USER INITIALS
-    ====================================================== */
-
-    function getInitials(name) {
-
-        if (!name) {
-            return "PP";
-        }
-
-
-        const parts =
-            name
-                .trim()
-                .split(/\s+/);
-
-
-        if (parts.length === 1) {
-
-            return parts[0]
-                .substring(0, 2)
-                .toUpperCase();
-
-        }
-
-
-        return (
-            parts[0][0] +
-            parts[parts.length - 1][0]
-        ).toUpperCase();
-
-    }
-
-
-    /* =====================================================
-       DEMO ADMIN ACCOUNT
-       -----------------------------------------------------
-       Creates a demo admin account only if no users
-       exist yet. This makes frontend testing easier.
-    ====================================================== */
-
-    function createDemoAdmin() {
-
-        const users =
-            getUsers();
-
-
-        const adminExists =
-            users.some(function (user) {
-
-                return (
-                    normalizeEmail(
-                        user.email
-                    ) ===
-                    "admin@pawpal.com"
-                );
-
-            });
-
-
-        if (!adminExists) {
-
-            users.push({
-
-                id:
-                    "ADMIN-DEMO-001",
-
-                name:
-                    "PawPal Admin",
-
-                email:
-                    "admin@pawpal.com",
-
-                password:
-                    "admin123",
-
-                role:
-                    "admin",
-
-                createdAt:
-                    new Date().toISOString(),
-
-                demo:
-                    true
-
-            });
-
-
-            saveUsers(
-                users
+            return (
+                normalizeEmail(
+                    user.email
+                ) ===
+                "owner@pawpal.com"
             );
 
-        }
+        });
+
+
+    if (!ownerExists) {
+
+        users.push({
+
+            id:
+                "OWNER-DEMO-001",
+
+            name:
+                "PawPal Pet Owner",
+
+            email:
+                "owner@pawpal.com",
+
+            password:
+                "owner123",
+
+            role:
+                "owner",
+
+            createdAt:
+                new Date().toISOString(),
+
+            demo:
+                true
+
+        });
+
+
+        saveUsers(
+            users
+        );
 
     }
 
-
-    createDemoAdmin();
-
-
-    /* =====================================================
-       DEMO OWNER ACCOUNT
-    ====================================================== */
-
-    function createDemoOwner() {
-
-        const users =
-            getUsers();
+}
 
 
-        const ownerExists =
-            users.some(function (user) {
-
-                return (
-                    normalizeEmail(
-                        user.email
-                    ) ===
-                    "owner@pawpal.com"
-                );
-
-            });
+createDemoOwner();
 
 
-        if (!ownerExists) {
+/* =====================================================
+   DEMO ADOPTER ACCOUNT
+====================================================== */
 
-            users.push({
+function createDemoAdopter() {
 
-                id:
-                    "OWNER-DEMO-001",
-
-                name:
-                    "PawPal Pet Owner",
-
-                email:
-                    "owner@pawpal.com",
-
-                password:
-                    "owner123",
-
-                role:
-                    "owner",
-
-                createdAt:
-                    new Date().toISOString(),
-
-                demo:
-                    true
-
-            });
+    const users =
+        getUsers();
 
 
-            saveUsers(
-                users
+    const adopterExists =
+        users.some(function (user) {
+
+            return (
+                normalizeEmail(
+                    user.email
+                ) ===
+                "adopter@pawpal.com"
             );
 
-        }
+        });
+
+
+    if (!adopterExists) {
+
+        users.push({
+
+            id:
+                "ADOPTER-DEMO-001",
+
+            name:
+                "PawPal Adopter",
+
+            email:
+                "adopter@pawpal.com",
+
+            password:
+                "adopter123",
+
+            role:
+                "adopter",
+
+            createdAt:
+                new Date().toISOString(),
+
+            demo:
+                true
+
+        });
+
+
+        saveUsers(
+            users
+        );
 
     }
 
-
-    createDemoOwner();
-
-
-    /* =====================================================
-       DEMO ADOPTER ACCOUNT
-    ====================================================== */
-
-    function createDemoAdopter() {
-
-        const users =
-            getUsers();
+}
 
 
-        const adopterExists =
-            users.some(function (user) {
-
-                return (
-                    normalizeEmail(
-                        user.email
-                    ) ===
-                    "adopter@pawpal.com"
-                );
-
-            });
+createDemoAdopter();
 
 
-        if (!adopterExists) {
+/* =====================================================
+   EXPOSE PAWPAL AUTH
+====================================================== */
 
-            users.push({
+window.PawPalAuth = {
 
-                id:
-                    "ADOPTER-DEMO-001",
+    getUsers:
+        getUsers,
 
-                name:
-                    "PawPal Adopter",
+    getCurrentUser:
+        getCurrentUser,
 
-                email:
-                    "adopter@pawpal.com",
+    saveCurrentUser:
+        saveCurrentUser,
 
-                password:
-                    "adopter123",
+    logout:
+        logoutUser,
 
-                role:
-                    "adopter",
+    getDashboardPath:
+        getDashboardPath,
 
-                createdAt:
-                    new Date().toISOString(),
+    formatRole:
+        formatRole,
 
-                demo:
-                    true
+    getInitials:
+        getInitials
 
-            });
-
-
-            saveUsers(
-                users
-            );
-
-        }
-
-    }
+};
 
 
-    createDemoAdopter();
+/* =====================================================
+   CONSOLE MESSAGE
+====================================================== */
 
-
-    /* =====================================================
-       EXPOSE AUTH FUNCTIONS
-       -----------------------------------------------------
-       These can also be used by other frontend scripts.
-    ====================================================== */
-
-    window.PawPalAuth = {
-
-        getUsers:
-            getUsers,
-
-        getCurrentUser:
-            getCurrentUser,
-
-        saveCurrentUser:
-            saveCurrentUser,
-
-        logout:
-            logoutUser,
-
-        getDashboardPath:
-            getDashboardPath,
-
-        formatRole:
-            formatRole,
-
-        getInitials:
-            getInitials
-
-    };
-
+console.log(
+    "PawPal authentication loaded successfully."
+);
+```
 
 });

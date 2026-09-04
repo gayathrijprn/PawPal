@@ -1,526 +1,559 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* =====================================================
-   PAWPAL AI ASSISTANT
-===================================================== */
+    /* =====================================================
+       PAWPAL AI ASSISTANT
+    ===================================================== */
 
-const assistantButton =
-    document.querySelector(".pawpal-assistant-button");
+    const assistantButton =
+        document.querySelector(".pawpal-assistant-button");
 
-const assistantPanel =
-    document.querySelector(".pawpal-assistant-panel");
+    const assistantPanel =
+        document.querySelector(".pawpal-assistant-panel");
 
-const closeButton =
-    document.querySelector(".pawpal-assistant-close");
+    const closeButton =
+        document.querySelector(".pawpal-assistant-close");
 
-const assistantForm =
-    document.getElementById("pawpal-assistant-form");
+    const assistantForm =
+        document.getElementById("pawpal-assistant-form");
 
-const assistantInput =
-    document.getElementById("pawpal-assistant-input");
+    const assistantInput =
+        document.getElementById("pawpal-assistant-input");
 
-const messages =
-    document.getElementById("pawpal-assistant-messages");
-
-const stopButton =
-    document.getElementById("pawpal-assistant-stop");
+    const messages =
+        document.getElementById("pawpal-assistant-messages");
 
 
-/* =====================================================
-   CHECK ELEMENTS
-===================================================== */
+    /* =====================================================
+       CHECK ELEMENTS
+    ===================================================== */
 
-if (!assistantButton) {
-    console.error("❌ PawPal Assistant button not found.");
-    return;
-}
-
-if (!assistantPanel) {
-    console.error("❌ PawPal Assistant panel not found.");
-    return;
-}
-
-if (!assistantForm) {
-    console.error("❌ PawPal Assistant form not found.");
-    return;
-}
-
-console.log("🐾 PawPal Assistant loaded successfully.");
-
-
-/* =====================================================
-   VOICE SETTINGS
-===================================================== */
-
-let voiceEnabled = true;
-
-let currentSpeech = null;
-
-
-/* =====================================================
-   CREATE VOICE BUTTON
-===================================================== */
-
-const controls =
-    document.querySelector(".pawpal-assistant-controls");
-
-let voiceButton = null;
-
-if (controls) {
-
-    voiceButton =
-        document.createElement("button");
-
-    voiceButton.type = "button";
-
-    voiceButton.className =
-        "pawpal-assistant-voice voice-on";
-
-    voiceButton.textContent =
-        "🔊 Voice ON";
-
-    voiceButton.title =
-        "Turn PawPal voice on or off";
-
-    voiceButton.setAttribute(
-        "aria-label",
-        "Toggle PawPal voice"
-    );
-
-    controls.insertBefore(
-        voiceButton,
-        stopButton || controls.firstChild
-    );
-}
-
-
-/* =====================================================
-   OPEN ASSISTANT
-===================================================== */
-
-assistantButton.addEventListener("click", () => {
-
-    console.log("🐾 Assistant button clicked.");
-
-    assistantPanel.classList.add("active");
-
-    setTimeout(() => {
-        if (assistantInput) {
-            assistantInput.focus();
-        }
-    }, 200);
-
-});
-
-
-/* =====================================================
-   CLOSE ASSISTANT
-===================================================== */
-
-if (closeButton) {
-
-    closeButton.addEventListener("click", () => {
-
-        assistantPanel.classList.remove("active");
-
-        stopSpeaking();
-
-    });
-
-}
-
-
-/* =====================================================
-   CLOSE WHEN CLICKING OUTSIDE
-===================================================== */
-
-document.addEventListener("click", (event) => {
-
-    if (!assistantPanel.classList.contains("active")) {
+    if (!assistantButton) {
+        console.error("❌ PawPal Assistant button not found.");
         return;
     }
 
-    const clickedInsidePanel =
-        assistantPanel.contains(event.target);
-
-    const clickedButton =
-        assistantButton.contains(event.target);
-
-    if (!clickedInsidePanel && !clickedButton) {
-
-        assistantPanel.classList.remove("active");
-
-        stopSpeaking();
+    if (!assistantPanel) {
+        console.error("❌ PawPal Assistant panel not found.");
+        return;
     }
 
-});
-
-
-/* =====================================================
-   ESCAPE KEY
-===================================================== */
-
-document.addEventListener("keydown", (event) => {
-
-    if (event.key === "Escape") {
-
-        assistantPanel.classList.remove("active");
-
-        stopSpeaking();
+    if (!assistantForm) {
+        console.error("❌ PawPal Assistant form not found.");
+        return;
     }
 
-});
+    console.log("🐾 PawPal Assistant loaded successfully.");
 
 
-/* =====================================================
-   VOICE TOGGLE
-===================================================== */
+    /* =====================================================
+       VOICE SETTINGS
+    ===================================================== */
 
-if (voiceButton) {
+    let voiceEnabled = true;
 
-    voiceButton.addEventListener("click", () => {
+    let currentSpeech = null;
 
-        voiceEnabled = !voiceEnabled;
 
-        if (voiceEnabled) {
+    /* =====================================================
+       CREATE ONE VOICE TOGGLE
+    ===================================================== */
+
+    const controls =
+        document.querySelector(".pawpal-assistant-controls");
+
+    let voiceButton = null;
+
+    if (controls) {
+
+        /*
+         * Make sure an old voice button is not already
+         * present in the HTML.
+         */
+
+        const existingVoiceButton =
+            controls.querySelector(".pawpal-assistant-voice");
+
+        if (existingVoiceButton) {
+
+            voiceButton = existingVoiceButton;
+
+        } else {
+
+            voiceButton =
+                document.createElement("button");
+
+            voiceButton.type = "button";
+
+            voiceButton.className =
+                "pawpal-assistant-voice voice-on";
 
             voiceButton.textContent =
                 "🔊 Voice ON";
 
-            voiceButton.classList.remove(
-                "voice-off"
+            voiceButton.title =
+                "Turn PawPal voice on or off";
+
+            voiceButton.setAttribute(
+                "aria-label",
+                "Toggle PawPal voice"
             );
 
-            voiceButton.classList.add(
-                "voice-on"
+            controls.insertBefore(
+                voiceButton,
+                controls.firstChild
             );
+        }
+    }
 
-            console.log("🔊 PawPal voice ON");
 
-        } else {
+    /* =====================================================
+       OPEN ASSISTANT
+    ===================================================== */
 
-            voiceButton.textContent =
-                "🔇 Voice OFF";
+    assistantButton.addEventListener("click", () => {
 
-            voiceButton.classList.remove(
-                "voice-on"
-            );
+        console.log("🐾 Assistant button clicked.");
 
-            voiceButton.classList.add(
-                "voice-off"
-            );
+        assistantPanel.classList.add("active");
+
+        setTimeout(() => {
+
+            if (assistantInput) {
+                assistantInput.focus();
+            }
+
+        }, 200);
+
+    });
+
+
+    /* =====================================================
+       CLOSE ASSISTANT
+    ===================================================== */
+
+    if (closeButton) {
+
+        closeButton.addEventListener("click", () => {
+
+            assistantPanel.classList.remove("active");
 
             stopSpeaking();
 
-            console.log("🔇 PawPal voice OFF");
+        });
+
+    }
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener("click", (event) => {
+
+        if (!assistantPanel.classList.contains("active")) {
+            return;
+        }
+
+        const clickedInsidePanel =
+            assistantPanel.contains(event.target);
+
+        const clickedAssistantButton =
+            assistantButton.contains(event.target);
+
+        if (
+            !clickedInsidePanel &&
+            !clickedAssistantButton
+        ) {
+
+            assistantPanel.classList.remove("active");
+
+            stopSpeaking();
+
         }
 
     });
 
-}
 
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
 
-/* =====================================================
-   STOP SPEAKING
-===================================================== */
+    document.addEventListener("keydown", (event) => {
 
-function stopSpeaking() {
+        if (event.key === "Escape") {
 
-    if (
-        "speechSynthesis" in window
-    ) {
-
-        window.speechSynthesis.cancel();
-
-        currentSpeech = null;
-    }
-
-}
-
-
-if (stopButton) {
-
-    stopButton.addEventListener(
-        "click",
-        () => {
+            assistantPanel.classList.remove("active");
 
             stopSpeaking();
 
         }
-    );
 
-}
+    });
 
 
-/* =====================================================
-   ADD MESSAGE
-===================================================== */
+    /* =====================================================
+       VOICE TOGGLE
+    ===================================================== */
 
-function addMessage(
-    text,
-    sender
-) {
+    if (voiceButton) {
 
-    if (!messages) {
-        return;
+        voiceButton.addEventListener("click", () => {
+
+            voiceEnabled =
+                !voiceEnabled;
+
+
+            if (voiceEnabled) {
+
+                voiceButton.textContent =
+                    "🔊 Voice ON";
+
+                voiceButton.classList.remove(
+                    "voice-off"
+                );
+
+                voiceButton.classList.add(
+                    "voice-on"
+                );
+
+                console.log(
+                    "🔊 PawPal voice ON"
+                );
+
+            } else {
+
+                voiceButton.textContent =
+                    "🔇 Voice OFF";
+
+                voiceButton.classList.remove(
+                    "voice-on"
+                );
+
+                voiceButton.classList.add(
+                    "voice-off"
+                );
+
+                stopSpeaking();
+
+                console.log(
+                    "🔇 PawPal voice OFF"
+                );
+
+            }
+
+        });
+
     }
 
-    const message =
-        document.createElement("div");
 
-    message.className =
-        `pawpal-message ${sender}`;
+    /* =====================================================
+       STOP SPEAKING
+    ===================================================== */
 
-    const content =
-        document.createElement("div");
+    function stopSpeaking() {
 
-    content.className =
-        "pawpal-message-content";
+        if (
+            "speechSynthesis" in window
+        ) {
 
-    content.textContent = text;
+            window.speechSynthesis.cancel();
 
-    message.appendChild(content);
+            currentSpeech = null;
 
-    messages.appendChild(message);
+        }
 
-    messages.scrollTop =
-        messages.scrollHeight;
-
-    return message;
-}
-
-
-/* =====================================================
-   ADD LOADING MESSAGE
-===================================================== */
-
-function addLoadingMessage() {
-
-    if (!messages) {
-        return null;
     }
 
-    const message =
-        document.createElement("div");
 
-    message.className =
-        "pawpal-message assistant pawpal-loading";
+    /* =====================================================
+       ADD MESSAGE
+    ===================================================== */
 
-    const content =
-        document.createElement("div");
+    function addMessage(
+        text,
+        sender
+    ) {
 
-    content.className =
-        "pawpal-message-content";
+        if (!messages) {
+            return;
+        }
 
-    content.innerHTML =
-        `
+        const message =
+            document.createElement("div");
+
+        message.className =
+            `pawpal-message ${sender}`;
+
+        const content =
+            document.createElement("div");
+
+        content.className =
+            "pawpal-message-content";
+
+        content.textContent =
+            text;
+
+        message.appendChild(content);
+
+        messages.appendChild(message);
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+        return message;
+
+    }
+
+
+    /* =====================================================
+       ADD LOADING MESSAGE
+    ===================================================== */
+
+    function addLoadingMessage() {
+
+        if (!messages) {
+            return null;
+        }
+
+        const message =
+            document.createElement("div");
+
+        message.className =
+            "pawpal-message assistant pawpal-loading";
+
+        const content =
+            document.createElement("div");
+
+        content.className =
+            "pawpal-message-content";
+
+        content.innerHTML = `
             <span></span>
             <span></span>
             <span></span>
         `;
 
-    message.appendChild(content);
+        message.appendChild(content);
 
-    messages.appendChild(message);
+        messages.appendChild(message);
 
-    messages.scrollTop =
-        messages.scrollHeight;
+        messages.scrollTop =
+            messages.scrollHeight;
 
-    return message;
-}
+        return message;
 
-
-/* =====================================================
-   SPEAK AI RESPONSE
-===================================================== */
-
-function speakResponse(text) {
-
-    if (!voiceEnabled) {
-        return;
     }
 
-    if (!("speechSynthesis" in window)) {
 
-        console.warn(
-            "⚠️ Speech synthesis is not supported."
-        );
+    /* =====================================================
+       SPEAK AI RESPONSE
+    ===================================================== */
 
-        return;
-    }
+    function speakResponse(text) {
 
-    stopSpeaking();
-
-    const speech =
-        new SpeechSynthesisUtterance(text);
-
-    speech.rate = 1;
-
-    speech.pitch = 1;
-
-    speech.volume = 1;
-
-    speech.lang = "en-IN";
-
-    currentSpeech = speech;
-
-    window.speechSynthesis.speak(
-        speech
-    );
-
-}
-
-
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
-
-assistantForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-        const message =
-            assistantInput.value.trim();
-
-        if (!message) {
+        if (!voiceEnabled) {
             return;
         }
 
+        if (
+            !("speechSynthesis" in window)
+        ) {
 
-        /* User message */
-
-        addMessage(
-            message,
-            "user"
-        );
-
-        assistantInput.value = "";
-
-        assistantInput.disabled = true;
-
-
-        /* Loading */
-
-        const loadingMessage =
-            addLoadingMessage();
-
-
-        try {
-
-            console.log(
-                "🐾 Sending to PawPal AI:",
-                message
+            console.warn(
+                "⚠️ Speech synthesis is not supported."
             );
 
-
-            const response =
-                await fetch(
-                    "http://localhost:3000/api/assistant",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            message: message
-                        })
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `Server returned ${response.status}`
-                );
-
-            }
-
-
-            const data =
-                await response.json();
-
-
-            console.log(
-                "🤖 PawPal AI response:",
-                data
-            );
-
-
-            /* Remove loading */
-
-            if (loadingMessage) {
-                loadingMessage.remove();
-            }
-
-
-            /* AI response */
-
-            if (
-                data &&
-                data.success &&
-                data.answer
-            ) {
-
-                addMessage(
-                    data.answer,
-                    "assistant"
-                );
-
-                speakResponse(
-                    data.answer
-                );
-
-            } else {
-
-                addMessage(
-                    "Sorry, I couldn't understand that. Please try again. 🐾",
-                    "assistant"
-                );
-
-            }
-
-
-        } catch (error) {
-
-            console.error(
-                "❌ PawPal Assistant Error:",
-                error
-            );
-
-
-            if (loadingMessage) {
-                loadingMessage.remove();
-            }
-
-
-            addMessage(
-                "Sorry! PawPal AI is currently unavailable. Please make sure the AI server is running. 🐾",
-                "assistant"
-            );
-
-        } finally {
-
-            assistantInput.disabled = false;
-
-            assistantInput.focus();
+            return;
 
         }
 
+        stopSpeaking();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.rate = 1;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+        speech.lang = "en-IN";
+
+        currentSpeech =
+            speech;
+
+        speech.onend = () => {
+
+            currentSpeech = null;
+
+        };
+
+        speech.onerror = () => {
+
+            currentSpeech = null;
+
+        };
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
     }
-);
 
 
-/* =====================================================
-   INITIAL STATE
-===================================================== */
+    /* =====================================================
+       SEND MESSAGE
+    ===================================================== */
 
-console.log(
-    "🐾 PawPal AI is ready!"
-);
+    assistantForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            const message =
+                assistantInput.value.trim();
+
+            if (!message) {
+                return;
+            }
+
+
+            /* User message */
+
+            addMessage(
+                message,
+                "user"
+            );
+
+            assistantInput.value = "";
+
+            assistantInput.disabled = true;
+
+
+            /* Loading */
+
+            const loadingMessage =
+                addLoadingMessage();
+
+
+            try {
+
+                console.log(
+                    "🐾 Sending to PawPal AI:",
+                    message
+                );
+
+
+                const response =
+                    await fetch(
+                        "http://localhost:3000/api/assistant",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                message: message
+                            })
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Server returned ${response.status}`
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "🤖 PawPal AI response:",
+                    data
+                );
+
+
+                /* Remove loading */
+
+                if (loadingMessage) {
+                    loadingMessage.remove();
+                }
+
+
+                /* AI response */
+
+                if (
+                    data &&
+                    data.success &&
+                    data.answer
+                ) {
+
+                    addMessage(
+                        data.answer,
+                        "assistant"
+                    );
+
+                    speakResponse(
+                        data.answer
+                    );
+
+                } else {
+
+                    addMessage(
+                        "Sorry, I couldn't understand that. Please try again. 🐾",
+                        "assistant"
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "❌ PawPal Assistant Error:",
+                    error
+                );
+
+
+                if (loadingMessage) {
+                    loadingMessage.remove();
+                }
+
+
+                addMessage(
+                    "Sorry! PawPal AI is currently unavailable. Please make sure the AI server is running. 🐾",
+                    "assistant"
+                );
+
+
+            } finally {
+
+                assistantInput.disabled = false;
+
+                assistantInput.focus();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL STATE
+    ===================================================== */
+
+    console.log(
+        "🐾 PawPal AI is ready!"
+    );
+
 });

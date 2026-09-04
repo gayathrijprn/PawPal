@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>PawPal | Adopter Dashboard</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+```
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+```
+<!-- SIDEBAR -->
+<aside class="dashboard-sidebar">
+
+    <div class="sidebar-brand">
+        <a href="../index.html">
+            🐾 <span>PawPal</span>
+        </a>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="#explore-pets"
+           class="sidebar-link active"
+           data-section="explore-pets">
+            <span>🐾</span>
+            <span class="sidebar-link-text">Explore Pets</span>
+        </a>
+
+        <a href="#saved-pets"
+           class="sidebar-link"
+           data-section="saved-pets">
+            <span>❤️</span>
+            <span class="sidebar-link-text">Saved Pets</span>
+        </a>
+
+        <a href="#applications"
+           class="sidebar-link"
+           data-section="applications">
+            <span>📋</span>
+            <span class="sidebar-link-text">My Applications</span>
+        </a>
+
+        <a href="#adoption-journey"
+           class="sidebar-link"
+           data-section="adoption-journey">
+            <span>🐶</span>
+            <span class="sidebar-link-text">Adoption Journey</span>
+        </a>
+
+        <a href="#notifications"
+           class="sidebar-link"
+           data-section="notifications">
+            <span>🔔</span>
+            <span class="sidebar-link-text">Notifications</span>
+        </a>
+
+        <a href="#settings"
+           class="sidebar-link"
+           data-section="settings">
+            <span>⚙️</span>
+            <span class="sidebar-link-text">Settings</span>
+        </a>
+
+        <a href="#profile"
+           class="sidebar-link"
+           data-section="profile">
+            <span>👤</span>
+            <span class="sidebar-link-text">Profile</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="../index.html"
+           class="sidebar-link back-to-pawpal">
+            <span>←</span>
+            <span class="sidebar-link-text">Back to PawPal</span>
+        </a>
+
+        <a href="#"
+           class="sidebar-link logout-btn">
+            <span>🚪</span>
+            <span class="sidebar-link-text">Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<div class="sidebar-overlay"></div>
+
+
+<!-- MAIN -->
+<main class="dashboard-main">
+
+    <header class="dashboard-topbar">
+
+        <button class="mobile-menu-btn"
+                type="button">
+            ☰
+        </button>
+
+        <h1 class="topbar-title">
+            Explore Pets
+        </h1>
+
+        <div class="topbar-actions">
+
+            <button class="topbar-icon-btn"
+                    type="button">
+                🔔
+            </button>
+
+            <div class="topbar-user">
+
+                <div class="user-avatar"
+                     data-user-avatar>
+                    AD
+                </div>
+
+                <div>
+                    <strong data-user-name>Adopter</strong>
+                    <small data-user-role>Adopter</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="dashboard-content">
+
+
+        <!-- EXPLORE PETS -->
+        <section id="explore-pets"
+                 class="dashboard-section">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Explore Pets</h2>
+                    <p>Find your perfect companion.</p>
+                </div>
+
+            </div>
+
+            <div class="dashboard-search">
+                <input type="search"
+                       placeholder="Search pets...">
+            </div>
+
+            <div class="pet-grid">
+
+                <article class="pet-card"
+                         data-pet="sample-pet"
+                         data-details="sample-pet">
+
+                    <button class="pet-favourite"
+                            type="button">
+                        ♡
+                    </button>
+
+                    <div class="pet-card-image">
+                        🐶
+                    </div>
+
+                    <h3 class="pet-name">
+                        Buddy
+                    </h3>
+
+                    <p>Mixed Breed • 2 years</p>
+
+                    <button data-adopt-pet="sample-pet">
+                        Adopt Me
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- SAVED PETS -->
+        <section id="saved-pets"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <h2>Saved Pets</h2>
+
+            <div class="dashboard-search">
+                <input type="search"
+                       placeholder="Search saved pets...">
+            </div>
+
+            <div class="pet-grid">
+
+                <article class="pet-card"
+                         data-pet="sample-pet"
+                         data-details="sample-pet">
+
+                    <button class="pet-favourite"
+                            type="button">
+                        ♡
+                    </button>
+
+                    <div class="pet-card-image">
+                        🐶
+                    </div>
+
+                    <h3 class="pet-name">
+                        Buddy
+                    </h3>
+
+                    <p>Mixed Breed • 2 years</p>
+
+                    <button data-adopt-pet="sample-pet">
+                        Adopt Me
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- APPLICATIONS -->
+        <section id="applications"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <h2>My Applications</h2>
+
+            <div class="dashboard-card">
+
+                <table class="dashboard-table">
+
+                    <thead>
+                        <tr>
+                            <th>Pet</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Buddy</td>
+
+                            <td>Today</td>
+
+                            <td>
+                                <span class="status">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td class="table-actions">
+
+                                <button data-application-action="view">
+                                    View
+                                </button>
+
+                                <button data-application-action="cancel">
+                                    Cancel
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADOPTION JOURNEY -->
+        <section id="adoption-journey"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <div class="dashboard-card">
+
+                <h2>Adoption Journey</h2>
+
+                <div class="journey-step">
+                    <strong>Application Submitted</strong>
+                </div>
+
+                <div class="journey-step">
+                    <strong>Meet & Greet</strong>
+
+                    <button data-journey-action="meet">
+                        Request Meet & Greet
+                    </button>
+                </div>
+
+                <div class="journey-step">
+                    <strong>Continue Adoption</strong>
+
+                    <button data-journey-action="continue">
+                        Continue
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICATIONS -->
+        <section id="notifications"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <h2>Notifications</h2>
+
+            <div class="notification-item">
+                <strong>Welcome to PawPal 🐾</strong>
+                <p>Start exploring pets available for adoption.</p>
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+        <section id="settings"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <div class="dashboard-card">
+
+                <h2>Settings</h2>
+
+                <div class="setting-row">
+
+                    <div>
+                        <h4>Email Notifications</h4>
+                        <p>Receive adoption updates by email.</p>
+                    </div>
+
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROFILE -->
+        <section id="profile"
+                 class="dashboard-section"
+                 style="display:none;">
+
+            <div class="dashboard-card">
+
+                <h2>My Profile</h2>
+
+                <form id="profileForm">
+
+                    <div class="form-group">
+
+                        <label>Name</label>
+
+                        <input type="text"
+                               name="name">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input type="email"
+                               data-user-email
+                               disabled>
+
+                    </div>
+
+                    <button type="submit">
+                        Save Changes
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<div id="dashboardToast"
+     class="dashboard-toast">
+</div>
+
+<script src="../js/auth.js"></script>
+
+<script src="adopter-dashboard.js"></script>
+
+</body>
+</html>

@@ -1,1337 +1,766 @@
-document.addEventListener("DOMContentLoaded", function () {
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>PawPal | Admin Dashboard</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+```
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
 
-    /* =====================================================
-       PAWPAL PET OWNER DASHBOARD
-       FRONTEND ONLY
-    ====================================================== */
+```
+<!-- SIDEBAR -->
+<aside class="dashboard-sidebar">
+
+    <div class="sidebar-brand">
+        <a href="../index.html">
+            🐾 <span>PawPal</span>
+        </a>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="#overview"
+           class="sidebar-link active"
+           data-section="overview">
+            <span>📊</span>
+            <span class="sidebar-link-text">Overview</span>
+        </a>
+
+        <a href="#pets"
+           class="sidebar-link"
+           data-section="pets">
+            <span>🐾</span>
+            <span class="sidebar-link-text">Pets</span>
+        </a>
+
+        <a href="#applications"
+           class="sidebar-link"
+           data-section="applications">
+            <span>📋</span>
+            <span class="sidebar-link-text">Applications</span>
+        </a>
+
+        <a href="#users"
+           class="sidebar-link"
+           data-section="users">
+            <span>👥</span>
+            <span class="sidebar-link-text">Users</span>
+        </a>
+
+        <a href="#reports"
+           class="sidebar-link"
+           data-section="reports">
+            <span>📈</span>
+            <span class="sidebar-link-text">Reports</span>
+        </a>
 
+        <a href="#notifications"
+           class="sidebar-link"
+           data-section="notifications">
+            <span>🔔</span>
+            <span class="sidebar-link-text">Notifications</span>
+        </a>
 
-    /* =====================================================
-       AUTH
-    ====================================================== */
+        <a href="#settings"
+           class="sidebar-link"
+           data-section="settings">
+            <span>⚙️</span>
+            <span class="sidebar-link-text">Settings</span>
+        </a>
 
-    const currentUser =
-        window.PawPalAuth
-            ? window.PawPalAuth.getCurrentUser()
-            : null;
+        <a href="#profile"
+           class="sidebar-link"
+           data-section="profile">
+            <span>👤</span>
+            <span class="sidebar-link-text">Profile</span>
+        </a>
 
+    </nav>
 
-    /* =====================================================
-       ELEMENTS
-    ====================================================== */
+    <div class="sidebar-bottom">
 
-    const sidebar =
-        document.querySelector(".dashboard-sidebar");
+        <a href="../index.html"
+           class="sidebar-link back-to-pawpal">
+            <span>←</span>
+            <span class="sidebar-link-text">Back to PawPal</span>
+        </a>
 
-    const sidebarOverlay =
-        document.querySelector(".sidebar-overlay");
+        <a href="#"
+           class="sidebar-link logout-btn">
+            <span>🚪</span>
+            <span class="sidebar-link-text">Logout</span>
+        </a>
 
-    const mobileMenuButton =
-        document.querySelector(".mobile-menu-btn");
+    </div>
 
-    const sidebarLinks =
-        document.querySelectorAll(".sidebar-link");
+</aside>
 
-    const sections =
-        document.querySelectorAll(".dashboard-section");
 
-    const topbarTitle =
-        document.querySelector(".topbar-title");
+<!-- MOBILE OVERLAY -->
+<div class="sidebar-overlay"></div>
 
-    const toast =
-        document.getElementById("dashboardToast");
 
+<!-- MAIN CONTENT -->
+<main class="dashboard-main">
 
-    /* =====================================================
-       MOBILE SIDEBAR
-    ====================================================== */
+    <!-- TOPBAR -->
+    <header class="dashboard-topbar">
 
-    function openSidebar() {
+        <button
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="Open menu">
+            ☰
+        </button>
 
-        if (sidebar) {
-            sidebar.classList.add("open");
-        }
+        <h1 class="topbar-title">
+            Overview
+        </h1>
 
-        if (sidebarOverlay) {
-            sidebarOverlay.classList.add("show");
-        }
+        <div class="topbar-actions">
 
-        document.body.classList.add(
-            "sidebar-open"
-        );
+            <button
+                class="topbar-icon-btn"
+                type="button"
+                aria-label="Notifications">
+                🔔
+            </button>
 
-    }
+            <div class="topbar-user">
 
+                <div
+                    class="user-avatar"
+                    data-user-avatar>
+                    AD
+                </div>
 
-    function closeSidebar() {
+                <div>
+                    <strong data-user-name>
+                        Admin
+                    </strong>
 
-        if (sidebar) {
-            sidebar.classList.remove("open");
-        }
+                    <small data-user-role>
+                        Admin
+                    </small>
+                </div>
 
-        if (sidebarOverlay) {
-            sidebarOverlay.classList.remove("show");
-        }
+            </div>
 
-        document.body.classList.remove(
-            "sidebar-open"
-        );
+        </div>
 
-    }
+    </header>
 
 
-    if (mobileMenuButton) {
+    <!-- DASHBOARD CONTENT -->
+    <div class="dashboard-content">
 
-        mobileMenuButton.addEventListener(
-            "click",
-            function () {
 
-                if (
-                    sidebar &&
-                    sidebar.classList.contains("open")
-                ) {
+        <!-- =========================
+             OVERVIEW
+        ========================== -->
 
-                    closeSidebar();
+        <section
+            id="overview"
+            class="dashboard-section">
 
-                } else {
+            <div class="dashboard-header">
 
-                    openSidebar();
+                <div>
+                    <h2>Admin Dashboard</h2>
 
-                }
+                    <p>
+                        Welcome back,
+                        <span data-user-name>Admin</span>.
+                    </p>
+                </div>
 
-            }
-        );
+            </div>
 
-    }
 
+            <!-- STATISTICS -->
 
-    if (sidebarOverlay) {
+            <div class="dashboard-stats">
 
-        sidebarOverlay.addEventListener(
-            "click",
-            closeSidebar
-        );
+                <div class="stat-card">
+                    <span>🐾</span>
+                    <h3>Pets</h3>
+                    <strong>0</strong>
+                </div>
 
-    }
+                <div class="stat-card">
+                    <span>👥</span>
+                    <h3>Users</h3>
+                    <strong>0</strong>
+                </div>
 
+                <div class="stat-card">
+                    <span>📋</span>
+                    <h3>Applications</h3>
+                    <strong>0</strong>
+                </div>
 
-    /* =====================================================
-       TOAST
-    ====================================================== */
+                <div class="stat-card">
+                    <span>❤️</span>
+                    <h3>Adoptions</h3>
+                    <strong>0</strong>
+                </div>
 
-    function showToast(
-        message,
-        type = "success"
-    ) {
+            </div>
 
-        if (!toast) {
 
-            alert(message);
+            <!-- QUICK ACTIONS -->
 
-            return;
+            <div class="dashboard-card">
 
-        }
+                <h3>Quick Actions</h3>
 
+                <div class="dashboard-actions">
 
-        toast.textContent =
-            message;
+                    <button
+                        type="button"
+                        data-dashboard-action="manage-pets">
+                        Manage Pets
+                    </button>
 
+                    <button
+                        type="button"
+                        data-dashboard-action="applications">
+                        Applications
+                    </button>
 
-        toast.className =
-            "dashboard-toast show " +
-            type;
+                    <button
+                        type="button"
+                        data-dashboard-action="users">
+                        Users
+                    </button>
 
+                    <button
+                        type="button"
+                        data-dashboard-action="reports">
+                        Reports
+                    </button>
 
-        clearTimeout(
-            window.pawpalOwnerToast
-        );
+                </div>
 
+            </div>
 
-        window.pawpalOwnerToast =
-            setTimeout(function () {
+        </section>
 
-                toast.classList.remove(
-                    "show"
-                );
 
-            }, 3000);
+        <!-- =========================
+             PETS
+        ========================== -->
 
-    }
+        <section
+            id="pets"
+            class="dashboard-section"
+            style="display: none;">
 
+            <div class="dashboard-header">
 
-    /* =====================================================
-       SECTION NAVIGATION
-    ====================================================== */
+                <div>
+                    <h2>Pets</h2>
 
-    function showSection(
-        sectionId,
-        title
-    ) {
+                    <p>
+                        Manage pets listed on PawPal.
+                    </p>
+                </div>
 
-        sections.forEach(
-            function (section) {
+                <button
+                    type="button"
+                    class="add-pet-btn"
+                    data-add-pet>
+                    + Add Pet
+                </button>
 
-                section.style.display =
-                    "none";
+            </div>
 
-            }
-        );
 
+            <div class="dashboard-search">
 
-        const target =
-            document.getElementById(
-                sectionId
-            );
+                <input
+                    type="search"
+                    placeholder="Search pets..."
+                    aria-label="Search pets">
 
+            </div>
 
-        if (target) {
 
-            target.style.display =
-                "block";
+            <div class="pet-grid">
 
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+                <article
+                    class="pet-card"
+                    data-name="Sample Pet">
 
-        }
+                    <div class="pet-card-image">
+                        🐶
+                    </div>
 
+                    <h3 class="pet-name">
+                        Sample Pet
+                    </h3>
 
-        if (topbarTitle && title) {
+                    <p>
+                        Mixed Breed
+                    </p>
 
-            topbarTitle.textContent =
-                title;
+                    <div class="pet-actions">
 
-        }
+                        <button
+                            type="button"
+                            class="btn-edit"
+                            data-action="edit">
+                            Edit
+                        </button>
 
+                        <button
+                            type="button"
+                            class="btn-delete"
+                            data-action="delete">
+                            Delete
+                        </button>
 
-        sidebarLinks.forEach(
-            function (link) {
+                    </div>
 
-                link.classList.remove(
-                    "active"
-                );
+                </article>
 
+            </div>
 
-                if (
-                    link.dataset.section ===
-                    sectionId
-                ) {
+        </section>
 
-                    link.classList.add(
-                        "active"
-                    );
 
-                }
+        <!-- =========================
+             ADD PET
+        ========================== -->
 
-            }
-        );
+        <section
+            id="add-pet"
+            class="dashboard-section"
+            style="display: none;">
 
+            <div class="dashboard-card">
 
-        closeSidebar();
+                <h2>Add a Pet</h2>
 
-    }
+                <form id="addPetForm">
 
+                    <div class="form-group">
 
-    /* =====================================================
-       SIDEBAR NAVIGATION
-    ====================================================== */
+                        <label for="pet-name">
+                            Pet Name
+                        </label>
 
-    sidebarLinks.forEach(
-        function (link) {
+                        <input
+                            id="pet-name"
+                            name="name"
+                            type="text"
+                            required>
 
-            link.addEventListener(
-                "click",
-                function (event) {
+                    </div>
 
-                    const section =
-                        link.dataset.section;
 
+                    <div class="form-group">
 
-                    if (!section) {
-                        return;
-                    }
+                        <label for="pet-breed">
+                            Breed
+                        </label>
 
+                        <input
+                            id="pet-breed"
+                            name="breed"
+                            type="text">
 
-                    event.preventDefault();
+                    </div>
 
 
-                    const titleElement =
-                        link.querySelector(
-                            ".sidebar-link-text"
-                        );
+                    <div class="form-group">
 
+                        <label for="pet-age">
+                            Age
+                        </label>
 
-                    const title =
-                        titleElement
-                            ? titleElement.textContent.trim()
-                            : "Dashboard";
+                        <input
+                            id="pet-age"
+                            name="age"
+                            type="number"
+                            min="0">
 
+                    </div>
 
-                    showSection(
-                        section,
-                        title
-                    );
 
-                }
-            );
+                    <div class="form-group">
 
-        }
-    );
+                        <label for="pet-gender">
+                            Gender
+                        </label>
 
+                        <select
+                            id="pet-gender"
+                            name="gender">
 
-    /* =====================================================
-       HASH NAVIGATION
-    ====================================================== */
+                            <option value="male">
+                                Male
+                            </option>
 
-    function handleHash() {
+                            <option value="female">
+                                Female
+                            </option>
 
-        const hash =
-            window.location.hash
-                .replace("#", "")
-                .trim();
+                        </select>
 
+                    </div>
 
-        if (!hash) {
-            return;
-        }
 
+                    <button type="submit">
+                        Add Pet
+                    </button>
 
-        const target =
-            document.getElementById(
-                hash
-            );
+                </form>
 
+            </div>
 
-        if (target) {
+        </section>
 
-            showSection(
-                hash,
-                hash
-                    .replace(/-/g, " ")
-                    .replace(/\b\w/g, function (letter) {
-                        return letter.toUpperCase();
-                    })
-            );
 
-        }
+        <!-- =========================
+             APPLICATIONS
+        ========================== -->
 
-    }
+        <section
+            id="applications"
+            class="dashboard-section"
+            style="display: none;">
 
+            <h2>Adoption Applications</h2>
 
-    handleHash();
+            <div class="dashboard-search">
 
+                <input
+                    type="search"
+                    placeholder="Search applications..."
+                    aria-label="Search applications">
 
-    /* =====================================================
-       PET SEARCH
-    ====================================================== */
+            </div>
 
-    const searchInputs =
-        document.querySelectorAll(
-            ".dashboard-search input"
-        );
 
+            <div class="dashboard-card">
 
-    searchInputs.forEach(
-        function (input) {
+                <table class="dashboard-table">
 
-            input.addEventListener(
-                "input",
-                function () {
+                    <thead>
 
-                    const searchTerm =
-                        input.value
-                            .trim()
-                            .toLowerCase();
+                        <tr>
+                            <th>Applicant</th>
+                            <th>Pet</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
 
+                    </thead>
 
-                    const section =
-                        input.closest(
-                            ".dashboard-section"
-                        );
+                    <tbody>
 
+                        <tr>
 
-                    if (!section) {
-                        return;
-                    }
+                            <td>
+                                Sample User
+                            </td>
 
+                            <td>
+                                Sample Pet
+                            </td>
 
-                    const cards =
-                        section.querySelectorAll(
-                            ".pet-card"
-                        );
+                            <td>
+                                <span class="status">
+                                    Pending
+                                </span>
+                            </td>
 
+                            <td class="table-actions">
 
-                    const rows =
-                        section.querySelectorAll(
-                            ".dashboard-table tbody tr"
-                        );
+                                <button
+                                    type="button"
+                                    data-application-action="view">
+                                    View
+                                </button>
 
+                                <button
+                                    type="button"
+                                    data-application-action="approve">
+                                    Approve
+                                </button>
 
-                    let matchFound =
-                        false;
+                                <button
+                                    type="button"
+                                    data-application-action="reject">
+                                    Reject
+                                </button>
 
+                            </td>
 
-                    cards.forEach(
-                        function (card) {
+                        </tr>
 
-                            const text =
-                                card.textContent
-                                    .toLowerCase();
+                    </tbody>
 
+                </table>
 
-                            const matches =
-                                !searchTerm ||
-                                text.includes(
-                                    searchTerm
-                                );
+            </div>
 
+        </section>
 
-                            card.style.display =
-                                matches
-                                    ? ""
-                                    : "none";
 
+        <!-- =========================
+             USERS
+        ========================== -->
 
-                            if (matches) {
-                                matchFound = true;
-                            }
+        <section
+            id="users"
+            class="dashboard-section"
+            style="display: none;">
 
-                        }
-                    );
+            <h2>Users</h2>
 
+            <div class="dashboard-search">
 
-                    rows.forEach(
-                        function (row) {
+                <input
+                    type="search"
+                    placeholder="Search users..."
+                    aria-label="Search users">
 
-                            const text =
-                                row.textContent
-                                    .toLowerCase();
+            </div>
 
 
-                            const matches =
-                                !searchTerm ||
-                                text.includes(
-                                    searchTerm
-                                );
+            <div class="dashboard-card">
 
+                <table class="dashboard-table">
 
-                            row.style.display =
-                                matches
-                                    ? ""
-                                    : "none";
+                    <thead>
 
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                        </tr>
 
-                            if (matches) {
-                                matchFound = true;
-                            }
+                    </thead>
 
-                        }
-                    );
+                    <tbody>
 
+                        <tr>
 
-                    if (
-                        searchTerm &&
-                        !matchFound
-                    ) {
+                            <td>
+                                Sample User
+                            </td>
 
-                        showToast(
-                            "No matching results found.",
-                            "info"
-                        );
+                            <td>
+                                user@example.com
+                            </td>
 
-                    }
+                            <td>
+                                0000000000
+                            </td>
 
-                }
-            );
+                            <td>
+                                User
+                            </td>
 
-        }
-    );
+                        </tr>
 
+                    </tbody>
 
-    /* =====================================================
-       MY PETS — EDIT
-    ====================================================== */
+                </table>
 
-    document.querySelectorAll(
-        ".pet-card"
-    ).forEach(
-        function (card) {
+            </div>
 
-            const editButton =
-                card.querySelector(
-                    ".btn-edit, [data-action='edit']"
-                );
+        </section>
 
 
-            const deleteButton =
-                card.querySelector(
-                    ".btn-delete, [data-action='delete']"
-                );
+        <!-- =========================
+             REPORTS
+        ========================== -->
 
+        <section
+            id="reports"
+            class="dashboard-section"
+            style="display: none;">
 
-            if (editButton) {
+            <div class="dashboard-card">
 
-                editButton.addEventListener(
-                    "click",
-                    function (event) {
+                <h2>Reports</h2>
 
-                        event.preventDefault();
-                        event.stopPropagation();
+                <p>
+                    PawPal adoption statistics
+                    and reports will appear here.
+                </p>
 
+            </div>
 
-                        const nameElement =
-                            card.querySelector(
-                                ".pet-name"
-                            );
+        </section>
 
 
-                        const petName =
-                            card.dataset.name ||
-                            (
-                                nameElement
-                                    ? nameElement.textContent.trim()
-                                    : "your pet"
-                            );
+        <!-- =========================
+             NOTIFICATIONS
+        ========================== -->
 
+        <section
+            id="notifications"
+            class="dashboard-section"
+            style="display: none;">
 
-                        showToast(
-                            "Edit mode opened for " +
-                            petName +
-                            ".",
-                            "info"
-                        );
+            <h2>Notifications</h2>
 
-                    }
-                );
+            <div class="notification-item">
 
-            }
+                <strong>
+                    Welcome to PawPal.
+                </strong>
 
+                <p>
+                    Your admin dashboard is ready.
+                </p>
 
-            /* =================================================
-               DELETE PET
-            ================================================== */
+            </div>
 
-            if (deleteButton) {
+        </section>
 
-                deleteButton.addEventListener(
-                    "click",
-                    function (event) {
 
-                        event.preventDefault();
-                        event.stopPropagation();
+        <!-- =========================
+             SETTINGS
+        ========================== -->
 
+        <section
+            id="settings"
+            class="dashboard-section"
+            style="display: none;">
 
-                        const nameElement =
-                            card.querySelector(
-                                ".pet-name"
-                            );
+            <div class="dashboard-card">
 
+                <h2>Settings</h2>
 
-                        const petName =
-                            card.dataset.name ||
-                            (
-                                nameElement
-                                    ? nameElement.textContent.trim()
-                                    : "this pet"
-                            );
+                <div class="setting-row">
 
+                    <div>
 
-                        const confirmed =
-                            confirm(
-                                "Are you sure you want to remove " +
-                                petName +
-                                "?"
-                            );
+                        <h4>
+                            Email Notifications
+                        </h4>
 
+                        <p>
+                            Receive email notifications.
+                        </p>
 
-                        if (!confirmed) {
-                            return;
-                        }
+                    </div>
 
+                    <label class="toggle">
 
-                        card.style.opacity =
-                            "0";
+                        <input
+                            type="checkbox"
+                            checked>
 
+                        <span></span>
 
-                        card.style.transform =
-                            "scale(.95)";
+                    </label>
 
+                </div>
 
-                        setTimeout(
-                            function () {
+            </div>
 
-                                card.remove();
+        </section>
 
 
-                                showToast(
-                                    petName +
-                                    " has been removed.",
-                                    "success"
-                                );
+        <!-- =========================
+             PROFILE
+        ========================== -->
 
-                            },
-                            250
-                        );
+        <section
+            id="profile"
+            class="dashboard-section"
+            style="display: none;">
 
-                    }
-                );
+            <div class="dashboard-card">
 
-            }
+                <h2>My Profile</h2>
 
-        }
-    );
+                <form id="profileForm">
 
+                    <div class="form-group">
 
-    /* =====================================================
-       ADOPTION REQUEST ACTIONS
-    ====================================================== */
+                        <label for="profile-name">
+                            Name
+                        </label>
 
-    document.querySelectorAll(
-        "[data-request-action]"
-    ).forEach(
-        function (button) {
+                        <input
+                            id="profile-name"
+                            type="text"
+                            name="name"
+                            data-profile-name>
 
-            button.addEventListener(
-                "click",
-                function (event) {
+                    </div>
 
-                    event.preventDefault();
 
+                    <div class="form-group">
 
-                    const action =
-                        button.dataset
-                            .requestAction;
+                        <label for="profile-email">
+                            Email
+                        </label>
 
+                        <input
+                            id="profile-email"
+                            type="email"
+                            name="email"
+                            data-user-email
+                            disabled>
 
-                    const row =
-                        button.closest(
-                            "tr, .application-item"
-                        );
+                    </div>
 
 
-                    if (
-                        action ===
-                        "approve"
-                    ) {
+                    <button type="submit">
+                        Save Changes
+                    </button>
 
-                        updateRequestStatus(
-                            row,
-                            "Approved"
-                        );
+                </form>
 
-                    }
+            </div>
 
+        </section>
 
-                    if (
-                        action ===
-                        "reject"
-                    ) {
 
-                        updateRequestStatus(
-                            row,
-                            "Rejected"
-                        );
+    </div>
 
-                    }
+</main>
+```
 
+</div>
 
-                    if (
-                        action ===
-                        "view"
-                    ) {
+<!-- TOAST -->
 
-                        showToast(
-                            "Adoption request details opened.",
-                            "info"
-                        );
+<div
+    id="dashboardToast"
+    class="dashboard-toast"
+    role="status"
+    aria-live="polite">
+</div>
 
-                    }
+<!-- AUTH -->
 
-                }
-            );
+<script src="../js/auth.js"></script>
 
-        }
-    );
+<!-- ADMIN DASHBOARD JS -->
 
+<script src="admin-dashboard.js"></script>
 
-    function updateRequestStatus(
-        row,
-        status
-    ) {
-
-        if (!row) {
-            return;
-        }
-
-
-        const statusElement =
-            row.querySelector(
-                ".status"
-            );
-
-
-        if (statusElement) {
-
-            statusElement.textContent =
-                status;
-
-
-            if (
-                status ===
-                "Approved"
-            ) {
-
-                statusElement.className =
-                    "status status-approved";
-
-            } else {
-
-                statusElement.className =
-                    "status status-rejected";
-
-            }
-
-        }
-
-
-        row.querySelectorAll(
-            "[data-request-action]"
-        ).forEach(
-            function (button) {
-
-                button.style.display =
-                    "none";
-
-            }
-        );
-
-
-        showToast(
-            "Adoption request " +
-            status.toLowerCase() +
-            " successfully.",
-            "success"
-        );
-
-    }
-
-
-    /* =====================================================
-       ADD PET FORM
-    ====================================================== */
-
-    const addPetForm =
-        document.getElementById(
-            "addPetForm"
-        );
-
-
-    if (addPetForm) {
-
-        addPetForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const nameInput =
-                    addPetForm.querySelector(
-                        '[name="name"]'
-                    );
-
-
-                const breedInput =
-                    addPetForm.querySelector(
-                        '[name="breed"]'
-                    );
-
-
-                const ageInput =
-                    addPetForm.querySelector(
-                        '[name="age"]'
-                    );
-
-
-                const genderInput =
-                    addPetForm.querySelector(
-                        '[name="gender"]'
-                    );
-
-
-                if (
-                    !nameInput ||
-                    !nameInput.value.trim()
-                ) {
-
-                    showToast(
-                        "Please enter your pet's name.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const petName =
-                    nameInput.value.trim();
-
-
-                /*
-                   Frontend-only behaviour.
-                   The pet is not stored in a database yet.
-                */
-
-                showToast(
-                    petName +
-                    " has been added successfully! 🐾",
-                    "success"
-                );
-
-
-                addPetForm.reset();
-
-
-                /*
-                   Return to My Pets after submission.
-                */
-
-                setTimeout(
-                    function () {
-
-                        const petsSection =
-                            document.getElementById(
-                                "my-pets"
-                            );
-
-
-                        if (petsSection) {
-
-                            showSection(
-                                "my-pets",
-                                "My Pets"
-                            );
-
-                        }
-
-                    },
-                    800
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ADD PET BUTTONS
-    ====================================================== */
-
-    document.querySelectorAll(
-        "[data-add-pet], .add-pet-btn"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    const addPetSection =
-                        document.getElementById(
-                            "add-pet"
-                        );
-
-
-                    if (addPetSection) {
-
-                        showSection(
-                            "add-pet",
-                            "Add a Pet"
-                        );
-
-                    } else {
-
-                        showToast(
-                            "Add Pet section is ready.",
-                            "info"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       MESSAGE BUTTONS
-    ====================================================== */
-
-    document.querySelectorAll(
-        "[data-message-action]"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    const recipient =
-                        button.dataset
-                            .messageAction ||
-                        "the adopter";
-
-
-                    showToast(
-                        "Message window for " +
-                        recipient +
-                        " is ready.",
-                        "info"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       NOTIFICATIONS
-    ====================================================== */
-
-    const notificationButton =
-        document.querySelector(
-            ".topbar-icon-btn"
-        );
-
-
-    if (notificationButton) {
-
-        notificationButton.addEventListener(
-            "click",
-            function () {
-
-                const notificationSection =
-                    document.getElementById(
-                        "notifications"
-                    );
-
-
-                if (notificationSection) {
-
-                    showSection(
-                        "notifications",
-                        "Notifications"
-                    );
-
-                } else {
-
-                    showToast(
-                        "You have new PawPal notifications 🐾",
-                        "info"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       MARK NOTIFICATIONS AS READ
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".notification-item, .activity-item"
-    ).forEach(
-        function (item) {
-
-            item.addEventListener(
-                "click",
-                function () {
-
-                    item.classList.add(
-                        "read"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       SETTINGS
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".toggle input"
-    ).forEach(
-        function (toggle) {
-
-            toggle.addEventListener(
-                "change",
-                function () {
-
-                    const row =
-                        toggle.closest(
-                            ".setting-row"
-                        );
-
-
-                    const title =
-                        row
-                            ? row.querySelector(
-                                "h4, h3, .setting-title"
-                            )
-                            : null;
-
-
-                    const settingName =
-                        title
-                            ? title.textContent.trim()
-                            : "Setting";
-
-
-                    showToast(
-                        settingName +
-                        (
-                            toggle.checked
-                                ? " enabled."
-                                : " disabled."
-                        ),
-                        "success"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       PROFILE FORM
-    ====================================================== */
-
-    const profileForm =
-        document.getElementById(
-            "profileForm"
-        );
-
-
-    if (profileForm) {
-
-        profileForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const nameInput =
-                    profileForm.querySelector(
-                        '[name="name"]'
-                    );
-
-
-                if (
-                    currentUser &&
-                    nameInput &&
-                    nameInput.value.trim()
-                ) {
-
-                    currentUser.name =
-                        nameInput.value.trim();
-
-
-                    if (
-                        window.PawPalAuth
-                    ) {
-
-                        window.PawPalAuth
-                            .saveCurrentUser(
-                                currentUser
-                            );
-
-                    }
-
-
-                    document
-                        .querySelectorAll(
-                            "[data-user-name]"
-                        )
-                        .forEach(
-                            function (element) {
-
-                                element.textContent =
-                                    currentUser.name;
-
-                            }
-                        );
-
-                }
-
-
-                showToast(
-                    "Profile updated successfully.",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       USER INFORMATION
-    ====================================================== */
-
-    if (currentUser) {
-
-        document
-            .querySelectorAll(
-                "[data-user-name]"
-            )
-            .forEach(
-                function (element) {
-
-                    element.textContent =
-                        currentUser.name;
-
-                }
-            );
-
-
-        document
-            .querySelectorAll(
-                "[data-user-email]"
-            )
-            .forEach(
-                function (element) {
-
-                    element.textContent =
-                        currentUser.email;
-
-                }
-            );
-
-
-        document
-            .querySelectorAll(
-                "[data-user-role]"
-            )
-            .forEach(
-                function (element) {
-
-                    element.textContent =
-                        window.PawPalAuth
-                            ? window.PawPalAuth.formatRole(
-                                currentUser.role
-                            )
-                            : "Pet Owner";
-
-                }
-            );
-
-
-        document
-            .querySelectorAll(
-                "[data-user-avatar]"
-            )
-            .forEach(
-                function (element) {
-
-                    element.textContent =
-                        window.PawPalAuth
-                            ? window.PawPalAuth.getInitials(
-                                currentUser.name
-                            )
-                            : "PO";
-
-                }
-            );
-
-    }
-
-
-    /* =====================================================
-       QUICK ACTIONS
-    ====================================================== */
-
-    document.querySelectorAll(
-        "[data-dashboard-action]"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    const action =
-                        button.dataset
-                            .dashboardAction;
-
-
-                    const actions = {
-
-                        "my-pets": [
-                            "my-pets",
-                            "My Pets"
-                        ],
-
-                        "requests": [
-                            "adoption-requests",
-                            "Adoption Requests"
-                        ],
-
-                        "messages": [
-                            "messages",
-                            "Messages"
-                        ],
-
-                        "add-pet": [
-                            "add-pet",
-                            "Add a Pet"
-                        ],
-
-                        "notifications": [
-                            "notifications",
-                            "Notifications"
-                        ]
-
-                    };
-
-
-                    if (
-                        actions[action]
-                    ) {
-
-                        showSection(
-                            actions[action][0],
-                            actions[action][1]
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       LOGOUT
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".logout-btn, [data-logout]"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    const confirmed =
-                        confirm(
-                            "Are you sure you want to log out?"
-                        );
-
-
-                    if (!confirmed) {
-                        return;
-                    }
-
-
-                    if (
-                        window.PawPalAuth
-                    ) {
-
-                        window.PawPalAuth
-                            .logout();
-
-                    } else {
-
-                        window.location.href =
-                            "login.html";
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       BACK TO PAWPAL
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".back-to-pawpal, [data-back-home]"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    const href =
-                        button.getAttribute(
-                            "href"
-                        );
-
-
-                    if (href) {
-                        return;
-                    }
-
-
-                    event.preventDefault();
-
-
-                    window.location.href =
-                        "../index.html";
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       INITIALIZE
-    ====================================================== */
-
-    console.log(
-        "PawPal Pet Owner Dashboard loaded successfully."
-    );
-
-
-});
+</body>
+</html>

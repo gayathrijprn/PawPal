@@ -1,646 +1,705 @@
 /* =====================================================
-PAWPAL AI ASSISTANT
+   PAWPAL AI ASSISTANT
 ===================================================== */
 
+
 /* =====================================================
-FLOATING ASSISTANT BUTTON
+   FLOATING ASSISTANT BUTTON
 ===================================================== */
 
 .pawpal-assistant-button {
-position: fixed;
-right: 28px;
-bottom: 28px;
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
 
-width: 66px;
-height: 66px;
+    width: 66px;
+    height: 66px;
 
-border: none;
-border-radius: 50%;
+    border: none;
+    border-radius: 50%;
 
-background: #e77d67;
-color: white;
+    background: #e77d67;
+    color: #ffffff;
 
-font-size: 28px;
-cursor: pointer;
+    font-size: 28px;
+    cursor: pointer;
 
-display: flex;
-align-items: center;
-justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
 
-z-index: 999999;
+    z-index: 999999;
 
-transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.pawpal-assistant-button {
-transform: translateY(-3px);
 
-box-shadow:
-    0 14px 35px rgba(0, 0, 0, 0.25);
+/* Hover */
 
+.pawpal-assistant-button:hover {
+    transform: translateY(-3px);
+
+    background: #d96e59;
+
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, 0.25);
 }
 
-.pawpal-assistant-button {
-transform: scale(0.95);
+
+/* Click */
+
+.pawpal-assistant-button:active {
+    transform: scale(0.95);
 }
+
 
 /* =====================================================
-ASSISTANT PANEL
+   ASSISTANT PANEL
 ===================================================== */
 
 .pawpal-assistant-panel {
-position: fixed;
+    position: fixed;
 
-right: 28px;
-bottom: 108px;
+    right: 28px;
+    bottom: 108px;
 
-width: 380px;
-max-width: calc(100vw - 40px);
+    width: 380px;
+    max-width: calc(100vw - 40px);
 
-height: 520px;
-max-height: calc(100vh - 140px);
+    height: 520px;
+    max-height: calc(100vh - 140px);
 
-background: #fffaf5;
+    background: #fffaf5;
 
-border-radius: 22px;
+    border-radius: 22px;
 
-box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.22);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.22);
 
-overflow: hidden;
+    overflow: hidden;
 
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-z-index: 999998;
+    z-index: 999998;
 
-opacity: 0;
-visibility: hidden;
-pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
-transform:
-    translateY(20px)
-    scale(0.96);
+    transform:
+        translateY(20px)
+        scale(0.96);
 
-transition:
-    opacity 0.25s ease,
-    visibility 0.25s ease,
-    transform 0.25s ease;
-
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        transform 0.25s ease;
 }
 
+
 /* =====================================================
-OPEN STATE
+   OPEN STATE
 ===================================================== */
 
 .pawpal-assistant-panel.active {
-opacity: 1;
+    opacity: 1;
 
-visibility: visible;
+    visibility: visible;
 
-pointer-events: auto;
+    pointer-events: auto;
 
-transform:
-    translateY(0)
-    scale(1);
-
+    transform:
+        translateY(0)
+        scale(1);
 }
 
+
 /* =====================================================
-HEADER
+   HEADER
 ===================================================== */
 
 .pawpal-assistant-header {
-background: #332720;
+    background: #332720;
 
-color: white;
+    color: #ffffff;
 
-padding: 16px 18px;
+    padding: 16px 18px;
 
-display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-align-items: center;
-
-justify-content: space-between;
-
-flex-shrink: 0;
-
+    flex-shrink: 0;
 }
+
 
 /* Header title */
 
 .pawpal-assistant-title {
-display: flex;
+    display: flex;
 
-flex-direction: column;
+    flex-direction: column;
 
-gap: 3px;
-
+    gap: 3px;
 }
+
 
 .pawpal-assistant-title strong {
-font-size: 17px;
+    font-size: 17px;
 
-font-weight: 700;
-
+    font-weight: 700;
 }
+
 
 .pawpal-assistant-title span {
-font-size: 12px;
+    font-size: 12px;
 
-opacity: 0.75;
-
+    opacity: 0.75;
 }
 
-/* Close button */
-
-.pawpal-assistant-close {
-width: 34px;
-height: 34px;
-
-border: none;
-
-border-radius: 50%;
-
-background:
-    rgba(255, 255, 255, 0.1);
-
-color: white;
-
-font-size: 24px;
-
-line-height: 1;
-
-cursor: pointer;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-
-}
-
-.pawpal-assistant-close {
-background:
-rgba(255, 255, 255, 0.2);
-
-transform: scale(1.05);
-
-}
 
 /* =====================================================
-MESSAGES
+   CLOSE BUTTON
+===================================================== */
+
+.pawpal-assistant-close {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.1);
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.pawpal-assistant-close:hover {
+    background:
+        rgba(255, 255, 255, 0.2);
+
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   MESSAGES
 ===================================================== */
 
 .pawpal-assistant-messages {
-flex: 1;
+    flex: 1;
 
-padding: 18px;
+    padding: 18px;
 
-overflow-y: auto;
+    overflow-y: auto;
 
-display: flex;
+    display: flex;
 
-flex-direction: column;
+    flex-direction: column;
 
-gap: 12px;
-
+    gap: 12px;
 }
+
 
 /* Scrollbar */
 
 .pawpal-assistant-messages::-webkit-scrollbar {
-width: 6px;
+    width: 6px;
 }
+
 
 .pawpal-assistant-messages::-webkit-scrollbar-track {
-background: transparent;
+    background: transparent;
 }
+
 
 .pawpal-assistant-messages::-webkit-scrollbar-thumb {
-background: #d8cec6;
+    background: #d8cec6;
 
-border-radius: 10px;
-
+    border-radius: 10px;
 }
 
+
 /* =====================================================
-MESSAGE
+   MESSAGE
 ===================================================== */
 
 .pawpal-message {
-display: flex;
+    display: flex;
 
-width: 100%;
-
+    width: 100%;
 }
+
 
 .pawpal-message-content {
-max-width: 82%;
+    max-width: 82%;
 
-padding: 11px 14px;
+    padding: 11px 14px;
 
-border-radius: 15px;
+    border-radius: 15px;
 
-font-size: 14px;
+    font-size: 14px;
 
-line-height: 1.5;
+    line-height: 1.5;
 
-word-wrap: break-word;
-
+    word-wrap: break-word;
 }
+
 
 /* Assistant message */
 
 .pawpal-message.assistant {
-justify-content: flex-start;
+    justify-content: flex-start;
 }
+
 
 .pawpal-message.assistant
 .pawpal-message-content {
-background: white;
+    background: #ffffff;
 
-color: #332720;
+    color: #332720;
 
-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 
-box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.06);
-
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06);
 }
+
 
 /* User message */
 
 .pawpal-message.user {
-justify-content: flex-end;
+    justify-content: flex-end;
 }
+
 
 .pawpal-message.user
 .pawpal-message-content {
-background: #e77d67;
+    background: #e77d67;
 
-color: white;
+    color: #ffffff;
 
-border-bottom-right-radius: 4px;
-
+    border-bottom-right-radius: 4px;
 }
 
+
 /* =====================================================
-LOADING
+   LOADING
 ===================================================== */
 
 .pawpal-loading
 .pawpal-message-content {
-display: flex;
+    display: flex;
 
-align-items: center;
+    align-items: center;
 
-gap: 5px;
-
+    gap: 5px;
 }
+
 
 .pawpal-loading
 .pawpal-message-content span {
-width: 7px;
-height: 7px;
+    width: 7px;
+    height: 7px;
 
-background: #e77d67;
+    background: #e77d67;
 
-border-radius: 50%;
+    border-radius: 50%;
 
-animation:
-    pawpalBounce 1.2s infinite;
-
+    animation:
+        pawpalBounce 1.2s infinite;
 }
+
 
 .pawpal-loading
-.pawpal-message-content
-span(2) {
-animation-delay: 0.15s;
+.pawpal-message-content span:nth-child(2) {
+    animation-delay: 0.15s;
 }
 
+
 .pawpal-loading
-.pawpal-message-content
-span(3) {
-animation-delay: 0.3s;
+.pawpal-message-content span:nth-child(3) {
+    animation-delay: 0.3s;
 }
+
 
 @keyframes pawpalBounce {
 
-0%,
-60%,
-100% {
-    transform: translateY(0);
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
 
-    opacity: 0.5;
+        opacity: 0.5;
+    }
+
+    30% {
+        transform: translateY(-5px);
+
+        opacity: 1;
+    }
 }
 
-30% {
-    transform: translateY(-5px);
-
-    opacity: 1;
-}
-
-}
 
 /* =====================================================
-CONTROLS
+   CONTROLS
 ===================================================== */
 
 .pawpal-assistant-controls {
-padding: 12px;
+    padding: 12px;
 
-background: white;
+    background: #ffffff;
 
-border-top:
-    1px solid #eee5de;
+    border-top:
+        1px solid #eee5de;
 
-display: flex;
+    display: flex;
 
-align-items: center;
+    align-items: center;
 
-gap: 8px;
+    gap: 8px;
 
-flex-shrink: 0;
-
+    flex-shrink: 0;
 }
 
+
 /* =====================================================
-FORM
+   FORM
 ===================================================== */
 
 .pawpal-assistant-controls form {
-flex: 1;
+    flex: 1;
 
-min-width: 0;
+    min-width: 0;
 
-display: flex;
+    display: flex;
 
-align-items: center;
+    align-items: center;
 
-gap: 8px;
-
+    gap: 8px;
 }
 
+
 /* =====================================================
-VOICE BUTTON
+   VOICE BUTTON
+   ONE SPEAKER BUTTON ONLY
 ===================================================== */
 
 .pawpal-assistant-voice {
-height: 40px;
+    height: 40px;
 
-min-width: 86px;
+    min-width: 86px;
 
-padding: 0 10px;
+    padding: 0 10px;
 
-border:
-    1px solid #d8cec6;
+    border:
+        1px solid #d8cec6;
 
-border-radius: 12px;
+    border-radius: 12px;
 
-background: #f3eee9;
+    background: #f3eee9;
 
-color: #332720;
+    color: #332720;
 
-cursor: pointer;
+    cursor: pointer;
 
-font-family: inherit;
+    font-family: inherit;
 
-font-size: 11px;
+    font-size: 11px;
 
-font-weight: 700;
+    font-weight: 700;
 
-display: flex;
+    display: flex;
 
-align-items: center;
+    align-items: center;
 
-justify-content: center;
+    justify-content: center;
 
-white-space: nowrap;
+    white-space: nowrap;
 
-flex-shrink: 0;
+    flex-shrink: 0;
 
-transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
-
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.pawpal-assistant-voice {
-transform: translateY(-1px);
 
-background: #eae1da;
+.pawpal-assistant-voice:hover {
+    transform: translateY(-1px);
 
+    background: #eae1da;
 }
+
 
 /* Voice ON */
 
 .pawpal-assistant-voice.voice-on {
-background: #e77d67;
+    background: #e77d67;
 
-border-color: #e77d67;
+    border-color: #e77d67;
 
-color: white;
+    color: #ffffff;
 
-box-shadow:
-    0 3px 10px
-    rgba(231, 125, 103, 0.25);
-
+    box-shadow:
+        0 3px 10px
+        rgba(231, 125, 103, 0.25);
 }
 
-.pawpal-assistant-voice.voice-on {
-background: #d96e59;
 
-border-color: #d96e59;
+.pawpal-assistant-voice.voice-on:hover {
+    background: #d96e59;
 
+    border-color: #d96e59;
 }
+
 
 /* Voice OFF */
 
 .pawpal-assistant-voice.voice-off {
-background: #f3eee9;
+    background: #f3eee9;
 
-border-color: #d8cec6;
+    border-color: #d8cec6;
 
-color: #6b5b52;
+    color: #6b5b52;
 
+    box-shadow: none;
 }
 
+
+.pawpal-assistant-voice.voice-off:hover {
+    background: #eae1da;
+}
+
+
 /* =====================================================
-STOP BUTTON
+   HIDE OLD STOP BUTTON
 ===================================================== */
 
-.pawpal-assistant-stop {
-width: 40px;
-height: 40px;
-
-border: none;
-
-border-radius: 12px;
-
-background: #f3eee9;
-
-color: #5f5048;
-
-cursor: pointer;
-
-font-size: 16px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-flex-shrink: 0;
-
-transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-
-}
+/*
+   We are using only ONE voice/speaker button.
+   If the old stop button still exists in your HTML,
+   this removes it visually.
+*/
 
 .pawpal-assistant-stop {
-background: #eae1da;
-
-transform: translateY(-1px);
-
+    display: none !important;
 }
+
 
 /* =====================================================
-INPUT
+   INPUT
 ===================================================== */
 
 #pawpal-assistant-input {
-flex: 1;
+    flex: 1;
 
-min-width: 0;
+    min-width: 0;
 
-height: 40px;
+    height: 40px;
 
-border:
-    1px solid #ddd2ca;
+    border:
+        1px solid #ddd2ca;
 
-border-radius: 12px;
+    border-radius: 12px;
 
-padding: 0 12px;
+    padding: 0 12px;
 
-outline: none;
+    outline: none;
 
-font-family: inherit;
+    font-family: inherit;
 
-font-size: 14px;
+    font-size: 14px;
 
-background: #fffaf5;
+    background: #fffaf5;
 
+    color: #332720;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-#pawpal-assistant-input {
-border-color: #e77d67;
 
-box-shadow:
-    0 0 0 3px
-    rgba(231, 125, 103, 0.12);
-
+#pawpal-assistant-input::placeholder {
+    color: #9a8c83;
 }
+
+
+#pawpal-assistant-input:focus {
+    border-color: #e77d67;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(231, 125, 103, 0.12);
+}
+
+
+#pawpal-assistant-input:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
 
 /* =====================================================
-SEND BUTTON
+   SEND BUTTON
 ===================================================== */
 
 .pawpal-assistant-send {
-width: 42px;
-height: 40px;
+    width: 42px;
+    height: 40px;
 
-border: none;
+    border: none;
 
-border-radius: 12px;
+    border-radius: 12px;
 
-background: #e77d67;
+    background: #e77d67;
 
-color: white;
+    color: #ffffff;
 
-font-size: 18px;
+    font-size: 18px;
 
-cursor: pointer;
+    cursor: pointer;
 
-flex-shrink: 0;
+    flex-shrink: 0;
 
-transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+    display: flex;
 
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.pawpal-assistant-send {
-background: #d96e59;
+
+.pawpal-assistant-send:hover {
+    background: #d96e59;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px
+        rgba(217, 110, 89, 0.25);
 }
 
-.pawpal-assistant-send {
-transform: scale(0.95);
+
+.pawpal-assistant-send:active {
+    transform: scale(0.95);
 }
+
 
 /* =====================================================
-MOBILE
+   MOBILE
 ===================================================== */
 
 @media (max-width: 600px) {
 
-.pawpal-assistant-panel {
-    right: 12px;
+    .pawpal-assistant-panel {
+        right: 12px;
 
-    bottom: 90px;
+        bottom: 90px;
 
-    width:
-        calc(100vw - 24px);
+        width:
+            calc(100vw - 24px);
 
-    height: 70vh;
+        height: 70vh;
 
-    max-height: none;
+        max-height: none;
+
+        border-radius: 18px;
+    }
+
+
+    .pawpal-assistant-button {
+        right: 18px;
+
+        bottom: 18px;
+
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 24px;
+    }
+
+
+    .pawpal-assistant-controls {
+        gap: 5px;
+
+        padding: 10px;
+    }
+
+
+    .pawpal-assistant-voice {
+        min-width: 76px;
+
+        padding: 0 7px;
+
+        font-size: 10px;
+    }
+
+
+    #pawpal-assistant-input {
+        font-size: 13px;
+    }
+
+
+    .pawpal-assistant-send {
+        width: 40px;
+
+        height: 40px;
+    }
 }
 
-.pawpal-assistant-button {
-    right: 18px;
 
-    bottom: 18px;
+/* =====================================================
+   VERY SMALL SCREENS
+===================================================== */
 
-    width: 58px;
+@media (max-width: 400px) {
 
-    height: 58px;
+    .pawpal-assistant-voice {
+        min-width: 68px;
 
-    font-size: 24px;
-}
+        font-size: 9px;
 
-.pawpal-assistant-controls {
-    gap: 5px;
+        padding: 0 5px;
+    }
 
-    padding: 10px;
-}
 
-.pawpal-assistant-voice {
-    min-width: 76px;
-
-    padding: 0 7px;
-
-    font-size: 10px;
-}
-
-.pawpal-assistant-stop {
-    width: 38px;
-
-    height: 40px;
-}
-
+    .pawpal-assistant-controls {
+        gap: 4px;
+    }
 }
