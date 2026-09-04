@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Shop pet food, clothes, hygiene essentials, beds, toys and more at PawPal."
+    >
+
+    <title>Shop — PawPal</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/shop.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="shop-navbar">
+
+    <a
+        href="../index.html"
+        class="shop-brand"
+        aria-label="Go to PawPal home"
+    >
+        <span
+            class="shop-brand-paw"
+            aria-hidden="true"
+        >🐾</span>
+
+        <span>PawPal</span>
+    </a>
+
+
+    <nav
+        class="shop-navigation"
+        aria-label="Main navigation"
+    >
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="./pets.html">
+            Find a Pet
+        </a>
+
+        <a href="./how-it-works.html">
+            How It Works
+        </a>
+
+        <a
+            href="./shop.html"
+            class="active"
+            aria-current="page"
+        >
+            Shop
+        </a>
+
+        <a href="./about.html">
+            About Us
+        </a>
+
+    </nav>
+
+
+    <div class="shop-nav-right">
+
+        <a
+            href="./login.html"
+            class="shop-login"
+        >
+            Log in
+        </a>
+
+
+        <button
+            type="button"
+            class="cart-button"
+            id="cart-button"
+            aria-label="Open shopping cart"
+        >
+
+            <span class="cart-icon">
+                🛒
+            </span>
+
+            <span class="cart-label">
+                Cart
+            </span>
+
+            <span
+                class="cart-count"
+                id="cart-count"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <a
+            href="./register.html"
+            class="shop-get-started"
+        >
+            Get Started →
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<section class="shop-hero">
+
+    <div class="shop-hero-decoration left">
+        🐾
+    </div>
+
+    <div class="shop-hero-decoration right">
+        ♡
+    </div>
+
+
+    <div class="shop-eyebrow">
+        <span>✦</span>
+        PAWPAL PET SHOP
+        <span>✦</span>
+    </div>
+
+
+    <h1>
+        Everything they need,
+        <br>
+        <em>all in one place.</em>
+    </h1>
+
+
+    <p>
+        From nutritious food and cosy beds to grooming
+        essentials, stylish clothes and playful toys —
+        find something your furry friend will love.
+    </p>
+
+
+    <div class="shop-hero-actions">
+
+        <a
+            href="#products"
+            class="shop-primary-button"
+        >
+            Shop essentials →
+        </a>
+
+        <a
+            href="#categories"
+            class="shop-secondary-button"
+        >
+            Browse categories
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<section
+    class="category-section"
+    id="categories"
+>
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-eyebrow">
+                SHOP BY CATEGORY
+            </span>
+
+            <h2>
+                Good things for
+                <em>good pets.</em>
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="category-grid">
+
+        <button
+            type="button"
+            class="category-card category-food"
+            data-category="food"
+        >
+            <span class="category-icon">🥣</span>
+            <span class="category-name">Food</span>
+            <span class="category-description">
+                Tasty & nutritious
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-treats"
+            data-category="treats"
+        >
+            <span class="category-icon">🦴</span>
+            <span class="category-name">Treats</span>
+            <span class="category-description">
+                Little rewards
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-clothes"
+            data-category="clothes"
+        >
+            <span class="category-icon">🧥</span>
+            <span class="category-name">Clothes</span>
+            <span class="category-description">
+                Cute & comfy
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-hygiene"
+            data-category="hygiene"
+        >
+            <span class="category-icon">🧴</span>
+            <span class="category-name">Hygiene</span>
+            <span class="category-description">
+                Fresh & clean
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-beds"
+            data-category="beds"
+        >
+            <span class="category-icon">🛏️</span>
+            <span class="category-name">
+                Nests & Beds
+            </span>
+            <span class="category-description">
+                Cosy places
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-toys"
+            data-category="toys"
+        >
+            <span class="category-icon">🧸</span>
+            <span class="category-name">Toys</span>
+            <span class="category-description">
+                Play all day
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-accessories"
+            data-category="accessories"
+        >
+            <span class="category-icon">🎀</span>
+            <span class="category-name">
+                Accessories
+            </span>
+            <span class="category-description">
+                Walks & little extras
+            </span>
+        </button>
+
+
+        <button
+            type="button"
+            class="category-card category-feeding"
+            data-category="feeding"
+        >
+            <span class="category-icon">🥛</span>
+            <span class="category-name">
+                Feeding
+            </span>
+            <span class="category-description">
+                Bowls & bottles
+            </span>
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<section class="deal-banner">
+
+    <div>
+
+        <span class="section-eyebrow">
+            PAWPAL WEEKEND PICKS
+        </span>
+
+        <h2>
+            Small treats,
+            <em>big tail wags.</em>
+        </h2>
+
+        <p>
+            Save on selected pet essentials while stocks last.
+        </p>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="deal-button"
+        id="sale-button"
+    >
+        Shop sale picks →
+    </button>
+
+</section>
+
+
+
+<section
+    class="products-section"
+    id="products"
+>
+
+    <div class="products-heading">
+
+        <div>
+
+            <span class="section-eyebrow">
+                PAWPAL PICKS
+            </span>
+
+            <h2>
+                Shop the
+                <em>good stuff.</em>
+            </h2>
+
+        </div>
+
+
+        <span
+            class="products-count"
+            id="products-count"
+        >
+            Showing 24 products
+        </span>
+
+    </div>
+
+
+
+    <div class="shop-filters">
+
+
+        <div class="shop-search">
+
+            <span aria-hidden="true">
+                🔍
+            </span>
+
+            <input
+                type="search"
+                id="product-search"
+                placeholder="Search products..."
+                aria-label="Search products"
+            >
+
+        </div>
+
+
+        <select
+            id="category-filter"
+            class="shop-select"
+            aria-label="Filter by category"
+        >
+
+            <option value="all">
+                All categories
+            </option>
+
+            <option value="food">
+                Food
+            </option>
+
+            <option value="treats">
+                Treats
+            </option>
+
+            <option value="clothes">
+                Clothes
+            </option>
+
+            <option value="hygiene">
+                Hygiene
+            </option>
+
+            <option value="beds">
+                Nests & Beds
+            </option>
+
+            <option value="toys">
+                Toys
+            </option>
+
+            <option value="accessories">
+                Accessories
+            </option>
+
+            <option value="feeding">
+                Feeding
+            </option>
+
+        </select>
+
+
+        <select
+            id="pet-filter"
+            class="shop-select"
+            aria-label="Filter by pet"
+        >
+
+            <option value="all">
+                All pets
+            </option>
+
+            <option value="dog">
+                Dogs
+            </option>
+
+            <option value="cat">
+                Cats
+            </option>
+
+            <option value="rabbit">
+                Rabbits
+            </option>
+
+        </select>
+
+
+        <select
+            id="sort-filter"
+            class="shop-select"
+            aria-label="Sort products"
+        >
+
+            <option value="featured">
+                Featured
+            </option>
+
+            <option value="price-low">
+                Price: Low to high
+            </option>
+
+            <option value="price-high">
+                Price: High to low
+            </option>
+
+            <option value="rating">
+                Top rated
+            </option>
+
+            <option value="name">
+                Name: A to Z
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        class="active-filter-row"
+        id="active-filter-row"
+    >
+
+        <span id="active-filter-text">
+            All products
+        </span>
+
+        <button
+            type="button"
+            id="clear-filters"
+        >
+            Clear filters
+        </button>
+
+    </div>
+
+
+
+    <div
+        class="product-grid"
+        id="product-grid"
+    >
+
+
+        <article
+            class="product-card"
+            data-id="pawpal-premium-kibble"
+            data-name="PawPal Premium Kibble"
+            data-category="food"
+            data-pet="dog"
+            data-price="899"
+            data-old-price="999"
+            data-rating="4.9"
+            data-featured="10"
+            data-image="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog food in a bowl"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Best seller
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add PawPal Premium Kibble to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog food
+                </span>
+
+                <h3>
+                    PawPal Premium Kibble
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    Balanced everyday nutrition for happy,
+                    energetic dogs.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹899
+                        <del>₹999</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="whisker-crunch"
+            data-name="Whisker Crunch Cat Food"
+            data-category="food"
+            data-pet="cat"
+            data-price="699"
+            data-old-price="799"
+            data-rating="4.8"
+            data-featured="9"
+            data-image="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat food"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Popular
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Whisker Crunch Cat Food to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat food
+                </span>
+
+                <h3>
+                    Whisker Crunch Cat Food
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    Crunchy, tasty bites made for curious
+                    little whiskers.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹699
+                        <del>₹799</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="cozy-paw-hoodie"
+            data-name="Cozy Paw Hoodie"
+            data-category="clothes"
+            data-pet="dog"
+            data-price="749"
+            data-rating="4.7"
+            data-featured="8"
+            data-image="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog wearing a cosy outfit"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    New
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Cozy Paw Hoodie to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog clothing
+                </span>
+
+                <h3>
+                    Cozy Paw Hoodie
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    Soft everyday hoodie for chilly walks
+                    and cosy evenings.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹749
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="tiny-tails-sweater"
+            data-name="Tiny Tails Sweater"
+            data-category="clothes"
+            data-pet="rabbit"
+            data-price="599"
+            data-rating="4.6"
+            data-featured="5"
+            data-image="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Rabbit"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Tiny Tails Sweater to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Rabbit clothing
+                </span>
+
+                <h3>
+                    Tiny Tails Sweater
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.6</span>
+                </div>
+
+                <p>
+                    Lightweight and gentle for little
+                    indoor companions.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹599
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="gentle-pet-shampoo"
+            data-name="Gentle Pet Shampoo"
+            data-category="hygiene"
+            data-pet="dog"
+            data-price="449"
+            data-old-price="499"
+            data-rating="4.8"
+            data-featured="9"
+            data-image="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog being groomed"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Gentle
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Gentle Pet Shampoo to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Grooming
+                </span>
+
+                <h3>
+                    Gentle Pet Shampoo
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    Mild everyday cleansing for a soft,
+                    fresh coat.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹449
+                        <del>₹499</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="paw-clean-wipes"
+            data-name="Paw Clean Wipes"
+            data-category="hygiene"
+            data-pet="all"
+            data-price="299"
+            data-old-price="349"
+            data-rating="4.7"
+            data-featured="6"
+            data-image="https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=900&q=85"
+                    alt="Pet hygiene supplies"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Paw Clean Wipes to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Hygiene
+                </span>
+
+                <h3>
+                    Paw Clean Wipes
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    Handy gentle wipes for paws after walks
+                    and outdoor adventures.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹299
+                        <del>₹349</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="cloud-nine-pet-bed"
+            data-name="Cloud Nine Pet Bed"
+            data-category="beds"
+            data-pet="dog"
+            data-price="1299"
+            data-old-price="1499"
+            data-rating="4.9"
+            data-featured="10"
+            data-image="https://images.unsplash.com/photo-1591946614720-90a587da4a36?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1591946614720-90a587da4a36?auto=format&fit=crop&w=900&q=85"
+                    alt="Cosy pet bed"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    PawPal pick
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Cloud Nine Pet Bed to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog bed
+                </span>
+
+                <h3>
+                    Cloud Nine Pet Bed
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    Deep, fluffy comfort for afternoon naps
+                    and long night sleeps.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹1,299
+                        <del>₹1,499</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="whisker-nest"
+            data-name="Whisker Nest"
+            data-category="beds"
+            data-pet="cat"
+            data-price="1099"
+            data-rating="4.8"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat resting in a cosy space"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Whisker Nest to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat bed
+                </span>
+
+                <h3>
+                    Whisker Nest
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    A soft little hideaway for cats who
+                    love their quiet corners.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹1,099
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="rope-buddy"
+            data-name="Rope Buddy"
+            data-category="toys"
+            data-pet="dog"
+            data-price="349"
+            data-old-price="399"
+            data-rating="4.8"
+            data-featured="8"
+            data-image="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog with a toy"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Fun pick
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Rope Buddy to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog toy
+                </span>
+
+                <h3>
+                    Rope Buddy
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    A sturdy tug-and-play companion for
+                    energetic pups.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹349
+                        <del>₹399</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="jingle-ball"
+            data-name="Jingle Ball"
+            data-category="toys"
+            data-pet="cat"
+            data-price="249"
+            data-rating="4.7"
+            data-featured="6"
+            data-image="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat toy"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Jingle Ball to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat toy
+                </span>
+
+                <h3>
+                    Jingle Ball
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    A little noisy, a lot of fun.
+                    Perfect for playful cats.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹249
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="everyday-paw-collar"
+            data-name="Everyday Paw Collar"
+            data-category="accessories"
+            data-pet="dog"
+            data-price="399"
+            data-rating="4.6"
+            data-featured="5"
+            data-image="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog wearing a collar"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Everyday Paw Collar to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog accessory
+                </span>
+
+                <h3>
+                    Everyday Paw Collar
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.6</span>
+                </div>
+
+                <p>
+                    Simple, comfortable and ready for
+                    every walk.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹399
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="bunny-hideout"
+            data-name="Bunny Hideout"
+            data-category="beds"
+            data-pet="rabbit"
+            data-price="899"
+            data-rating="4.9"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Rabbit resting"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Bunny Hideout to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Rabbit hideout
+                </span>
+
+                <h3>
+                    Bunny Hideout
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    A snug little retreat for curious
+                    rabbits to relax in.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹899
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="salmon-training-bites"
+            data-name="Salmon Training Bites"
+            data-category="treats"
+            data-pet="dog"
+            data-price="299"
+            data-old-price="349"
+            data-rating="4.9"
+            data-featured="9"
+            data-image="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=85"
+                    alt="Happy dog"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Sale
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Salmon Training Bites to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog treats
+                </span>
+
+                <h3>
+                    Salmon Training Bites
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    Tiny tasty rewards for training,
+                    bonding and everyday good behaviour.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹299
+                        <del>₹349</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="tuna-crunch-treats"
+            data-name="Tuna Crunch Treats"
+            data-category="treats"
+            data-pet="cat"
+            data-price="279"
+            data-rating="4.8"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat enjoying a treat"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Tuna Crunch Treats to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat treats
+                </span>
+
+                <h3>
+                    Tuna Crunch Treats
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    Crunchy little tuna treats made for
+                    curious cats.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹279
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="bunny-herb-nibbles"
+            data-name="Bunny Herb Nibbles"
+            data-category="treats"
+            data-pet="rabbit"
+            data-price="249"
+            data-rating="4.7"
+            data-featured="6"
+            data-image="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Rabbit"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Bunny Herb Nibbles to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Rabbit treats
+                </span>
+
+                <h3>
+                    Bunny Herb Nibbles
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    Small herb-inspired bites for gentle
+                    everyday enrichment.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹249
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="soft-paw-jacket"
+            data-name="Soft Paw Jacket"
+            data-category="clothes"
+            data-pet="dog"
+            data-price="999"
+            data-rating="4.8"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog in clothing"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Winter pick
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Soft Paw Jacket to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog clothing
+                </span>
+
+                <h3>
+                    Soft Paw Jacket
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    Warm and comfortable outerwear for
+                    cooler morning walks.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹999
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="meow-mist-grooming-spray"
+            data-name="Meow Mist Grooming Spray"
+            data-category="hygiene"
+            data-pet="cat"
+            data-price="399"
+            data-rating="4.6"
+            data-featured="5"
+            data-image="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Meow Mist Grooming Spray to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat grooming
+                </span>
+
+                <h3>
+                    Meow Mist Grooming Spray
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.6</span>
+                </div>
+
+                <p>
+                    A fresh everyday grooming companion
+                    for tidy little coats.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹399
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="fresh-paw-dental-kit"
+            data-name="Fresh Paw Dental Kit"
+            data-category="hygiene"
+            data-pet="dog"
+            data-price="549"
+            data-old-price="599"
+            data-rating="4.7"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+                    alt="Happy dog"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Everyday care
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Fresh Paw Dental Kit to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dental care
+                </span>
+
+                <h3>
+                    Fresh Paw Dental Kit
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    A simple home-care kit for keeping
+                    everyday routines fresh.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹549
+                        <del>₹599</del>
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="cloud-cat-cave"
+            data-name="Cloud Cat Cave"
+            data-category="beds"
+            data-pet="cat"
+            data-price="1199"
+            data-rating="4.9"
+            data-featured="9"
+            data-image="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=900&q=85"
+                    alt="Cat resting in a cat cave"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Cosy pick
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Cloud Cat Cave to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Cat bed
+                </span>
+
+                <h3>
+                    Cloud Cat Cave
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    A tucked-away cave for cats who love
+                    quiet naps and cosy corners.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹1,199
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="bunny-soft-mat"
+            data-name="Bunny Soft Mat"
+            data-category="beds"
+            data-pet="rabbit"
+            data-price="699"
+            data-rating="4.7"
+            data-featured="6"
+            data-image="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Rabbit"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Bunny Soft Mat to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Rabbit bed
+                </span>
+
+                <h3>
+                    Bunny Soft Mat
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    A washable soft spot for stretching out,
+                    lounging and resting.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹699
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="plush-paw-friend"
+            data-name="Plush Paw Friend"
+            data-category="toys"
+            data-pet="all"
+            data-price="399"
+            data-rating="4.8"
+            data-featured="8"
+            data-image="https://images.unsplash.com/photo-1583336663277-620dc1996580?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583336663277-620dc1996580?auto=format&fit=crop&w=900&q=85"
+                    alt="Soft pet toy"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Cuddle pick
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Plush Paw Friend to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Pet toy
+                </span>
+
+                <h3>
+                    Plush Paw Friend
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    A soft companion for gentle play,
+                    naps and cuddle time.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹399
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="classic-walk-leash"
+            data-name="Classic Walk Leash"
+            data-category="accessories"
+            data-pet="dog"
+            data-price="699"
+            data-rating="4.9"
+            data-featured="8"
+            data-image="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog on a walk"
+                    loading="lazy"
+                >
+
+                <span class="product-badge">
+                    Top rated
+                </span>
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Classic Walk Leash to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Dog accessory
+                </span>
+
+                <h3>
+                    Classic Walk Leash
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.9</span>
+                </div>
+
+                <p>
+                    Comfortable everyday leash for relaxed
+                    neighbourhood walks.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹699
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="bamboo-food-bowl"
+            data-name="Bamboo Food Bowl"
+            data-category="feeding"
+            data-pet="all"
+            data-price="549"
+            data-rating="4.8"
+            data-featured="7"
+            data-image="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=900&q=85"
+                    alt="Pet food bowl"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Bamboo Food Bowl to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Feeding
+                </span>
+
+                <h3>
+                    Bamboo Food Bowl
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    Simple raised bowl for everyday meals
+                    and water.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹549
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="slow-feast-bowl"
+            data-name="Slow Feast Bowl"
+            data-category="feeding"
+            data-pet="dog"
+            data-price="649"
+            data-rating="4.7"
+            data-featured="6"
+            data-image="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85"
+                    alt="Dog at mealtime"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Slow Feast Bowl to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Feeding
+                </span>
+
+                <h3>
+                    Slow Feast Bowl
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.7</span>
+                </div>
+
+                <p>
+                    Designed to make mealtimes a little
+                    slower and more engaging.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹649
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-id="bunny-hay-feeder"
+            data-name="Bunny Hay Feeder"
+            data-category="feeding"
+            data-pet="rabbit"
+            data-price="459"
+            data-rating="4.8"
+            data-featured="5"
+            data-image="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=900&q=85"
+                    alt="Rabbit"
+                    loading="lazy"
+                >
+
+                <button
+                    type="button"
+                    class="product-favourite"
+                    aria-label="Add Bunny Hay Feeder to favourites"
+                >
+                    ♡
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    Rabbit feeding
+                </span>
+
+                <h3>
+                    Bunny Hay Feeder
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                    <span>4.8</span>
+                </div>
+
+                <p>
+                    A tidy little feeder to keep hay
+                    accessible throughout the day.
+                </p>
+
+                <div class="product-bottom">
+
+                    <strong>
+                        ₹459
+                    </strong>
+
+                    <button
+                        type="button"
+                        class="add-cart-button"
+                    >
+                        Add to cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+
+    <div
+        class="shop-no-results"
+        id="shop-no-results"
+    >
+
+        <div class="shop-no-results-icon">
+            🐾
+        </div>
+
+        <h3>
+            Nothing found
+        </h3>
+
+        <p>
+            Try another search, pet type or category.
+        </p>
+
+        <button
+            type="button"
+            id="clear-filters-empty"
+        >
+            Clear filters
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<section class="shop-values">
+
+    <div class="shop-values-inner">
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                🐾
+            </div>
+
+            <h3>
+                Pet-first picks
+            </h3>
+
+            <p>
+                Products chosen with comfort,
+                safety and everyday pet happiness
+                in mind.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                ♡
+            </div>
+
+            <h3>
+                Made with care
+            </h3>
+
+            <p>
+                We believe the little things matter
+                when caring for your best friend.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                ✦
+            </div>
+
+            <h3>
+                One happy home
+            </h3>
+
+            <p>
+                PawPal brings adoption, pet care and
+                pet essentials together in one place.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="shop-cta">
+
+    <div class="shop-cta-content">
+
+        <span class="section-eyebrow">
+            STILL LOOKING?
+        </span>
+
+        <h2>
+            Maybe your next best friend
+            <em>is waiting too.</em>
+        </h2>
+
+        <p>
+            Browse pets looking for loving forever homes
+            and find the one who makes your heart smile.
+        </p>
+
+        <a
+            href="./pets.html"
+            class="shop-primary-button"
+        >
+            Find a pet →
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<div
+    class="cart-overlay"
+    id="cart-overlay"
+    aria-hidden="true"
+></div>
+
+
+
+<aside
+    class="cart-drawer"
+    id="cart-drawer"
+    aria-hidden="true"
+    aria-label="Shopping cart"
+>
+
+    <div class="cart-header">
+
+        <div>
+
+            <span class="cart-eyebrow">
+                YOUR PAWPAL CART
+            </span>
+
+            <h2>
+                Little things
+                <em>they'll love.</em>
+            </h2>
+
+        </div>
+
+        <button
+            type="button"
+            class="cart-close"
+            id="cart-close"
+            aria-label="Close shopping cart"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cart-items"
+    ></div>
+
+
+    <div
+        class="cart-empty"
+        id="cart-empty"
+    >
+
+        <div class="cart-empty-icon">
+            🛒
+        </div>
+
+        <h3>
+            Your cart is empty
+        </h3>
+
+        <p>
+            Add something lovely for your furry friend.
+        </p>
+
+        <button
+            type="button"
+            id="continue-shopping"
+            class="cart-continue"
+        >
+            Continue shopping
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-footer"
+        id="cart-footer"
+    >
+
+        <div class="cart-summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="cart-subtotal">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <p class="cart-note">
+            Free shipping on orders over ₹1,500.
+            Checkout is ready to connect to your
+            payment system.
+        </p>
+
+
+        <button
+            type="button"
+            class="checkout-button"
+            id="checkout-button"
+        >
+            Continue to checkout →
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<div
+    class="quick-view-backdrop"
+    id="quick-view-backdrop"
+    aria-hidden="true"
+></div>
+
+
+<section
+    class="quick-view"
+    id="quick-view"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="quick-view-title"
+>
+
+    <button
+        type="button"
+        class="quick-view-close"
+        id="quick-view-close"
+        aria-label="Close product preview"
+    >
+        ✕
+    </button>
+
+
+    <div class="quick-view-image">
+
+        <img
+            id="quick-view-image"
+            src=""
+            alt=""
+        >
+
+    </div>
+
+
+    <div class="quick-view-info">
+
+        <span
+            class="product-category"
+            id="quick-view-category"
+        ></span>
+
+        <h2 id="quick-view-title"></h2>
+
+        <div
+            class="rating"
+            id="quick-view-rating"
+        ></div>
+
+        <p id="quick-view-description"></p>
+
+        <strong
+            class="quick-view-price"
+            id="quick-view-price"
+        ></strong>
+
+        <button
+            type="button"
+            class="shop-primary-button quick-add"
+            id="quick-add"
+        >
+            Add to cart →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<footer class="shop-footer">
+
+    <div class="shop-footer-main">
+
+        <div class="shop-footer-brand">
+
+            <a
+                href="../index.html"
+                class="shop-brand footer-brand"
+            >
+
+                <span class="shop-brand-paw">
+                    🐾
+                </span>
+
+                <span>
+                    PawPal
+                </span>
+
+            </a>
+
+            <p>
+                Connecting loving people with pets
+                who need them — and helping every
+                pet live a happier life.
+            </p>
+
+        </div>
+
+
+        <div class="shop-footer-links">
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="./pets.html">
+                    Find a Pet
+                </a>
+
+                <a href="./how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="./shop.html">
+                    Shop
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Shop
+                </h4>
+
+                <a
+                    href="#products"
+                    data-footer-category="food"
+                >
+                    Pet Food
+                </a>
+
+                <a
+                    href="#products"
+                    data-footer-category="clothes"
+                >
+                    Clothes
+                </a>
+
+                <a
+                    href="#products"
+                    data-footer-category="hygiene"
+                >
+                    Hygiene
+                </a>
+
+                <a
+                    href="#products"
+                    data-footer-category="beds"
+                >
+                    Beds & Nests
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Get in touch
+                </h4>
+
+                <a href="mailto:hello@pawpal.com">
+                    hello@pawpal.com
+                </a>
+
+                <span>
+                    Kerala, India
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="shop-footer-bottom">
+
+        <span>
+            ©
+            <span id="current-year">
+                2026
+            </span>
+            PawPal.
+            Made with ♥ for animals.
+        </span>
+
+        <span>
+            Pet care made with love.
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<script src="../js/shop.js"></script>
+
+</body>
+</html>

@@ -16,7 +16,6 @@
 
 <div class="dashboard-app">
 
-
     <!-- =====================================================
          SIDEBAR
          ===================================================== -->
@@ -502,8 +501,9 @@
 
                         <div class="card-body">
 
-                            <div class="pet-grid"
-                                 style="grid-template-columns:repeat(2,1fr);">
+                            <div
+                                class="pet-grid"
+                                style="grid-template-columns:repeat(2,1fr);">
 
                                 <article class="pet-card">
 
@@ -513,8 +513,12 @@
                                             src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80"
                                             alt="Bruno">
 
-                                        <button class="pet-favourite">
+                                        <button
+                                            class="pet-favourite"
+                                            type="button">
+
                                             ♥
+
                                         </button>
 
                                     </div>
@@ -554,8 +558,12 @@
                                             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=80"
                                             alt="Luna">
 
-                                        <button class="pet-favourite">
+                                        <button
+                                            class="pet-favourite"
+                                            type="button">
+
                                             ♥
+
                                         </button>
 
                                     </div>
@@ -630,7 +638,6 @@
                                         <strong>
                                             Bruno
                                         </strong>
-
                                         to your favourites.
 
                                         <span class="activity-time">
@@ -751,8 +758,12 @@
 
                             </div>
 
-                            <button class="pet-favourite">
+                            <button
+                                class="pet-favourite"
+                                type="button">
+
                                 ♡
+
                             </button>
 
                         </div>
@@ -818,8 +829,12 @@
 
                             </div>
 
-                            <button class="pet-favourite">
+                            <button
+                                class="pet-favourite"
+                                type="button">
+
                                 ♡
+
                             </button>
 
                         </div>
@@ -885,8 +900,12 @@
 
                             </div>
 
-                            <button class="pet-favourite">
+                            <button
+                                class="pet-favourite"
+                                type="button">
+
                                 ♡
+
                             </button>
 
                         </div>
@@ -975,8 +994,12 @@
                                 src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=80"
                                 alt="Bruno">
 
-                            <button class="pet-favourite">
+                            <button
+                                class="pet-favourite"
+                                type="button">
+
                                 ♥
+
                             </button>
 
                         </div>
@@ -992,8 +1015,15 @@
                             </div>
 
                             <div class="pet-meta">
-                                <span>2 years</span>
-                                <span>Male</span>
+
+                                <span>
+                                    2 years
+                                </span>
+
+                                <span>
+                                    Male
+                                </span>
+
                             </div>
 
                             <div class="pet-actions">
@@ -1021,8 +1051,12 @@
                                 src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=80"
                                 alt="Luna">
 
-                            <button class="pet-favourite">
+                            <button
+                                class="pet-favourite"
+                                type="button">
+
                                 ♥
+
                             </button>
 
                         </div>
@@ -1038,8 +1072,15 @@
                             </div>
 
                             <div class="pet-meta">
-                                <span>1 year</span>
-                                <span>Female</span>
+
+                                <span>
+                                    1 year
+                                </span>
+
+                                <span>
+                                    Female
+                                </span>
+
                             </div>
 
                             <div class="pet-actions">
@@ -1080,7 +1121,8 @@
                         </h2>
 
                         <p>
-                            Track your adoption requests.
+                            Track your adoption requests
+                            and follow their progress.
                         </p>
 
                     </div>
@@ -1099,11 +1141,27 @@
                                 <thead>
 
                                     <tr>
-                                        <th>Pet</th>
-                                        <th>Submitted</th>
-                                        <th>Shelter</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+
+                                        <th>
+                                            Pet
+                                        </th>
+
+                                        <th>
+                                            Submitted
+                                        </th>
+
+                                        <th>
+                                            Shelter
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+
                                     </tr>
 
                                 </thead>
@@ -1111,14 +1169,18 @@
 
                                 <tbody>
 
+                                    <!-- BRUNO APPLICATION -->
+
                                     <tr>
 
                                         <td>
-                                            Bruno
+                                            <strong>
+                                                Bruno
+                                            </strong>
                                         </td>
 
                                         <td>
-                                            Aug 30
+                                            Aug 30, 2026
                                         </td>
 
                                         <td>
@@ -1126,34 +1188,40 @@
                                         </td>
 
                                         <td>
+
                                             <span class="status pending">
-                                                Pending
+                                                Home Verification
                                             </span>
+
                                         </td>
 
                                         <td>
 
-                                            <button
-                                                class="btn btn-secondary btn-small"
-                                                onclick="showToast('Application details opened')">
+                                            <a
+                                                href="adoption-status.html"
+                                                class="btn btn-primary btn-small">
 
-                                                View
+                                                Track Status
 
-                                            </button>
+                                            </a>
 
                                         </td>
 
                                     </tr>
 
 
+                                    <!-- LUNA APPLICATION -->
+
                                     <tr>
 
                                         <td>
-                                            Luna
+                                            <strong>
+                                                Luna
+                                            </strong>
                                         </td>
 
                                         <td>
-                                            Aug 25
+                                            Aug 25, 2026
                                         </td>
 
                                         <td>
@@ -1161,20 +1229,22 @@
                                         </td>
 
                                         <td>
+
                                             <span class="status approved">
                                                 Approved
                                             </span>
+
                                         </td>
 
                                         <td>
 
-                                            <button
-                                                class="btn btn-primary btn-small"
-                                                onclick="showToast('Adoption journey opened')">
+                                            <a
+                                                href="adoption-status.html?pet=luna"
+                                                class="btn btn-primary btn-small">
 
-                                                Continue
+                                                Track Status
 
-                                            </button>
+                                            </a>
 
                                         </td>
 
@@ -1323,13 +1393,13 @@
 
                             <div style="margin-top:20px;">
 
-                                <button
-                                    class="btn btn-primary"
-                                    onclick="showToast('Meet & greet request sent')">
+                                <a
+                                    href="adoption-status.html?pet=luna"
+                                    class="btn btn-primary">
 
-                                    Request Meet & Greet
+                                    View Adoption Status
 
-                                </button>
+                                </a>
 
                             </div>
 
@@ -1403,11 +1473,12 @@
                                 <div class="activity-text">
 
                                     <strong>
-                                        Bruno is still available for adoption.
+                                        Bruno's application moved to
+                                        Home Verification.
                                     </strong>
 
                                     <span class="activity-time">
-                                        2 days ago
+                                        Today
                                     </span>
 
                                 </div>
@@ -1554,9 +1625,7 @@
                                     About Me
                                 </label>
 
-                                <textarea>
-I love animals and I'm looking forward to giving a pet a happy and loving home.
-                                </textarea>
+                                <textarea>I love animals and I'm looking forward to giving a pet a happy and loving home.</textarea>
 
                             </div>
 
@@ -1567,6 +1636,7 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
                             <button
                                 class="btn btn-primary"
+                                type="button"
                                 onclick="showToast('Profile saved successfully')">
 
                                 Save Changes
@@ -1630,6 +1700,7 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
                                 <button
                                     class="toggle active"
+                                    type="button"
                                     onclick="toggleSetting(this)">
                                 </button>
 
@@ -1653,6 +1724,7 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
                                 <button
                                     class="toggle active"
+                                    type="button"
                                     onclick="toggleSetting(this)">
                                 </button>
 
@@ -1675,6 +1747,7 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
                                 <button
                                     class="toggle active"
+                                    type="button"
                                     onclick="toggleSetting(this)">
                                 </button>
 
@@ -1697,10 +1770,12 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
                                 <button
                                     class="toggle"
+                                    type="button"
                                     onclick="toggleSetting(this)">
                                 </button>
 
                             </div>
+
 
                         </div>
 
@@ -1718,7 +1793,9 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 </div>
 
 
-<!-- TOAST -->
+<!-- =====================================================
+     TOAST
+     ===================================================== -->
 
 <div
     class="dashboard-toast"
@@ -1742,20 +1819,28 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
         document.getElementById('sidebarOverlay');
 
 
-    mobileMenuBtn.addEventListener('click', () => {
+    if (mobileMenuBtn) {
 
-        sidebar.classList.toggle('open');
-        sidebarOverlay.classList.toggle('show');
+        mobileMenuBtn.addEventListener('click', () => {
 
-    });
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('show');
+
+        });
+
+    }
 
 
-    sidebarOverlay.addEventListener('click', () => {
+    if (sidebarOverlay) {
 
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('show');
+        sidebarOverlay.addEventListener('click', () => {
 
-    });
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('show');
+
+        });
+
+    }
 
 
     /* =====================================================
@@ -1763,7 +1848,9 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
        ===================================================== */
 
     const sidebarLinks =
-        document.querySelectorAll('.sidebar-link[href^="#"]');
+        document.querySelectorAll(
+            '.sidebar-link[href^="#"]'
+        );
 
 
     sidebarLinks.forEach(link => {
@@ -1771,7 +1858,9 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
         link.addEventListener('click', () => {
 
             sidebarLinks.forEach(item => {
+
                 item.classList.remove('active');
+
             });
 
             link.classList.add('active');
@@ -1812,6 +1901,10 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
 
         const toast =
             document.getElementById('dashboardToast');
+
+        if (!toast) {
+            return;
+        }
 
         toast.textContent = message;
 
@@ -1855,19 +1948,28 @@ I love animals and I'm looking forward to giving a pet a happy and loving home.
         .querySelectorAll('.pet-favourite')
         .forEach(button => {
 
-            button.addEventListener('click', () => {
+            button.addEventListener('click', event => {
 
-                if (button.textContent.trim() === '♡') {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (
+                    button.textContent.trim() === '♡'
+                ) {
 
                     button.textContent = '♥';
 
-                    showToast('Pet saved to favourites');
+                    showToast(
+                        'Pet saved to favourites'
+                    );
 
                 } else {
 
                     button.textContent = '♡';
 
-                    showToast('Pet removed from favourites');
+                    showToast(
+                        'Pet removed from favourites'
+                    );
 
                 }
 

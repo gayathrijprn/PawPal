@@ -945,265 +945,6 @@ a {
 }
 
 
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 1100px) {
-
-    .navigation {
-        gap: 18px;
-    }
-
-    .care-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .care-card {
-        min-height: auto;
-    }
-
-    .care-hero {
-        padding-left: 7%;
-        padding-right: 7%;
-    }
-
-    .hero-illustration {
-        width: 320px;
-        height: 320px;
-    }
-
-    .illustration-circle {
-        width: 260px;
-        height: 260px;
-        font-size: 105px;
-    }
-
-}
-
-
-@media (max-width: 850px) {
-
-    .navbar {
-        padding: 15px 5%;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .navigation {
-        order: 3;
-        width: 100%;
-
-        justify-content: center;
-
-        overflow-x: auto;
-
-        padding-bottom: 5px;
-    }
-
-    .navigation a {
-        white-space: nowrap;
-    }
-
-    .nav-right {
-        margin-left: auto;
-    }
-
-    .care-hero {
-        min-height: auto;
-
-        padding-top: 65px;
-        padding-bottom: 70px;
-
-        flex-direction: column;
-
-        text-align: center;
-    }
-
-    .hero-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .hero-content > p {
-        max-width: 650px;
-    }
-
-    .hero-illustration {
-        margin-top: 10px;
-    }
-
-    .detail-section,
-    .detail-section.reverse {
-        grid-template-columns: 1fr;
-
-        gap: 50px;
-
-        padding: 80px 7%;
-    }
-
-    .detail-section.reverse .detail-visual,
-    .detail-section.reverse .detail-content {
-        grid-column: auto;
-        grid-row: auto;
-    }
-
-    .detail-section.reverse .detail-visual {
-        order: 1;
-    }
-
-    .detail-section.reverse .detail-content {
-        order: 2;
-    }
-
-    .detail-content {
-        max-width: 700px;
-        margin: auto;
-    }
-
-    .footer-main {
-        flex-direction: column;
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .navbar {
-        min-height: auto;
-    }
-
-    .brand {
-        font-size: 24px;
-    }
-
-    .nav-right {
-        gap: 10px;
-    }
-
-    .login-link {
-        display: none;
-    }
-
-    .nav-button {
-        padding: 9px 15px;
-    }
-
-    .navigation {
-        justify-content: flex-start;
-        gap: 22px;
-    }
-
-    .care-hero {
-        padding: 55px 6% 65px;
-    }
-
-    .hero-content h1 {
-        font-size: 45px;
-        letter-spacing: -1px;
-    }
-
-    .hero-content > p {
-        font-size: 15px;
-    }
-
-    .hero-buttons {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .hero-buttons a {
-        width: 100%;
-    }
-
-    .hero-illustration {
-        width: 270px;
-        height: 270px;
-    }
-
-    .illustration-circle {
-        width: 215px;
-        height: 215px;
-
-        border-width: 9px;
-
-        font-size: 85px;
-    }
-
-    .floating-card {
-        padding: 9px 12px;
-        font-size: 11px;
-    }
-
-    .card-one {
-        right: -5px;
-        top: 25px;
-    }
-
-    .card-two {
-        left: -5px;
-        bottom: 25px;
-    }
-
-    .care-options {
-        padding: 75px 5%;
-    }
-
-    .section-heading {
-        margin-bottom: 40px;
-    }
-
-    .section-heading h2 {
-        font-size: 35px;
-    }
-
-    .care-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .care-card {
-        padding: 27px;
-    }
-
-    .detail-section,
-    .detail-section.reverse {
-        padding: 70px 6%;
-    }
-
-    .big-detail-icon {
-        width: 220px;
-        height: 220px;
-
-        font-size: 85px;
-    }
-
-    .detail-content h2 {
-        font-size: 37px;
-    }
-
-    .feature-list,
-    .wellness-grid,
-    .heat-features {
-        grid-template-columns: 1fr;
-    }
-
-    .routine-section {
-        padding: 75px 6%;
-    }
-
-    .routine-content h2 {
-        font-size: 39px;
-    }
-
-    .footer {
-        padding: 55px 7% 20px;
-    }
-
-    .footer-links {
-        gap: 50px;
-    }
-
-}
 /* =========================================================
    EXPANDED PET WELLNESS
    ========================================================= */
@@ -1819,6 +1560,841 @@ a {
 
 
 /* =========================================================
+   HEALTH TIMELINE
+   ========================================================= */
+
+.health-timeline-section {
+    padding: 110px 8%;
+
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(239, 200, 186, 0.25),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(216, 224, 208, 0.30),
+            transparent 28%
+        ),
+        var(--cream-soft);
+
+    scroll-margin-top: 80px;
+}
+
+
+/* HEALTH HEADING */
+
+.health-timeline-heading {
+    max-width: 760px;
+    margin: 0 auto 45px;
+
+    text-align: center;
+}
+
+.health-timeline-heading h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(38px, 5vw, 57px);
+
+    line-height: 1.1;
+
+    margin-bottom: 18px;
+}
+
+.health-timeline-heading h2 span {
+    display: block;
+
+    color: var(--coral);
+}
+
+.health-timeline-heading p {
+    color: var(--text-soft);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* ================= PET SELECTOR ================= */
+
+.health-pet-selector {
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    padding: 7px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.health-pet-button {
+    position: relative;
+
+    border: none;
+
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: left;
+
+    background: transparent;
+
+    color: var(--text);
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    font-family: "DM Sans", sans-serif;
+
+    transition: 0.25s ease;
+}
+
+.health-pet-button:hover {
+    background: var(--cream-soft);
+}
+
+.health-pet-button.active {
+    background: var(--peach-soft);
+
+    box-shadow: inset 0 0 0 1px rgba(217, 120, 97, 0.18);
+}
+
+.health-pet-avatar {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 14px;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+.health-pet-button strong {
+    display: block;
+
+    font-size: 14px;
+}
+
+.health-pet-button small {
+    display: block;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+
+    margin-top: 2px;
+}
+
+.pet-check {
+    margin-left: auto;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--coral);
+
+    color: white;
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    transform: scale(0.7);
+
+    transition: 0.25s ease;
+}
+
+.health-pet-button.active .pet-check {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* ================= HEALTH SUMMARY ================= */
+
+.health-summary {
+    max-width: 1200px;
+
+    margin: 0 auto 22px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.health-summary-card {
+    min-height: 105px;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow-soft);
+
+    transition: 0.25s ease;
+}
+
+.health-summary-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow);
+}
+
+.health-summary-icon {
+    width: 47px;
+    height: 47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+.vaccine-summary .health-summary-icon {
+    background: var(--peach-soft);
+}
+
+.medication-summary .health-summary-icon {
+    background: var(--sage-soft);
+}
+
+.upcoming-summary .health-summary-icon {
+    background: var(--yellow-soft);
+}
+
+.vet-summary .health-summary-icon {
+    background: var(--lavender-soft);
+}
+
+.health-summary-card span {
+    display: block;
+
+    color: var(--text-light);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    margin-bottom: 3px;
+}
+
+.health-summary-card strong {
+    display: inline-block;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 20px;
+
+    line-height: 1.1;
+}
+
+.health-summary-card small {
+    display: block;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+
+/* ================= HEALTH CONTENT ================= */
+
+.health-content-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.75fr);
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+
+/* ================= TIMELINE CARD ================= */
+
+.health-timeline-card {
+    padding: 30px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.health-card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.health-card-header h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 27px;
+}
+
+.timeline-calendar {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--peach-soft);
+
+    border-radius: 15px;
+
+    font-size: 23px;
+}
+
+
+/* ================= TIMELINE ================= */
+
+.health-timeline {
+    position: relative;
+
+    padding-top: 24px;
+}
+
+.health-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 23px;
+
+    top: 29px;
+
+    bottom: 28px;
+
+    width: 2px;
+
+    background: var(--border);
+}
+
+.health-event {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 48px minmax(0, 1fr);
+
+    gap: 15px;
+
+    padding-bottom: 26px;
+}
+
+.health-event:last-child {
+    padding-bottom: 5px;
+}
+
+.health-event-icon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 47px;
+    height: 47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: var(--cream-soft);
+
+    border: 1px solid var(--border);
+
+    font-size: 20px;
+}
+
+.health-event.vaccination .health-event-icon {
+    background: var(--peach-soft);
+}
+
+.health-event.medication .health-event-icon {
+    background: var(--sage-soft);
+}
+
+.health-event.vet .health-event-icon {
+    background: var(--lavender-soft);
+}
+
+.health-event-content {
+    padding: 3px 0;
+}
+
+.health-event-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 5px;
+}
+
+.health-event-date {
+    color: var(--text-light);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+.health-event-title {
+    font-family: "Playfair Display", serif;
+
+    font-size: 19px;
+
+    line-height: 1.25;
+}
+
+.health-event-description {
+    max-width: 600px;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    margin-top: 5px;
+}
+
+
+/* ================= STATUS BADGES ================= */
+
+.health-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.health-status.completed {
+    background: var(--sage-soft);
+
+    color: var(--sage-dark);
+}
+
+.health-status.active {
+    background: var(--peach-soft);
+
+    color: var(--coral-dark);
+}
+
+.health-status.upcoming {
+    background: var(--yellow-soft);
+
+    color: #876F2F;
+}
+
+
+/* ================= TYPE LABEL ================= */
+
+.health-event-type {
+    display: inline-block;
+
+    margin-top: 7px;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+/* ================= REMINDERS CARD ================= */
+
+.health-reminders-card {
+    padding: 27px;
+
+    background: var(--lavender-soft);
+
+    border: 1px solid #D7CDDC;
+
+    border-radius: 25px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.health-reminders-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 22px;
+}
+
+.health-reminders-header h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+}
+
+.health-reminders-header > span {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 13px;
+
+    font-size: 20px;
+}
+
+
+/* ================= REMINDER LIST ================= */
+
+.health-reminder-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+}
+
+.health-reminder-item {
+    padding: 14px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    background: rgba(255, 255, 255, 0.68);
+
+    border: 1px solid rgba(117, 102, 125, 0.10);
+
+    border-radius: 15px;
+}
+
+.health-reminder-icon {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    flex-shrink: 0;
+}
+
+.health-reminder-item strong {
+    display: block;
+
+    font-size: 11px;
+}
+
+.health-reminder-item small {
+    display: block;
+
+    color: var(--text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    margin-top: 2px;
+}
+
+.health-reminder-date {
+    display: inline-block;
+
+    color: var(--lavender-dark);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    margin-top: 5px;
+}
+
+
+/* ================= ADD RECORD BUTTON ================= */
+
+.add-health-record {
+    width: 100%;
+
+    min-height: 45px;
+
+    border: 1px dashed var(--lavender-dark);
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    color: var(--lavender-dark);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.add-health-record span {
+    font-size: 16px;
+
+    vertical-align: middle;
+
+    margin-right: 4px;
+}
+
+.add-health-record:hover {
+    background: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* ================= HEALTH NOTE ================= */
+
+.health-note {
+    max-width: 1200px;
+
+    margin: 20px auto 0;
+
+    padding: 20px 23px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    background: var(--sage-soft);
+
+    border: 1px solid #D0DCC8;
+
+    border-radius: 18px;
+}
+
+.health-note-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.health-note strong {
+    display: block;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 16px;
+
+    margin-bottom: 3px;
+}
+
+.health-note p {
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= DEMO NOTE ================= */
+
+.health-demo-note {
+    max-width: 1200px;
+
+    margin: 12px auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    justify-content: center;
+
+    color: var(--text-light);
+
+    font-size: 9px;
+
+    text-align: center;
+}
+
+.health-demo-note span {
+    font-size: 13px;
+}
+
+.health-demo-note p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE - GENERAL
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navigation {
+        gap: 18px;
+    }
+
+    .care-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .care-card {
+        min-height: auto;
+    }
+
+    .care-hero {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .hero-illustration {
+        width: 320px;
+        height: 320px;
+    }
+
+    .illustration-circle {
+        width: 260px;
+        height: 260px;
+        font-size: 105px;
+    }
+
+    .health-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .health-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .health-reminders-card {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
    RESPONSIVE - EXPANDED SECTIONS
    ========================================================= */
 
@@ -1847,6 +2423,105 @@ a {
 
 }
 
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .navbar {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .navigation {
+        order: 3;
+        width: 100%;
+
+        justify-content: center;
+
+        overflow-x: auto;
+
+        padding-bottom: 5px;
+    }
+
+    .navigation a {
+        white-space: nowrap;
+    }
+
+    .nav-right {
+        margin-left: auto;
+    }
+
+    .care-hero {
+        min-height: auto;
+
+        padding-top: 65px;
+        padding-bottom: 70px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-content > p {
+        max-width: 650px;
+    }
+
+    .hero-illustration {
+        margin-top: 10px;
+    }
+
+    .detail-section,
+    .detail-section.reverse {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        padding: 80px 7%;
+    }
+
+    .detail-section.reverse .detail-visual,
+    .detail-section.reverse .detail-content {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .detail-section.reverse .detail-visual {
+        order: 1;
+    }
+
+    .detail-section.reverse .detail-content {
+        order: 2;
+    }
+
+    .detail-content {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .footer-main {
+        flex-direction: column;
+    }
+
+    .health-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
 
@@ -1901,6 +2576,1533 @@ a {
 
     .heat-warning {
         padding: 19px;
+    }
+
+    /* HEALTH TIMELINE */
+
+    .health-timeline-section {
+        padding: 75px 5%;
+    }
+
+    .health-timeline-heading h2 {
+        font-size: 38px;
+    }
+
+    .health-pet-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .health-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .health-summary-card {
+        min-height: 90px;
+    }
+
+    .health-timeline-card {
+        padding: 22px 18px;
+    }
+
+    .health-card-header h3 {
+        font-size: 22px;
+    }
+
+    .timeline-calendar {
+        width: 43px;
+        height: 43px;
+        font-size: 19px;
+    }
+
+    .health-event {
+        grid-template-columns: 42px minmax(0, 1fr);
+
+        gap: 12px;
+    }
+
+    .health-event-icon {
+        width: 41px;
+        height: 41px;
+
+        font-size: 17px;
+    }
+
+    .health-timeline::before {
+        left: 20px;
+    }
+
+    .health-event-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .health-event-title {
+        font-size: 17px;
+    }
+
+    .health-reminders-card {
+        padding: 22px 18px;
+    }
+
+    .health-note {
+        padding: 17px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        min-height: auto;
+    }
+
+    .brand {
+        font-size: 24px;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
+
+    .login-link {
+        display: none;
+    }
+
+    .nav-button {
+        padding: 9px 15px;
+    }
+
+    .navigation {
+        justify-content: flex-start;
+        gap: 22px;
+    }
+
+    .care-hero {
+        padding: 55px 6% 65px;
+    }
+
+    .hero-content h1 {
+        font-size: 45px;
+        letter-spacing: -1px;
+    }
+
+    .hero-content > p {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+    }
+
+    .hero-illustration {
+        width: 270px;
+        height: 270px;
+    }
+
+    .illustration-circle {
+        width: 215px;
+        height: 215px;
+
+        border-width: 9px;
+
+        font-size: 85px;
+    }
+
+    .floating-card {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .card-one {
+        right: -5px;
+        top: 25px;
+    }
+
+    .card-two {
+        left: -5px;
+        bottom: 25px;
+    }
+
+    .care-options {
+        padding: 75px 5%;
+    }
+
+    .section-heading {
+        margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+        font-size: 35px;
+    }
+
+    .care-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .care-card {
+        padding: 27px;
+    }
+
+    .detail-section,
+    .detail-section.reverse {
+        padding: 70px 6%;
+    }
+
+    .big-detail-icon {
+        width: 220px;
+        height: 220px;
+
+        font-size: 85px;
+    }
+
+    .detail-content h2 {
+        font-size: 37px;
+    }
+
+    .feature-list,
+    .wellness-grid,
+    .heat-features {
+        grid-template-columns: 1fr;
+    }
+
+    .routine-section {
+        padding: 75px 6%;
+    }
+
+    .routine-content h2 {
+        font-size: 39px;
+    }
+
+    .footer {
+        padding: 55px 7% 20px;
+    }
+
+    .footer-links {
+        gap: 50px;
+    }
+
+    /* HEALTH TIMELINE */
+
+    .health-timeline-heading h2 {
+        font-size: 35px;
+    }
+
+    .health-timeline-heading p {
+        font-size: 14px;
+    }
+
+    .health-pet-button {
+        padding: 12px;
+    }
+
+    .health-pet-avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .health-summary-card {
+        padding: 17px;
+    }
+
+    .health-event-description {
+        font-size: 10px;
+    }
+
+    .health-demo-note {
+        align-items: flex-start;
+    }
+
+}
+
+/* =========================================================
+   PAWPAL - HEALTH TIMELINE
+   Vaccination • Medication • Vet Visits • Reminders
+   ========================================================= */
+
+
+/* ================= HEALTH FEATURE BANNER ================= */
+
+.health-feature-banner {
+    width: 100%;
+    margin-top: 55px;
+    padding: 28px 32px;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    background: linear-gradient(
+        135deg,
+        #F1E8DE,
+        #F8F0E8
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    box-shadow: var(--shadow-soft);
+}
+
+
+.health-feature-icon {
+    width: 68px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 31px;
+
+    background: var(--white);
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 20px rgba(72, 52, 43, 0.07);
+}
+
+
+.health-feature-content {
+    flex: 1;
+}
+
+
+.health-feature-content .mini-label {
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color: var(--coral);
+}
+
+
+.health-feature-content h3 {
+    margin: 0 0 7px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+    line-height: 1.25;
+
+    color: var(--text);
+}
+
+
+.health-feature-content p {
+    margin: 0;
+
+    max-width: 680px;
+
+    font-size: 14px;
+    line-height: 1.65;
+
+    color: var(--text-soft);
+}
+
+
+.health-banner-link {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 18px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--coral);
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.health-banner-link span {
+    font-size: 18px;
+
+    transition: transform 0.25s ease;
+}
+
+
+.health-banner-link:hover {
+    transform: translateY(-2px);
+
+    background: var(--cream-soft);
+
+    box-shadow: var(--shadow-soft);
+}
+
+
+.health-banner-link:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   HEALTH TIMELINE SECTION
+   ========================================================= */
+
+.health-timeline-section {
+    width: 100%;
+
+    padding: 105px 7% 115px;
+
+    background: var(--cream-soft);
+}
+
+
+.health-timeline-heading {
+    max-width: 760px;
+
+    margin: 0 auto 48px;
+
+    text-align: center;
+}
+
+
+.health-timeline-heading .section-label {
+    display: inline-block;
+    margin-bottom: 14px;
+}
+
+
+.health-timeline-heading h2 {
+    margin: 0 0 18px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(34px, 4vw, 52px);
+
+    line-height: 1.12;
+
+    color: var(--text);
+}
+
+
+.health-timeline-heading h2 span {
+    color: var(--coral);
+}
+
+
+.health-timeline-heading p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    color: var(--text-soft);
+}
+
+
+/* =========================================================
+   HEALTH APP
+   ========================================================= */
+
+.health-timeline-app {
+    width: 100%;
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 34px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 28px;
+
+    box-shadow: var(--shadow);
+}
+
+
+/* ================= APP TOP ================= */
+
+.health-app-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 28px;
+}
+
+
+.health-app-top .mini-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+
+    color: var(--coral);
+}
+
+
+.health-app-top h3 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+
+    color: var(--text);
+}
+
+
+/* ================= ADD BUTTON ================= */
+
+.add-health-button {
+    border: none;
+
+    padding: 13px 19px;
+
+    border-radius: 12px;
+
+    background: var(--coral);
+
+    color: var(--white);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.add-health-button:hover {
+    background: var(--coral-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(201, 95, 73, 0.2);
+}
+
+
+.add-health-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   PET SELECTOR
+   ========================================================= */
+
+.pet-selector {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.pet-selector-button {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    padding: 15px 18px;
+
+    text-align: left;
+
+    background: var(--cream-soft);
+
+    border: 1px solid var(--border);
+    border-radius: 17px;
+
+    cursor: pointer;
+
+    font-family: "DM Sans", sans-serif;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.pet-selector-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-soft);
+
+    background: var(--white);
+}
+
+
+.pet-selector-button.active {
+    background: var(--pink-soft);
+
+    border-color: var(--coral);
+
+    box-shadow:
+        0 8px 22px rgba(72, 52, 43, 0.07);
+}
+
+
+.pet-avatar {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border-radius: 14px;
+
+    font-size: 24px;
+}
+
+
+.pet-selector-button > span:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.pet-selector-button strong {
+    font-size: 14px;
+
+    color: var(--text);
+}
+
+
+.pet-selector-button small {
+    font-size: 11px;
+
+    color: var(--text-soft);
+}
+
+
+.selector-check {
+    width: 23px;
+    height: 23px;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--border);
+
+    color: transparent;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.pet-selector-button.active .selector-check {
+    background: var(--coral);
+
+    color: var(--white);
+}
+
+
+/* =========================================================
+   HEALTH SUMMARY
+   ========================================================= */
+
+.health-summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.health-summary-card {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 19px;
+
+    background: var(--cream-soft);
+
+    border: 1px solid var(--border);
+    border-radius: 17px;
+}
+
+
+.health-summary-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border-radius: 12px;
+
+    font-size: 19px;
+}
+
+
+.health-summary-card > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.health-summary-label {
+    font-size: 11px;
+
+    color: var(--text-light);
+}
+
+
+.health-summary-value {
+    font-family: "Playfair Display", serif;
+
+    font-size: 21px;
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   MAIN HEALTH GRID
+   ========================================================= */
+
+.health-main-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(300px, 0.8fr);
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   TIMELINE CARD
+   ========================================================= */
+
+.timeline-card {
+    padding: 27px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+
+.timeline-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+
+.timeline-card-header .mini-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    color: var(--coral);
+}
+
+
+.timeline-card-header h3 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+
+    color: var(--text);
+}
+
+
+.timeline-calendar {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cream);
+
+    border-radius: 13px;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   TIMELINE LIST
+   ========================================================= */
+
+.health-timeline-list {
+    position: relative;
+}
+
+
+.health-timeline-list::before {
+    content: "";
+
+    position: absolute;
+
+    top: 20px;
+    bottom: 20px;
+
+    left: 20px;
+
+    width: 1px;
+
+    background: var(--border);
+}
+
+
+.timeline-item {
+    position: relative;
+
+    display: flex;
+
+    gap: 17px;
+
+    padding-bottom: 23px;
+}
+
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+
+.timeline-marker {
+    position: relative;
+    z-index: 2;
+
+    width: 41px;
+    height: 41px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cream-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 50%;
+
+    font-size: 17px;
+}
+
+
+.timeline-marker.completed {
+    background: var(--sage-soft);
+
+    border-color: #C7D2BE;
+}
+
+
+.timeline-marker.active {
+    background: var(--yellow-soft);
+
+    border-color: #E7D59D;
+}
+
+
+.timeline-marker.upcoming {
+    background: var(--pink-soft);
+
+    border-color: var(--coral-soft);
+}
+
+
+.timeline-item-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 3px 0 0;
+}
+
+
+.timeline-item-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.timeline-date {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--text-light);
+
+    letter-spacing: 0.3px;
+}
+
+
+.timeline-item h4 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 18px;
+
+    color: var(--text);
+}
+
+
+.health-status {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.health-status.completed {
+    background: var(--sage-soft);
+
+    color: var(--sage-dark);
+}
+
+
+.health-status.active {
+    background: var(--yellow-soft);
+
+    color: #806A32;
+}
+
+
+.health-status.upcoming {
+    background: var(--pink-soft);
+
+    color: var(--coral-dark);
+}
+
+
+.timeline-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    color: var(--text-soft);
+}
+
+
+.timeline-meta span:first-child {
+    font-weight: 700;
+
+    color: var(--lavender-dark);
+}
+
+
+/* =========================================================
+   REMINDERS CARD
+   ========================================================= */
+
+.health-reminders-card {
+    padding: 27px;
+
+    background: var(--cream);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+}
+
+
+.health-reminders-card .mini-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    color: var(--coral);
+}
+
+
+.health-reminders-card h3 {
+    margin: 0 0 23px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+    line-height: 1.3;
+
+    color: var(--text);
+}
+
+
+/* =========================================================
+   REMINDER ITEMS
+   ========================================================= */
+
+.upcoming-reminders {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.upcoming-reminder {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+}
+
+
+.reminder-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cream-soft);
+
+    border-radius: 11px;
+
+    font-size: 17px;
+}
+
+
+.reminder-info {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.reminder-info strong {
+    font-size: 12px;
+
+    color: var(--text);
+}
+
+
+.reminder-info span {
+    font-size: 10px;
+
+    color: var(--text-light);
+}
+
+
+.reminder-status {
+    flex-shrink: 0;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    padding: 5px 7px;
+
+    border-radius: 20px;
+
+    background: var(--pink-soft);
+
+    color: var(--coral-dark);
+}
+
+
+.reminder-status.active {
+    background: var(--yellow-soft);
+
+    color: #806A32;
+}
+
+
+.reminder-status.plan-ahead {
+    background: var(--lavender-soft);
+
+    color: var(--lavender-dark);
+}
+
+
+/* =========================================================
+   HEALTH NOTE
+   ========================================================= */
+
+.health-note {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    background: rgba(255, 255, 255, 0.65);
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+}
+
+
+.health-note > span {
+    flex-shrink: 0;
+
+    font-size: 16px;
+}
+
+
+.health-note p {
+    margin: 0;
+
+    font-size: 10px;
+    line-height: 1.6;
+
+    color: var(--text-soft);
+}
+
+
+/* =========================================================
+   HEALTH TOAST
+   ========================================================= */
+
+.health-toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 30px;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 18px;
+
+    background: var(--text);
+
+    color: var(--white);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.18);
+
+    transform:
+        translate(-50%, 25px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.health-toast.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+.health-toast span {
+    font-size: 17px;
+}
+
+
+.health-toast p {
+    margin: 0;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .health-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .health-reminders-card {
+        display: grid;
+
+        grid-template-columns:
+            auto 1fr;
+
+        column-gap: 25px;
+    }
+
+
+    .health-reminders-card .mini-label,
+    .health-reminders-card h3 {
+        grid-column: 1 / -1;
+    }
+
+
+    .upcoming-reminders {
+        grid-column: 1;
+    }
+
+
+    .health-note {
+        grid-column: 2;
+
+        margin-top: 0;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 850px
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .health-feature-banner {
+        flex-wrap: wrap;
+    }
+
+
+    .health-feature-content {
+        min-width: calc(100% - 100px);
+    }
+
+
+    .health-banner-link {
+        margin-left: 90px;
+    }
+
+
+    .health-summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .health-timeline-section {
+        padding: 75px 5% 80px;
+    }
+
+
+    .health-timeline-app {
+        padding: 22px;
+
+        border-radius: 22px;
+    }
+
+
+    .health-app-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .add-health-button {
+        width: 100%;
+    }
+
+
+    .pet-selector {
+        grid-template-columns: 1fr;
+    }
+
+
+    .health-main-grid {
+        gap: 15px;
+    }
+
+
+    .timeline-card,
+    .health-reminders-card {
+        padding: 20px;
+    }
+
+
+    .health-reminders-card {
+        display: block;
+    }
+
+
+    .health-note {
+        margin-top: 20px;
+    }
+
+
+    .timeline-item-top {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .timeline-meta {
+        line-height: 1.5;
+    }
+
+
+    .health-feature-banner {
+        padding: 23px;
+    }
+
+
+    .health-feature-icon {
+        width: 55px;
+        height: 55px;
+
+        font-size: 25px;
+    }
+
+
+    .health-feature-content {
+        min-width: 0;
+    }
+
+
+    .health-feature-content h3 {
+        font-size: 20px;
+    }
+
+
+    .health-banner-link {
+        margin-left: 0;
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .health-timeline-heading h2 {
+        font-size: 32px;
+    }
+
+
+    .health-timeline-heading p {
+        font-size: 13px;
+    }
+
+
+    .health-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .health-summary-card {
+        padding: 15px;
+    }
+
+
+    .health-app-top h3 {
+        font-size: 21px;
+    }
+
+
+    .pet-selector-button {
+        padding: 13px;
+    }
+
+
+    .timeline-card-header h3 {
+        font-size: 21px;
+    }
+
+
+    .timeline-item {
+        gap: 12px;
+    }
+
+
+    .timeline-marker {
+        width: 36px;
+        height: 36px;
+
+        font-size: 15px;
+    }
+
+
+    .health-timeline-list::before {
+        left: 17px;
+    }
+
+
+    .timeline-item h4 {
+        font-size: 16px;
+    }
+
+
+    .timeline-meta {
+        font-size: 10px;
+    }
+
+
+    .health-status {
+        font-size: 9px;
+    }
+
+
+    .upcoming-reminder {
+        align-items: flex-start;
+    }
+
+
+    .reminder-status {
+        display: none;
+    }
+
+
+    .health-feature-content p {
+        font-size: 12px;
     }
 
 }

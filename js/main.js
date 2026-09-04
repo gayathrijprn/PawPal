@@ -1,93 +1,560 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
-       PAWPAL MAIN WEBSITE JAVASCRIPT
-       FRONTEND ONLY
-    ====================================================== */
+       ELEMENTS
+    ===================================================== */
+
+    const menuButton =
+        document.getElementById("mobileMenuButton");
+
+    const navigation =
+        document.getElementById("mainNavigation");
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresButton =
+        document.getElementById("featuresButton");
+
+    const rescueDropdown =
+        document.getElementById("rescueDropdown");
+
+    const rescueButton =
+        document.getElementById("rescueDropdownButton");
 
 
     /* =====================================================
-       MOBILE NAVIGATION
-    ====================================================== */
+       MOBILE MENU
+    ===================================================== */
 
-    const menuButton =
-        document.querySelector(
-            ".mobile-menu-btn, .menu-toggle, [data-menu-toggle]"
-        );
+    if (menuButton && navigation) {
 
+        menuButton.addEventListener("click", function (event) {
 
-    const navigation =
-        document.querySelector(
-            ".nav-links, .navbar-links, .main-nav, .navigation"
-        );
+            event.preventDefault();
+            event.stopPropagation();
 
+            const isOpen =
+                navigation.classList.toggle("mobile-open");
 
-    if (
-        menuButton &&
-        navigation
-    ) {
-
-        menuButton.addEventListener(
-            "click",
-            function () {
-
-                navigation.classList.toggle(
-                    "open"
-                );
-
-
-                menuButton.classList.toggle(
-                    "active"
-                );
-
-            }
-        );
-
-
-        navigation
-            .querySelectorAll("a")
-            .forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            navigation.classList.remove(
-                                "open"
-                            );
-
-                            menuButton.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-                }
+            menuButton.setAttribute(
+                "aria-expanded",
+                String(isOpen)
             );
+
+            menuButton.innerHTML =
+                isOpen ? "✕" : "☰";
+
+        });
 
     }
 
 
     /* =====================================================
-       SMOOTH SCROLLING
-    ====================================================== */
+       FEATURES DROPDOWN
+    ===================================================== */
 
-    document.querySelectorAll(
-        'a[href^="#"]'
-    ).forEach(
-        function (link) {
+    function openFeatures() {
+
+        if (!featuresDropdown || !featuresButton) {
+            return;
+        }
+
+        featuresDropdown.classList.add("dropdown-open");
+
+        featuresButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+    }
+
+
+    function closeFeatures() {
+
+        if (!featuresDropdown || !featuresButton) {
+            return;
+        }
+
+        featuresDropdown.classList.remove(
+            "dropdown-open"
+        );
+
+        featuresButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        closeRescue();
+
+    }
+
+
+    function toggleFeatures() {
+
+        if (!featuresDropdown || !featuresButton) {
+            return;
+        }
+
+        const isOpen =
+            featuresDropdown.classList.contains(
+                "dropdown-open"
+            );
+
+        if (isOpen) {
+            closeFeatures();
+        } else {
+            openFeatures();
+        }
+
+    }
+
+
+    if (featuresButton) {
+
+        featuresButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                toggleFeatures();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       RESCUE & ADOPTION NESTED DROPDOWN
+    ===================================================== */
+
+    function openRescue() {
+
+        if (!rescueDropdown || !rescueButton) {
+            return;
+        }
+
+        rescueDropdown.classList.add(
+            "nested-open"
+        );
+
+        rescueButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+    }
+
+
+    function closeRescue() {
+
+        if (!rescueDropdown || !rescueButton) {
+            return;
+        }
+
+        rescueDropdown.classList.remove(
+            "nested-open"
+        );
+
+        rescueButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+
+    function toggleRescue() {
+
+        if (!rescueDropdown || !rescueButton) {
+            return;
+        }
+
+        const isOpen =
+            rescueDropdown.classList.contains(
+                "nested-open"
+            );
+
+        if (isOpen) {
+            closeRescue();
+        } else {
+            openRescue();
+        }
+
+    }
+
+
+    if (rescueButton) {
+
+        rescueButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                /*
+                 * Make sure the main Features
+                 * dropdown stays open.
+                 */
+
+                openFeatures();
+
+                toggleRescue();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       IMPORTANT:
+       ALLOW RESCUE MENU LINKS TO NAVIGATE
+    ===================================================== */
+
+    if (rescueDropdown) {
+
+        const rescueLinks =
+            rescueDropdown.querySelectorAll(
+                ".nested-dropdown-menu a"
+            );
+
+        rescueLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * DO NOT preventDefault()
+                     * DO NOT stopPropagation()
+                     *
+                     * The browser must be allowed
+                     * to follow the href normally.
+                     */
+
+                    closeRescue();
+                    closeFeatures();
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       FEATURE DROPDOWN LINKS
+    ===================================================== */
+
+    if (featuresDropdown) {
+
+        const featureLinks =
+            featuresDropdown.querySelectorAll(
+                "a"
+            );
+
+        featureLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Let the browser follow
+                     * the href normally.
+                     */
+
+                    closeRescue();
+                    closeFeatures();
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CLICK OUTSIDE DROPDOWNS
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            /*
+             * If click is outside Features dropdown,
+             * close everything.
+             */
+
+            if (
+                featuresDropdown &&
+                !featuresDropdown.contains(event.target)
+            ) {
+
+                closeFeatures();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                closeFeatures();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE MOBILE MENU AFTER NAVIGATION
+    ===================================================== */
+
+    if (navigation) {
+
+        navigation
+            .querySelectorAll("a")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        if (window.innerWidth <= 900) {
+
+                            navigation.classList.remove(
+                                "mobile-open"
+                            );
+
+                            if (menuButton) {
+
+                                menuButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                                menuButton.innerHTML =
+                                    "☰";
+
+                            }
+
+                            closeFeatures();
+
+                        }
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =====================================================
+       FAVOURITES
+    ===================================================== */
+
+    const favouriteButtons =
+        document.querySelectorAll(
+            ".heart-button"
+        );
+
+
+    let favourites = [];
+
+    try {
+
+        favourites =
+            JSON.parse(
+                localStorage.getItem(
+                    "pawpal-favourites"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        favourites = [];
+
+    }
+
+
+    favouriteButtons.forEach(
+        function (button) {
+
+            const petName =
+                button.dataset.pet;
+
+
+            if (
+                favourites.includes(
+                    petName
+                )
+            ) {
+
+                button.classList.add(
+                    "favourite-active"
+                );
+
+                button.textContent =
+                    "♥";
+
+            }
+
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+
+                    if (
+                        favourites.includes(
+                            petName
+                        )
+                    ) {
+
+                        favourites =
+                            favourites.filter(
+                                function (pet) {
+
+                                    return pet !==
+                                        petName;
+
+                                }
+                            );
+
+                        button.classList.remove(
+                            "favourite-active"
+                        );
+
+                        button.textContent =
+                            "♡";
+
+                    } else {
+
+                        favourites.push(
+                            petName
+                        );
+
+                        button.classList.add(
+                            "favourite-active"
+                        );
+
+                        button.textContent =
+                            "♥";
+
+                    }
+
+
+                    localStorage.setItem(
+                        "pawpal-favourites",
+                        JSON.stringify(
+                            favourites
+                        )
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       PET CARD CLICK
+    ===================================================== */
+
+    const petCards =
+        document.querySelectorAll(
+            ".home-pet-card"
+        );
+
+
+    petCards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target.closest(
+                            ".heart-button"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    window.location.href =
+                        "pages/pets.html";
+
+                }
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        window.location.href =
+                            "pages/pets.html";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       SAME-PAGE SMOOTH SCROLL
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(function (link) {
 
             link.addEventListener(
                 "click",
                 function (event) {
 
                     const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
-
+                        link.getAttribute("href");
 
                     if (
                         !targetId ||
@@ -105,33 +572,30 @@ document.addEventListener("DOMContentLoaded", function () {
                         );
 
 
-                    if (!target) {
-                        return;
+                    if (target) {
+
+                        event.preventDefault();
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
                     }
-
-
-                    event.preventDefault();
-
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
 
                 }
             );
 
-        }
-    );
+        });
 
 
     /* =====================================================
        NAVBAR SCROLL EFFECT
-    ====================================================== */
+    ===================================================== */
 
     const navbar =
         document.querySelector(
-            ".navbar, .site-header, header"
+            ".navbar"
         );
 
 
@@ -141,10 +605,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
-        if (
-            window.scrollY > 30
-        ) {
+        if (window.scrollY > 20) {
 
             navbar.classList.add(
                 "scrolled"
@@ -163,7 +624,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener(
         "scroll",
-        updateNavbar
+        updateNavbar,
+        { passive: true }
     );
 
 
@@ -171,570 +633,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       FEATURED PET CARDS
-       -----------------------------------------------------
-       Makes homepage featured pets open their
-       corresponding detail pages.
-    ====================================================== */
-
-    const featuredPets =
-        document.querySelectorAll(
-            ".home-pet-card"
-        );
-
-
-    const featuredPetIds = [
-        "milo",
-        "luna",
-        "bruno"
-    ];
-
-
-    featuredPets.forEach(
-        function (card, index) {
-
-            const petId =
-                card.dataset.pet ||
-                card.dataset.details ||
-                featuredPetIds[index];
-
-
-            if (!petId) {
-                return;
-            }
-
-
-            card.style.cursor =
-                "pointer";
-
-
-            card.setAttribute(
-                "tabindex",
-                "0"
-            );
-
-
-            card.setAttribute(
-                "role",
-                "link"
-            );
-
-
-            card.addEventListener(
-                "click",
-                function (event) {
-
-                    /*
-                       Do not navigate when the
-                       favourite/like button is clicked.
-                    */
-
-                    if (
-                        event.target.closest(
-                            ".pet-like, .pet-favourite, .favorite-button"
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    window.location.href =
-                        "../pages/pet-details.html?pet=" +
-                        encodeURIComponent(
-                            petId
-                        );
-
-                }
-            );
-
-
-            card.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
-
-                        event.preventDefault();
-
-
-                        window.location.href =
-                            "../pages/pet-details.html?pet=" +
-                            encodeURIComponent(
-                                petId
-                            );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       HOMEPAGE PET FAVOURITES
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".pet-like, .home-pet-card .favorite-button"
-    ).forEach(
-        function (button, index) {
-
-            const card =
-                button.closest(
-                    ".home-pet-card"
-                );
-
-
-            if (!card) {
-                return;
-            }
-
-
-            const petId =
-                card.dataset.pet ||
-                card.dataset.details ||
-                featuredPetIds[index] ||
-                card.querySelector(
-                    ".pet-name"
-                )?.textContent
-                    .trim()
-                    .toLowerCase()
-                    .replace(/\s+/g, "-");
-
-
-            const storageKey =
-                "pawpal-favorite-" +
-                petId;
-
-
-            if (
-                localStorage.getItem(
-                    storageKey
-                ) === "true"
-            ) {
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                if (
-                    button.textContent.trim() ===
-                    "♡"
-                ) {
-
-                    button.textContent =
-                        "♥";
-
-                }
-
-            }
-
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-
-                    const active =
-                        button.classList.toggle(
-                            "active"
-                        );
-
-
-                    button.textContent =
-                        active
-                            ? "♥"
-                            : "♡";
-
-
-                    localStorage.setItem(
-                        storageKey,
-                        active
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       CTA BUTTONS
-    ====================================================== */
-
-    document.querySelectorAll(
-        "[data-action]"
-    ).forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    const action =
-                        button.dataset.action;
-
-
-                    if (
-                        action ===
-                        "browse-pets"
-                    ) {
-
-                        event.preventDefault();
-
-                        window.location.href =
-                            "../pages/pets.html";
-
-                    }
-
-
-                    if (
-                        action ===
-                        "login"
-                    ) {
-
-                        event.preventDefault();
-
-                        window.location.href =
-                            "../pages/login.html";
-
-                    }
-
-
-                    if (
-                        action ===
-                        "register"
-                    ) {
-
-                        event.preventDefault();
-
-                        window.location.href =
-                            "../pages/register.html";
-
-                    }
-
-
-                    if (
-                        action ===
-                        "adopt"
-                    ) {
-
-                        event.preventDefault();
-
-                        window.location.href =
-                            "../pages/adoption-form.html";
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       GENERIC BROWSE PETS BUTTONS
-    ====================================================== */
-
-    document.querySelectorAll(
-        ".browse-pets-btn, .find-pet-btn"
-    ).forEach(
-        function (button) {
-
-            const href =
-                button.getAttribute(
-                    "href"
-                );
-
-
-            if (href) {
-                return;
-            }
-
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    window.location.href =
-                        "../pages/pets.html";
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       NEWSLETTER FORM
-    ====================================================== */
-
-    const newsletterForm =
-        document.querySelector(
-            "#newsletterForm, .newsletter-form"
-        );
-
-
-    if (newsletterForm) {
-
-        newsletterForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const emailInput =
-                    newsletterForm.querySelector(
-                        'input[type="email"]'
-                    );
-
-
-                if (
-                    !emailInput ||
-                    !emailInput.value.trim()
-                ) {
-
-                    showMainToast(
-                        "Please enter your email address.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const email =
-                    emailInput.value
-                        .trim();
-
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-                if (
-                    !emailPattern.test(
-                        email
-                    )
-                ) {
-
-                    showMainToast(
-                        "Please enter a valid email address.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                localStorage.setItem(
-                    "pawpal-newsletter-email",
-                    email
-                );
-
-
-                emailInput.value =
-                    "";
-
-
-                showMainToast(
-                    "You're on the PawPal list! 🐾💌",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       MAIN TOAST
-    ====================================================== */
-
-    function showMainToast(
-        message,
-        type = "success"
-    ) {
-
-        let toast =
-            document.getElementById(
-                "pawpalMainToast"
-            );
-
-
-        if (!toast) {
-
-            toast =
-                document.createElement(
-                    "div"
-                );
-
-
-            toast.id =
-                "pawpalMainToast";
-
-
-            toast.style.position =
-                "fixed";
-
-
-            toast.style.left =
-                "50%";
-
-
-            toast.style.bottom =
-                "28px";
-
-
-            toast.style.transform =
-                "translateX(-50%) translateY(20px)";
-
-
-            toast.style.padding =
-                "13px 20px";
-
-
-            toast.style.borderRadius =
-                "14px";
-
-
-            toast.style.fontFamily =
-                "DM Sans, sans-serif";
-
-
-            toast.style.fontSize =
-                "14px";
-
-
-            toast.style.fontWeight =
-                "700";
-
-
-            toast.style.zIndex =
-                "9999";
-
-
-            toast.style.opacity =
-                "0";
-
-
-            toast.style.pointerEvents =
-                "none";
-
-
-            toast.style.transition =
-                "all .25s ease";
-
-
-            document.body.appendChild(
-                toast
-            );
-
-        }
-
-
-        if (
-            type === "error"
-        ) {
-
-            toast.style.background =
-                "#fcefeb";
-
-            toast.style.color =
-                "#b95742";
-
-            toast.style.border =
-                "1px solid #f1c8bd";
-
-        } else {
-
-            toast.style.background =
-                "#e7eee3";
-
-            toast.style.color =
-                "#60745a";
-
-            toast.style.border =
-                "1px solid #cbdcc6";
-
-        }
-
-
-        toast.textContent =
-            message;
-
-
-        toast.style.opacity =
-            "1";
-
-
-        toast.style.transform =
-            "translateX(-50%) translateY(0)";
-
-
-        clearTimeout(
-            window.pawpalMainToastTimer
-        );
-
-
-        window.pawpalMainToastTimer =
-            setTimeout(
-                function () {
-
-                    toast.style.opacity =
-                        "0";
-
-
-                    toast.style.transform =
-                        "translateX(-50%) translateY(20px)";
-
-                },
-                3000
-            );
-
-    }
-
-
-    /* =====================================================
        SCROLL REVEAL
-    ====================================================== */
+    ===================================================== */
 
     const revealElements =
         document.querySelectorAll(
-            ".feature-card, " +
+            ".feature-menu-card, " +
+            ".step-card, " +
             ".home-pet-card, " +
-            ".why-card, " +
-            ".story-card, " +
-            ".section-heading"
+            ".home-rescued-card, " +
+            ".success-story-card"
         );
 
 
     if (
-        "IntersectionObserver"
-        in window
+        "IntersectionObserver" in window &&
+        revealElements.length
     ) {
 
-        const observer =
+        const revealObserver =
             new IntersectionObserver(
-                function (entries) {
+                function (entries, observer) {
 
                     entries.forEach(
                         function (entry) {
@@ -746,7 +665,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                 entry.target.classList.add(
                                     "visible"
                                 );
-
 
                                 observer.unobserve(
                                     entry.target
@@ -767,122 +685,43 @@ document.addEventListener("DOMContentLoaded", function () {
         revealElements.forEach(
             function (element) {
 
-                observer.observe(
+                revealObserver.observe(
                     element
                 );
 
             }
         );
 
-    } else {
-
-        revealElements.forEach(
-            function (element) {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-
     }
-
-
-    /* =====================================================
-       BACK TO TOP
-    ====================================================== */
-
-    const backToTop =
-        document.querySelector(
-            ".back-to-top, [data-back-to-top]"
-        );
-
-
-    if (backToTop) {
-
-        backToTop.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-
-                window.scrollTo({
-
-                    top: 0,
-
-                    behavior: "smooth"
-
-                });
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ESCAPE KEY
-       -----------------------------------------------------
-       Closes mobile menus.
-    ====================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-
-                if (navigation) {
-
-                    navigation.classList.remove(
-                        "open"
-                    );
-
-                }
-
-
-                if (menuButton) {
-
-                    menuButton.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            }
-
-        }
-    );
 
 
     /* =====================================================
        CURRENT YEAR
-    ====================================================== */
+    ===================================================== */
 
-    document.querySelectorAll(
-        "[data-current-year]"
-    ).forEach(
-        function (element) {
+    document
+        .querySelectorAll(
+            "[data-current-year]"
+        )
+        .forEach(
+            function (element) {
 
-            element.textContent =
-                new Date().getFullYear();
+                element.textContent =
+                    new Date().getFullYear();
 
-        }
-    );
+            }
+        );
 
 
     /* =====================================================
-       INITIALIZE
-    ====================================================== */
+       INITIAL STATE
+    ===================================================== */
+
+    closeFeatures();
+
 
     console.log(
-        "PawPal main website loaded successfully 🐾"
+        "PawPal navigation initialized successfully 🐾"
     );
-
 
 });

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PawPal AI Assistant</title>
+
+    <link rel="stylesheet" href="../CSS/assistant.css">
+</head>
+
+<body>
+
+    <!-- PawPal Assistant Button -->
+    <button id="pawpal-assistant-button" class="assistant-button">
+        🐾
+        <span>Ask PawPal</span>
+    </button>
+
+
+    <!-- Assistant Panel -->
+    <div id="pawpal-assistant-panel" class="assistant-panel">
+
+        <!-- Header -->
+        <div class="assistant-header">
+
+            <div class="assistant-title">
+                <div class="assistant-icon">
+                    🐾
+                </div>
+
+                <div>
+                    <h2>PawPal AI</h2>
+                    <p>Your friendly pet assistant</p>
+                </div>
+            </div>
+
+            <button
+                id="pawpal-assistant-close"
+                class="assistant-close"
+                type="button">
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- Messages -->
+        <div
+            id="pawpal-assistant-messages"
+            class="assistant-messages">
+
+            <div class="pawpal-message assistant">
+
+                <div class="pawpal-message-content">
+                    Hi! 🐾 I'm PawPal AI. I can help you with pet adoption, pet care, rescue, vaccinations and responsible pet ownership. How can I help you today?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Input Area -->
+        <form
+            id="pawpal-assistant-form"
+            class="assistant-form">
+
+            <input
+                type="text"
+                id="pawpal-assistant-input"
+                placeholder="Ask PawPal something..."
+                autocomplete="off"
+                required>
+
+            <button
+                type="submit"
+                class="send-button">
+                ➤
+            </button>
+
+        </form>
+
+
+        <!-- Controls -->
+        <div class="assistant-controls">
+
+            <button
+                type="button"
+                id="pawpal-assistant-stop">
+                🔇 Stop speaking
+            </button>
+
+            <span>
+                AI-powered assistant
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <script src="../JS/assistant.js"></script>
+
+</body>
+
+</html>
