@@ -4535,3 +4535,8 @@ button:focus-visible {
     }
 
 }
+.welcome-user {
+    font-weight: 600;
+    color: var(--text-dark, #2f2926);
+    white-space: nowrap;
+}

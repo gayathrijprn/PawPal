@@ -1,151 +1,256 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+```
+<title>PawPal | Admin Dashboard</title>
 
-    <title>PawPal — My Dashboard</title>
-
-    <link
-        rel="stylesheet"
-        href="../CSS/style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+```
 
 </head>
 
 <body>
 
-    <header class="navbar">
+<div class="dashboard-layout">
 
-        <a href="../index.html" class="brand">
+```
+<!-- SIDEBAR -->
+<aside class="dashboard-sidebar">
 
-            <div class="brand-paw">
-                🐾
-            </div>
+    <div class="sidebar-brand">
+        <a href="../index.html">
+            🐾 <span>PawPal</span>
+        </a>
+    </div>
 
-            <div class="brand-name">
-                Paw<span>Pal</span>
-            </div>
+    <nav class="sidebar-nav">
 
+        <a href="#overview"
+           class="sidebar-link active"
+           data-section="overview">
+            <span>📊</span>
+            <span class="sidebar-link-text">Overview</span>
         </a>
 
-        <div class="nav-right">
+        <a href="#pets"
+           class="sidebar-link"
+           data-section="pets">
+            <span>🐾</span>
+            <span class="sidebar-link-text">Pets</span>
+        </a>
+
+        <a href="#applications"
+           class="sidebar-link"
+           data-section="applications">
+            <span>📋</span>
+            <span class="sidebar-link-text">Applications</span>
+        </a>
+
+        <a href="#users"
+           class="sidebar-link"
+           data-section="users">
+            <span>👥</span>
+            <span class="sidebar-link-text">Users</span>
+        </a>
+
+        <a href="#reports"
+           class="sidebar-link"
+           data-section="reports">
+            <span>📈</span>
+            <span class="sidebar-link-text">Reports</span>
+        </a>
+
+        <a href="#notifications"
+           class="sidebar-link"
+           data-section="notifications">
+            <span>🔔</span>
+            <span class="sidebar-link-text">Notifications</span>
+        </a>
+
+        <a href="#settings"
+           class="sidebar-link"
+           data-section="settings">
+            <span>⚙️</span>
+            <span class="sidebar-link-text">Settings</span>
+        </a>
+
+        <a href="#profile"
+           class="sidebar-link"
+           data-section="profile">
+            <span>👤</span>
+            <span class="sidebar-link-text">Profile</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="../index.html"
+           class="sidebar-link back-to-pawpal">
+            <span>←</span>
+            <span class="sidebar-link-text">Back to PawPal</span>
+        </a>
+
+        <a href="#"
+           class="sidebar-link logout-btn">
+            <span>🚪</span>
+            <span class="sidebar-link-text">Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- MOBILE OVERLAY -->
+<div class="sidebar-overlay"></div>
+
+
+<!-- MAIN CONTENT -->
+<main class="dashboard-main">
+
+    <!-- TOPBAR -->
+    <header class="dashboard-topbar">
+
+        <button
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="Open menu">
+            ☰
+        </button>
+
+        <h1 class="topbar-title">
+            Overview
+        </h1>
+
+        <div class="topbar-actions">
 
             <button
-                id="logoutButton"
-                class="nav-button"
-                type="button">
-
-                Log Out
-
+                class="topbar-icon-btn"
+                type="button"
+                aria-label="Notifications">
+                🔔
             </button>
+
+            <div class="topbar-user">
+
+                <div
+                    class="user-avatar"
+                    data-user-avatar>
+                    AD
+                </div>
+
+                <div>
+                    <strong data-user-name>
+                        Admin
+                    </strong>
+
+                    <small data-user-role>
+                        Admin
+                    </small>
+                </div>
+
+            </div>
 
         </div>
 
     </header>
 
 
-    <main>
+    <!-- DASHBOARD CONTENT -->
+    <div class="dashboard-content">
 
-        <section class="dashboard-section">
 
-            <div class="dashboard-container">
+        <!-- =========================
+             OVERVIEW
+        ========================== -->
 
-                <div class="section-label">
-                    MY PAWPAL
+        <section
+            id="overview"
+            class="dashboard-section">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Admin Dashboard</h2>
+
+                    <p>
+                        Welcome back,
+                        <span data-user-name>Admin</span>.
+                    </p>
                 </div>
 
-                <h1>
-                    Welcome,
-                    <span id="userName">...</span>! 🐾
-                </h1>
-
-                <p>
-                    Your PawPal account and profile.
-                </p>
+            </div>
 
 
-                <div class="dashboard-card">
+            <!-- STATISTICS -->
 
-                    <div class="dashboard-card-icon">
-                        🐾
-                    </div>
+            <div class="dashboard-stats">
 
-                    <div>
-
-                        <h2 id="profileName">
-                            Loading...
-                        </h2>
-
-                        <p id="profileRole">
-                            Loading...
-                        </p>
-
-                    </div>
-
+                <div class="stat-card">
+                    <span>🐾</span>
+                    <h3>Pets</h3>
+                    <strong>0</strong>
                 </div>
 
+                <div class="stat-card">
+                    <span>👥</span>
+                    <h3>Users</h3>
+                    <strong>0</strong>
+                </div>
 
-                <div class="profile-details">
+                <div class="stat-card">
+                    <span>📋</span>
+                    <h3>Applications</h3>
+                    <strong>0</strong>
+                </div>
 
-                    <h2>
-                        My Profile
-                    </h2>
+                <div class="stat-card">
+                    <span>❤️</span>
+                    <h3>Adoptions</h3>
+                    <strong>0</strong>
+                </div>
 
-                    <div class="profile-detail-row">
-
-                        <strong>
-                            Full Name
-                        </strong>
-
-                        <span id="profileFullName">
-                            —
-                        </span>
-
-                    </div>
-
-
-                    <div class="profile-detail-row">
-
-                        <strong>
-                            Email
-                        </strong>
-
-                        <span id="profileEmail">
-                            —
-                        </span>
-
-                    </div>
+            </div>
 
 
-                    <div class="profile-detail-row">
+            <!-- QUICK ACTIONS -->
 
-                        <strong>
-                            Phone
-                        </strong>
+            <div class="dashboard-card">
 
-                        <span id="profilePhone">
-                            —
-                        </span>
+                <h3>Quick Actions</h3>
 
-                    </div>
+                <div class="dashboard-actions">
 
+                    <button
+                        type="button"
+                        data-dashboard-action="manage-pets">
+                        Manage Pets
+                    </button>
 
-                    <div class="profile-detail-row">
+                    <button
+                        type="button"
+                        data-dashboard-action="applications">
+                        Applications
+                    </button>
 
-                        <strong>
-                            Account Type
-                        </strong>
+                    <button
+                        type="button"
+                        data-dashboard-action="users">
+                        Users
+                    </button>
 
-                        <span id="profileRole">
-                            —
-                        </span>
-
-                    </div>
+                    <button
+                        type="button"
+                        data-dashboard-action="reports">
+                        Reports
+                    </button>
 
                 </div>
 
@@ -153,15 +258,506 @@
 
         </section>
 
-    </main>
+
+        <!-- =========================
+             PETS
+        ========================== -->
+
+        <section
+            id="pets"
+            class="dashboard-section"
+            style="display: none;">
+
+            <div class="dashboard-header">
+
+                <div>
+                    <h2>Pets</h2>
+
+                    <p>
+                        Manage pets listed on PawPal.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="add-pet-btn"
+                    data-add-pet>
+                    + Add Pet
+                </button>
+
+            </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+            <div class="dashboard-search">
 
-    <script src="../js/supabase-config.js"></script>
+                <input
+                    type="search"
+                    placeholder="Search pets..."
+                    aria-label="Search pets">
 
-    <script src="../js/dashboard.js"></script>
+            </div>
+
+
+            <div class="pet-grid">
+
+                <article
+                    class="pet-card"
+                    data-name="Sample Pet">
+
+                    <div class="pet-card-image">
+                        🐶
+                    </div>
+
+                    <h3 class="pet-name">
+                        Sample Pet
+                    </h3>
+
+                    <p>
+                        Mixed Breed
+                    </p>
+
+                    <div class="pet-actions">
+
+                        <button
+                            type="button"
+                            class="btn-edit"
+                            data-action="edit">
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-delete"
+                            data-action="delete">
+                            Delete
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ADD PET
+        ========================== -->
+
+        <section
+            id="add-pet"
+            class="dashboard-section"
+            style="display: none;">
+
+            <div class="dashboard-card">
+
+                <h2>Add a Pet</h2>
+
+                <form id="addPetForm">
+
+                    <div class="form-group">
+
+                        <label for="pet-name">
+                            Pet Name
+                        </label>
+
+                        <input
+                            id="pet-name"
+                            name="name"
+                            type="text"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pet-breed">
+                            Breed
+                        </label>
+
+                        <input
+                            id="pet-breed"
+                            name="breed"
+                            type="text">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pet-age">
+                            Age
+                        </label>
+
+                        <input
+                            id="pet-age"
+                            name="age"
+                            type="number"
+                            min="0">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pet-gender">
+                            Gender
+                        </label>
+
+                        <select
+                            id="pet-gender"
+                            name="gender">
+
+                            <option value="male">
+                                Male
+                            </option>
+
+                            <option value="female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit">
+                        Add Pet
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             APPLICATIONS
+        ========================== -->
+
+        <section
+            id="applications"
+            class="dashboard-section"
+            style="display: none;">
+
+            <h2>Adoption Applications</h2>
+
+            <div class="dashboard-search">
+
+                <input
+                    type="search"
+                    placeholder="Search applications..."
+                    aria-label="Search applications">
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <table class="dashboard-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Applicant</th>
+                            <th>Pet</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Sample User
+                            </td>
+
+                            <td>
+                                Sample Pet
+                            </td>
+
+                            <td>
+                                <span class="status">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td class="table-actions">
+
+                                <button
+                                    type="button"
+                                    data-application-action="view">
+                                    View
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-application-action="approve">
+                                    Approve
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-application-action="reject">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             USERS
+        ========================== -->
+
+        <section
+            id="users"
+            class="dashboard-section"
+            style="display: none;">
+
+            <h2>Users</h2>
+
+            <div class="dashboard-search">
+
+                <input
+                    type="search"
+                    placeholder="Search users..."
+                    aria-label="Search users">
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <table class="dashboard-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Sample User
+                            </td>
+
+                            <td>
+                                user@example.com
+                            </td>
+
+                            <td>
+                                0000000000
+                            </td>
+
+                            <td>
+                                User
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REPORTS
+        ========================== -->
+
+        <section
+            id="reports"
+            class="dashboard-section"
+            style="display: none;">
+
+            <div class="dashboard-card">
+
+                <h2>Reports</h2>
+
+                <p>
+                    PawPal adoption statistics
+                    and reports will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             NOTIFICATIONS
+        ========================== -->
+
+        <section
+            id="notifications"
+            class="dashboard-section"
+            style="display: none;">
+
+            <h2>Notifications</h2>
+
+            <div class="notification-item">
+
+                <strong>
+                    Welcome to PawPal.
+                </strong>
+
+                <p>
+                    Your admin dashboard is ready.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section
+            id="settings"
+            class="dashboard-section"
+            style="display: none;">
+
+            <div class="dashboard-card">
+
+                <h2>Settings</h2>
+
+                <div class="setting-row">
+
+                    <div>
+
+                        <h4>
+                            Email Notifications
+                        </h4>
+
+                        <p>
+                            Receive email notifications.
+                        </p>
+
+                    </div>
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            checked>
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROFILE
+        ========================== -->
+
+        <section
+            id="profile"
+            class="dashboard-section"
+            style="display: none;">
+
+            <div class="dashboard-card">
+
+                <h2>My Profile</h2>
+
+                <form id="profileForm">
+
+                    <div class="form-group">
+
+                        <label for="profile-name">
+                            Name
+                        </label>
+
+                        <input
+                            id="profile-name"
+                            type="text"
+                            name="name"
+                            data-profile-name>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="profile-email">
+                            Email
+                        </label>
+
+                        <input
+                            id="profile-email"
+                            type="email"
+                            name="email"
+                            data-user-email
+                            disabled>
+
+                    </div>
+
+
+                    <button type="submit">
+                        Save Changes
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<!-- TOAST -->
+<div
+    id="dashboardToast"
+    class="dashboard-toast"
+    role="status"
+    aria-live="polite">
+</div>
+
+<!-- AUTH -->
+<script src="../js/auth.js"></script>
+
+<!-- ADMIN DASHBOARD JS -->
+<script src="../js/dashboard-admin.js"></script>
 
 </body>
-
 </html>
