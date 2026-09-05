@@ -1338,15 +1338,66 @@
         padding:
             0 20px;
 
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
     }
 
+
+    /*
+       Keep Welcome + Sign Out together
+       on the SAME LINE and far right.
+    */
 
     .nav-right {
 
-        gap: 10px;
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: 8px;
+
+        margin-left: auto;
+
+        white-space: nowrap;
 
     }
 
+
+    .nav-right .welcome-user {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        white-space: nowrap;
+
+    }
+
+
+    .nav-right .signout-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        white-space: nowrap;
+
+    }
+
+
+    /*
+       Do NOT hide the logged-in welcome message.
+    */
 
     .login {
 
@@ -1611,9 +1662,12 @@
     }
 
 }
+
+
+
 /* ========================================================
    FIND MY MATCH BUTTON
-   ======================================================== */
+======================================================== */
 
 .pets-header-actions {
 
@@ -1624,6 +1678,7 @@
     gap: 18px;
 
 }
+
 
 .find-match-button {
 
@@ -1655,6 +1710,7 @@
 
 }
 
+
 .find-match-button:hover {
 
     transform: translateY(-2px);
@@ -1667,7 +1723,7 @@
 
 /* ========================================================
    MATCH SECTION
-   ======================================================== */
+======================================================== */
 
 .match-section {
 
@@ -1697,6 +1753,7 @@
 
 }
 
+
 .match-section.active {
 
     display: block;
@@ -1705,6 +1762,7 @@
         matchSectionIn 0.4s ease;
 
 }
+
 
 @keyframes matchSectionIn {
 
@@ -1825,7 +1883,7 @@
 
 /* ========================================================
    SWIPE AREA
-   ======================================================== */
+======================================================== */
 
 .swipe-area {
 
@@ -2035,7 +2093,7 @@
 
 /* ========================================================
    SWIPE ACTION BUTTONS
-   ======================================================== */
+======================================================== */
 
 .swipe-actions {
 
@@ -2126,7 +2184,7 @@
 
 /* ========================================================
    EMPTY SWIPE STATE
-   ======================================================== */
+======================================================== */
 
 .swipe-empty {
 
@@ -2205,7 +2263,7 @@
 
 /* ========================================================
    MATCH RESULTS
-   ======================================================== */
+======================================================== */
 
 .matches-result {
 
@@ -2367,7 +2425,7 @@
 
 /* ========================================================
    SWIPE ANIMATIONS
-   ======================================================== */
+======================================================== */
 
 .swipe-out-left {
 
@@ -2394,7 +2452,7 @@
 
 /* ========================================================
    RESPONSIVE MATCH MODE
-   ======================================================== */
+======================================================== */
 
 @media (max-width: 720px) {
 
@@ -2484,6 +2542,145 @@
     .swipe-card-image {
 
         height: 300px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   FINAL NAVBAR FIX
+   Welcome + Sign Out = SAME LINE + FAR RIGHT
+========================================================= */
+
+.navbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+}
+
+
+.nav-right {
+
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 14px;
+
+    margin-left: auto;
+
+    white-space: nowrap;
+
+}
+
+
+.nav-right .welcome-user {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    white-space: nowrap;
+
+}
+
+
+.nav-right .signout-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    white-space: nowrap;
+
+}
+
+
+/* Make sure navbar items don't wrap */
+
+.nav-right > * {
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+   FINAL MOBILE NAVBAR FIX
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        width: 100%;
+
+        height: 70px;
+
+        padding: 0 20px;
+
+    }
+
+
+    .nav-right {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: 8px;
+
+        margin-left: auto;
+
+        white-space: nowrap;
+
+    }
+
+
+    .nav-right .welcome-user {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        white-space: nowrap;
+
+    }
+
+
+    .nav-right .signout-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        white-space: nowrap;
 
     }
 
