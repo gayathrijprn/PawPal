@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Adoption Application | PawPal</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +17,7 @@
     rel="stylesheet">
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
 
 <style>
 
@@ -431,6 +433,7 @@
 
 </style>
 
+
 </head>
 
 <body>
@@ -441,41 +444,172 @@
 
 <header class="navbar">
 
-    <a href="../index.html" class="brand">
-        <div class="brand-paw">🐾</div>
 
-        <div class="brand-name">
-            Paw<span>Pal</span>
-        </div>
+<a href="../index.html" class="brand">
+    <div class="brand-paw">🐾</div>
+
+    <div class="brand-name">
+        Paw<span>Pal</span>
+    </div>
+</a>
+
+<button
+    class="mobile-menu-button"
+    id="mobileMenuButton"
+    type="button"
+    aria-label="Open navigation"
+    aria-expanded="false"
+>
+    ☰
+</button>
+
+<nav class="navigation" id="mainNavigation">
+
+    <a href="../index.html">
+        Home
     </a>
 
-    <nav class="navigation">
+    <a href="pets.html">
+        Find a Pet
+    </a>
 
-        <a href="../index.html">Home</a>
+    <!-- FEATURES -->
 
-        <a href="pets.html">Find a Pet</a>
+    <div class="nav-dropdown" id="featuresDropdown">
 
-        <a href="how-it-works.html">How It Works</a>
+        <button
+            class="nav-dropdown-button"
+            type="button"
+            aria-expanded="false"
+        >
+            Features
+            <span class="dropdown-arrow">⌄</span>
+        </button>
 
-        <a href="about.html">About Us</a>
+        <div class="nav-dropdown-menu">
 
-    </nav>
+            <a href="pets.html">
+                <span>🐾</span>
+                Smart Pet Matching
+            </a>
 
-    <div class="nav-right">
+            <a href="pet-care.html">
+                <span>🩺</span>
+                Pet Care
+            </a>
 
-        <a href="login.html" class="login">
-            Log in
-        </a>
+            <a href="pet-care.html#health-timeline">
+                <span>📅</span>
+                Health Timeline
+            </a>
 
-        <a href="register.html" class="nav-button">
-            Get Started
-            <span>→</span>
-        </a>
+            <a href="pet-passport.html">
+                <span>📋</span>
+                Digital Pet Passport
+            </a>
+
+            <a href="adoption-status.html">
+                <span>💌</span>
+                Adoption Status
+            </a>
+
+            <!-- RESCUE & ADOPTION -->
+
+            <div class="nested-dropdown">
+
+                <button
+                    class="nested-dropdown-button"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    <span>🏠</span>
+                    Rescue & Adoption
+                    <span class="nested-arrow">›</span>
+                </button>
+
+                <div class="nested-dropdown-menu">
+
+                    <a href="rescue-adoption.html">
+                        🐕 Rescue an Animal
+                    </a>
+
+                    <a href="rescue-adoption.html#rescue-listings">
+                        🐾 Browse Rescued Pets
+                    </a>
+
+                    <a href="start-fundraiser.html">
+                        💰 Start a Fundraiser
+                    </a>
+
+                    <a href="donation.html">
+                        ❤️ Donate & Support
+                    </a>
+
+                </div>
+
+            </div>
+
+            <a href="start-fundraiser.html">
+                <span>🎗️</span>
+                Fundraisers
+            </a>
+
+            <a href="donation.html">
+                <span>❤️</span>
+                Donate & Support
+            </a>
+
+            <a href="shop.html">
+                <span>🛍️</span>
+                Pet Shop
+            </a>
+
+            <a href="how-it-works.html">
+                <span>✨</span>
+                How PawPal Works
+            </a>
+
+        </div>
 
     </div>
 
-</header>
+    <a href="how-it-works.html">
+        How It Works
+    </a>
 
+    <a href="shop.html">
+        Shop
+    </a>
+
+    <a href="about.html">
+        About Us
+    </a>
+
+</nav>
+
+<div class="nav-right" id="authNav">
+
+    <a
+        href="login.html"
+        class="login"
+        id="loginNavButton"
+    >
+        Log in
+    </a>
+
+    <a
+        href="register.html"
+        class="nav-button"
+        id="signupNavButton"
+    >
+        Get Started
+        <span>→</span>
+    </a>
+
+</div>
+
+
+</header>
 
 <!-- =====================================================
      MAIN
@@ -483,432 +617,433 @@
 
 <main class="adoption-page">
 
-    <div class="application-wrapper">
 
-        <div class="application-header">
+<div class="application-wrapper">
 
-            <div class="application-label">
-                MAKE IT OFFICIAL 🐾
+    <div class="application-header">
+
+        <div class="application-label">
+            MAKE IT OFFICIAL 🐾
+        </div>
+
+        <h1>
+            Give them a
+            <em>forever home.</em>
+        </h1>
+
+        <p>
+            Tell us a little about yourself and the
+            loving home you can provide. Your application
+            helps us make sure every pet finds the right match.
+        </p>
+
+    </div>
+
+
+    <div class="application-card">
+
+        <!-- SELECTED PET -->
+
+        <div class="selected-pet">
+
+            <div class="selected-pet-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=85"
+                    alt="Milo"
+                >
+
             </div>
 
-            <h1>
-                Give them a
-                <em>forever home.</em>
-            </h1>
+            <div class="selected-pet-info">
 
-            <p>
-                Tell us a little about yourself and the
-                loving home you can provide. Your application
-                helps us make sure every pet finds the right match.
-            </p>
+                <span>You're applying to adopt</span>
+
+                <h2>Milo 🐶</h2>
+
+                <p>Golden Retriever · 2 years · Kollam</p>
+
+            </div>
 
         </div>
 
 
-        <div class="application-card">
+        <form id="adoptionForm">
 
-            <!-- SELECTED PET -->
 
-            <div class="selected-pet">
+            <!-- PERSONAL DETAILS -->
 
-                <div class="selected-pet-image">
+            <section class="form-section">
 
-                    <img
-                        src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=85"
-                        alt="Milo"
-                    >
+                <div class="form-section-title">
+
+                    <div class="form-section-number">
+                        01
+                    </div>
+
+                    <h2>About you</h2>
 
                 </div>
 
-                <div class="selected-pet-info">
 
-                    <span>You're applying to adopt</span>
+                <div class="form-grid">
 
-                    <h2>Milo 🐶</h2>
+                    <div class="form-group">
 
-                    <p>Golden Retriever · 2 years · Kollam</p>
-
-                </div>
-
-            </div>
-
-
-            <form id="adoptionForm">
-
-
-                <!-- PERSONAL DETAILS -->
-
-                <section class="form-section">
-
-                    <div class="form-section-title">
-
-                        <div class="form-section-number">
-                            01
-                        </div>
-
-                        <h2>About you</h2>
-
-                    </div>
-
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>
-                                Full name <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                id="fullName"
-                                placeholder="Your full name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Email address <span>*</span>
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="you@example.com"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Phone number <span>*</span>
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                placeholder="+91 XXXXX XXXXX"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Age <span>*</span>
-                            </label>
-
-                            <input
-                                type="number"
-                                id="age"
-                                placeholder="Your age"
-                                min="18"
-                                required
-                            >
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- HOME DETAILS -->
-
-                <section class="form-section">
-
-                    <div class="form-section-title">
-
-                        <div class="form-section-number">
-                            02
-                        </div>
-
-                        <h2>Your home</h2>
-
-                    </div>
-
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>
-                                City <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                id="city"
-                                placeholder="Where do you live?"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Home type <span>*</span>
-                            </label>
-
-                            <select id="homeType" required>
-
-                                <option value="">
-                                    Select home type
-                                </option>
-
-                                <option>
-                                    Apartment
-                                </option>
-
-                                <option>
-                                    Independent house
-                                </option>
-
-                                <option>
-                                    Villa
-                                </option>
-
-                                <option>
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group full">
-
-                            <label>
-                                Do you have a safe outdoor space?
-                            </label>
-
-                            <div class="choice-grid">
-
-                                <div class="choice">
-
-                                    <input
-                                        type="radio"
-                                        name="outdoor"
-                                        id="outdoorYes"
-                                        value="yes"
-                                    >
-
-                                    <label for="outdoorYes">
-                                        🏡 Yes, I have outdoor space
-                                    </label>
-
-                                </div>
-
-
-                                <div class="choice">
-
-                                    <input
-                                        type="radio"
-                                        name="outdoor"
-                                        id="outdoorNo"
-                                        value="no"
-                                    >
-
-                                    <label for="outdoorNo">
-                                        🏠 No, indoor only
-                                    </label>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- PET EXPERIENCE -->
-
-                <section class="form-section">
-
-                    <div class="form-section-title">
-
-                        <div class="form-section-number">
-                            03
-                        </div>
-
-                        <h2>Your experience</h2>
-
-                    </div>
-
-
-                    <div class="form-grid">
-
-                        <div class="form-group full">
-
-                            <label>
-                                Have you had pets before?
-                            </label>
-
-                            <div class="choice-grid">
-
-                                <div class="choice">
-
-                                    <input
-                                        type="radio"
-                                        name="experience"
-                                        id="experienced"
-                                        value="yes"
-                                    >
-
-                                    <label for="experienced">
-                                        🐾 Yes, I've had pets before
-                                    </label>
-
-                                </div>
-
-
-                                <div class="choice">
-
-                                    <input
-                                        type="radio"
-                                        name="experience"
-                                        id="newOwner"
-                                        value="no"
-                                    >
-
-                                    <label for="newOwner">
-                                        🌱 No, this would be my first
-                                    </label>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group full">
-
-                            <label>
-                                Tell us why you'd like to adopt <span>*</span>
-                            </label>
-
-                            <textarea
-                                id="reason"
-                                placeholder="Tell us a little about why you think this pet would be a good fit for you..."
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <div class="form-group full">
-
-                            <label>
-                                Anything else you'd like us to know?
-                            </label>
-
-                            <textarea
-                                id="additionalInfo"
-                                placeholder="Share anything else that might help us understand your home and lifestyle..."
-                            ></textarea>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- AGREEMENT -->
-
-                <div class="agreement">
-
-                    <label>
+                        <label>
+                            Full name <span>*</span>
+                        </label>
 
                         <input
-                            type="checkbox"
-                            id="agreement"
+                            type="text"
+                            id="fullName"
+                            placeholder="Your full name"
                             required
                         >
 
-                        <span>
-                            I confirm that the information I've provided
-                            is accurate and that I am ready to provide a
-                            safe, loving and permanent home for this pet.
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-
-                <!-- SUBMIT -->
-
-                <div class="form-submit">
-
-                    <div class="form-note">
-                        🐾 Your application will be reviewed by the pet owner.
                     </div>
 
-                    <button
-                        type="submit"
-                        class="submit-button"
+
+                    <div class="form-group">
+
+                        <label>
+                            Email address <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone number <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="+91 XXXXX XXXXX"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Age <span>*</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            placeholder="Your age"
+                            min="18"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- HOME DETAILS -->
+
+            <section class="form-section">
+
+                <div class="form-section-title">
+
+                    <div class="form-section-number">
+                        02
+                    </div>
+
+                    <h2>Your home</h2>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            City <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Where do you live?"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Home type <span>*</span>
+                        </label>
+
+                        <select id="homeType" required>
+
+                            <option value="">
+                                Select home type
+                            </option>
+
+                            <option>
+                                Apartment
+                            </option>
+
+                            <option>
+                                Independent house
+                            </option>
+
+                            <option>
+                                Villa
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Do you have a safe outdoor space?
+                        </label>
+
+                        <div class="choice-grid">
+
+                            <div class="choice">
+
+                                <input
+                                    type="radio"
+                                    name="outdoor"
+                                    id="outdoorYes"
+                                    value="yes"
+                                >
+
+                                <label for="outdoorYes">
+                                    🏡 Yes, I have outdoor space
+                                </label>
+
+                            </div>
+
+
+                            <div class="choice">
+
+                                <input
+                                    type="radio"
+                                    name="outdoor"
+                                    id="outdoorNo"
+                                    value="no"
+                                >
+
+                                <label for="outdoorNo">
+                                    🏠 No, indoor only
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- PET EXPERIENCE -->
+
+            <section class="form-section">
+
+                <div class="form-section-title">
+
+                    <div class="form-section-number">
+                        03
+                    </div>
+
+                    <h2>Your experience</h2>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label>
+                            Have you had pets before?
+                        </label>
+
+                        <div class="choice-grid">
+
+                            <div class="choice">
+
+                                <input
+                                    type="radio"
+                                    name="experience"
+                                    id="experienced"
+                                    value="yes"
+                                >
+
+                                <label for="experienced">
+                                    🐾 Yes, I've had pets before
+                                </label>
+
+                            </div>
+
+
+                            <div class="choice">
+
+                                <input
+                                    type="radio"
+                                    name="experience"
+                                    id="newOwner"
+                                    value="no"
+                                >
+
+                                <label for="newOwner">
+                                    🌱 No, this would be my first
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Tell us why you'd like to adopt <span>*</span>
+                        </label>
+
+                        <textarea
+                            id="reason"
+                            placeholder="Tell us a little about why you think this pet would be a good fit for you..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Anything else you'd like us to know?
+                        </label>
+
+                        <textarea
+                            id="additionalInfo"
+                            placeholder="Share anything else that might help us understand your home and lifestyle..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- AGREEMENT -->
+
+            <div class="agreement">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="agreement"
+                        required
                     >
-                        Submit application
-                        <span>→</span>
-                    </button>
 
-                </div>
+                    <span>
+                        I confirm that the information I've provided
+                        is accurate and that I am ready to provide a
+                        safe, loving and permanent home for this pet.
+                    </span>
 
-            </form>
-
-
-            <!-- SUCCESS MESSAGE -->
-
-            <div class="success-message" id="successMessage">
-
-                <div class="success-icon">
-                    🐶
-                </div>
-
-                <h2>
-                    Application sent! 💕
-                </h2>
-
-                <p>
-                    Thank you for opening your heart to adoption.
-                    Your application has been submitted successfully.
-                    The pet owner will review your request and get
-                    back to you soon.
-                </p>
-
-                <a href="pets.html">
-                    Find more pets →
-                </a>
+                </label>
 
             </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <div class="form-submit">
+
+                <div class="form-note">
+                    🐾 Your application will be reviewed by the pet owner.
+                </div>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Submit application
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <div class="success-message" id="successMessage">
+
+            <div class="success-icon">
+                🐶
+            </div>
+
+            <h2>
+                Application sent! 💕
+            </h2>
+
+            <p>
+                Thank you for opening your heart to adoption.
+                Your application has been submitted successfully.
+                The pet owner will review your request and get
+                back to you soon.
+            </p>
+
+            <a href="pets.html">
+                Find more pets →
+            </a>
 
         </div>
 
     </div>
 
-</main>
+</div>
 
+
+</main>
 
 <!-- =====================================================
      FOOTER
@@ -916,101 +1051,250 @@
 
 <footer class="footer">
 
-    <div class="footer-top">
 
-        <div class="footer-brand">
+<div class="footer-top">
 
-            <a href="../index.html" class="brand">
+    <div class="footer-brand">
 
-                <div class="brand-paw">
-                    🐾
-                </div>
+        <a href="../index.html" class="brand">
 
-                <div class="brand-name">
-                    Paw<span>Pal</span>
-                </div>
+            <div class="brand-paw">
+                🐾
+            </div>
 
-            </a>
+            <div class="brand-name">
+                Paw<span>Pal</span>
+            </div>
 
-            <p>
-                Connecting loving people with
-                pets looking for a place to call home.
-            </p>
+        </a>
 
-        </div>
-
-
-        <div class="footer-links">
-
-            <strong>Explore</strong>
-
-            <a href="pets.html">
-                Find a Pet
-            </a>
-
-            <a href="how-it-works.html">
-                How It Works
-            </a>
-
-            <a href="about.html">
-                About Us
-            </a>
-
-        </div>
-
-
-        <div class="footer-links">
-
-            <strong>Account</strong>
-
-            <a href="login.html">
-                Log in
-            </a>
-
-            <a href="register.html">
-                Register
-            </a>
-
-        </div>
-
-
-        <div class="footer-links">
-
-            <strong>PawPal</strong>
-
-            <a href="about.html">
-                Our Mission
-            </a>
-
-            <a href="how-it-works.html">
-                Adoption Guide
-            </a>
-
-        </div>
+        <p>
+            Connecting loving people with
+            pets looking for a place to call home.
+        </p>
 
     </div>
 
 
-    <div class="footer-bottom">
+    <div class="footer-links">
 
-        <span>
-            © 2026 PawPal. Made with 🐾 & love.
-        </span>
+        <strong>Explore</strong>
 
-        <span>
-            Find a friend. Give love. 🐶
-        </span>
+        <a href="pets.html">
+            Find a Pet
+        </a>
+
+        <a href="how-it-works.html">
+            How It Works
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
 
     </div>
+
+
+    <div class="footer-links">
+
+        <strong>Account</strong>
+
+        <a href="login.html">
+            Log in
+        </a>
+
+        <a href="register.html">
+            Register
+        </a>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <strong>PawPal</strong>
+
+        <a href="about.html">
+            Our Mission
+        </a>
+
+        <a href="how-it-works.html">
+            Adoption Guide
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 PawPal. Made with 🐾 & love.
+    </span>
+
+    <span>
+        Find a friend. Give love. 🐶
+    </span>
+
+</div>
+
 
 </footer>
-
 
 <!-- =====================================================
      JAVASCRIPT
 ====================================================== -->
 
+<script src="../js/auth.js"></script>
+
 <script>
+
+    /* =====================================================
+       MOBILE NAVIGATION
+    ===================================================== */
+
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
+
+    const mainNavigation =
+        document.getElementById("mainNavigation");
+
+    if (mobileMenuButton && mainNavigation) {
+
+        mobileMenuButton.addEventListener(
+            "click",
+            function () {
+
+                const isOpen =
+                    mainNavigation.classList.toggle("mobile-open");
+
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FEATURES DROPDOWN
+    ===================================================== */
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresButton =
+        featuresDropdown
+            ? featuresDropdown.querySelector(".nav-dropdown-button")
+            : null;
+
+    if (featuresDropdown && featuresButton) {
+
+        featuresButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                const isOpen =
+                    featuresDropdown.classList.toggle("dropdown-open");
+
+                featuresButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       NESTED RESCUE DROPDOWN
+    ===================================================== */
+
+    const nestedDropdown =
+        document.querySelector(".nested-dropdown");
+
+    const nestedButton =
+        nestedDropdown
+            ? nestedDropdown.querySelector(".nested-dropdown-button")
+            : null;
+
+    if (nestedDropdown && nestedButton) {
+
+        nestedButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                const isOpen =
+                    nestedDropdown.classList.toggle("nested-open");
+
+                nestedButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE DROPDOWNS WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                featuresDropdown &&
+                !featuresDropdown.contains(event.target)
+            ) {
+
+                featuresDropdown.classList.remove("dropdown-open");
+
+                if (featuresButton) {
+                    featuresButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+                }
+
+            }
+
+            if (
+                nestedDropdown &&
+                !nestedDropdown.contains(event.target)
+            ) {
+
+                nestedDropdown.classList.remove("nested-open");
+
+                if (nestedButton) {
+                    nestedButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ADOPTION FORM
+    ===================================================== */
 
     const adoptionForm =
         document.getElementById("adoptionForm");

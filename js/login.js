@@ -175,6 +175,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 console.log("Login successful:", data);
 
+                const profile = data.user?.user_metadata || {};
+                const displayName = [profile.first_name, profile.last_name]
+                    .filter(Boolean)
+                    .join(" ") || email.split("@")[0];
+
+                localStorage.setItem("pawpal-current-user", JSON.stringify({
+                    id: data.user.id,
+                    name: displayName,
+                    email: data.user.email,
+                    role: profile.role || "adopter"
+                }));
+
                 showMessage(
                     "Login successful! Welcome back 🐾",
                     "success"

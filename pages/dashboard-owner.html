@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+<head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PawPal | Pet Owner Dashboard</title>
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
 <link rel="stylesheet" href="../css/dashboard.css">
-```
+
 
 </head>
 
@@ -18,81 +21,133 @@
 
 <div class="dashboard-layout">
 
-```
-<!-- SIDEBAR -->
+
+<!-- =========================
+     SIDEBAR
+========================== -->
+
 <aside class="dashboard-sidebar">
 
     <div class="sidebar-brand">
+
         <a href="../index.html">
             🐾 <span>PawPal</span>
         </a>
+
     </div>
 
+
     <nav class="sidebar-nav">
+
 
         <a href="#my-pets"
            class="sidebar-link active"
            data-section="my-pets">
+
             <span>🐾</span>
-            <span class="sidebar-link-text">My Pets</span>
+            <span class="sidebar-link-text">
+                My Pets
+            </span>
+
         </a>
+
 
         <a href="#adoption-requests"
            class="sidebar-link"
            data-section="adoption-requests">
+
             <span>📋</span>
-            <span class="sidebar-link-text">Adoption Requests</span>
+            <span class="sidebar-link-text">
+                Adoption Requests
+            </span>
+
         </a>
+
 
         <a href="#messages"
            class="sidebar-link"
            data-section="messages">
+
             <span>💬</span>
-            <span class="sidebar-link-text">Messages</span>
+            <span class="sidebar-link-text">
+                Messages
+            </span>
+
         </a>
+
 
         <a href="#add-pet"
            class="sidebar-link"
            data-section="add-pet">
+
             <span>➕</span>
-            <span class="sidebar-link-text">Add a Pet</span>
+            <span class="sidebar-link-text">
+                Add a Pet
+            </span>
+
         </a>
+
 
         <a href="#notifications"
            class="sidebar-link"
            data-section="notifications">
+
             <span>🔔</span>
-            <span class="sidebar-link-text">Notifications</span>
+            <span class="sidebar-link-text">
+                Notifications
+            </span>
+
         </a>
+
 
         <a href="#settings"
            class="sidebar-link"
            data-section="settings">
+
             <span>⚙️</span>
-            <span class="sidebar-link-text">Settings</span>
+            <span class="sidebar-link-text">
+                Settings
+            </span>
+
         </a>
+
 
         <a href="#profile"
            class="sidebar-link"
            data-section="profile">
+
             <span>👤</span>
-            <span class="sidebar-link-text">Profile</span>
+            <span class="sidebar-link-text">
+                Profile
+            </span>
+
         </a>
 
     </nav>
 
+
     <div class="sidebar-bottom">
+
 
         <a href="../index.html"
            class="sidebar-link back-to-pawpal">
+
             <span>←</span>
-            <span class="sidebar-link-text">Back to PawPal</span>
+            <span class="sidebar-link-text">
+                Back to PawPal
+            </span>
+
         </a>
+
 
         <a href="#"
            class="sidebar-link logout-btn">
+
             <span>🚪</span>
-            <span class="sidebar-link-text">Logout</span>
+            <span class="sidebar-link-text">
+                Logout
+            </span>
+
         </a>
 
     </div>
@@ -100,40 +155,75 @@
 </aside>
 
 
+<!-- MOBILE OVERLAY -->
+
 <div class="sidebar-overlay"></div>
 
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================== -->
+
 <main class="dashboard-main">
+
+
+    <!-- =========================
+         TOPBAR
+    ========================== -->
 
     <header class="dashboard-topbar">
 
-        <button class="mobile-menu-btn"
-                type="button">
+
+        <button
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="Open menu">
+
             ☰
+
         </button>
+
 
         <h1 class="topbar-title">
             My Pets
         </h1>
 
+
         <div class="topbar-actions">
 
-            <button class="topbar-icon-btn"
-                    type="button">
+
+            <button
+                class="topbar-icon-btn"
+                type="button"
+                aria-label="Notifications">
+
                 🔔
+
             </button>
+
 
             <div class="topbar-user">
 
-                <div class="user-avatar"
-                     data-user-avatar>
+
+                <div
+                    class="user-avatar"
+                    data-user-avatar>
+
                     PO
+
                 </div>
 
+
                 <div>
-                    <strong data-user-name>Pet Owner</strong>
-                    <small data-user-role>Pet Owner</small>
+
+                    <strong data-user-name>
+                        Pet Owner
+                    </strong>
+
+                    <small data-user-role>
+                        Pet Owner
+                    </small>
+
                 </div>
 
             </div>
@@ -143,60 +233,104 @@
     </header>
 
 
+    <!-- =========================
+         DASHBOARD CONTENT
+    ========================== -->
+
     <div class="dashboard-content">
 
 
-        <!-- MY PETS -->
-        <section id="my-pets"
-                 class="dashboard-section">
+        <!-- =========================
+             MY PETS
+        ========================== -->
+
+        <section
+            id="my-pets"
+            class="dashboard-section">
+
 
             <div class="dashboard-header">
 
+
                 <div>
-                    <h2>My Pets</h2>
-                    <p>Manage pets you have listed on PawPal.</p>
+
+                    <h2>
+                        My Pets
+                    </h2>
+
+                    <p>
+                        Manage pets you have listed on PawPal.
+                    </p>
+
                 </div>
 
-                <button class="add-pet-btn"
-                        data-add-pet>
+
+                <button
+                    class="add-pet-btn"
+                    type="button"
+                    data-add-pet>
+
                     + Add Pet
+
                 </button>
 
             </div>
 
+
             <div class="dashboard-search">
 
-                <input type="search"
-                       placeholder="Search your pets...">
+                <input
+                    type="search"
+                    placeholder="Search your pets..."
+                    aria-label="Search your pets">
 
             </div>
 
+
             <div class="pet-grid">
 
-                <article class="pet-card"
-                         data-name="Buddy"
-                         data-pet="sample-pet">
+
+                <article
+                    class="pet-card"
+                    data-name="Buddy"
+                    data-pet="sample-pet">
+
 
                     <div class="pet-card-image">
                         🐶
                     </div>
 
+
                     <h3 class="pet-name">
                         Buddy
                     </h3>
 
-                    <p>Mixed Breed • 2 years</p>
+
+                    <p>
+                        Mixed Breed • 2 years
+                    </p>
+
 
                     <div class="pet-actions">
 
-                        <button class="btn-edit"
-                                data-action="edit">
+
+                        <button
+                            class="btn-edit"
+                            type="button"
+                            data-action="edit">
+
                             Edit
+
                         </button>
 
-                        <button class="btn-delete"
-                                data-action="delete">
+
+                        <button
+                            class="btn-delete"
+                            type="button"
+                            data-action="delete">
+
                             Delete
+
                         </button>
 
                     </div>
@@ -208,57 +342,115 @@
         </section>
 
 
-        <!-- ADOPTION REQUESTS -->
-        <section id="adoption-requests"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             ADOPTION REQUESTS
+        ========================== -->
 
-            <h2>Adoption Requests</h2>
+        <section
+            id="adoption-requests"
+            class="dashboard-section"
+            style="display:none;">
+
+
+            <h2>
+                Adoption Requests
+            </h2>
+
 
             <div class="dashboard-search">
-                <input type="search"
-                       placeholder="Search requests...">
+
+                <input
+                    type="search"
+                    placeholder="Search requests..."
+                    aria-label="Search requests">
+
             </div>
+
 
             <div class="dashboard-card">
 
+
                 <table class="dashboard-table">
 
+
                     <thead>
+
                         <tr>
-                            <th>Adopter</th>
-                            <th>Pet</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+
+                            <th>
+                                Adopter
+                            </th>
+
+                            <th>
+                                Pet
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
                         </tr>
+
                     </thead>
+
 
                     <tbody>
 
                         <tr>
 
-                            <td>Sample Adopter</td>
-                            <td>Buddy</td>
 
                             <td>
+                                Sample Adopter
+                            </td>
+
+
+                            <td>
+                                Buddy
+                            </td>
+
+
+                            <td>
+
                                 <span class="status">
                                     Pending
                                 </span>
+
                             </td>
+
 
                             <td class="table-actions">
 
-                                <button data-request-action="view">
+
+                                <button
+                                    type="button"
+                                    data-request-action="view">
+
                                     View
+
                                 </button>
 
-                                <button data-request-action="approve">
+
+                                <button
+                                    type="button"
+                                    data-request-action="approve">
+
                                     Approve
+
                                 </button>
 
-                                <button data-request-action="reject">
+
+                                <button
+                                    type="button"
+                                    data-request-action="reject">
+
                                     Reject
+
                                 </button>
+
 
                             </td>
 
@@ -273,26 +465,46 @@
         </section>
 
 
-        <!-- MESSAGES -->
-        <section id="messages"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             MESSAGES
+        ========================== -->
 
-            <h2>Messages</h2>
+        <section
+            id="messages"
+            class="dashboard-section"
+            style="display:none;">
+
+
+            <h2>
+                Messages
+            </h2>
+
 
             <div class="dashboard-card">
 
+
                 <div class="message-item">
 
+
                     <div>
-                        <strong>Sample Adopter</strong>
+
+                        <strong>
+                            Sample Adopter
+                        </strong>
+
                         <p>
                             I am interested in adopting Buddy.
                         </p>
+
                     </div>
 
-                    <button data-message-action="Sample Adopter">
+
+                    <button
+                        type="button"
+                        data-message-action="Sample Adopter">
+
                         Reply
+
                     </button>
 
                 </div>
@@ -302,79 +514,109 @@
         </section>
 
 
-        <!-- ADD PET -->
-        <section id="add-pet"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             ADD PET
+        ========================== -->
+
+        <section
+            id="add-pet"
+            class="dashboard-section"
+            style="display:none;">
+
 
             <div class="dashboard-card">
 
-                <h2>Add a Pet</h2>
+
+                <h2>
+                    Add a Pet
+                </h2>
+
 
                 <p>
                     Add a pet to PawPal for adoption.
                 </p>
 
+
                 <form id="addPetForm">
 
+
                     <div class="form-group">
+
 
                         <label for="petName">
                             Pet Name
                         </label>
 
-                        <input id="petName"
-                               name="name"
-                               type="text"
-                               required>
+
+                        <input
+                            id="petName"
+                            name="name"
+                            type="text"
+                            required>
 
                     </div>
 
+
                     <div class="form-group">
+
 
                         <label for="petBreed">
                             Breed
                         </label>
 
-                        <input id="petBreed"
-                               name="breed"
-                               type="text">
+
+                        <input
+                            id="petBreed"
+                            name="breed"
+                            type="text">
 
                     </div>
 
+
                     <div class="form-group">
+
 
                         <label for="petAge">
                             Age
                         </label>
 
-                        <input id="petAge"
-                               name="age"
-                               type="number"
-                               min="0">
+
+                        <input
+                            id="petAge"
+                            name="age"
+                            type="number"
+                            min="0">
 
                     </div>
 
+
                     <div class="form-group">
+
 
                         <label for="petGender">
                             Gender
                         </label>
 
-                        <select id="petGender"
-                                name="gender">
+
+                        <select
+                            id="petGender"
+                            name="gender">
+
 
                             <option value="male">
                                 Male
                             </option>
 
+
                             <option value="female">
                                 Female
                             </option>
 
+
                         </select>
 
                     </div>
+
 
                     <button type="submit">
                         Add Pet
@@ -387,16 +629,28 @@
         </section>
 
 
-        <!-- NOTIFICATIONS -->
-        <section id="notifications"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             NOTIFICATIONS
+        ========================== -->
 
-            <h2>Notifications</h2>
+        <section
+            id="notifications"
+            class="dashboard-section"
+            style="display:none;">
+
+
+            <h2>
+                Notifications
+            </h2>
+
 
             <div class="notification-item">
 
-                <strong>Welcome to PawPal 🐾</strong>
+
+                <strong>
+                    Welcome to PawPal 🐾
+                </strong>
+
 
                 <p>
                     Your pet owner dashboard is ready.
@@ -407,28 +661,50 @@
         </section>
 
 
-        <!-- SETTINGS -->
-        <section id="settings"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section
+            id="settings"
+            class="dashboard-section"
+            style="display:none;">
+
 
             <div class="dashboard-card">
 
-                <h2>Settings</h2>
+
+                <h2>
+                    Settings
+                </h2>
+
 
                 <div class="setting-row">
 
+
                     <div>
-                        <h4>Email Notifications</h4>
-                        <p>Receive adoption request updates.</p>
+
+                        <h4>
+                            Email Notifications
+                        </h4>
+
+                        <p>
+                            Receive adoption request updates.
+                        </p>
+
                     </div>
+
 
                     <label class="toggle">
 
-                        <input type="checkbox"
-                               checked>
+
+                        <input
+                            type="checkbox"
+                            checked>
+
 
                         <span></span>
+
 
                     </label>
 
@@ -439,35 +715,59 @@
         </section>
 
 
-        <!-- PROFILE -->
-        <section id="profile"
-                 class="dashboard-section"
-                 style="display:none;">
+        <!-- =========================
+             PROFILE
+        ========================== -->
+
+        <section
+            id="profile"
+            class="dashboard-section"
+            style="display:none;">
+
 
             <div class="dashboard-card">
 
-                <h2>My Profile</h2>
+
+                <h2>
+                    My Profile
+                </h2>
+
 
                 <form id="profileForm">
 
-                    <div class="form-group">
-
-                        <label>Name</label>
-
-                        <input type="text"
-                               name="name">
-
-                    </div>
 
                     <div class="form-group">
 
-                        <label>Email</label>
 
-                        <input type="email"
-                               data-user-email
-                               disabled>
+                        <label for="profile-name">
+                            Name
+                        </label>
+
+
+                        <input
+                            id="profile-name"
+                            type="text"
+                            name="name">
 
                     </div>
+
+
+                    <div class="form-group">
+
+
+                        <label for="profile-email">
+                            Email
+                        </label>
+
+
+                        <input
+                            id="profile-email"
+                            type="email"
+                            data-user-email
+                            disabled>
+
+                    </div>
+
 
                     <button type="submit">
                         Save Changes
@@ -483,17 +783,33 @@
     </div>
 
 </main>
-```
+
 
 </div>
 
-<div id="dashboardToast"
-     class="dashboard-toast">
+<!-- =========================
+     TOAST
+========================== -->
+
+<div
+    id="dashboardToast"
+    class="dashboard-toast"
+    role="status"
+    aria-live="polite">
 </div>
+
+<!-- =========================
+     AUTH
+========================== -->
 
 <script src="../js/auth.js"></script>
+
+<!-- =========================
+     PET OWNER DASHBOARD JS
+========================== -->
 
 <script src="owner-dashboard.js"></script>
 
 </body>
+
 </html>

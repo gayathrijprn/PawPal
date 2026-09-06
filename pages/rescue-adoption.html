@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,288 @@
     <title>PawPal | Rescue & Adoption</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nav-fixes.css">
     <link rel="stylesheet" href="../css/rescue.css">
+
+    <style>
+
+        /* =====================================================
+           COMMON PAWPAL NAVIGATION
+        ===================================================== */
+
+        .navbar {
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            border: none;
+            background: transparent;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 0;
+        }
+
+        .nav-arrow {
+            font-size: 14px;
+            transition: transform .25s ease;
+        }
+
+        .nav-dropdown.open .nav-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            width: 245px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 18px 45px rgba(61, 45, 37, .15);
+            border: 1px solid rgba(61, 45, 37, .08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: .25s ease;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-dropdown-menu > a,
+        .nav-submenu > a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .nav-dropdown-menu > a:hover,
+        .nav-submenu > a:hover {
+            background: var(--pink);
+            color: var(--coral-dark);
+        }
+
+        .nav-dropdown-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 7px 5px;
+        }
+
+        .nav-submenu {
+            position: relative;
+        }
+
+        .nav-submenu-arrow {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .nav-submenu-menu {
+            position: absolute;
+            top: -10px;
+            left: calc(100% + 5px);
+            width: 230px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 18px 45px rgba(61, 45, 37, .15);
+            border: 1px solid rgba(61, 45, 37, .08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(-8px);
+            transition: .25s ease;
+        }
+
+        .nav-submenu:hover .nav-submenu-menu,
+        .nav-submenu.open .nav-submenu-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .nav-submenu-menu a {
+            display: block;
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .nav-submenu-menu a:hover {
+            background: var(--pink);
+            color: var(--coral-dark);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .auth-user-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .auth-user-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--pink);
+            color: var(--coral-dark);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .welcome-user {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .logout-btn {
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+
+        .logout-btn:hover {
+            background: var(--pink);
+            color: var(--coral-dark);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 25px;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+
+        /* =====================================================
+           MOBILE NAVIGATION
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .navigation {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 15px;
+                background: #fff;
+                box-shadow: 0 15px 30px rgba(61,45,37,.12);
+            }
+
+            .navigation.mobile-open {
+                display: flex;
+            }
+
+            .navigation > a,
+            .nav-dropdown-toggle {
+                width: 100%;
+                padding: 13px 15px;
+                text-align: left;
+            }
+
+            .nav-dropdown-menu {
+                position: static;
+                width: 100%;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            .nav-dropdown.open .nav-dropdown-menu {
+                display: block;
+                transform: none;
+            }
+
+            .nav-submenu-menu {
+                position: static;
+                width: 100%;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                padding-left: 15px;
+            }
+
+            .nav-submenu.open .nav-submenu-menu {
+                display: block;
+            }
+
+            .nav-right {
+                margin-left: auto;
+            }
+
+            .welcome-user {
+                display: none;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -18,58 +300,208 @@
 
 
 <!-- =========================================================
-     NAVBAR
+     COMMON PAWPAL NAVBAR
      ========================================================= -->
 
-<header class="rescue-navbar">
+<header class="navbar">
 
-    <div class="rescue-nav-inner">
+    <a
+        href="../index.html"
+        class="brand"
+        aria-label="Go to PawPal home"
+    >
 
-        <a href="../index.html" class="rescue-brand">
+        <div class="brand-paw">
+            🐾
+        </div>
 
-            <span class="rescue-brand-paw">
-                🐾
-            </span>
+        <div class="brand-name">
+            Paw<span>Pal</span>
+        </div>
 
-            <span>
-                Paw<span>Pal</span>
-            </span>
+    </a>
 
+
+    <button
+        type="button"
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
+
+
+    <nav
+        class="navigation"
+        id="mainNavigation"
+        aria-label="Main navigation"
+    >
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="pets.html">
+            Find a Pet
         </a>
 
 
-        <nav class="rescue-navigation">
+        <!-- FEATURES -->
 
-            <a href="../index.html">
-                Home
-            </a>
+        <div
+            class="nav-dropdown"
+            id="featuresDropdown"
+        >
 
-            <a href="pets.html">
-                Find a Pet
-            </a>
+            <button
+                type="button"
+                class="nav-dropdown-toggle"
+                id="featuresToggle"
+                aria-expanded="false"
+            >
 
-            <a href="how-it-works.html">
-                How It Works
-            </a>
+                Features
 
-            <a href="about.html">
-                About Us
-            </a>
+                <span class="nav-arrow">
+                    ⌄
+                </span>
 
-        </nav>
+            </button>
 
 
-        <div class="rescue-nav-actions">
+            <div class="nav-dropdown-menu">
 
-            <a href="login.html" class="rescue-login">
-                Log in
-            </a>
+                <a href="pets.html">
+                    🐾 Smart Pet Matching
+                </a>
 
-            <a href="register.html" class="rescue-nav-button">
-                Get Started
-            </a>
+                <a href="pet-care.html">
+                    ❤️ Pet Care
+                </a>
+
+                <a href="pet-care.html#health-timeline">
+                    🩺 Health Timeline
+                </a>
+
+                <a href="pet-passport.html">
+                    📘 Digital Pet Passport
+                </a>
+
+                <a href="adoption-status.html">
+                    📋 Adoption Status
+                </a>
+
+
+                <div class="nav-dropdown-divider"></div>
+
+
+                <!-- RESCUE & ADOPTION -->
+
+                <div
+                    class="nav-submenu"
+                    id="rescueSubmenu"
+                >
+
+                    <a
+                        href="rescue-adoption.html"
+                        aria-current="page"
+                    >
+
+                        <span>
+                            🐕 Rescue & Adoption
+                        </span>
+
+                        <span class="nav-submenu-arrow">
+                            ›
+                        </span>
+
+                    </a>
+
+
+                    <div class="nav-submenu-menu">
+
+                        <a href="rescue-adoption.html">
+                            🐾 Rescue an Animal
+                        </a>
+
+                        <a href="rescue-adoption.html#rescue-listings">
+                            🔎 Browse Rescued Pets
+                        </a>
+
+                        <a href="start-fundraiser.html">
+                            💝 Start a Fundraiser
+                        </a>
+
+                        <a href="donation.html">
+                            💗 Donate & Support
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="start-fundraiser.html">
+                    💝 Fundraisers
+                </a>
+
+                <a href="donation.html">
+                    💗 Donate & Support
+                </a>
+
+                <a href="shop.html">
+                    🛍 Pet Shop
+                </a>
+
+                <a href="how-it-works.html">
+                    ✨ How PawPal Works
+                </a>
+
+            </div>
 
         </div>
+
+
+        <a href="how-it-works.html">
+            How It Works
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+    </nav>
+
+
+    <!-- AUTH -->
+
+    <div
+        class="nav-right"
+        id="authNav"
+    >
+
+        <a
+            href="login.html"
+            class="login"
+            id="loginNavButton"
+        >
+            Log in
+        </a>
+
+        <a
+            href="register.html"
+            class="nav-button"
+            id="signupNavButton"
+        >
+            Get Started
+            <span>→</span>
+        </a>
 
     </div>
 
@@ -372,9 +804,7 @@
             novalidate>
 
 
-            <!-- =================================================
-                 PHOTO UPLOAD
-                 ================================================= -->
+            <!-- PHOTO UPLOAD -->
 
             <div class="rescue-form-section">
 
@@ -447,9 +877,7 @@
 
 
 
-            <!-- =================================================
-                 BASIC INFORMATION
-                 ================================================= -->
+            <!-- BASIC INFORMATION -->
 
             <div class="rescue-form-section">
 
@@ -685,9 +1113,7 @@
 
 
 
-            <!-- =================================================
-                 HEALTH & FIRST AID
-                 ================================================= -->
+            <!-- HEALTH & FIRST AID -->
 
             <div class="rescue-form-section">
 
@@ -888,9 +1314,7 @@
 
 
 
-            <!-- =================================================
-                 TEMPORARY CARE
-                 ================================================= -->
+            <!-- TEMPORARY CARE -->
 
             <div class="rescue-form-section">
 
@@ -1048,9 +1472,7 @@
 
 
 
-            <!-- =================================================
-                 RESCUE STORY
-                 ================================================= -->
+            <!-- RESCUE STORY -->
 
             <div class="rescue-form-section">
 
@@ -1174,9 +1596,7 @@
 
 
 
-            <!-- =================================================
-                 CONTACT & CONSENT
-                 ================================================= -->
+            <!-- CONTACT & CONSENT -->
 
             <div class="rescue-form-section">
 
@@ -1311,9 +1731,7 @@
 
 
 
-            <!-- =================================================
-                 FORM ACTIONS
-                 ================================================= -->
+            <!-- FORM ACTIONS -->
 
             <div class="rescue-form-actions">
 
@@ -1426,7 +1844,6 @@
 
             <option value="other">
                 Other
-
             </option>
 
         </select>
@@ -1470,9 +1887,7 @@
         id="rescueCardGrid">
 
 
-        <!-- =====================================================
-             RESCUE CARD 1
-             ===================================================== -->
+        <!-- RESCUE CARD 1 -->
 
         <article
             class="rescue-animal-card"
@@ -1569,9 +1984,7 @@
 
 
 
-        <!-- =====================================================
-             RESCUE CARD 2
-             ===================================================== -->
+        <!-- RESCUE CARD 2 -->
 
         <article
             class="rescue-animal-card"
@@ -1669,9 +2082,7 @@
 
 
 
-        <!-- =====================================================
-             RESCUE CARD 3
-             ===================================================== -->
+        <!-- RESCUE CARD 3 -->
 
         <article
             class="rescue-animal-card"
@@ -1769,9 +2180,7 @@
 
 
 
-        <!-- =====================================================
-             RESCUE CARD 4
-             ===================================================== -->
+        <!-- RESCUE CARD 4 -->
 
         <article
             class="rescue-animal-card"
@@ -2141,10 +2550,157 @@
      JAVASCRIPT
      ========================================================= -->
 
+<!-- PAWPAL AUTH -->
+
+<script src="../js/auth.js"></script>
+
+
+<!-- COMMON NAVIGATION -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
+
+    const mainNavigation =
+        document.getElementById("mainNavigation");
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresToggle =
+        document.getElementById("featuresToggle");
+
+    const rescueSubmenu =
+        document.getElementById("rescueSubmenu");
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    if (mobileMenuButton && mainNavigation) {
+
+        mobileMenuButton.addEventListener("click", function () {
+
+            const isOpen =
+                mainNavigation.classList.toggle("mobile-open");
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       FEATURES DROPDOWN
+    ===================================================== */
+
+    if (featuresToggle && featuresDropdown) {
+
+        featuresToggle.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                featuresDropdown.classList.toggle("open");
+
+            featuresToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       RESCUE SUBMENU
+    ===================================================== */
+
+    if (rescueSubmenu) {
+
+        const rescueLink =
+            rescueSubmenu.querySelector(":scope > a");
+
+        if (rescueLink) {
+
+            rescueLink.addEventListener("click", function (event) {
+
+                if (window.innerWidth <= 900) {
+
+                    event.preventDefault();
+
+                    rescueSubmenu.classList.toggle("open");
+
+                }
+
+            });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CLOSE DROPDOWN OUTSIDE
+    ===================================================== */
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            featuresDropdown &&
+            !featuresDropdown.contains(event.target)
+        ) {
+
+            featuresDropdown.classList.remove("open");
+
+            if (featuresToggle) {
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* =====================================================
+       YEAR
+    ===================================================== */
+
+    const rescueYear =
+        document.getElementById("rescueYear");
+
+    if (rescueYear) {
+
+        rescueYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+});
+
+</script>
+
+
+<!-- RESCUE PAGE JAVASCRIPT -->
+
 <script src="../js/JS rescue.js"></script>
 
 
 </body>
 
 </html>
-```
+

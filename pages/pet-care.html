@@ -1,1103 +1,1282 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pet Care | PawPal</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Pet Care | PawPal</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="../CSS/pet-care.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../CSS/pet-care.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
+
+
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
 
-    <header class="navbar">
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-inner">
 
         <a href="../index.html" class="brand">
             <span class="brand-paw">🐾</span>
             <span>PawPal</span>
         </a>
 
-        <nav class="navigation">
-            <a href="../index.html">Home</a>
-            <a href="pets.html">Find a Pet</a>
-            <a href="how-it-works.html">How It Works</a>
-            <a href="pet-care.html" class="active">Pet Care</a>
-            <a href="about.html">About Us</a>
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="navigation" id="mainNavigation">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="pets.html">
+                Find a Pet
+            </a>
+
+            <!-- FEATURES DROPDOWN -->
+
+            <div class="nav-dropdown" id="featuresDropdown">
+
+                <button
+                    type="button"
+                    class="nav-dropdown-toggle"
+                    aria-expanded="false">
+                    Features
+                    <span>⌄</span>
+                </button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="pets.html">
+                        <span>🐾</span>
+                        <div>
+                            <strong>Smart Pet Matching</strong>
+                            <small>Find pets that fit your lifestyle</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-care.html" class="active">
+                        <span>💚</span>
+                        <div>
+                            <strong>Pet Care</strong>
+                            <small>Everyday care and guidance</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-care.html#health-timeline">
+                        <span>📅</span>
+                        <div>
+                            <strong>Health Timeline</strong>
+                            <small>Keep track of important health events</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-passport.html">
+                        <span>📘</span>
+                        <div>
+                            <strong>Digital Pet Passport</strong>
+                            <small>Keep your pet's records together</small>
+                        </div>
+                    </a>
+
+                    <a href="adoption-status.html">
+                        <span>📋</span>
+                        <div>
+                            <strong>Adoption Status</strong>
+                            <small>Track your adoption journey</small>
+                        </div>
+                    </a>
+
+                    <!-- RESCUE & ADOPTION -->
+
+                    <div class="nav-subdropdown">
+
+                        <button
+                            type="button"
+                            class="nav-subdropdown-toggle"
+                            aria-expanded="false">
+
+                            <span>🏠</span>
+
+                            <div>
+                                <strong>Rescue & Adoption</strong>
+                                <small>Help animals find loving homes</small>
+                            </div>
+
+                            <span class="submenu-arrow">›</span>
+
+                        </button>
+
+                        <div class="nav-subdropdown-menu">
+
+                            <a href="rescue-adoption.html">
+                                🐾 Rescue an Animal
+                            </a>
+
+                            <a href="rescue-adoption.html#rescue-listings">
+                                🔎 Browse Rescued Pets
+                            </a>
+
+                            <a href="start-fundraiser.html">
+                                💰 Start a Fundraiser
+                            </a>
+
+                            <a href="donation.html">
+                                ❤️ Donate & Support
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <a href="start-fundraiser.html">
+                        <span>💰</span>
+                        <div>
+                            <strong>Fundraisers</strong>
+                            <small>Support pets in need</small>
+                        </div>
+                    </a>
+
+                    <a href="donation.html">
+                        <span>❤️</span>
+                        <div>
+                            <strong>Donate & Support</strong>
+                            <small>Give a pet a second chance</small>
+                        </div>
+                    </a>
+
+                    <a href="shop.html">
+                        <span>🛍️</span>
+                        <div>
+                            <strong>Pet Shop</strong>
+                            <small>Essentials for happy pets</small>
+                        </div>
+                    </a>
+
+                    <a href="how-it-works.html">
+                        <span>💡</span>
+                        <div>
+                            <strong>How PawPal Works</strong>
+                            <small>Learn about the adoption process</small>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="how-it-works.html">
+                How It Works
+            </a>
+
+            <a href="shop.html">
+                Shop
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
         </nav>
 
-        <div class="nav-right">
-            <a href="login.html" class="login-link">Log in</a>
-            <a href="register.html" class="nav-button">Get Started</a>
+
+        <!-- AUTH NAVIGATION -->
+
+        <div class="nav-right" id="authNav">
+
+            <a href="login.html" class="login" id="loginNavButton">
+                Log in
+            </a>
+
+            <a href="register.html" class="nav-button" id="signupNavButton">
+                Get Started
+                <span>→</span>
+            </a>
+
         </div>
 
-    </header>
+    </div>
+
+</header>
 
 
-    <main>
+<main>
 
-        <!-- ================= HERO ================= -->
+    <!-- ================= HERO ================= -->
 
-        <section class="care-hero">
+    <section class="care-hero">
 
-            <div class="hero-content">
+        <div class="hero-content">
 
-                <span class="eyebrow">PAWPAL CARE HUB</span>
+            <span class="eyebrow">PAWPAL CARE HUB</span>
 
-                <h1>
-                    Everything they need,
-                    <span>all in one place.</span>
-                </h1>
+            <h1>
+                Everything they need,
+                <span>all in one place.</span>
+            </h1>
+
+            <p>
+                From keeping their paws and coat healthy to supporting
+                their emotional wellbeing, PawPal helps you take better
+                care of every part of your pet's life.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#care-options" class="primary-button">
+                    Explore Pet Care
+                </a>
+
+                <a href="pets.html" class="secondary-button">
+                    Find a Pet
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-illustration">
+
+            <div class="illustration-circle">
+                🐶
+            </div>
+
+            <div class="floating-card card-one">
+                ✨
+                <strong>Happy pets</strong>
+            </div>
+
+            <div class="floating-card card-two">
+                🐾
+                <strong>Better care</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CARE OPTIONS ================= -->
+
+    <section class="care-options" id="care-options">
+
+        <div class="section-heading centered">
+
+            <span class="section-label">
+                CARE MADE SIMPLE
+            </span>
+
+            <h2>
+                What does your pet need today?
+            </h2>
+
+            <p>
+                Choose an area of care and discover ways to keep
+                your furry friend healthy, happy and comfortable.
+            </p>
+
+        </div>
+
+
+        <div class="care-grid">
+
+            <!-- GROOMING -->
+
+            <article class="care-card grooming-card">
+
+                <div class="care-icon">✂️</div>
+
+                <span class="care-number">01</span>
+
+                <h3>Pet Grooming</h3>
 
                 <p>
-                    From keeping their paws and coat healthy to supporting
-                    their emotional wellbeing, PawPal helps you take better
-                    care of every part of your pet's life.
+                    Keep your pet clean, comfortable and looking their
+                    absolute best with personalised grooming care.
                 </p>
 
-                <div class="hero-buttons">
-                    <a href="#care-options" class="primary-button">
-                        Explore Pet Care
-                    </a>
+                <ul>
+                    <li>🐾 Find professional groomers</li>
+                    <li>🛁 Bathing & coat care</li>
+                    <li>✂️ Hair trimming</li>
+                    <li>💅 Nail & paw care</li>
+                    <li>🦷 Dental & ear care</li>
+                    <li>✨ Breed-specific grooming</li>
+                </ul>
 
-                    <a href="pets.html" class="secondary-button">
-                        Find a Pet
-                    </a>
-                </div>
+                <a href="#grooming" class="care-link">
+                    Explore grooming <span>→</span>
+                </a>
 
-            </div>
-
-            <div class="hero-illustration">
-
-                <div class="illustration-circle">
-                    🐶
-                </div>
-
-                <div class="floating-card card-one">
-                    ✨
-                    <strong>Happy pets</strong>
-                </div>
-
-                <div class="floating-card card-two">
-                    🐾
-                    <strong>Better care</strong>
-                </div>
-
-            </div>
-
-        </section>
+            </article>
 
 
-        <!-- ================= CARE OPTIONS ================= -->
+            <!-- MATING -->
 
-        <section class="care-options" id="care-options">
+            <article class="care-card mating-card">
 
-            <div class="section-heading centered">
+                <div class="care-icon">💕</div>
 
-                <span class="section-label">CARE MADE SIMPLE</span>
+                <span class="care-number">02</span>
 
-                <h2>
-                    What does your pet need today?
-                </h2>
+                <h3>Pet Mating</h3>
 
                 <p>
-                    Choose an area of care and discover ways to keep
-                    your furry friend healthy, happy and comfortable.
+                    Help suitable pets connect responsibly while
+                    considering health, compatibility and responsible
+                    breeding practices.
                 </p>
 
-            </div>
+                <ul>
+                    <li>🐕 Discover available pets</li>
+                    <li>💕 Compatibility matching</li>
+                    <li>🤝 Connect with pet owners</li>
+                    <li>📩 Send mating requests</li>
+                    <li>🩺 Health considerations</li>
+                    <li>🌱 Responsible breeding</li>
+                </ul>
+
+                <a href="#mating" class="care-link">
+                    Explore mating <span>→</span>
+                </a>
+
+            </article>
 
 
-            <div class="care-grid">
+            <!-- WELLNESS -->
 
-                <!-- GROOMING -->
+            <article class="care-card wellness-card">
 
-                <article class="care-card grooming-card">
+                <div class="care-icon">🌿</div>
 
-                    <div class="care-icon">✂️</div>
+                <span class="care-number">03</span>
 
-                    <span class="care-number">01</span>
-
-                    <h3>Pet Grooming</h3>
-
-                    <p>
-                        Keep your pet clean, comfortable and looking their
-                        absolute best with personalised grooming care.
-                    </p>
-
-                    <ul>
-                        <li>🐾 Find professional groomers</li>
-                        <li>🛁 Bathing & coat care</li>
-                        <li>✂️ Hair trimming</li>
-                        <li>💅 Nail & paw care</li>
-                        <li>🦷 Dental & ear care</li>
-                        <li>✨ Breed-specific grooming</li>
-                    </ul>
-
-                    <a href="#grooming" class="care-link">
-                        Explore grooming <span>→</span>
-                    </a>
-
-                </article>
-
-
-                <!-- MATING -->
-
-                <article class="care-card mating-card">
-
-                    <div class="care-icon">💕</div>
-
-                    <span class="care-number">02</span>
-
-                    <h3>Pet Mating</h3>
-
-                    <p>
-                        Help suitable pets connect responsibly while
-                        considering health, compatibility and responsible
-                        breeding practices.
-                    </p>
-
-                    <ul>
-                        <li>🐕 Discover available pets</li>
-                        <li>💕 Compatibility matching</li>
-                        <li>🤝 Connect with pet owners</li>
-                        <li>📩 Send mating requests</li>
-                        <li>🩺 Health considerations</li>
-                        <li>🌱 Responsible breeding</li>
-                    </ul>
-
-                    <a href="#mating" class="care-link">
-                        Explore mating <span>→</span>
-                    </a>
-
-                </article>
-
-
-                <!-- WELLNESS -->
-
-                <article class="care-card wellness-card">
-
-                    <div class="care-icon">🌿</div>
-
-                    <span class="care-number">03</span>
-
-                    <h3>Pet Wellness</h3>
-
-                    <p>
-                        Support your pet's emotional and mental wellbeing
-                        through play, enrichment, companionship and
-                        understanding their behaviour.
-                    </p>
-
-                    <ul>
-                        <li>😊 Mood tracking</li>
-                        <li>🧠 Mental stimulation</li>
-                        <li>🎾 Play & enrichment</li>
-                        <li>🐾 Socialisation</li>
-                        <li>💗 Emotional wellbeing</li>
-                        <li>🏡 Companionship ideas</li>
-                    </ul>
-
-                    <a href="#wellness" class="care-link">
-                        Explore wellness <span>→</span>
-                    </a>
-
-                </article>
-
-
-                <!-- HEAT CARE -->
-
-                <article class="care-card heat-card">
-
-                    <div class="care-icon">🌸</div>
-
-                    <span class="care-number">04</span>
-
-                    <h3>Pet Heat Care</h3>
-
-                    <p>
-                        Understand reproductive cycles with tracking,
-                        reminders, hygiene guidance and helpful care
-                        information.
-                    </p>
-
-                    <ul>
-                        <li>📅 Heat-cycle tracking</li>
-                        <li>🔔 Care reminders</li>
-                        <li>🧼 Hygiene guidance</li>
-                        <li>🌸 Behaviour changes</li>
-                        <li>📝 Cycle calendar</li>
-                        <li>🩺 Vet guidance</li>
-                    </ul>
-
-                    <a href="#heat-care" class="care-link">
-                        Explore heat care <span>→</span>
-                    </a>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= GROOMING ================= -->
-
-        <section class="detail-section grooming-detail" id="grooming">
-
-            <div class="detail-visual">
-                <div class="big-detail-icon">✂️</div>
-            </div>
-
-            <div class="detail-content">
-
-                <span class="section-label">PET GROOMING</span>
-
-                <h2>Fresh, clean and comfortable.</h2>
+                <h3>Pet Wellness</h3>
 
                 <p>
-                    Grooming is more than making your pet look cute.
-                    Regular grooming can support hygiene, comfort and
-                    overall wellbeing.
+                    Support your pet's emotional and mental wellbeing
+                    through play, enrichment, companionship and
+                    understanding their behaviour.
                 </p>
 
-                <div class="feature-list">
+                <ul>
+                    <li>😊 Mood tracking</li>
+                    <li>🧠 Mental stimulation</li>
+                    <li>🎾 Play & enrichment</li>
+                    <li>🐾 Socialisation</li>
+                    <li>💗 Emotional wellbeing</li>
+                    <li>🏡 Companionship ideas</li>
+                </ul>
+
+                <a href="#wellness" class="care-link">
+                    Explore wellness <span>→</span>
+                </a>
+
+            </article>
+
+
+            <!-- HEAT CARE -->
+
+            <article class="care-card heat-card">
+
+                <div class="care-icon">🌸</div>
+
+                <span class="care-number">04</span>
+
+                <h3>Pet Heat Care</h3>
+
+                <p>
+                    Understand reproductive cycles with tracking,
+                    reminders, hygiene guidance and helpful care
+                    information.
+                </p>
+
+                <ul>
+                    <li>📅 Heat-cycle tracking</li>
+                    <li>🔔 Care reminders</li>
+                    <li>🧼 Hygiene guidance</li>
+                    <li>🌸 Behaviour changes</li>
+                    <li>📝 Cycle calendar</li>
+                    <li>🩺 Vet guidance</li>
+                </ul>
+
+                <a href="#heat-care" class="care-link">
+                    Explore heat care <span>→</span>
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GROOMING ================= -->
+
+    <section class="detail-section grooming-detail" id="grooming">
+
+        <div class="detail-visual">
+            <div class="big-detail-icon">✂️</div>
+        </div>
+
+        <div class="detail-content">
+
+            <span class="section-label">
+                PET GROOMING
+            </span>
+
+            <h2>
+                Fresh, clean and comfortable.
+            </h2>
+
+            <p>
+                Grooming is more than making your pet look cute.
+                Regular grooming can support hygiene, comfort and
+                overall wellbeing.
+            </p>
+
+            <div class="feature-list">
+
+                <div>
+                    <span>🛁</span>
+                    <div>
+                        <strong>Bathing</strong>
+                        <p>Keep coats clean and fresh.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <span>💅</span>
+                    <div>
+                        <strong>Nail & Paw Care</strong>
+                        <p>Maintain healthy paws and comfortable nails.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <span>🦷</span>
+                    <div>
+                        <strong>Dental & Ear Care</strong>
+                        <p>Support everyday hygiene beyond the coat.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <span>✂️</span>
+                    <div>
+                        <strong>Professional Groomers</strong>
+                        <p>Connect with grooming professionals.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="login.html" class="primary-button">
+                Book Grooming
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MATING ================= -->
+
+    <section class="detail-section reverse mating-detail" id="mating">
+
+        <div class="detail-visual">
+            <div class="big-detail-icon">💕</div>
+        </div>
+
+        <div class="detail-content">
+
+            <span class="section-label">
+                PET MATING
+            </span>
+
+            <h2>
+                Helping the right pets connect.
+            </h2>
+
+            <p>
+                PawPal can help pet owners discover suitable connections
+                for responsible breeding. Matching should always consider
+                health, age, temperament, breed compatibility and
+                veterinary guidance.
+            </p>
+
+            <div class="info-box">
+
+                <span>🩺</span>
+
+                <div>
+
+                    <strong>
+                        Responsible breeding comes first.
+                    </strong>
+
+                    <p>
+                        Pets should be healthy and appropriately aged,
+                        and owners should consult a veterinarian before
+                        breeding.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a href="login.html" class="secondary-button">
+                Find Available Pets
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PET WELLNESS
+         ===================================================== -->
+
+    <section class="wellness-full-section" id="wellness">
+
+        <div class="wellness-heading">
+
+            <span class="section-label">
+                PET WELLNESS
+            </span>
+
+            <h2>
+                A healthy pet needs
+                <span>a happy mind.</span>
+            </h2>
+
+            <p>
+                Wellness isn't only about physical health. Pets need
+                affection, stimulation, routine, play and meaningful
+                interaction to feel safe and happy.
+            </p>
+
+        </div>
+
+
+        <!-- WELLNESS FEATURES -->
+
+        <div class="wellness-feature-grid">
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">😊</div>
+
+                <h3>
+                    Mood & Emotion
+                </h3>
+
+                <p>
+                    Notice changes in your pet's mood and learn to
+                    recognise signs of happiness, stress, boredom,
+                    fear or loneliness.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>Happy</span>
+                    <span>Calm</span>
+                    <span>Anxious</span>
+                    <span>Playful</span>
+                </div>
+
+            </div>
+
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">🧠</div>
+
+                <h3>
+                    Mental Stimulation
+                </h3>
+
+                <p>
+                    Keep curious minds active with puzzles, scent games,
+                    training exercises and activities suited to your
+                    pet's abilities.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>Puzzles</span>
+                    <span>Scent games</span>
+                    <span>Training</span>
+                </div>
+
+            </div>
+
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">🎾</div>
+
+                <h3>
+                    Play & Enrichment
+                </h3>
+
+                <p>
+                    Regular play helps pets stay active while giving
+                    them opportunities to explore, chase, sniff,
+                    solve problems and have fun.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>Fetch</span>
+                    <span>Toys</span>
+                    <span>Walks</span>
+                    <span>Explore</span>
+                </div>
+
+            </div>
+
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">🐾</div>
+
+                <h3>
+                    Socialisation
+                </h3>
+
+                <p>
+                    Positive interactions with people and suitable
+                    animals can help pets become more confident and
+                    comfortable in different environments.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>People</span>
+                    <span>Pets</span>
+                    <span>New places</span>
+                </div>
+
+            </div>
+
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">💗</div>
+
+                <h3>
+                    Affection & Bonding
+                </h3>
+
+                <p>
+                    Spending quality time together builds trust.
+                    Gentle attention, cuddles and positive interaction
+                    can strengthen your relationship.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>Cuddles</span>
+                    <span>Attention</span>
+                    <span>Trust</span>
+                </div>
+
+            </div>
+
+
+            <div class="wellness-feature">
+
+                <div class="wellness-feature-icon">🏡</div>
+
+                <h3>
+                    Comfort & Routine
+                </h3>
+
+                <p>
+                    Predictable routines, a safe resting place and
+                    enough quiet time can help pets feel secure in
+                    their everyday environment.
+                </p>
+
+                <div class="wellness-tags">
+                    <span>Routine</span>
+                    <span>Rest</span>
+                    <span>Safe space</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WELLNESS ROUTINE -->
+
+        <div class="wellness-routine">
+
+            <div class="routine-title">
+
+                <span>🌿</span>
+
+                <div>
+                    <h3>
+                        A simple wellness routine
+                    </h3>
+
+                    <p>
+                        Small daily moments can make a big difference.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="routine-items">
+
+                <div class="routine-item">
+                    <span>🌅</span>
+                    <strong>Morning</strong>
+                    <small>Walk & interaction</small>
+                </div>
+
+                <div class="routine-item">
+                    <span>🎾</span>
+                    <strong>Play</strong>
+                    <small>Enrichment activity</small>
+                </div>
+
+                <div class="routine-item">
+                    <span>🤗</span>
+                    <strong>Bond</strong>
+                    <small>Quality time</small>
+                </div>
+
+                <div class="routine-item">
+                    <span>🌙</span>
+                    <strong>Rest</strong>
+                    <small>Quiet & comfortable sleep</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WELLNESS SIGNS -->
+
+        <div class="wellness-signs">
+
+            <div class="signs-column happy-signs">
+
+                <h3>
+                    💚 Signs your pet may be doing well
+                </h3>
+
+                <ul>
+                    <li>✓ Interested in play and surroundings</li>
+                    <li>✓ Comfortable resting and sleeping</li>
+                    <li>✓ Enjoys positive interaction</li>
+                    <li>✓ Shows normal appetite and activity</li>
+                    <li>✓ Curious about their environment</li>
+                </ul>
+
+            </div>
+
+
+            <div class="signs-column concern-signs">
+
+                <h3>
+                    💛 Changes worth paying attention to
+                </h3>
+
+                <ul>
+                    <li>• Sudden withdrawal or hiding</li>
+                    <li>• Unusual aggression or fear</li>
+                    <li>• Loss of interest in normal activities</li>
+                    <li>• Significant changes in eating or sleeping</li>
+                    <li>• Sudden or persistent behaviour changes</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PET HEAT CARE
+         ===================================================== -->
+
+    <section class="heat-full-section" id="heat-care">
+
+        <div class="heat-heading">
+
+            <span class="section-label">
+                PET HEAT CARE
+            </span>
+
+            <h2>
+                Understand the cycle.
+                <span>Care with confidence.</span>
+            </h2>
+
+            <p>
+                For dogs and other animals that experience heat or
+                reproductive cycles, tracking changes can make
+                everyday care easier and more organised.
+            </p>
+
+        </div>
+
+
+        <!-- HEAT DASHBOARD -->
+
+        <div class="heat-dashboard">
+
+            <div class="cycle-card">
+
+                <div class="cycle-card-top">
 
                     <div>
-                        <span>🛁</span>
-                        <div>
-                            <strong>Bathing</strong>
-                            <p>Keep coats clean and fresh.</p>
-                        </div>
+                        <span class="mini-label">
+                            CYCLE TRACKER
+                        </span>
+
+                        <h3>
+                            Track every stage
+                        </h3>
                     </div>
 
-                    <div>
-                        <span>💅</span>
-                        <div>
-                            <strong>Nail & Paw Care</strong>
-                            <p>Maintain healthy paws and comfortable nails.</p>
-                        </div>
+                    <span class="cycle-icon">
+                        📅
+                    </span>
+
+                </div>
+
+                <p>
+                    Record the beginning and end of each cycle to
+                    understand your pet's individual pattern over time.
+                </p>
+
+                <div class="cycle-progress">
+
+                    <div class="cycle-stage active">
+                        <span>1</span>
+                        <strong>Start</strong>
                     </div>
 
-                    <div>
-                        <span>🦷</span>
-                        <div>
-                            <strong>Dental & Ear Care</strong>
-                            <p>Support everyday hygiene beyond the coat.</p>
-                        </div>
+                    <div class="cycle-line"></div>
+
+                    <div class="cycle-stage">
+                        <span>2</span>
+                        <strong>Cycle</strong>
                     </div>
 
-                    <div>
-                        <span>✂️</span>
-                        <div>
-                            <strong>Professional Groomers</strong>
-                            <p>Connect with grooming professionals.</p>
-                        </div>
+                    <div class="cycle-line"></div>
+
+                    <div class="cycle-stage">
+                        <span>3</span>
+                        <strong>Recovery</strong>
                     </div>
 
                 </div>
 
                 <a href="login.html" class="primary-button">
-                    Book Grooming
+                    Start Tracking
                 </a>
 
             </div>
 
-        </section>
 
+            <div class="heat-reminder-card">
 
-        <!-- ================= MATING ================= -->
+                <span class="mini-label">
+                    SMART REMINDERS
+                </span>
 
-        <section class="detail-section reverse mating-detail" id="mating">
+                <h3>
+                    Never forget important care.
+                </h3>
 
-            <div class="detail-visual">
-                <div class="big-detail-icon">💕</div>
-            </div>
-
-            <div class="detail-content">
-
-                <span class="section-label">PET MATING</span>
-
-                <h2>Helping the right pets connect.</h2>
-
-                <p>
-                    PawPal can help pet owners discover suitable connections
-                    for responsible breeding. Matching should always consider
-                    health, age, temperament, breed compatibility and
-                    veterinary guidance.
-                </p>
-
-                <div class="info-box">
-                    <span>🩺</span>
+                <div class="reminder-list">
 
                     <div>
-                        <strong>Responsible breeding comes first.</strong>
-
-                        <p>
-                            Pets should be healthy and appropriately aged,
-                            and owners should consult a veterinarian before
-                            breeding.
-                        </p>
-                    </div>
-                </div>
-
-                <a href="login.html" class="secondary-button">
-                    Find Available Pets
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PET WELLNESS
-             ===================================================== -->
-
-        <section class="wellness-full-section" id="wellness">
-
-            <div class="wellness-heading">
-
-                <span class="section-label">PET WELLNESS</span>
-
-                <h2>
-                    A healthy pet needs
-                    <span>a happy mind.</span>
-                </h2>
-
-                <p>
-                    Wellness isn't only about physical health. Pets need
-                    affection, stimulation, routine, play and meaningful
-                    interaction to feel safe and happy.
-                </p>
-
-            </div>
-
-
-            <!-- WELLNESS FEATURES -->
-
-            <div class="wellness-feature-grid">
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">😊</div>
-                    <h3>Mood & Emotion</h3>
-                    <p>
-                        Notice changes in your pet's mood and learn to
-                        recognise signs of happiness, stress, boredom,
-                        fear or loneliness.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>Happy</span>
-                        <span>Calm</span>
-                        <span>Anxious</span>
-                        <span>Playful</span>
-                    </div>
-                </div>
-
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">🧠</div>
-                    <h3>Mental Stimulation</h3>
-                    <p>
-                        Keep curious minds active with puzzles, scent games,
-                        training exercises and activities suited to your
-                        pet's abilities.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>Puzzles</span>
-                        <span>Scent games</span>
-                        <span>Training</span>
-                    </div>
-                </div>
-
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">🎾</div>
-                    <h3>Play & Enrichment</h3>
-                    <p>
-                        Regular play helps pets stay active while giving
-                        them opportunities to explore, chase, sniff,
-                        solve problems and have fun.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>Fetch</span>
-                        <span>Toys</span>
-                        <span>Walks</span>
-                        <span>Explore</span>
-                    </div>
-                </div>
-
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">🐾</div>
-                    <h3>Socialisation</h3>
-                    <p>
-                        Positive interactions with people and suitable
-                        animals can help pets become more confident and
-                        comfortable in different environments.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>People</span>
-                        <span>Pets</span>
-                        <span>New places</span>
-                    </div>
-                </div>
-
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">💗</div>
-                    <h3>Affection & Bonding</h3>
-                    <p>
-                        Spending quality time together builds trust.
-                        Gentle attention, cuddles and positive interaction
-                        can strengthen your relationship.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>Cuddles</span>
-                        <span>Attention</span>
-                        <span>Trust</span>
-                    </div>
-                </div>
-
-
-                <div class="wellness-feature">
-                    <div class="wellness-feature-icon">🏡</div>
-                    <h3>Comfort & Routine</h3>
-                    <p>
-                        Predictable routines, a safe resting place and
-                        enough quiet time can help pets feel secure in
-                        their everyday environment.
-                    </p>
-
-                    <div class="wellness-tags">
-                        <span>Routine</span>
-                        <span>Rest</span>
-                        <span>Safe space</span>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- WELLNESS ROUTINE -->
-
-            <div class="wellness-routine">
-
-                <div class="routine-title">
-                    <span>🌿</span>
-
-                    <div>
-                        <h3>A simple wellness routine</h3>
-                        <p>Small daily moments can make a big difference.</p>
-                    </div>
-                </div>
-
-
-                <div class="routine-items">
-
-                    <div class="routine-item">
-                        <span>🌅</span>
-                        <strong>Morning</strong>
-                        <small>Walk & interaction</small>
-                    </div>
-
-                    <div class="routine-item">
-                        <span>🎾</span>
-                        <strong>Play</strong>
-                        <small>Enrichment activity</small>
-                    </div>
-
-                    <div class="routine-item">
-                        <span>🤗</span>
-                        <strong>Bond</strong>
-                        <small>Quality time</small>
-                    </div>
-
-                    <div class="routine-item">
-                        <span>🌙</span>
-                        <strong>Rest</strong>
-                        <small>Quiet & comfortable sleep</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- WELLNESS SIGNS -->
-
-            <div class="wellness-signs">
-
-                <div class="signs-column happy-signs">
-
-                    <h3>💚 Signs your pet may be doing well</h3>
-
-                    <ul>
-                        <li>✓ Interested in play and surroundings</li>
-                        <li>✓ Comfortable resting and sleeping</li>
-                        <li>✓ Enjoys positive interaction</li>
-                        <li>✓ Shows normal appetite and activity</li>
-                        <li>✓ Curious about their environment</li>
-                    </ul>
-
-                </div>
-
-
-                <div class="signs-column concern-signs">
-
-                    <h3>💛 Changes worth paying attention to</h3>
-
-                    <ul>
-                        <li>• Sudden withdrawal or hiding</li>
-                        <li>• Unusual aggression or fear</li>
-                        <li>• Loss of interest in normal activities</li>
-                        <li>• Significant changes in eating or sleeping</li>
-                        <li>• Sudden or persistent behaviour changes</li>
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PET HEAT CARE
-             ===================================================== -->
-
-        <section class="heat-full-section" id="heat-care">
-
-            <div class="heat-heading">
-
-                <span class="section-label">PET HEAT CARE</span>
-
-                <h2>
-                    Understand the cycle.
-                    <span>Care with confidence.</span>
-                </h2>
-
-                <p>
-                    For dogs and other animals that experience heat or
-                    reproductive cycles, tracking changes can make
-                    everyday care easier and more organised.
-                </p>
-
-            </div>
-
-
-            <!-- HEAT DASHBOARD -->
-
-            <div class="heat-dashboard">
-
-                <div class="cycle-card">
-
-                    <div class="cycle-card-top">
-
-                        <div>
-                            <span class="mini-label">CYCLE TRACKER</span>
-                            <h3>Track every stage</h3>
-                        </div>
-
-                        <span class="cycle-icon">📅</span>
-
-                    </div>
-
-                    <p>
-                        Record the beginning and end of each cycle to
-                        understand your pet's individual pattern over time.
-                    </p>
-
-                    <div class="cycle-progress">
-
-                        <div class="cycle-stage active">
-                            <span>1</span>
-                            <strong>Start</strong>
-                        </div>
-
-                        <div class="cycle-line"></div>
-
-                        <div class="cycle-stage">
-                            <span>2</span>
-                            <strong>Cycle</strong>
-                        </div>
-
-                        <div class="cycle-line"></div>
-
-                        <div class="cycle-stage">
-                            <span>3</span>
-                            <strong>Recovery</strong>
-                        </div>
-
-                    </div>
-
-                    <a href="login.html" class="primary-button">
-                        Start Tracking
-                    </a>
-
-                </div>
-
-
-                <div class="heat-reminder-card">
-
-                    <span class="mini-label">SMART REMINDERS</span>
-
-                    <h3>Never forget important care.</h3>
-
-                    <div class="reminder-list">
-
-                        <div>
-                            <span>🔔</span>
-                            <p>
-                                <strong>Cycle reminder</strong>
-                                <small>Prepare for the expected cycle</small>
-                            </p>
-                        </div>
-
-                        <div>
-                            <span>🧼</span>
-                            <p>
-                                <strong>Hygiene reminder</strong>
-                                <small>Keep bedding and surroundings clean</small>
-                            </p>
-                        </div>
-
-                        <div>
-                            <span>🩺</span>
-                            <p>
-                                <strong>Health check</strong>
-                                <small>Keep veterinary care on schedule</small>
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HEAT CARE CARDS -->
-
-            <div class="heat-care-grid">
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">📅</span>
-                    <h3>Cycle Calendar</h3>
-                    <p>
-                        Keep a simple history of cycle dates and changes.
-                        Consistent records can help you recognise your
-                        pet's individual pattern.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Tip</strong>
-                        <span>Record dates rather than relying on memory.</span>
-                    </div>
-                </div>
-
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">🧼</span>
-                    <h3>Hygiene & Comfort</h3>
-                    <p>
-                        Give your pet a clean, calm and comfortable space.
-                        Wash bedding regularly and provide access to fresh
-                        water.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Care</strong>
-                        <span>Keep their resting area clean and comfortable.</span>
-                    </div>
-                </div>
-
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">🌸</span>
-                    <h3>Behaviour Changes</h3>
-                    <p>
-                        Hormonal changes may be accompanied by differences
-                        in behaviour, energy, attention or interaction.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Observe</strong>
-                        <span>Look for changes from your pet's normal behaviour.</span>
-                    </div>
-                </div>
-
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">🏡</span>
-                    <h3>Extra Supervision</h3>
-                    <p>
-                        During heat, appropriate supervision and secure
-                        surroundings are especially important for pets
-                        that may seek a mate.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Safety</strong>
-                        <span>Keep your pet secure and supervised.</span>
-                    </div>
-                </div>
-
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">💧</span>
-                    <h3>Everyday Comfort</h3>
-                    <p>
-                        Maintain normal routines as much as possible while
-                        giving your pet extra patience, rest and access
-                        to fresh water.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Remember</strong>
-                        <span>Comfort and calm surroundings can help.</span>
-                    </div>
-                </div>
-
-
-                <div class="heat-care-card">
-                    <span class="heat-care-icon">🩺</span>
-                    <h3>Know When to Ask a Vet</h3>
-                    <p>
-                        If something seems unusual or your pet appears
-                        unwell, veterinary advice is the safest choice.
-                    </p>
-
-                    <div class="heat-tip">
-                        <strong>Important</strong>
-                        <span>Don't ignore unusual or severe symptoms.</span>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- HEAT WARNING -->
-
-            <div class="heat-warning">
-
-                <div class="warning-symbol">🩺</div>
-
-                <div>
-
-                    <h3>When should you contact a veterinarian?</h3>
-
-                    <p>
-                        Seek veterinary advice if your pet shows unusual
-                        or concerning symptoms such as severe discomfort,
-                        marked lethargy, fever, unusual discharge, very
-                        heavy bleeding or a sudden significant change in
-                        behaviour.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             HEALTH TIMELINE
-             ===================================================== -->
-
-        <section class="health-timeline-section" id="health-timeline">
-
-            <div class="health-timeline-heading">
-
-                <span class="section-label">PET HEALTH TIMELINE</span>
-
-                <h2>
-                    Every important health moment,
-                    <span>in one timeline.</span>
-                </h2>
-
-                <p>
-                    Keep vaccinations, medications and veterinary visits
-                    organised so you always know what happened, what is
-                    active and what is coming next.
-                </p>
-
-            </div>
-
-
-            <!-- PET SELECTOR -->
-
-            <div class="health-pet-selector">
-
-                <button class="health-pet-button active" data-pet="bruno">
-                    <span class="health-pet-avatar">🐶</span>
-
-                    <span>
-                        <strong>Bruno</strong>
-                        <small>Golden Retriever</small>
-                    </span>
-
-                    <span class="pet-check">✓</span>
-                </button>
-
-
-                <button class="health-pet-button" data-pet="luna">
-                    <span class="health-pet-avatar">🐕</span>
-
-                    <span>
-                        <strong>Luna</strong>
-                        <small>Labrador</small>
-                    </span>
-
-                    <span class="pet-check">✓</span>
-                </button>
-
-            </div>
-
-
-            <!-- HEALTH SUMMARY -->
-
-            <div class="health-summary">
-
-                <div class="health-summary-card vaccine-summary">
-
-                    <div class="health-summary-icon">
-                        💉
-                    </div>
-
-                    <div>
-                        <span>VACCINATIONS</span>
-                        <strong id="vaccine-count">4</strong>
-                        <small>records</small>
-                    </div>
-
-                </div>
-
-
-                <div class="health-summary-card medication-summary">
-
-                    <div class="health-summary-icon">
-                        💊
-                    </div>
-
-                    <div>
-                        <span>MEDICATION</span>
-                        <strong id="medication-count">1</strong>
-                        <small id="medication-label">active</small>
-                    </div>
-
-                </div>
-
-
-                <div class="health-summary-card upcoming-summary">
-
-                    <div class="health-summary-icon">
-                        🔔
-                    </div>
-
-                    <div>
-                        <span>NEXT DUE</span>
-                        <strong id="next-due-date">15 Sep</strong>
-                        <small id="next-due-name">Rabies Booster</small>
-                    </div>
-
-                </div>
-
-
-                <div class="health-summary-card vet-summary">
-
-                    <div class="health-summary-icon">
-                        🩺
-                    </div>
-
-                    <div>
-                        <span>LAST VET VISIT</span>
-                        <strong id="last-vet-date">10 Jul</strong>
-                        <small id="last-vet-name">General Check-up</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- TIMELINE CONTENT -->
-
-            <div class="health-content-grid">
-
-                <div class="health-timeline-card">
-
-                    <div class="health-card-header">
-
-                        <div>
-                            <span class="mini-label">HEALTH HISTORY</span>
-
-                            <h3 id="timeline-pet-title">
-                                Bruno's Health Timeline
-                            </h3>
-                        </div>
-
-                        <span class="timeline-calendar">📋</span>
-
-                    </div>
-
-
-                    <div class="health-timeline" id="health-timeline-list">
-                        <!-- JavaScript inserts timeline records here -->
-                    </div>
-
-                </div>
-
-
-                <!-- REMINDERS -->
-
-                <aside class="health-reminders-card">
-
-                    <div class="health-reminders-header">
-
-                        <div>
-                            <span class="mini-label">UPCOMING CARE</span>
-                            <h3>Health reminders</h3>
-                        </div>
 
                         <span>🔔</span>
 
+                        <p>
+                            <strong>Cycle reminder</strong>
+                            <small>
+                                Prepare for the expected cycle
+                            </small>
+                        </p>
+
                     </div>
 
+                    <div>
 
-                    <div class="health-reminder-list" id="health-reminder-list">
-                        <!-- JavaScript inserts reminders -->
+                        <span>🧼</span>
+
+                        <p>
+                            <strong>Hygiene reminder</strong>
+                            <small>
+                                Keep bedding and surroundings clean
+                            </small>
+                        </p>
+
                     </div>
 
+                    <div>
 
-                    <button class="add-health-record" id="add-health-record">
-                        <span>＋</span>
-                        Add Health Record
-                    </button>
+                        <span>🩺</span>
 
-                </aside>
+                        <p>
+                            <strong>Health check</strong>
+                            <small>
+                                Keep veterinary care on schedule
+                            </small>
+                        </p>
 
-            </div>
-
-
-            <!-- HEALTH NOTE -->
-
-            <div class="health-note">
-
-                <span class="health-note-icon">💡</span>
-
-                <div>
-
-                    <strong>Keep records up to date</strong>
-
-                    <p>
-                        Regularly updating your pet's health records can
-                        make veterinary visits easier and help you stay
-                        prepared for upcoming care.
-                    </p>
+                    </div>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div class="health-demo-note">
-                <span>ℹ️</span>
+
+        <!-- HEAT CARE CARDS -->
+
+        <div class="heat-care-grid">
+
+            <div class="heat-care-card">
+
+                <span class="heat-care-icon">📅</span>
+
+                <h3>
+                    Cycle Calendar
+                </h3>
+
                 <p>
-                    Demo health records are shown for now. These records
-                    can later be connected to your PawPal database.
+                    Keep a simple history of cycle dates and changes.
+                    Consistent records can help you recognise your
+                    pet's individual pattern.
                 </p>
+
+                <div class="heat-tip">
+                    <strong>Tip</strong>
+                    <span>
+                        Record dates rather than relying on memory.
+                    </span>
+                </div>
+
             </div>
 
-        </section>
+
+            <div class="heat-care-card">
+
+                <span class="heat-care-icon">🧼</span>
+
+                <h3>
+                    Hygiene & Comfort
+                </h3>
+
+                <p>
+                    Give your pet a clean, calm and comfortable space.
+                    Wash bedding regularly and provide access to fresh
+                    water.
+                </p>
+
+                <div class="heat-tip">
+                    <strong>Care</strong>
+                    <span>
+                        Keep their resting area clean and comfortable.
+                    </span>
+                </div>
+
+            </div>
 
 
-        <!-- ================= FINAL CTA ================= -->
+            <div class="heat-care-card">
 
-        <section class="routine-section">
+                <span class="heat-care-icon">🌸</span>
 
-            <div class="routine-content">
+                <h3>
+                    Behaviour Changes
+                </h3>
 
-                <span class="section-label">
-                    A LITTLE CARE GOES A LONG WAY
+                <p>
+                    Hormonal changes may be accompanied by differences
+                    in behaviour, energy, attention or interaction.
+                </p>
+
+                <div class="heat-tip">
+                    <strong>Observe</strong>
+                    <span>
+                        Look for changes from your pet's normal behaviour.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="heat-care-card">
+
+                <span class="heat-care-icon">🏡</span>
+
+                <h3>
+                    Extra Supervision
+                </h3>
+
+                <p>
+                    During heat, appropriate supervision and secure
+                    surroundings are especially important for pets
+                    that may seek a mate.
+                </p>
+
+                <div class="heat-tip">
+                    <strong>Safety</strong>
+                    <span>
+                        Keep your pet secure and supervised.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="heat-care-card">
+
+                <span class="heat-care-icon">💧</span>
+
+                <h3>
+                    Everyday Comfort
+                </h3>
+
+                <p>
+                    Maintain normal routines as much as possible while
+                    giving your pet extra patience, rest and access
+                    to fresh water.
+                </p>
+
+                <div class="heat-tip">
+                    <strong>Remember</strong>
+                    <span>
+                        Comfort and calm surroundings can help.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="heat-care-card">
+
+                <span class="heat-care-icon">🩺</span>
+
+                <h3>
+                    Know When to Ask a Vet
+                </h3>
+
+                <p>
+                    If something seems unusual or your pet appears
+                    unwell, veterinary advice is the safest choice.
+                </p>
+
+                <div class="heat-tip">
+                    <strong>Important</strong>
+                    <span>
+                        Don't ignore unusual or severe symptoms.
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HEAT WARNING -->
+
+        <div class="heat-warning">
+
+            <div class="warning-symbol">
+                🩺
+            </div>
+
+            <div>
+
+                <h3>
+                    When should you contact a veterinarian?
+                </h3>
+
+                <p>
+                    Seek veterinary advice if your pet shows unusual
+                    or concerning symptoms such as severe discomfort,
+                    marked lethargy, fever, unusual discharge, very
+                    heavy bleeding or a sudden significant change in
+                    behaviour.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HEALTH TIMELINE
+         ===================================================== -->
+
+    <section class="health-timeline-section" id="health-timeline">
+
+        <div class="health-timeline-heading">
+
+            <span class="section-label">
+                PET HEALTH TIMELINE
+            </span>
+
+            <h2>
+                Every important health moment,
+                <span>in one timeline.</span>
+            </h2>
+
+            <p>
+                Keep vaccinations, medications and veterinary visits
+                organised so you always know what happened, what is
+                active and what is coming next.
+            </p>
+
+        </div>
+
+
+        <!-- PET SELECTOR -->
+
+        <div class="health-pet-selector">
+
+            <button
+                class="health-pet-button active"
+                data-pet="bruno">
+
+                <span class="health-pet-avatar">
+                    🐶
                 </span>
 
-                <h2>
-                    Build a happier everyday routine.
-                </h2>
+                <span>
+                    <strong>Bruno</strong>
+                    <small>Golden Retriever</small>
+                </span>
 
-                <p>
-                    Whether it is a grooming appointment, a play session,
-                    a wellness activity or simply spending more time
-                    together, small moments of care make a big difference.
-                </p>
+                <span class="pet-check">
+                    ✓
+                </span>
 
-                <a href="pets.html" class="primary-button">
-                    Meet Your Next PawPal
-                </a>
-
-            </div>
-
-            <div class="routine-paws">
-                🐾 🐾 🐾
-            </div>
-
-        </section>
-
-    </main>
+            </button>
 
 
-    <!-- ================= FOOTER ================= -->
+            <button
+                class="health-pet-button"
+                data-pet="luna">
 
-    <footer class="footer">
+                <span class="health-pet-avatar">
+                    🐕
+                </span>
 
-        <div class="footer-main">
+                <span>
+                    <strong>Luna</strong>
+                    <small>Labrador</small>
+                </span>
 
-            <div class="footer-brand">
+                <span class="pet-check">
+                    ✓
+                </span>
 
-                <a href="../index.html" class="brand">
-                    <span class="brand-paw">🐾</span>
-                    <span>PawPal</span>
-                </a>
+            </button>
 
-                <p>
-                    Helping pets find loving homes and helping people
-                    give them the care they deserve.
-                </p>
-
-            </div>
+        </div>
 
 
-            <div class="footer-links">
+        <!-- HEALTH SUMMARY -->
 
-                <div>
-                    <h4>Explore</h4>
+        <div class="health-summary">
 
-                    <a href="../index.html">Home</a>
-                    <a href="pets.html">Find a Pet</a>
-                    <a href="how-it-works.html">How It Works</a>
-                    <a href="pet-care.html">Pet Care</a>
+            <div class="health-summary-card vaccine-summary">
+
+                <div class="health-summary-icon">
+                    💉
                 </div>
 
                 <div>
-                    <h4>Company</h4>
+                    <span>VACCINATIONS</span>
+                    <strong id="vaccine-count">4</strong>
+                    <small>records</small>
+                </div>
 
-                    <a href="about.html">About Us</a>
-                    <a href="login.html">Log in</a>
-                    <a href="register.html">Get Started</a>
+            </div>
+
+
+            <div class="health-summary-card medication-summary">
+
+                <div class="health-summary-icon">
+                    💊
+                </div>
+
+                <div>
+                    <span>MEDICATION</span>
+                    <strong id="medication-count">1</strong>
+                    <small id="medication-label">active</small>
+                </div>
+
+            </div>
+
+
+            <div class="health-summary-card upcoming-summary">
+
+                <div class="health-summary-icon">
+                    🔔
+                </div>
+
+                <div>
+                    <span>NEXT DUE</span>
+                    <strong id="next-due-date">15 Sep</strong>
+                    <small id="next-due-name">
+                        Rabies Booster
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="health-summary-card vet-summary">
+
+                <div class="health-summary-icon">
+                    🩺
+                </div>
+
+                <div>
+                    <span>LAST VET VISIT</span>
+                    <strong id="last-vet-date">10 Jul</strong>
+                    <small id="last-vet-name">
+                        General Check-up
+                    </small>
                 </div>
 
             </div>
@@ -1105,46 +1284,483 @@
         </div>
 
 
-        <div class="footer-bottom">
+        <!-- TIMELINE CONTENT -->
+
+        <div class="health-content-grid">
+
+            <div class="health-timeline-card">
+
+                <div class="health-card-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            HEALTH HISTORY
+                        </span>
+
+                        <h3 id="timeline-pet-title">
+                            Bruno's Health Timeline
+                        </h3>
+
+                    </div>
+
+                    <span class="timeline-calendar">
+                        📋
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="health-timeline"
+                    id="health-timeline-list">
+
+                    <!-- JavaScript inserts timeline records here -->
+
+                </div>
+
+            </div>
+
+
+            <!-- REMINDERS -->
+
+            <aside class="health-reminders-card">
+
+                <div class="health-reminders-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            UPCOMING CARE
+                        </span>
+
+                        <h3>
+                            Health reminders
+                        </h3>
+
+                    </div>
+
+                    <span>
+                        🔔
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="health-reminder-list"
+                    id="health-reminder-list">
+
+                    <!-- JavaScript inserts reminders -->
+
+                </div>
+
+
+                <button
+                    class="add-health-record"
+                    id="add-health-record">
+
+                    <span>＋</span>
+                    Add Health Record
+
+                </button>
+
+            </aside>
+
+        </div>
+
+
+        <!-- HEALTH NOTE -->
+
+        <div class="health-note">
+
+            <span class="health-note-icon">
+                💡
+            </span>
+
+            <div>
+
+                <strong>
+                    Keep records up to date
+                </strong>
+
+                <p>
+                    Regularly updating your pet's health records can
+                    make veterinary visits easier and help you stay
+                    prepared for upcoming care.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="health-demo-note">
+
+            <span>ℹ️</span>
+
             <p>
-                © 2026 PawPal. Made with 🐾 for pets and their people.
+                Demo health records are shown for now. These records
+                can later be connected to your PawPal database.
             </p>
+
         </div>
 
-    </footer>
+    </section>
 
 
-    <!-- HEALTH TIMELINE JS -->
+    <!-- ================= FINAL CTA ================= -->
 
-    <script src="../js/health-timeline.js"></script>
+    <section class="routine-section">
+
+        <div class="routine-content">
+
+            <span class="section-label">
+                A LITTLE CARE GOES A LONG WAY
+            </span>
+
+            <h2>
+                Build a happier everyday routine.
+            </h2>
+
+            <p>
+                Whether it is a grooming appointment, a play session,
+                a wellness activity or simply spending more time
+                together, small moments of care make a big difference.
+            </p>
+
+            <a href="pets.html" class="primary-button">
+                Meet Your Next PawPal
+            </a>
+
+        </div>
+
+        <div class="routine-paws">
+            🐾 🐾 🐾
+        </div>
+
+    </section>
+
+</main>
 
 
-    <!-- SMOOTH SCROLL -->
+<!-- ================= FOOTER ================= -->
 
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
+<footer class="footer">
 
-            link.addEventListener("click", function(event) {
+    <div class="footer-main">
 
-                const target = document.querySelector(
-                    this.getAttribute("href")
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand">
+                <span class="brand-paw">🐾</span>
+                <span>PawPal</span>
+            </a>
+
+            <p>
+                Helping pets find loving homes and helping people
+                give them the care they deserve.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="pets.html">
+                    Find a Pet
+                </a>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="pet-care.html">
+                    Pet Care
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Company
+                </h4>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+                <a href="register.html">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PawPal. Made with 🐾 for pets and their people.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= PAWPAL AUTH ================= -->
+
+<script src="../js/auth.js"></script>
+
+
+<!-- ================= COMMON NAVIGATION ================= -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const mobileMenuButton =
+            document.getElementById("mobileMenuButton");
+
+        const mainNavigation =
+            document.getElementById("mainNavigation");
+
+        const featuresDropdown =
+            document.getElementById("featuresDropdown");
+
+        const featuresToggle =
+            featuresDropdown
+                ? featuresDropdown.querySelector(".nav-dropdown-toggle")
+                : null;
+
+        const subDropdowns =
+            document.querySelectorAll(".nav-subdropdown");
+
+
+        /* ================= MOBILE MENU ================= */
+
+        if (mobileMenuButton && mainNavigation) {
+
+            mobileMenuButton.addEventListener("click", function () {
+
+                const isOpen =
+                    mainNavigation.classList.toggle("mobile-open");
+
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
                 );
 
-                if (target) {
+                mobileMenuButton.setAttribute(
+                    "aria-label",
+                    isOpen
+                        ? "Close navigation"
+                        : "Open navigation"
+                );
 
-                    event.preventDefault();
+            });
 
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
+        }
+
+
+        /* ================= FEATURES DROPDOWN ================= */
+
+        if (featuresToggle && featuresDropdown) {
+
+            featuresToggle.addEventListener("click", function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen =
+                    featuresDropdown.classList.toggle("open");
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            });
+
+        }
+
+
+        /* ================= RESCUE SUBMENU ================= */
+
+        subDropdowns.forEach(function (subDropdown) {
+
+            const toggle =
+                subDropdown.querySelector(
+                    ".nav-subdropdown-toggle"
+                );
+
+            if (!toggle) return;
+
+            toggle.addEventListener("click", function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen =
+                    subDropdown.classList.toggle("open");
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            });
+
+        });
+
+
+        /* ================= OUTSIDE CLICK ================= */
+
+        document.addEventListener("click", function (event) {
+
+            if (
+                featuresDropdown &&
+                !featuresDropdown.contains(event.target)
+            ) {
+
+                featuresDropdown.classList.remove("open");
+
+                if (featuresToggle) {
+
+                    featuresToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+
+
+            subDropdowns.forEach(function (subDropdown) {
+
+                if (!subDropdown.contains(event.target)) {
+
+                    subDropdown.classList.remove("open");
+
+                    const toggle =
+                        subDropdown.querySelector(
+                            ".nav-subdropdown-toggle"
+                        );
+
+                    if (toggle) {
+
+                        toggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
 
                 }
 
             });
 
         });
-    </script>
+
+
+        /* ================= MOBILE LINK CLICK ================= */
+
+        if (mainNavigation) {
+
+            mainNavigation
+                .querySelectorAll("a")
+                .forEach(function (link) {
+
+                    link.addEventListener("click", function () {
+
+                        if (
+                            !link.closest(".nav-dropdown-menu") &&
+                            !link.closest(".nav-subdropdown-menu")
+                        ) {
+
+                            mainNavigation.classList.remove(
+                                "mobile-open"
+                            );
+
+                            if (mobileMenuButton) {
+
+                                mobileMenuButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                                mobileMenuButton.setAttribute(
+                                    "aria-label",
+                                    "Open navigation"
+                                );
+
+                            }
+
+                        }
+
+                    });
+
+                });
+
+        }
+
+    });
+</script>
+
+
+<!-- ================= HEALTH TIMELINE JS ================= -->
+
+<script src="../js/health-timeline.js"></script>
+
+
+<!-- ================= SMOOTH SCROLL ================= -->
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+        link.addEventListener("click", function (event) {
+
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+</script>
+
 
 </body>
 </html>

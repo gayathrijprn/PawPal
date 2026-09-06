@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>How It Works | PawPal</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +17,7 @@
     rel="stylesheet">
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
 
 <style>
     .journey-page {
@@ -267,39 +269,204 @@
     }
 </style>
 
+
 </head>
 
 <body class="journey-page">
+
 
 <!-- NAVIGATION -->
 
 <header class="navbar">
 
-    <a href="../index.html" class="brand">
-        <div class="brand-paw">🐾</div>
+    <div class="nav-inner">
 
-        <div class="brand-name">
-            Paw<span>Pal</span>
+        <a href="../index.html" class="brand">
+            <span class="brand-paw">🐾</span>
+            <span class="brand-name">
+                Paw<span>Pal</span>
+            </span>
+        </a>
+
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="navigation" id="mainNavigation">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="pets.html">
+                Find a Pet
+            </a>
+
+            <!-- FEATURES DROPDOWN -->
+
+            <div class="nav-dropdown" id="featuresDropdown">
+
+                <button
+    type="button"
+    class="nav-dropdown-button"
+    aria-expanded="false">
+    Features
+    <span class="dropdown-arrow">⌄</span>
+</button>
+
+                <div class="nav-dropdown-menu">
+
+                    <a href="pets.html">
+                        <span>🐾</span>
+                        <div>
+                            <strong>Smart Pet Matching</strong>
+                            <small>Find pets that fit your lifestyle</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-care.html">
+                        <span>💚</span>
+                        <div>
+                            <strong>Pet Care</strong>
+                            <small>Everyday care and guidance</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-care.html#health-timeline">
+                        <span>📅</span>
+                        <div>
+                            <strong>Health Timeline</strong>
+                            <small>Keep track of important health events</small>
+                        </div>
+                    </a>
+
+                    <a href="pet-passport.html">
+                        <span>📘</span>
+                        <div>
+                            <strong>Digital Pet Passport</strong>
+                            <small>Keep your pet's records together</small>
+                        </div>
+                    </a>
+
+                    <a href="adoption-status.html">
+                        <span>📋</span>
+                        <div>
+                            <strong>Adoption Status</strong>
+                            <small>Track your adoption journey</small>
+                        </div>
+                    </a>
+
+                    <!-- RESCUE & ADOPTION -->
+
+                    <div class="nested-dropdown">
+
+    <button
+        type="button"
+        class="nested-dropdown-button"
+        aria-expanded="false">
+
+        <span class="dropdown-icon">🏠</span>
+
+        <div class="dropdown-text">
+            <strong>Rescue & Adoption</strong>
+            <small>Help animals find loving homes</small>
         </div>
-    </a>
 
-    <nav class="navigation">
-        <a href="../index.html">Home</a>
-        <a href="pets.html">Find a Pet</a>
-        <a href="how-it-works.html" class="active">How It Works</a>
-        <a href="about.html">About Us</a>
-    </nav>
+        <span class="nested-arrow">›</span>
 
-    <div class="nav-right">
+    </button>
 
-        <a href="login.html" class="login">
-            Log in
-        </a>
+    <div class="nested-dropdown-menu">
 
-        <a href="register.html" class="nav-button">
-            Get Started
-            <span>→</span>
-        </a>
+                            <a href="rescue-adoption.html">
+                                🐾 Rescue an Animal
+                            </a>
+
+                            <a href="rescue-adoption.html#rescue-listings">
+                                🔎 Browse Rescued Pets
+                            </a>
+
+                            <a href="start-fundraiser.html">
+                                💰 Start a Fundraiser
+                            </a>
+
+                            <a href="donation.html">
+                                ❤️ Donate & Support
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <a href="start-fundraiser.html">
+                        <span>💰</span>
+                        <div>
+                            <strong>Fundraisers</strong>
+                            <small>Support pets in need</small>
+                        </div>
+                    </a>
+
+                    <a href="donation.html">
+                        <span>❤️</span>
+                        <div>
+                            <strong>Donate & Support</strong>
+                            <small>Give a pet a second chance</small>
+                        </div>
+                    </a>
+
+                    <a href="shop.html">
+                        <span>🛍️</span>
+                        <div>
+                            <strong>Pet Shop</strong>
+                            <small>Essentials for happy pets</small>
+                        </div>
+                    </a>
+
+                    <a href="how-it-works.html">
+                        <span>💡</span>
+                        <div>
+                            <strong>How PawPal Works</strong>
+                            <small>Learn about the adoption process</small>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <a href="how-it-works.html" class="active">
+                How It Works
+            </a>
+
+            <a href="shop.html">
+                Shop
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+        </nav>
+
+        <!-- AUTH NAVIGATION -->
+
+        <div class="nav-right" id="authNav">
+
+            <a href="login.html" class="login" id="loginNavButton">
+                Log in
+            </a>
+
+            <a href="register.html" class="nav-button" id="signupNavButton">
+                Get Started
+                <span>→</span>
+            </a>
+
+        </div>
 
     </div>
 
@@ -545,6 +712,345 @@
     </div>
 
 </footer>
+
+
+<!-- PAWPAL AUTH -->
+
+<script src="../js/auth.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
+
+    const mainNavigation =
+        document.getElementById("mainNavigation");
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresToggle =
+        featuresDropdown
+            ? featuresDropdown.querySelector(".nav-dropdown-button")
+            : null;
+
+    const subDropdowns =
+        document.querySelectorAll(".nested-dropdown");
+
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
+
+    if (mobileMenuButton && mainNavigation) {
+
+        mobileMenuButton.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                mainNavigation.classList.toggle("mobile-open");
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+            mobileMenuButton.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Close navigation"
+                    : "Open navigation"
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       FEATURES DROPDOWN
+       ===================================================== */
+
+    if (featuresDropdown && featuresToggle) {
+
+        featuresToggle.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen =
+                    featuresDropdown.classList.toggle(
+                        "dropdown-open"
+                    );
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+
+                /* Close rescue submenu when
+                   Features is closed */
+
+                if (!isOpen) {
+
+                    subDropdowns.forEach(function (subDropdown) {
+
+                        subDropdown.classList.remove(
+                            "nested-open"
+                        );
+
+                        const toggle =
+                            subDropdown.querySelector(
+                                ".nested-dropdown-button"
+                            );
+
+                        if (toggle) {
+
+                            toggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+
+                    });
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       RESCUE & ADOPTION SUBMENU
+       ===================================================== */
+
+    subDropdowns.forEach(function (subDropdown) {
+
+        const toggle =
+            subDropdown.querySelector(
+                ".nested-dropdown-button"
+            );
+
+        if (!toggle) return;
+
+
+        toggle.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen =
+                    subDropdown.classList.toggle(
+                        "nested-open"
+                    );
+
+                toggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CLICK OUTSIDE
+       ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            /* Close Features */
+
+            if (
+                featuresDropdown &&
+                !featuresDropdown.contains(event.target)
+            ) {
+
+                featuresDropdown.classList.remove(
+                    "dropdown-open"
+                );
+
+                if (featuresToggle) {
+
+                    featuresToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+
+
+            /* Close Rescue submenu */
+
+            subDropdowns.forEach(function (subDropdown) {
+
+                if (
+                    !subDropdown.contains(event.target)
+                ) {
+
+                    subDropdown.classList.remove(
+                        "nested-open"
+                    );
+
+                    const toggle =
+                        subDropdown.querySelector(
+                            ".nested-dropdown-button"
+                        );
+
+                    if (toggle) {
+
+                        toggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE MOBILE MENU WHEN NORMAL LINK IS CLICKED
+       ===================================================== */
+
+    if (mainNavigation) {
+
+        mainNavigation
+            .querySelectorAll("a")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        /*
+                         * Links inside Features should not
+                         * automatically close everything
+                         * before navigation.
+                         */
+
+                        if (
+                            !link.closest(
+                                ".nav-dropdown-menu"
+                            ) &&
+                            !link.closest(
+                                ".nested-dropdown-menu"
+                            )
+                        ) {
+
+                            mainNavigation.classList.remove(
+                                "mobile-open"
+                            );
+
+                            if (mobileMenuButton) {
+
+                                mobileMenuButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                                mobileMenuButton.setAttribute(
+                                    "aria-label",
+                                    "Open navigation"
+                                );
+
+                            }
+
+                        }
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =====================================================
+       ESC KEY
+       ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key !== "Escape") return;
+
+
+            /* Close Features */
+
+            if (featuresDropdown) {
+
+                featuresDropdown.classList.remove(
+                    "dropdown-open"
+                );
+
+            }
+
+            if (featuresToggle) {
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+
+            /* Close nested menus */
+
+            subDropdowns.forEach(function (subDropdown) {
+
+                subDropdown.classList.remove(
+                    "nested-open"
+                );
+
+                const toggle =
+                    subDropdown.querySelector(
+                        ".nested-dropdown-button"
+                    );
+
+                if (toggle) {
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            });
+
+        }
+    );
+
+});
+</script>
 
 </body>
 

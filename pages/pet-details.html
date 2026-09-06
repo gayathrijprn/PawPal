@@ -17,6 +17,8 @@
     rel="stylesheet"
 >
 
+<link rel="stylesheet" href="../css/nav-fixes.css">
+
 <style>
 
     * {
@@ -57,25 +59,29 @@
         font-family: inherit;
     }
 
-    /* NAVBAR */
+    /* =========================
+       NAVBAR
+    ========================= */
 
     .navbar {
-        height: 82px;
+        min-height: 82px;
         padding: 0 7%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 25px;
         background: rgba(255,249,242,.96);
         border-bottom: 1px solid var(--border);
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 1000;
     }
 
     .brand {
         display: flex;
         align-items: center;
         gap: 10px;
+        flex-shrink: 0;
     }
 
     .brand-paw {
@@ -100,18 +106,24 @@
 
     .navigation {
         display: flex;
-        gap: 34px;
+        align-items: center;
+        gap: 27px;
+        flex: 1;
+        justify-content: center;
     }
 
-    .navigation a {
+    .navigation > a,
+    .nav-dropdown-toggle {
         color: var(--soft);
         font-size: 14px;
         font-weight: 600;
         transition: .2s ease;
+        white-space: nowrap;
     }
 
-    .navigation a:hover,
-    .navigation a.active {
+    .navigation > a:hover,
+    .navigation > a.active,
+    .nav-dropdown-toggle:hover {
         color: var(--coral);
     }
 
@@ -119,6 +131,7 @@
         display: flex;
         align-items: center;
         gap: 22px;
+        flex-shrink: 0;
     }
 
     .login {
@@ -147,7 +160,161 @@
         margin-left: 7px;
     }
 
-    /* PAGE */
+    /* FEATURES DROPDOWN */
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav-dropdown-toggle {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        padding: 8px 0;
+    }
+
+    .nav-dropdown-toggle span {
+        margin-left: 4px;
+        font-size: 12px;
+    }
+
+    .nav-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 245px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow: var(--shadow);
+        display: none;
+        z-index: 1100;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+        display: block;
+    }
+
+    .nav-dropdown-menu > a,
+    .nav-submenu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--soft);
+        font-size: 13px;
+        font-weight: 600;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        text-align: left;
+    }
+
+    .nav-dropdown-menu > a:hover,
+    .nav-submenu-toggle:hover {
+        background: var(--cream);
+        color: var(--coral);
+    }
+
+    /* RESCUE SUBMENU */
+
+    .nav-submenu {
+        position: relative;
+    }
+
+    .nav-submenu-menu {
+        position: absolute;
+        top: 0;
+        left: calc(100% + 6px);
+        min-width: 225px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow: var(--shadow);
+        display: none;
+    }
+
+    .nav-submenu.open .nav-submenu-menu {
+        display: block;
+    }
+
+    .nav-submenu-menu a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--soft);
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .nav-submenu-menu a:hover {
+        background: var(--cream);
+        color: var(--coral);
+    }
+
+    /* MOBILE MENU BUTTON */
+
+    .mobile-menu-button {
+        display: none;
+        border: 0;
+        background: var(--cream-dark);
+        color: var(--text);
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        font-size: 22px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    /* AUTH USER */
+
+    .auth-user-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .auth-user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--pink);
+        display: grid;
+        place-items: center;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--text);
+    }
+
+    .welcome-user {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .logout-btn {
+        border: 0;
+        background: transparent;
+        color: var(--soft);
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .logout-btn:hover {
+        color: var(--coral);
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
 
     .details-page {
         max-width: 1180px;
@@ -386,10 +553,84 @@
 
     /* RESPONSIVE */
 
+    @media (max-width: 1100px) {
+
+        .navigation {
+            gap: 17px;
+        }
+
+        .nav-right {
+            gap: 12px;
+        }
+
+    }
+
     @media (max-width: 900px) {
+
+        .navbar {
+            padding: 0 5%;
+        }
+
+        .mobile-menu-button {
+            display: grid;
+            place-items: center;
+            margin-left: auto;
+        }
 
         .navigation {
             display: none;
+            position: absolute;
+            top: 82px;
+            left: 0;
+            right: 0;
+            background: var(--cream);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 7%;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 4px;
+            box-shadow: 0 15px 30px rgba(61,45,37,.08);
+        }
+
+        .navigation.mobile-open {
+            display: flex;
+        }
+
+        .navigation > a,
+        .nav-dropdown-toggle {
+            display: block;
+            width: 100%;
+            padding: 12px 8px;
+        }
+
+        .nav-dropdown-menu {
+            position: static;
+            transform: none;
+            box-shadow: none;
+            border: 0;
+            background: transparent;
+            padding: 4px 0 4px 12px;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            display: block;
+        }
+
+        .nav-submenu-menu {
+            position: static;
+            box-shadow: none;
+            border: 0;
+            background: transparent;
+            padding: 4px 0 4px 12px;
+        }
+
+        .nav-submenu.open .nav-submenu-menu {
+            display: block;
+        }
+
+        .nav-right {
+            margin-left: 0;
         }
 
         .details-card {
@@ -417,11 +658,16 @@
             padding: 0 18px;
         }
 
-        .nav-button {
-            padding: 10px 13px;
+        .brand-name {
+            font-size: 22px;
         }
 
-        .login {
+        .brand-paw {
+            width: 38px;
+            height: 38px;
+        }
+
+        .nav-right {
             display: none;
         }
 
@@ -455,7 +701,12 @@
 
 <body>
 
+<!-- =========================
+     COMMON PAWPAL NAVBAR
+========================= -->
+
 <header class="navbar">
+
 
 <a href="../index.html" class="brand">
 
@@ -468,17 +719,132 @@
 </a>
 
 
-<nav class="navigation">
+<button
+    class="mobile-menu-button"
+    id="mobileMenuButton"
+    type="button"
+    aria-label="Open navigation"
+    aria-expanded="false"
+>
+    ☰
+</button>
 
-    <a href="../index.html">Home</a>
+
+<nav class="navigation" id="mainNavigation">
+
+    <a href="../index.html">
+        Home
+    </a>
+
 
     <a href="pets.html" class="active">
         Find a Pet
     </a>
 
+
+    <!-- FEATURES -->
+
+    <div class="nav-dropdown" id="featuresDropdown">
+
+        <button
+            class="nav-dropdown-toggle"
+            type="button"
+            aria-expanded="false"
+        >
+            Features <span>⌄</span>
+        </button>
+
+
+        <div class="nav-dropdown-menu">
+
+            <a href="pets.html">
+                Smart Pet Matching
+            </a>
+
+            <a href="pet-care.html">
+                Pet Care
+            </a>
+
+            <a href="pet-care.html#health-timeline">
+                Health Timeline
+            </a>
+
+            <a href="pet-passport.html">
+                Digital Pet Passport
+            </a>
+
+            <a href="adoption-status.html">
+                Adoption Status
+            </a>
+
+
+            <!-- RESCUE & ADOPTION -->
+
+            <div class="nav-submenu">
+
+                <button
+                    class="nav-submenu-toggle"
+                    type="button"
+                    aria-expanded="false"
+                >
+                    Rescue &amp; Adoption
+                    <span>›</span>
+                </button>
+
+
+                <div class="nav-submenu-menu">
+
+                    <a href="rescue-adoption.html">
+                        Rescue an Animal
+                    </a>
+
+                    <a href="rescue-adoption.html#rescue-listings">
+                        Browse Rescued Pets
+                    </a>
+
+                    <a href="start-fundraiser.html">
+                        Start a Fundraiser
+                    </a>
+
+                    <a href="donation.html">
+                        Donate &amp; Support
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="start-fundraiser.html">
+                Fundraisers
+            </a>
+
+            <a href="donation.html">
+                Donate &amp; Support
+            </a>
+
+            <a href="shop.html">
+                Pet Shop
+            </a>
+
+            <a href="how-it-works.html">
+                How PawPal Works
+            </a>
+
+        </div>
+
+    </div>
+
+
     <a href="how-it-works.html">
         How It Works
     </a>
+
+
+    <a href="shop.html">
+        Shop
+    </a>
+
 
     <a href="about.html">
         About Us
@@ -487,17 +853,29 @@
 </nav>
 
 
-<div class="nav-right">
+<!-- AUTH NAVIGATION -->
 
-    <a href="login.html" class="login">
+<div class="nav-right" id="authNav">
+
+    <a
+        href="login.html"
+        class="login"
+        id="loginNavButton"
+    >
         Log in
     </a>
 
-    <a href="register.html" class="nav-button">
+
+    <a
+        href="register.html"
+        class="nav-button"
+        id="signupNavButton"
+    >
         Get Started <span>→</span>
     </a>
 
 </div>
+
 
 </header>
 
@@ -507,178 +885,325 @@
     ← Back to all pets
 </a>
 
-
 <section class="details-card">
 
-    <div class="pet-photo-wrap">
 
-        <img
-            id="petImage"
-            class="pet-photo"
-            src=""
-            alt=""
+<div class="pet-photo-wrap">
+
+    <img
+        id="petImage"
+        class="pet-photo"
+        src=""
+        alt=""
+    >
+
+    <span class="available-badge">
+        ● Available for adoption
+    </span>
+
+    <button
+        class="favorite"
+        id="favoriteButton"
+        aria-label="Add to favorites"
+        type="button"
+    >
+        ♡
+    </button>
+
+</div>
+
+
+<div class="details-content">
+
+    <div class="eyebrow">
+        PAWPAL COMPANION
+    </div>
+
+    <h1 id="petName">
+        Bruno
+    </h1>
+
+    <p class="breed" id="petBreed">
+        Labrador
+    </p>
+
+
+    <div class="info-grid">
+
+        <div class="info-box">
+            <span>Age</span>
+            <strong id="petAge">3 years</strong>
+        </div>
+
+        <div class="info-box">
+            <span>Gender</span>
+            <strong id="petGender">Male</strong>
+        </div>
+
+        <div class="info-box">
+            <span>Location</span>
+            <strong id="petLocation">Trivandrum</strong>
+        </div>
+
+        <div class="info-box">
+            <span>Size</span>
+            <strong id="petSize">Large</strong>
+        </div>
+
+    </div>
+
+
+    <p class="description" id="petDescription">
+        Bruno is a friendly and playful companion who
+        loves spending time with people. He is looking
+        for a loving family where he can feel safe,
+        happy and cared for.
+    </p>
+
+
+    <div class="tags" id="petTags">
+    </div>
+
+
+    <div class="actions">
+
+        <a
+            href="adoption-form.html"
+            class="adopt-button"
+            id="adoptButton"
         >
-
-        <span class="available-badge">
-            ● Available for adoption
-        </span>
+            Start adoption
+            →
+        </a>
 
         <button
-            class="favorite"
-            id="favoriteButton"
-            aria-label="Add to favorites"
+            class="message-button"
+            id="messageButton"
             type="button"
         >
-            ♡
+            💬 Message
         </button>
 
     </div>
 
+</div>
 
-    <div class="details-content">
-
-        <div class="eyebrow">
-            PAWPAL COMPANION
-        </div>
-
-        <h1 id="petName">
-            Bruno
-        </h1>
-
-        <p class="breed" id="petBreed">
-            Labrador
-        </p>
-
-
-        <div class="info-grid">
-
-            <div class="info-box">
-                <span>Age</span>
-                <strong id="petAge">3 years</strong>
-            </div>
-
-            <div class="info-box">
-                <span>Gender</span>
-                <strong id="petGender">Male</strong>
-            </div>
-
-            <div class="info-box">
-                <span>Location</span>
-                <strong id="petLocation">Trivandrum</strong>
-            </div>
-
-            <div class="info-box">
-                <span>Size</span>
-                <strong id="petSize">Large</strong>
-            </div>
-
-        </div>
-
-
-        <p class="description" id="petDescription">
-            Bruno is a friendly and playful companion who
-            loves spending time with people. He is looking
-            for a loving family where he can feel safe,
-            happy and cared for.
-        </p>
-
-
-        <div class="tags" id="petTags">
-        </div>
-
-
-        <div class="actions">
-
-            <a
-                href="adoption-form.html"
-                class="adopt-button"
-                id="adoptButton"
-            >
-                Start adoption
-                →
-            </a>
-
-            <button
-                class="message-button"
-                id="messageButton"
-                type="button"
-            >
-                💬 Message
-            </button>
-
-        </div>
-
-    </div>
 
 </section>
 
-
 <section class="why-section">
 
-    <div class="section-label">
-        WHY ADOPT?
-    </div>
 
-    <h2>
-        A new friend is
-        <em>waiting.</em>
-    </h2>
+<div class="section-label">
+    WHY ADOPT?
+</div>
 
-
-    <div class="why-grid">
-
-        <article class="why-box">
-
-            <div class="why-icon">🏡</div>
-
-            <h3>
-                Give them a home
-            </h3>
-
-            <p>
-                Adoption gives a loving animal
-                the safe and caring home they deserve.
-            </p>
-
-        </article>
+<h2>
+    A new friend is
+    <em>waiting.</em>
+</h2>
 
 
-        <article class="why-box">
+<div class="why-grid">
 
-            <div class="why-icon">💕</div>
+    <article class="why-box">
 
-            <h3>
-                Gain a best friend
-            </h3>
+        <div class="why-icon">🏡</div>
 
-            <p>
-                Pets bring companionship, happiness
-                and countless unforgettable moments.
-            </p>
+        <h3>
+            Give them a home
+        </h3>
 
-        </article>
+        <p>
+            Adoption gives a loving animal
+            the safe and caring home they deserve.
+        </p>
+
+    </article>
 
 
-        <article class="why-box">
+    <article class="why-box">
 
-            <div class="why-icon">🐾</div>
+        <div class="why-icon">💕</div>
 
-            <h3>
-                Make a difference
-            </h3>
+        <h3>
+            Gain a best friend
+        </h3>
 
-            <p>
-                Choosing adoption means giving one
-                more deserving pet a second chance.
-            </p>
+        <p>
+            Pets bring companionship, happiness
+            and countless unforgettable moments.
+        </p>
 
-        </article>
+    </article>
 
-    </div>
+
+    <article class="why-box">
+
+        <div class="why-icon">🐾</div>
+
+        <h3>
+            Make a difference
+        </h3>
+
+        <p>
+            Choosing adoption means giving one
+            more deserving pet a second chance.
+        </p>
+
+    </article>
+
+</div>
+
 
 </section>
 
 </main>
+
+<!-- =========================
+     PAWPAL AUTHENTICATION
+========================= -->
+
+<script src="../js/auth.js"></script>
+
+<!-- =========================
+     NAVIGATION SCRIPT
+========================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const mobileButton =
+        document.getElementById("mobileMenuButton");
+
+    const navigation =
+        document.getElementById("mainNavigation");
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresToggle =
+        featuresDropdown
+            ? featuresDropdown.querySelector(".nav-dropdown-toggle")
+            : null;
+
+    const submenu =
+        featuresDropdown
+            ? featuresDropdown.querySelector(".nav-submenu")
+            : null;
+
+    const submenuToggle =
+        submenu
+            ? submenu.querySelector(".nav-submenu-toggle")
+            : null;
+
+
+    /* MOBILE MENU */
+
+    if (mobileButton && navigation) {
+
+        mobileButton.addEventListener("click", function () {
+
+            const isOpen =
+                navigation.classList.toggle("mobile-open");
+
+            mobileButton.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* FEATURES DROPDOWN */
+
+    if (featuresToggle && featuresDropdown) {
+
+        featuresToggle.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                featuresDropdown.classList.toggle("open");
+
+            featuresToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* RESCUE & ADOPTION SUBMENU */
+
+    if (submenuToggle && submenu) {
+
+        submenuToggle.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                submenu.classList.toggle("open");
+
+            submenuToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* CLOSE DROPDOWNS WHEN CLICKING OUTSIDE */
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            featuresDropdown &&
+            !featuresDropdown.contains(event.target)
+        ) {
+
+            featuresDropdown.classList.remove("open");
+
+            if (featuresToggle) {
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+            if (submenu) {
+                submenu.classList.remove("open");
+            }
+
+            if (submenuToggle) {
+
+                submenuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>
+
+<!-- =========================
+     PET DETAILS FUNCTIONALITY
+========================= -->
 
 <script>
 
@@ -793,53 +1318,79 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-    const params = new URLSearchParams(window.location.search);
-
-    const requestedPet = (params.get("pet") || "bruno").toLowerCase();
-
-    const pet = petData[requestedPet] || petData.bruno;
+    const params =
+        new URLSearchParams(window.location.search);
 
 
-    document.title = pet.name + " — PawPal";
+    const requestedPet =
+        (params.get("pet") || "bruno").toLowerCase();
 
 
-    document.getElementById("petImage").src = pet.image;
-    document.getElementById("petImage").alt = pet.name + " the " + pet.breed;
+    const pet =
+        petData[requestedPet] || petData.bruno;
 
-    document.getElementById("petName").innerHTML =
+
+    document.title =
+        pet.name + " — PawPal";
+
+
+    document.getElementById("petImage").src =
+        pet.image;
+
+    document.getElementById("petImage").alt =
+        pet.name + " the " + pet.breed;
+
+
+    document.getElementById("petName").textContent =
         pet.name;
+
 
     document.getElementById("petBreed").textContent =
         pet.breed;
 
+
     document.getElementById("petAge").textContent =
         pet.age;
+
 
     document.getElementById("petGender").textContent =
         pet.gender;
 
+
     document.getElementById("petLocation").textContent =
         pet.location;
 
+
     document.getElementById("petSize").textContent =
         pet.size;
+
 
     document.getElementById("petDescription").textContent =
         pet.description;
 
 
+    /* TAGS */
+
     const tagsContainer =
         document.getElementById("petTags");
 
+
     tagsContainer.innerHTML = "";
+
 
     pet.tags.forEach(function (tag) {
 
-        const span = document.createElement("span");
+        const span =
+            document.createElement("span");
 
-        span.className = "tag";
 
-        span.textContent = tag;
+        span.className =
+            "tag";
+
+
+        span.textContent =
+            tag;
+
 
         tagsContainer.appendChild(span);
 
@@ -861,10 +1412,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const favoriteButton =
         document.getElementById("favoriteButton");
 
+
     const favoriteKey =
         "pawpal-favorite-" + requestedPet;
 
-    if (localStorage.getItem(favoriteKey) === "true") {
+
+    if (
+        localStorage.getItem(favoriteKey) === "true"
+    ) {
 
         favoriteButton.classList.add("active");
 
@@ -873,20 +1428,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    favoriteButton.addEventListener("click", function () {
+    favoriteButton.addEventListener(
+        "click",
+        function () {
 
-        const isFavorite =
-            favoriteButton.classList.toggle("active");
+            const isFavorite =
+                favoriteButton.classList.toggle("active");
 
-        favoriteButton.textContent =
-            isFavorite ? "♥" : "♡";
 
-        localStorage.setItem(
-            favoriteKey,
-            isFavorite
-        );
+            favoriteButton.textContent =
+                isFavorite ? "♥" : "♡";
 
-    });
+
+            localStorage.setItem(
+                favoriteKey,
+                isFavorite
+            );
+
+        }
+    );
 
 
     /*
@@ -909,4 +1469,5 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 </body>
+
 </html>

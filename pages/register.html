@@ -1,5 +1,5 @@
+html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -20,7 +20,7 @@
 
 <link
     rel="preconnect"
-    href="https://fonts.gstatic.com"
+    href="https://fonts.googleapis.com"
     crossorigin
 >
 
@@ -37,13 +37,211 @@
     href="../css/style.css"
 >
 
+<link rel="stylesheet" href="../css/nav-fixes.css">
+
 
 <style>
 
     /* =====================================================
-       PAWPAL REGISTER PAGE
+       COMMON PAWPAL NAVIGATION
     ===================================================== */
 
+    .navbar {
+        position: relative;
+        z-index: 1000;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav-dropdown-toggle {
+        border: none;
+        background: transparent;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 0;
+    }
+
+    .nav-arrow {
+        font-size: 14px;
+        transition: transform .25s ease;
+    }
+
+    .nav-dropdown.open .nav-arrow {
+        transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        width: 245px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 18px 45px rgba(61, 45, 37, .15);
+        border: 1px solid rgba(61, 45, 37, .08);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: .25s ease;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown-menu > a,
+    .nav-submenu > a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .nav-dropdown-menu > a:hover,
+    .nav-submenu > a:hover {
+        background: var(--pink);
+        color: var(--coral-dark);
+    }
+
+    .nav-dropdown-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 7px 5px;
+    }
+
+    .nav-submenu {
+        position: relative;
+    }
+
+    .nav-submenu-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .nav-submenu-menu {
+        position: absolute;
+        top: -10px;
+        left: calc(100% + 5px);
+        width: 230px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 10px;
+        box-shadow: 0 18px 45px rgba(61, 45, 37, .15);
+        border: 1px solid rgba(61, 45, 37, .08);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-8px);
+        transition: .25s ease;
+    }
+
+    .nav-submenu:hover .nav-submenu-menu,
+    .nav-submenu.open .nav-submenu-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0);
+    }
+
+    .nav-submenu-menu a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .nav-submenu-menu a:hover {
+        background: var(--pink);
+        color: var(--coral-dark);
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .auth-user-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .auth-user-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--pink);
+        color: var(--coral-dark);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .welcome-user {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .logout-btn {
+        border: none;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 20px;
+    }
+
+    .logout-btn:hover {
+        background: var(--pink);
+        color: var(--coral-dark);
+    }
+
+    .mobile-menu-button {
+        display: none;
+        border: none;
+        background: transparent;
+        font-size: 25px;
+        cursor: pointer;
+        color: var(--text);
+    }
+
+
+    /* =====================================================
+       PAWPAL REGISTER PAGE
+    ===================================================== */
 
     body {
         min-height: 100vh;
@@ -918,7 +1116,91 @@
 
 
     /* =====================================================
-       MOBILE
+       NAVIGATION MOBILE
+    ===================================================== */
+
+    @media(max-width: 900px) {
+
+        .mobile-menu-button {
+            display: block;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0;
+            padding: 15px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(61,45,37,.12);
+        }
+
+        .navigation.mobile-open {
+            display: flex;
+        }
+
+        .navigation > a,
+        .nav-dropdown-toggle {
+            width: 100%;
+            padding: 13px 15px;
+            text-align: left;
+        }
+
+        .nav-dropdown-menu {
+            position: static;
+            width: 100%;
+            transform: none;
+            box-shadow: none;
+            border: none;
+            display: none;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            display: block;
+            transform: none;
+        }
+
+        .nav-submenu-menu {
+            position: static;
+            width: 100%;
+            transform: none;
+            box-shadow: none;
+            border: none;
+            display: none;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            padding-left: 15px;
+        }
+
+        .nav-submenu.open .nav-submenu-menu {
+            display: block;
+        }
+
+        .nav-right {
+            margin-left: auto;
+        }
+
+        .auth-user-wrapper {
+            gap: 6px;
+        }
+
+        .welcome-user {
+            display: none;
+        }
+
+    }
+
+
+    /* =====================================================
+       SMALL MOBILE
     ===================================================== */
 
     @media(max-width: 600px) {
@@ -993,7 +1275,9 @@
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      NAVIGATION
@@ -1004,6 +1288,7 @@
     <a
         href="../index.html"
         class="brand"
+        aria-label="Go to PawPal home"
     >
 
         <div class="brand-paw">
@@ -1017,15 +1302,151 @@
     </a>
 
 
-    <nav class="navigation">
+    <button
+        type="button"
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
 
-        <a href="../index.html">Home</a>
+
+    <nav
+        class="navigation"
+        id="mainNavigation"
+        aria-label="Main navigation"
+    >
+
+        <a href="../index.html">
+            Home
+        </a>
+
         <a href="pets.html">
             Find a Pet
         </a>
 
+
+        <!-- FEATURES -->
+
+        <div
+            class="nav-dropdown"
+            id="featuresDropdown"
+        >
+
+            <button
+                type="button"
+                class="nav-dropdown-toggle"
+                id="featuresToggle"
+                aria-expanded="false"
+            >
+
+                Features
+
+                <span class="nav-arrow">
+                    ⌄
+                </span>
+
+            </button>
+
+
+            <div class="nav-dropdown-menu">
+
+                <a href="pets.html">
+                    🐾 Smart Pet Matching
+                </a>
+
+                <a href="pet-care.html">
+                    ❤️ Pet Care
+                </a>
+
+                <a href="pet-care.html#health-timeline">
+                    🩺 Health Timeline
+                </a>
+
+                <a href="pet-passport.html">
+                    📘 Digital Pet Passport
+                </a>
+
+                <a href="adoption-status.html">
+                    📋 Adoption Status
+                </a>
+
+
+                <div class="nav-dropdown-divider"></div>
+
+
+                <!-- RESCUE SUBMENU -->
+
+                <div
+                    class="nav-submenu"
+                    id="rescueSubmenu"
+                >
+
+                    <a href="rescue-adoption.html">
+
+                        <span>
+                            🐕 Rescue & Adoption
+                        </span>
+
+                        <span class="nav-submenu-arrow">
+                            ›
+                        </span>
+
+                    </a>
+
+
+                    <div class="nav-submenu-menu">
+
+                        <a href="rescue-adoption.html">
+                            🐾 Rescue an Animal
+                        </a>
+
+                        <a href="rescue-adoption.html#rescue-listings">
+                            🔎 Browse Rescued Pets
+                        </a>
+
+                        <a href="start-fundraiser.html">
+                            💝 Start a Fundraiser
+                        </a>
+
+                        <a href="donation.html">
+                            💗 Donate & Support
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a href="start-fundraiser.html">
+                    💝 Fundraisers
+                </a>
+
+                <a href="donation.html">
+                    💗 Donate & Support
+                </a>
+
+                <a href="shop.html">
+                    🛍 Pet Shop
+                </a>
+
+                <a href="how-it-works.html">
+                    ✨ How PawPal Works
+                </a>
+
+            </div>
+
+        </div>
+
+
         <a href="how-it-works.html">
             How It Works
+        </a>
+
+        <a href="shop.html">
+            Shop
         </a>
 
         <a href="about.html">
@@ -1035,11 +1456,17 @@
     </nav>
 
 
-    <div class="nav-right">
+    <!-- AUTH NAV -->
+
+    <div
+        class="nav-right"
+        id="authNav"
+    >
 
         <a
             href="login.html"
             class="login"
+            id="loginNavButton"
         >
             Log in
         </a>
@@ -1047,6 +1474,7 @@
         <a
             href="register.html"
             class="nav-button"
+            id="signupNavButton"
         >
             Get Started
             <span>→</span>
@@ -1419,11 +1847,14 @@
                     <span>
 
                         I agree to PawPal's
-                        <a href="#">
+
+                        <a href="./about.html">
                             Terms of Service
                         </a>
+
                         and
-                        <a href="#">
+
+                        <a href="./about.html">
                             Privacy Policy
                         </a>.
 
@@ -1463,7 +1894,7 @@
 
             <div class="register-back">
 
-                <a href="">
+                <a href="../index.html">
 
                     ← Back to PawPal
 
@@ -1483,12 +1914,162 @@
      JAVASCRIPT
 ====================================================== -->
 
+<!-- PAWPAL AUTH -->
+
+<script src="../js/auth.js"></script>
+
+
 <!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../js/supabase-config.js"></script>
 
 <script src="../js/register.js"></script>
+
+
+<!-- =====================================================
+     COMMON NAVIGATION JS
+====================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
+
+    const mainNavigation =
+        document.getElementById("mainNavigation");
+
+    const featuresDropdown =
+        document.getElementById("featuresDropdown");
+
+    const featuresToggle =
+        document.getElementById("featuresToggle");
+
+    const rescueSubmenu =
+        document.getElementById("rescueSubmenu");
+
+
+    /* ================================================
+       MOBILE MENU
+    ================================================ */
+
+    if (mobileMenuButton && mainNavigation) {
+
+        mobileMenuButton.addEventListener("click", function () {
+
+            const isOpen =
+                mainNavigation.classList.toggle("mobile-open");
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* ================================================
+       FEATURES DROPDOWN
+    ================================================ */
+
+    if (featuresToggle && featuresDropdown) {
+
+        featuresToggle.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+                featuresDropdown.classList.toggle("open");
+
+            featuresToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+    }
+
+
+    /* ================================================
+       RESCUE SUBMENU
+    ================================================ */
+
+    if (rescueSubmenu) {
+
+        const rescueLink =
+            rescueSubmenu.querySelector(":scope > a");
+
+        if (rescueLink) {
+
+            rescueLink.addEventListener("click", function (event) {
+
+                if (window.innerWidth <= 900) {
+
+                    event.preventDefault();
+
+                    rescueSubmenu.classList.toggle("open");
+
+                }
+
+            });
+
+        }
+
+    }
+
+
+    /* ================================================
+       CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+    ================================================ */
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            featuresDropdown &&
+            !featuresDropdown.contains(event.target)
+        ) {
+
+            featuresDropdown.classList.remove("open");
+
+            if (featuresToggle) {
+
+                featuresToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* ================================================
+       CURRENT YEAR SUPPORT
+    ================================================ */
+
+    const yearElements =
+        document.querySelectorAll("[data-current-year]");
+
+    yearElements.forEach(function (element) {
+
+        element.textContent =
+            new Date().getFullYear();
+
+    });
+
+});
+
+</script>
+
 </body>
 
 </html>
+

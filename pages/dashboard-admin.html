@@ -3,15 +3,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PawPal | Admin Dashboard</title>
 
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
 <link rel="stylesheet" href="../css/dashboard.css">
-```
+
 
 </head>
 
@@ -19,88 +21,123 @@
 
 <div class="dashboard-layout">
 
-```
-<!-- SIDEBAR -->
+
+<!-- =========================
+     SIDEBAR
+========================== -->
+
 <aside class="dashboard-sidebar">
 
     <div class="sidebar-brand">
+
         <a href="../index.html">
             🐾 <span>PawPal</span>
         </a>
+
     </div>
+
 
     <nav class="sidebar-nav">
 
         <a href="#overview"
            class="sidebar-link active"
            data-section="overview">
+
             <span>📊</span>
             <span class="sidebar-link-text">Overview</span>
+
         </a>
+
 
         <a href="#pets"
            class="sidebar-link"
            data-section="pets">
+
             <span>🐾</span>
             <span class="sidebar-link-text">Pets</span>
+
         </a>
+
 
         <a href="#applications"
            class="sidebar-link"
            data-section="applications">
+
             <span>📋</span>
             <span class="sidebar-link-text">Applications</span>
+
         </a>
+
 
         <a href="#users"
            class="sidebar-link"
            data-section="users">
+
             <span>👥</span>
             <span class="sidebar-link-text">Users</span>
+
         </a>
+
 
         <a href="#reports"
            class="sidebar-link"
            data-section="reports">
+
             <span>📈</span>
             <span class="sidebar-link-text">Reports</span>
+
         </a>
+
 
         <a href="#notifications"
            class="sidebar-link"
            data-section="notifications">
+
             <span>🔔</span>
             <span class="sidebar-link-text">Notifications</span>
+
         </a>
+
 
         <a href="#settings"
            class="sidebar-link"
            data-section="settings">
+
             <span>⚙️</span>
             <span class="sidebar-link-text">Settings</span>
+
         </a>
+
 
         <a href="#profile"
            class="sidebar-link"
            data-section="profile">
+
             <span>👤</span>
             <span class="sidebar-link-text">Profile</span>
+
         </a>
 
     </nav>
+
 
     <div class="sidebar-bottom">
 
         <a href="../index.html"
            class="sidebar-link back-to-pawpal">
+
             <span>←</span>
             <span class="sidebar-link-text">Back to PawPal</span>
+
         </a>
+
 
         <a href="#"
            class="sidebar-link logout-btn">
+
             <span>🚪</span>
             <span class="sidebar-link-text">Logout</span>
+
         </a>
 
     </div>
@@ -108,26 +145,40 @@
 </aside>
 
 
-<!-- MOBILE OVERLAY -->
+<!-- =========================
+     MOBILE OVERLAY
+========================== -->
+
 <div class="sidebar-overlay"></div>
 
 
-<!-- MAIN CONTENT -->
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+
 <main class="dashboard-main">
 
-    <!-- TOPBAR -->
+
+    <!-- =========================
+         TOPBAR
+    ========================== -->
+
     <header class="dashboard-topbar">
 
         <button
             class="mobile-menu-btn"
             type="button"
             aria-label="Open menu">
+
             ☰
+
         </button>
+
 
         <h1 class="topbar-title">
             Overview
         </h1>
+
 
         <div class="topbar-actions">
 
@@ -135,18 +186,25 @@
                 class="topbar-icon-btn"
                 type="button"
                 aria-label="Notifications">
+
                 🔔
+
             </button>
+
 
             <div class="topbar-user">
 
                 <div
                     class="user-avatar"
                     data-user-avatar>
+
                     AD
+
                 </div>
 
+
                 <div>
+
                     <strong data-user-name>
                         Admin
                     </strong>
@@ -154,6 +212,7 @@
                     <small data-user-role>
                         Admin
                     </small>
+
                 </div>
 
             </div>
@@ -163,7 +222,10 @@
     </header>
 
 
-    <!-- DASHBOARD CONTENT -->
+    <!-- =========================
+         DASHBOARD CONTENT
+    ========================== -->
+
     <div class="dashboard-content">
 
 
@@ -175,15 +237,20 @@
             id="overview"
             class="dashboard-section">
 
+
             <div class="dashboard-header">
 
                 <div>
-                    <h2>Admin Dashboard</h2>
+
+                    <h2>
+                        Admin Dashboard
+                    </h2>
 
                     <p>
                         Welcome back,
                         <span data-user-name>Admin</span>.
                     </p>
+
                 </div>
 
             </div>
@@ -194,27 +261,62 @@
             <div class="dashboard-stats">
 
                 <div class="stat-card">
+
                     <span>🐾</span>
-                    <h3>Pets</h3>
-                    <strong>0</strong>
+
+                    <h3>
+                        Pets
+                    </h3>
+
+                    <strong>
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div class="stat-card">
+
                     <span>👥</span>
-                    <h3>Users</h3>
-                    <strong>0</strong>
+
+                    <h3>
+                        Users
+                    </h3>
+
+                    <strong>
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div class="stat-card">
+
                     <span>📋</span>
-                    <h3>Applications</h3>
-                    <strong>0</strong>
+
+                    <h3>
+                        Applications
+                    </h3>
+
+                    <strong>
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div class="stat-card">
+
                     <span>❤️</span>
-                    <h3>Adoptions</h3>
-                    <strong>0</strong>
+
+                    <h3>
+                        Adoptions
+                    </h3>
+
+                    <strong>
+                        0
+                    </strong>
+
                 </div>
 
             </div>
@@ -224,32 +326,46 @@
 
             <div class="dashboard-card">
 
-                <h3>Quick Actions</h3>
+                <h3>
+                    Quick Actions
+                </h3>
+
 
                 <div class="dashboard-actions">
 
                     <button
                         type="button"
                         data-dashboard-action="manage-pets">
+
                         Manage Pets
+
                     </button>
+
 
                     <button
                         type="button"
                         data-dashboard-action="applications">
+
                         Applications
+
                     </button>
+
 
                     <button
                         type="button"
                         data-dashboard-action="users">
+
                         Users
+
                     </button>
+
 
                     <button
                         type="button"
                         data-dashboard-action="reports">
+
                         Reports
+
                     </button>
 
                 </div>
@@ -268,21 +384,29 @@
             class="dashboard-section"
             style="display: none;">
 
+
             <div class="dashboard-header">
 
                 <div>
-                    <h2>Pets</h2>
+
+                    <h2>
+                        Pets
+                    </h2>
 
                     <p>
                         Manage pets listed on PawPal.
                     </p>
+
                 </div>
+
 
                 <button
                     type="button"
                     class="add-pet-btn"
                     data-add-pet>
+
                     + Add Pet
+
                 </button>
 
             </div>
@@ -304,17 +428,21 @@
                     class="pet-card"
                     data-name="Sample Pet">
 
+
                     <div class="pet-card-image">
                         🐶
                     </div>
+
 
                     <h3 class="pet-name">
                         Sample Pet
                     </h3>
 
+
                     <p>
                         Mixed Breed
                     </p>
+
 
                     <div class="pet-actions">
 
@@ -322,14 +450,19 @@
                             type="button"
                             class="btn-edit"
                             data-action="edit">
+
                             Edit
+
                         </button>
+
 
                         <button
                             type="button"
                             class="btn-delete"
                             data-action="delete">
+
                             Delete
+
                         </button>
 
                     </div>
@@ -350,11 +483,16 @@
             class="dashboard-section"
             style="display: none;">
 
+
             <div class="dashboard-card">
 
-                <h2>Add a Pet</h2>
+                <h2>
+                    Add a Pet
+                </h2>
+
 
                 <form id="addPetForm">
+
 
                     <div class="form-group">
 
@@ -406,6 +544,7 @@
                             Gender
                         </label>
 
+
                         <select
                             id="pet-gender"
                             name="gender">
@@ -443,7 +582,11 @@
             class="dashboard-section"
             style="display: none;">
 
-            <h2>Adoption Applications</h2>
+
+            <h2>
+                Adoption Applications
+            </h2>
+
 
             <div class="dashboard-search">
 
@@ -462,13 +605,27 @@
                     <thead>
 
                         <tr>
-                            <th>Applicant</th>
-                            <th>Pet</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+
+                            <th>
+                                Applicant
+                            </th>
+
+                            <th>
+                                Pet
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
@@ -483,29 +640,40 @@
                             </td>
 
                             <td>
+
                                 <span class="status">
                                     Pending
                                 </span>
+
                             </td>
 
                             <td class="table-actions">
 
+
                                 <button
                                     type="button"
                                     data-application-action="view">
+
                                     View
+
                                 </button>
+
 
                                 <button
                                     type="button"
                                     data-application-action="approve">
+
                                     Approve
+
                                 </button>
+
 
                                 <button
                                     type="button"
                                     data-application-action="reject">
+
                                     Reject
+
                                 </button>
 
                             </td>
@@ -530,7 +698,11 @@
             class="dashboard-section"
             style="display: none;">
 
-            <h2>Users</h2>
+
+            <h2>
+                Users
+            </h2>
+
 
             <div class="dashboard-search">
 
@@ -549,13 +721,27 @@
                     <thead>
 
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Role</th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
@@ -597,9 +783,12 @@
             class="dashboard-section"
             style="display: none;">
 
+
             <div class="dashboard-card">
 
-                <h2>Reports</h2>
+                <h2>
+                    Reports
+                </h2>
 
                 <p>
                     PawPal adoption statistics
@@ -620,7 +809,11 @@
             class="dashboard-section"
             style="display: none;">
 
-            <h2>Notifications</h2>
+
+            <h2>
+                Notifications
+            </h2>
+
 
             <div class="notification-item">
 
@@ -646,9 +839,13 @@
             class="dashboard-section"
             style="display: none;">
 
+
             <div class="dashboard-card">
 
-                <h2>Settings</h2>
+                <h2>
+                    Settings
+                </h2>
+
 
                 <div class="setting-row">
 
@@ -663,6 +860,7 @@
                         </p>
 
                     </div>
+
 
                     <label class="toggle">
 
@@ -690,11 +888,16 @@
             class="dashboard-section"
             style="display: none;">
 
+
             <div class="dashboard-card">
 
-                <h2>My Profile</h2>
+                <h2>
+                    My Profile
+                </h2>
+
 
                 <form id="profileForm">
+
 
                     <div class="form-group">
 
@@ -741,11 +944,14 @@
     </div>
 
 </main>
-```
+
 
 </div>
 
-<!-- TOAST -->
+<!-- =========================
+     TOAST
+========================== -->
+
 <div
     id="dashboardToast"
     class="dashboard-toast"
@@ -753,11 +959,18 @@
     aria-live="polite">
 </div>
 
-<!-- AUTH -->
+<!-- =========================
+     AUTH
+========================== -->
+
 <script src="../js/auth.js"></script>
 
-<!-- ADMIN DASHBOARD JS -->
+<!-- =========================
+     ADMIN DASHBOARD JS
+========================== -->
+
 <script src="../js/dashboard-admin.js"></script>
 
 </body>
+
 </html>

@@ -1,301 +1,309 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Log In | PawPal</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Log In | PawPal</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/login.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
+<link rel="stylesheet" href="../CSS/login.css">
+
+
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
 
-    <header class="navbar">
+<!-- NAVBAR -->
 
-        <div class="nav-inner">
+<header class="navbar">
 
-            <a href="../index.html" class="brand">
-                <span class="brand-paw">🐾</span>
-                <span>PawPal</span>
+    <div class="nav-inner">
+
+        <a href="../index.html" class="brand">
+            <span class="brand-paw">🐾</span>
+            <span>PawPal</span>
+        </a>
+
+        <div class="nav-right">
+
+            <span class="login-question">
+                Don't have an account?
+            </span>
+
+            <a href="register.html" class="nav-button">
+                Sign Up <span>→</span>
             </a>
 
-            <div class="nav-right">
+        </div>
 
-                <span class="login-question">
-                    Don't have an account?
+    </div>
+
+</header>
+
+
+<!-- LOGIN -->
+
+<main class="login-page">
+
+    <section class="login-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="login-story">
+
+            <div class="story-paw">
+                🐾
+            </div>
+
+            <span class="story-label">
+                WELCOME BACK
+            </span>
+
+            <h1>
+                Every paw
+                <em>needs someone.</em>
+            </h1>
+
+            <p>
+                Sign in to continue helping animals find
+                safety, care and loving homes.
+            </p>
+
+
+            <div class="story-points">
+
+                <div class="story-point">
+                    <span>✓</span>
+                    Discover animals waiting for homes
+                </div>
+
+                <div class="story-point">
+                    <span>✓</span>
+                    Support rescue fundraisers
+                </div>
+
+                <div class="story-point">
+                    <span>✓</span>
+                    Track your adoption applications
+                </div>
+
+            </div>
+
+
+            <div class="story-decoration">
+                <span>🐶</span>
+                <span>🐱</span>
+                <span>🐰</span>
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="login-card">
+
+            <div class="login-heading">
+
+                <span class="section-label">
+                    PAWPAL ACCOUNT
                 </span>
 
-                <a href="register.html" class="nav-button">
-                    Sign Up <span>→</span>
+                <h2>
+                    Welcome back.
+                </h2>
+
+                <p>
+                    Log in to your PawPal account to continue.
+                </p>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm" novalidate>
+
+
+                <!-- EMAIL -->
+
+                <div class="login-field">
+
+                    <label for="loginEmail">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-field">
+
+                    <div class="password-label-row">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <a
+                            href="mailto:hello@pawpal.com?subject=PawPal%20password%20help"
+                            class="forgot-link"
+                            aria-label="Email PawPal for password help"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMEMBER -->
+
+                <label class="remember-row">
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                    >
+
+                    <span class="custom-checkbox"></span>
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+
+                <!-- ERROR / SUCCESS -->
+
+                <div
+                    id="loginMessage"
+                    class="login-message"
+                ></div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="login-submit"
+                >
+                    <span>Log In</span>
+                    <span>→</span>
+                </button>
+
+
+            </form>
+
+
+            <!-- SIGN UP -->
+
+            <div class="signup-prompt">
+
+                <span>
+                    New to PawPal?
+                </span>
+
+                <a href="register.html">
+                    Create an account
                 </a>
+
+            </div>
+
+
+            <!-- TRUST -->
+
+            <div class="login-trust">
+
+                <span>🔒</span>
+
+                <p>
+                    Your account is securely managed
+                    by PawPal's authentication system.
+                </p>
 
             </div>
 
         </div>
 
-    </header>
+    </section>
 
+</main>
 
-    <!-- LOGIN -->
 
-    <main class="login-page">
+<!-- FOOTER -->
 
-        <section class="login-container">
+<footer class="login-footer">
 
+    <a href="../index.html">
+        ← Back to PawPal
+    </a>
 
-            <!-- LEFT SIDE -->
+    <span>
+        © 2026 PawPal
+    </span>
 
-            <div class="login-story">
+</footer>
 
-                <div class="story-paw">
-                    🐾
-                </div>
 
-                <span class="story-label">
-                    WELCOME BACK
-                </span>
+<!-- SUPABASE -->
 
-                <h1>
-                    Every paw
-                    <em>needs someone.</em>
-                </h1>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-                <p>
-                    Sign in to continue helping animals find
-                    safety, care and loving homes.
-                </p>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/login.js"></script>
 
-
-                <div class="story-points">
-
-                    <div class="story-point">
-                        <span>✓</span>
-                        Discover animals waiting for homes
-                    </div>
-
-                    <div class="story-point">
-                        <span>✓</span>
-                        Support rescue fundraisers
-                    </div>
-
-                    <div class="story-point">
-                        <span>✓</span>
-                        Track your adoption applications
-                    </div>
-
-                </div>
-
-
-                <div class="story-decoration">
-                    <span>🐶</span>
-                    <span>🐱</span>
-                    <span>🐰</span>
-                </div>
-
-            </div>
-
-
-            <!-- RIGHT SIDE -->
-
-            <div class="login-card">
-
-                <div class="login-heading">
-
-                    <span class="section-label">
-                        PAWPAL ACCOUNT
-                    </span>
-
-                    <h2>
-                        Welcome back.
-                    </h2>
-
-                    <p>
-                        Log in to your PawPal account to continue.
-                    </p>
-
-                </div>
-
-
-                <!-- LOGIN FORM -->
-
-                <form id="loginForm" novalidate>
-
-
-                    <!-- EMAIL -->
-
-                    <div class="login-field">
-
-                        <label for="loginEmail">
-                            Email address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            name="email"
-                            placeholder="you@example.com"
-                            autocomplete="email"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="login-field">
-
-                        <div class="password-label-row">
-
-                            <label for="loginPassword">
-                                Password
-                            </label>
-
-                            <a
-                                href="forgot-password.html"
-                                class="forgot-link"
-                            >
-                                Forgot password?
-                            </a>
-
-                        </div>
-
-
-                        <div class="password-wrapper">
-
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                name="password"
-                                placeholder="Enter your password"
-                                autocomplete="current-password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                id="togglePassword"
-                                class="password-toggle"
-                                aria-label="Show password"
-                            >
-                                Show
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- REMEMBER -->
-
-                    <label class="remember-row">
-
-                        <input
-                            type="checkbox"
-                            id="rememberMe"
-                        >
-
-                        <span class="custom-checkbox"></span>
-
-                        <span>
-                            Remember me
-                        </span>
-
-                    </label>
-
-
-                    <!-- ERROR / SUCCESS -->
-
-                    <div
-                        id="loginMessage"
-                        class="login-message"
-                    ></div>
-
-
-                    <!-- SUBMIT -->
-
-                    <button
-                        type="submit"
-                        id="loginButton"
-                        class="login-submit"
-                    >
-                        <span>Log In</span>
-                        <span>→</span>
-                    </button>
-
-
-                </form>
-
-
-                <!-- SIGN UP -->
-
-                <div class="signup-prompt">
-
-                    <span>
-                        New to PawPal?
-                    </span>
-
-                    <a href="register.html">
-                        Create an account
-                    </a>
-
-                </div>
-
-
-                <!-- TRUST -->
-
-                <div class="login-trust">
-
-                    <span>🔒</span>
-
-                    <p>
-                        Your account is securely managed
-                        by PawPal's authentication system.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer class="login-footer">
-
-        <a href="../index.html">
-            ← Back to PawPal
-        </a>
-
-        <span>
-            © 2026 PawPal
-        </span>
-
-    </footer>
-
-
-    <!-- SUPABASE -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script src="../js/supabase-config.js"></script>
-    <script src="../js/login.js"></script>
 
 </body>
 

@@ -1,926 +1,1186 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pet Passport | PawPal</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Pet Passport | PawPal</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="../CSS/pet-passport.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="../CSS/pet-passport.css">
+<link rel="stylesheet" href="../css/nav-fixes.css">
+
+<style>
+    /* =====================================================
+       COMMON PAWPAL NAVIGATION
+       Temporary shared navigation styles.
+       Full CSS cleanup will be done globally later.
+       ===================================================== */
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nav-inner {
+        width: 100%;
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+    }
+
+    .navigation > a {
+        white-space: nowrap;
+    }
+
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .nav-dropdown-toggle {
+        border: 0;
+        background: transparent;
+        font: inherit;
+        cursor: pointer;
+        padding: 8px 0;
+    }
+
+    .nav-dropdown-toggle span {
+        margin-left: 4px;
+    }
+
+    .nav-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 245px;
+        background: #fff;
+        border: 1px solid #e9ded4;
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow: 0 20px 50px rgba(61,45,37,.12);
+        display: none;
+        z-index: 1100;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+        display: block;
+    }
+
+    .nav-dropdown-menu > a,
+    .nav-submenu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .nav-dropdown-menu > a:hover,
+    .nav-submenu-toggle:hover {
+        background: #fff9f2;
+    }
+
+    .nav-submenu {
+        position: relative;
+    }
+
+    .nav-submenu-menu {
+        position: absolute;
+        top: 0;
+        left: calc(100% + 6px);
+        min-width: 225px;
+        background: #fff;
+        border: 1px solid #e9ded4;
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow: 0 20px 50px rgba(61,45,37,.12);
+        display: none;
+    }
+
+    .nav-submenu.open .nav-submenu-menu {
+        display: block;
+    }
+
+    .nav-submenu-menu a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+
+    .nav-submenu-menu a:hover {
+        background: #fff9f2;
+    }
+
+    .mobile-menu-button {
+        display: none;
+        border: 0;
+        background: transparent;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    .auth-user-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .auth-user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #f5d5cb;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .welcome-user {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .logout-btn {
+        border: 0;
+        background: transparent;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 5px 0;
+    }
+
+    @media (max-width: 1100px) {
+        .navigation {
+            gap: 16px;
+        }
+    }
+
+    @media (max-width: 900px) {
+
+        .mobile-menu-button {
+            display: block;
+            margin-left: auto;
+        }
+
+        .navigation {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 4px;
+            padding: 16px 7%;
+            background: #fff9f2;
+            border-bottom: 1px solid #e9ded4;
+            box-shadow: 0 15px 30px rgba(61,45,37,.08);
+        }
+
+        .navigation.mobile-open {
+            display: flex;
+        }
+
+        .navigation > a,
+        .nav-dropdown-toggle {
+            width: 100%;
+            text-align: left;
+            padding: 12px 8px;
+        }
+
+        .nav-dropdown-menu {
+            position: static;
+            transform: none;
+            box-shadow: none;
+            border: 0;
+            background: transparent;
+            padding: 4px 0 4px 12px;
+        }
+
+        .nav-submenu-menu {
+            position: static;
+            box-shadow: none;
+            border: 0;
+            background: transparent;
+            padding: 4px 0 4px 12px;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .auth-user-wrapper {
+            display: none;
+        }
+
+        .nav-right {
+            gap: 10px;
+        }
+    }
+</style>
+
+
 </head>
 
 <body>
 
-    <!-- =====================================================
-         NAVBAR
-         ===================================================== -->
 
-    <header class="navbar">
+<!-- =====================================================
+     COMMON PAWPAL NAVBAR
+     ===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-inner">
 
         <a href="../index.html" class="brand">
-            <span class="brand-paw">🐾</span>
-            <span>PawPal</span>
+
+            <span class="brand-paw">
+                🐾
+            </span>
+
+            <span>
+                PawPal
+            </span>
+
         </a>
 
-        <nav class="navigation">
-            <a href="../index.html">Home</a>
-            <a href="pets.html">Find a Pet</a>
-            <a href="how-it-works.html">How It Works</a>
-            <a href="pet-care.html">Pet Care</a>
-            <a href="pet-passport.html" class="active">Pet Passport</a>
-            <a href="about.html">About Us</a>
-        </nav>
 
-        <div class="nav-right">
-            <a href="login.html" class="login-link">Log in</a>
-            <a href="register.html" class="nav-button">Get Started</a>
-        </div>
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
 
-    </header>
 
+        <nav class="navigation" id="mainNavigation">
 
-    <main>
+            <a href="../index.html">
+                Home
+            </a>
 
-        <!-- =================================================
-             PAGE INTRO
-             ================================================= -->
 
-        <section class="passport-intro">
+            <a href="pets.html">
+                Find a Pet
+            </a>
 
-            <div class="passport-intro-content">
 
-                <span class="eyebrow">
-                    PAWPAL DIGITAL RECORD
-                </span>
+            <!-- FEATURES -->
 
-                <h1>
-                    Their whole story,
-                    <span>in one passport.</span>
-                </h1>
+            <div class="nav-dropdown" id="featuresDropdown">
 
-                <p>
-                    A complete digital record of your pet's identity,
-                    health, vaccinations, medications, veterinary visits,
-                    adoption history and important documents.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PET SELECTOR
-             ================================================= -->
-
-        <section class="passport-selector-section">
-
-            <div class="passport-selector">
-
-                <div class="selector-heading">
-
-                    <span class="section-label">
-                        SELECT PET
-                    </span>
-
-                    <h2>
-                        Whose passport would you like to view?
-                    </h2>
-
-                </div>
-
-
-                <div class="passport-pet-buttons" id="passportPetSelector">
-
-                    <button
-                        type="button"
-                        class="passport-pet-button active"
-                        data-pet="bruno"
-                    >
-
-                        <span class="passport-pet-avatar">
-                            🐶
-                        </span>
-
-                        <span class="passport-pet-info">
-
-                            <strong>Bruno</strong>
-
-                            <small>
-                                Golden Retriever
-                            </small>
-
-                        </span>
-
-                        <span class="passport-pet-check">
-                            ✓
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="passport-pet-button"
-                        data-pet="luna"
-                    >
-
-                        <span class="passport-pet-avatar">
-                            🐱
-                        </span>
-
-                        <span class="passport-pet-info">
-
-                            <strong>Luna</strong>
-
-                            <small>
-                                Domestic Shorthair
-                            </small>
-
-                        </span>
-
-                        <span class="passport-pet-check">
-                            ✓
-                        </span>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             DIGITAL PASSPORT
-             ================================================= -->
-
-        <section class="passport-section">
-
-            <div class="passport-document" id="passportDocument">
-
-
-                <!-- =============================================
-                     PASSPORT COVER
-                     ============================================= -->
-
-                <div class="passport-cover">
-
-                    <div class="passport-cover-top">
-
-                        <div class="passport-brand">
-
-                            <span class="passport-brand-icon">
-                                🐾
-                            </span>
-
-                            <div>
-                                <strong>PawPal</strong>
-                                <small>Digital Pet Passport</small>
-                            </div>
-
-                        </div>
-
-
-                        <div class="passport-country">
-                            PET RECORD
-                        </div>
-
-                    </div>
-
-
-                    <div class="passport-cover-main">
-
-                        <div class="passport-photo-wrap">
-
-                            <div
-                                class="passport-photo"
-                                id="passportPhoto"
-                            >
-                                🐶
-                            </div>
-
-                            <span class="photo-label">
-                                PET PHOTO
-                            </span>
-
-                        </div>
-
-
-                        <div class="passport-identity">
-
-                            <span class="passport-mini-label">
-                                THIS PASSPORT BELONGS TO
-                            </span>
-
-                            <h2 id="passportPetName">
-                                Bruno
-                            </h2>
-
-                            <p id="passportPetBreed">
-                                Golden Retriever
-                            </p>
-
-                            <div class="passport-basic-tags">
-
-                                <span id="passportGender">
-                                    Male
-                                </span>
-
-                                <span id="passportAge">
-                                    3 Years
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="passport-qr">
-
-                            <div class="qr-placeholder">
-                                <div class="qr-grid">
-                                    ▦
-                                </div>
-                            </div>
-
-                            <span>
-                                SCAN RECORD
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="passport-cover-bottom">
-
-                        <div>
-
-                            <span>
-                                PASSPORT ID
-                            </span>
-
-                            <strong id="passportId">
-                                PP-2026-BRUNO-00482
-                            </strong>
-
-                        </div>
-
-
-                        <div class="verified-badge">
-                            <span>✓</span>
-                            PawPal Verified Record
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =============================================
-                     QUICK OVERVIEW
-                     ============================================= -->
-
-                <div class="passport-body">
-
-                    <div class="passport-status-row">
-
-                        <div class="record-status">
-
-                            <span class="status-dot"></span>
-
-                            <div>
-                                <strong>Record Active</strong>
-                                <small>
-                                    Last updated
-                                    <span id="lastUpdated">
-                                        20 Aug 2026
-                                    </span>
-                                </small>
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="print-passport-button"
-                            id="printPassport"
-                        >
-                            🖨️ Print Passport
-                        </button>
-
-                    </div>
-
-
-                    <!-- =========================================
-                         OVERVIEW CARDS
-                         ========================================= -->
-
-                    <div class="passport-overview-grid">
-
-                        <div class="passport-stat-card">
-
-                            <span class="stat-icon">
-                                💉
-                            </span>
-
-                            <div>
-                                <small>
-                                    Vaccinations
-                                </small>
-
-                                <strong id="vaccinationCount">
-                                    2
-                                </strong>
-                            </div>
-
-                        </div>
-
-
-                        <div class="passport-stat-card">
-
-                            <span class="stat-icon">
-                                🩺
-                            </span>
-
-                            <div>
-                                <small>
-                                    Vet Visits
-                                </small>
-
-                                <strong id="vetVisitCount">
-                                    4
-                                </strong>
-                            </div>
-
-                        </div>
-
-
-                        <div class="passport-stat-card">
-
-                            <span class="stat-icon">
-                                💊
-                            </span>
-
-                            <div>
-                                <small>
-                                    Medications
-                                </small>
-
-                                <strong id="medicationCount">
-                                    0
-                                </strong>
-                            </div>
-
-                        </div>
-
-
-                        <div class="passport-stat-card">
-
-                            <span class="stat-icon">
-                                📅
-                            </span>
-
-                            <div>
-                                <small>
-                                    Next Due
-                                </small>
-
-                                <strong id="nextDue">
-                                    15 Sep
-                                </strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- =========================================
-                         IDENTITY
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    PET IDENTITY
-                                </span>
-
-                                <h3>
-                                    Official pet details
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                🪪
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="identity-grid"
-                            id="identityGrid"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         MEDICAL TIMELINE
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    COMPLETE MEDICAL HISTORY
-                                </span>
-
-                                <h3>
-                                    Every important health moment
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                🩺
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="passport-medical-timeline"
-                            id="passportMedicalTimeline"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         VACCINATION RECORD
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    VACCINATION RECORD
-                                </span>
-
-                                <h3>
-                                    Protection & immunisation
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                💉
-                            </span>
-
-                        </div>
-
-
-                        <div class="vaccination-table-wrapper">
-
-                            <table class="vaccination-table">
-
-                                <thead>
-
-                                    <tr>
-                                        <th>Vaccine</th>
-                                        <th>Date Given</th>
-                                        <th>Next Due</th>
-                                        <th>Status</th>
-                                    </tr>
-
-                                </thead>
-
-                                <tbody id="vaccinationTableBody">
-
-                                    <!-- Filled by JS -->
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         MEDICATION RECORD
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    MEDICATION HISTORY
-                                </span>
-
-                                <h3>
-                                    Medicines & treatments
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                💊
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="medication-list"
-                            id="medicationList"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         VET VISITS
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    VETERINARY VISITS
-                                </span>
-
-                                <h3>
-                                    Professional care history
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                🏥
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="vet-history-grid"
-                            id="vetHistoryGrid"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         OWNERSHIP & ADOPTION HISTORY
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    LIFE HISTORY
-                                </span>
-
-                                <h3>
-                                    Rescue, adoption & ownership
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                ❤️
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="life-history"
-                            id="lifeHistory"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         DOCUMENT VAULT
-                         ========================================= -->
-
-                    <section class="passport-record-section">
-
-                        <div class="record-section-heading">
-
-                            <div>
-
-                                <span class="section-label">
-                                    DOCUMENT VAULT
-                                </span>
-
-                                <h3>
-                                    Important documents
-                                </h3>
-
-                            </div>
-
-                            <span class="record-heading-icon">
-                                📁
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="document-grid"
-                            id="documentGrid"
-                        >
-
-                            <!-- Filled by JS -->
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         EMERGENCY INFORMATION
-                         ========================================= -->
-
-                    <section class="emergency-section">
-
-                        <div class="emergency-icon">
-                            🚨
-                        </div>
-
-                        <div class="emergency-content">
-
-                            <span class="section-label">
-                                EMERGENCY INFORMATION
-                            </span>
-
-                            <h3>
-                                Quick information for urgent situations
-                            </h3>
-
-                            <div class="emergency-grid">
-
-                                <div>
-                                    <small>
-                                        Primary Contact
-                                    </small>
-
-                                    <strong id="emergencyOwner">
-                                        Sarah Thomas
-                                    </strong>
-                                </div>
-
-
-                                <div>
-                                    <small>
-                                        Emergency Vet
-                                    </small>
-
-                                    <strong>
-                                        PawCare Veterinary Clinic
-                                    </strong>
-                                </div>
-
-
-                                <div>
-                                    <small>
-                                        Important Note
-                                    </small>
-
-                                    <strong id="emergencyNote">
-                                        No known allergies
-                                    </strong>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =========================================
-                         PASSPORT FOOTER
-                         ========================================= -->
-
-                    <div class="passport-document-footer">
-
-                        <div>
-
-                            <strong>
-                                PawPal Digital Pet Passport
-                            </strong>
-
-                            <span>
-                                A complete record for a lifetime of care.
-                            </span>
-
-                        </div>
-
-
-                        <div class="footer-verification">
-
-                            <span>
-                                ✓
-                            </span>
-
-                            <div>
-                                <strong>
-                                    Verified Record
-                                </strong>
-
-                                <small>
-                                    PawPal
-                                </small>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             BOTTOM CTA
-             ================================================= -->
-
-        <section class="passport-cta">
-
-            <div class="passport-cta-content">
-
-                <span class="section-label">
-                    KEEP THEIR STORY SAFE
-                </span>
-
-                <h2>
-                    One pet.
-                    <span>One complete record.</span>
-                </h2>
-
-                <p>
-                    Keep their important information organised,
-                    documented and ready whenever you need it.
-                </p>
-
-                <a
-                    href="pet-care.html"
-                    class="primary-button"
+                <button
+                    class="nav-dropdown-toggle"
+                    type="button"
+                    aria-expanded="false"
                 >
-                    Explore Pet Care
-                </a>
-
-            </div>
-
-            <div class="passport-cta-paws">
-                🐾
-            </div>
-
-        </section>
-
-    </main>
+                    Features <span>⌄</span>
+                </button>
 
 
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-
-    <footer class="footer">
-
-        <div class="footer-main">
-
-            <div class="footer-brand">
-
-                <a href="../index.html" class="brand">
-
-                    <span class="brand-paw">
-                        🐾
-                    </span>
-
-                    <span>
-                        PawPal
-                    </span>
-
-                </a>
-
-                <p>
-                    Helping pets find loving homes and helping people
-                    give them the care they deserve.
-                </p>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <div>
-
-                    <h4>
-                        Explore
-                    </h4>
-
-                    <a href="../index.html">
-                        Home
-                    </a>
+                <div class="nav-dropdown-menu">
 
                     <a href="pets.html">
-                        Find a Pet
-                    </a>
-
-                    <a href="how-it-works.html">
-                        How It Works
+                        Smart Pet Matching
                     </a>
 
                     <a href="pet-care.html">
                         Pet Care
                     </a>
 
-                    <a href="pet-passport.html">
-                        Pet Passport
+                    <a href="pet-care.html#health-timeline">
+                        Health Timeline
+                    </a>
+
+                    <a href="pet-passport.html" class="active">
+                        Digital Pet Passport
+                    </a>
+
+                    <a href="adoption-status.html">
+                        Adoption Status
+                    </a>
+
+
+                    <!-- RESCUE & ADOPTION -->
+
+                    <div class="nav-submenu">
+
+                        <button
+                            class="nav-submenu-toggle"
+                            type="button"
+                            aria-expanded="false"
+                        >
+                            Rescue &amp; Adoption
+                            <span>›</span>
+                        </button>
+
+
+                        <div class="nav-submenu-menu">
+
+                            <a href="rescue-adoption.html">
+                                Rescue an Animal
+                            </a>
+
+                            <a href="rescue-adoption.html#rescue-listings">
+                                Browse Rescued Pets
+                            </a>
+
+                            <a href="start-fundraiser.html">
+                                Start a Fundraiser
+                            </a>
+
+                            <a href="donation.html">
+                                Donate &amp; Support
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <a href="start-fundraiser.html">
+                        Fundraisers
+                    </a>
+
+                    <a href="donation.html">
+                        Donate &amp; Support
+                    </a>
+
+                    <a href="shop.html">
+                        Pet Shop
+                    </a>
+
+                    <a href="how-it-works.html">
+                        How PawPal Works
                     </a>
 
                 </div>
 
+            </div>
 
-                <div>
 
-                    <h4>
-                        Company
-                    </h4>
+            <a href="how-it-works.html">
+                How It Works
+            </a>
 
-                    <a href="about.html">
-                        About Us
-                    </a>
 
-                    <a href="login.html">
-                        Log in
-                    </a>
+            <a href="shop.html">
+                Shop
+            </a>
 
-                    <a href="register.html">
-                        Get Started
-                    </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+        </nav>
+
+
+        <!-- AUTH NAVIGATION -->
+
+        <div class="nav-right" id="authNav">
+
+            <a
+                href="login.html"
+                class="login"
+                id="loginNavButton"
+            >
+                Log in
+            </a>
+
+
+            <a
+                href="register.html"
+                class="nav-button"
+                id="signupNavButton"
+            >
+                Get Started <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- =================================================
+         PAGE INTRO
+         ================================================= -->
+
+    <section class="passport-intro">
+
+        <div class="passport-intro-content">
+
+            <span class="eyebrow">
+                PAWPAL DIGITAL RECORD
+            </span>
+
+            <h1>
+                Their whole story,
+                <span>in one passport.</span>
+            </h1>
+
+            <p>
+                A complete digital record of your pet's identity,
+                health, vaccinations, medications, veterinary visits,
+                adoption history and important documents.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PET SELECTOR
+         ================================================= -->
+
+    <section class="passport-selector-section">
+
+        <div class="passport-selector">
+
+            <div class="selector-heading">
+
+                <span class="section-label">
+                    SELECT PET
+                </span>
+
+                <h2>
+                    Whose passport would you like to view?
+                </h2>
+
+            </div>
+
+
+            <div
+                class="passport-pet-buttons"
+                id="passportPetSelector"
+            >
+
+                <button
+                    type="button"
+                    class="passport-pet-button active"
+                    data-pet="bruno"
+                >
+
+                    <span class="passport-pet-avatar">
+                        🐶
+                    </span>
+
+                    <span class="passport-pet-info">
+
+                        <strong>Bruno</strong>
+
+                        <small>
+                            Golden Retriever
+                        </small>
+
+                    </span>
+
+                    <span class="passport-pet-check">
+                        ✓
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="passport-pet-button"
+                    data-pet="luna"
+                >
+
+                    <span class="passport-pet-avatar">
+                        🐱
+                    </span>
+
+                    <span class="passport-pet-info">
+
+                        <strong>Luna</strong>
+
+                        <small>
+                            Domestic Shorthair
+                        </small>
+
+                    </span>
+
+                    <span class="passport-pet-check">
+                        ✓
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         DIGITAL PASSPORT
+         ================================================= -->
+
+    <section class="passport-section">
+
+        <div
+            class="passport-document"
+            id="passportDocument"
+        >
+
+            <!-- PASSPORT COVER -->
+
+            <div class="passport-cover">
+
+                <div class="passport-cover-top">
+
+                    <div class="passport-brand">
+
+                        <span class="passport-brand-icon">
+                            🐾
+                        </span>
+
+                        <div>
+                            <strong>PawPal</strong>
+                            <small>Digital Pet Passport</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="passport-country">
+                        PET RECORD
+                    </div>
+
+                </div>
+
+
+                <div class="passport-cover-main">
+
+                    <div class="passport-photo-wrap">
+
+                        <div
+                            class="passport-photo"
+                            id="passportPhoto"
+                        >
+                            🐶
+                        </div>
+
+                        <span class="photo-label">
+                            PET PHOTO
+                        </span>
+
+                    </div>
+
+
+                    <div class="passport-identity">
+
+                        <span class="passport-mini-label">
+                            THIS PASSPORT BELONGS TO
+                        </span>
+
+                        <h2 id="passportPetName">
+                            Bruno
+                        </h2>
+
+                        <p id="passportPetBreed">
+                            Golden Retriever
+                        </p>
+
+                        <div class="passport-basic-tags">
+
+                            <span id="passportGender">
+                                Male
+                            </span>
+
+                            <span id="passportAge">
+                                3 Years
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="passport-qr">
+
+                        <div class="qr-placeholder">
+
+                            <div class="qr-grid">
+                                ▦
+                            </div>
+
+                        </div>
+
+                        <span>
+                            SCAN RECORD
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="passport-cover-bottom">
+
+                    <div>
+
+                        <span>
+                            PASSPORT ID
+                        </span>
+
+                        <strong id="passportId">
+                            PP-2026-BRUNO-00482
+                        </strong>
+
+                    </div>
+
+
+                    <div class="verified-badge">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        PawPal Verified Record
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK OVERVIEW -->
+
+            <div class="passport-body">
+
+                <div class="passport-status-row">
+
+                    <div class="record-status">
+
+                        <span class="status-dot"></span>
+
+                        <div>
+
+                            <strong>
+                                Record Active
+                            </strong>
+
+                            <small>
+                                Last updated
+                                <span id="lastUpdated">
+                                    20 Aug 2026
+                                </span>
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="print-passport-button"
+                        id="printPassport"
+                    >
+                        🖨️ Print Passport
+                    </button>
+
+                </div>
+
+
+                <!-- OVERVIEW CARDS -->
+
+                <div class="passport-overview-grid">
+
+                    <div class="passport-stat-card">
+
+                        <span class="stat-icon">
+                            💉
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Vaccinations
+                            </small>
+
+                            <strong id="vaccinationCount">
+                                2
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="passport-stat-card">
+
+                        <span class="stat-icon">
+                            🩺
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Vet Visits
+                            </small>
+
+                            <strong id="vetVisitCount">
+                                4
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="passport-stat-card">
+
+                        <span class="stat-icon">
+                            💊
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Medications
+                            </small>
+
+                            <strong id="medicationCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="passport-stat-card">
+
+                        <span class="stat-icon">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Next Due
+                            </small>
+
+                            <strong id="nextDue">
+                                15 Sep
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IDENTITY -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                PET IDENTITY
+                            </span>
+
+                            <h3>
+                                Official pet details
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            🪪
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="identity-grid"
+                        id="identityGrid"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- MEDICAL TIMELINE -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                COMPLETE MEDICAL HISTORY
+                            </span>
+
+                            <h3>
+                                Every important health moment
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            🩺
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="passport-medical-timeline"
+                        id="passportMedicalTimeline"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- VACCINATION RECORD -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                VACCINATION RECORD
+                            </span>
+
+                            <h3>
+                                Protection &amp; immunisation
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            💉
+                        </span>
+
+                    </div>
+
+
+                    <div class="vaccination-table-wrapper">
+
+                        <table class="vaccination-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Vaccine</th>
+                                    <th>Date Given</th>
+                                    <th>Next Due</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="vaccinationTableBody">
+                                <!-- Filled by JS -->
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MEDICATION RECORD -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                MEDICATION HISTORY
+                            </span>
+
+                            <h3>
+                                Medicines &amp; treatments
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            💊
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="medication-list"
+                        id="medicationList"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- VET VISITS -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                VETERINARY VISITS
+                            </span>
+
+                            <h3>
+                                Professional care history
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            🏥
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="vet-history-grid"
+                        id="vetHistoryGrid"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- OWNERSHIP & ADOPTION HISTORY -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                LIFE HISTORY
+                            </span>
+
+                            <h3>
+                                Rescue, adoption &amp; ownership
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            ❤️
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="life-history"
+                        id="lifeHistory"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- DOCUMENT VAULT -->
+
+                <section class="passport-record-section">
+
+                    <div class="record-section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                DOCUMENT VAULT
+                            </span>
+
+                            <h3>
+                                Important documents
+                            </h3>
+
+                        </div>
+
+                        <span class="record-heading-icon">
+                            📁
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="document-grid"
+                        id="documentGrid"
+                    >
+                        <!-- Filled by JS -->
+                    </div>
+
+                </section>
+
+
+                <!-- EMERGENCY INFORMATION -->
+
+                <section class="emergency-section">
+
+                    <div class="emergency-icon">
+                        🚨
+                    </div>
+
+                    <div class="emergency-content">
+
+                        <span class="section-label">
+                            EMERGENCY INFORMATION
+                        </span>
+
+                        <h3>
+                            Quick information for urgent situations
+                        </h3>
+
+
+                        <div class="emergency-grid">
+
+                            <div>
+
+                                <small>
+                                    Primary Contact
+                                </small>
+
+                                <strong id="emergencyOwner">
+                                    Sarah Thomas
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <small>
+                                    Emergency Vet
+                                </small>
+
+                                <strong>
+                                    PawCare Veterinary Clinic
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <small>
+                                    Important Note
+                                </small>
+
+                                <strong id="emergencyNote">
+                                    No known allergies
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PASSPORT FOOTER -->
+
+                <div class="passport-document-footer">
+
+                    <div>
+
+                        <strong>
+                            PawPal Digital Pet Passport
+                        </strong>
+
+                        <span>
+                            A complete record for a lifetime of care.
+                        </span>
+
+                    </div>
+
+
+                    <div class="footer-verification">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Verified Record
+                            </strong>
+
+                            <small>
+                                PawPal
+                            </small>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -928,19 +1188,304 @@
 
         </div>
 
+    </section>
 
-        <div class="footer-bottom">
+
+    <!-- =================================================
+         BOTTOM CTA
+         ================================================= -->
+
+    <section class="passport-cta">
+
+        <div class="passport-cta-content">
+
+            <span class="section-label">
+                KEEP THEIR STORY SAFE
+            </span>
+
+            <h2>
+                One pet.
+                <span>One complete record.</span>
+            </h2>
 
             <p>
-                © 2026 PawPal. Made with 🐾 for pets and their people.
+                Keep their important information organised,
+                documented and ready whenever you need it.
+            </p>
+
+            <a
+                href="pet-care.html"
+                class="primary-button"
+            >
+                Explore Pet Care
+            </a>
+
+        </div>
+
+        <div class="passport-cta-paws">
+            🐾
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand">
+
+                <span class="brand-paw">
+                    🐾
+                </span>
+
+                <span>
+                    PawPal
+                </span>
+
+            </a>
+
+            <p>
+                Helping pets find loving homes and helping people
+                give them the care they deserve.
             </p>
 
         </div>
 
-    </footer>
+
+        <div class="footer-links">
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="pets.html">
+                    Find a Pet
+                </a>
+
+                <a href="how-it-works.html">
+                    How It Works
+                </a>
+
+                <a href="pet-care.html">
+                    Pet Care
+                </a>
+
+                <a href="pet-passport.html">
+                    Pet Passport
+                </a>
+
+            </div>
 
 
-    <script src="../js/pet-passport.js"></script>
+            <div>
+
+                <h4>
+                    Company
+                </h4>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+                <a href="register.html">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 PawPal. Made with 🐾 for pets and their people.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     PAWPAL AUTHENTICATION
+     ===================================================== -->
+
+<script src="../js/auth.js"></script>
+
+
+<!-- =====================================================
+     COMMON NAVIGATION SCRIPT
+     ===================================================== -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const mobileButton =
+            document.getElementById("mobileMenuButton");
+
+        const navigation =
+            document.getElementById("mainNavigation");
+
+        const featuresDropdown =
+            document.getElementById("featuresDropdown");
+
+        const featuresToggle =
+            featuresDropdown
+                ? featuresDropdown.querySelector(".nav-dropdown-toggle")
+                : null;
+
+        const submenu =
+            featuresDropdown
+                ? featuresDropdown.querySelector(".nav-submenu")
+                : null;
+
+        const submenuToggle =
+            submenu
+                ? submenu.querySelector(".nav-submenu-toggle")
+                : null;
+
+
+        /* MOBILE MENU */
+
+        if (mobileButton && navigation) {
+
+            mobileButton.addEventListener("click", function () {
+
+                const isOpen =
+                    navigation.classList.toggle("mobile-open");
+
+                mobileButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            });
+
+        }
+
+
+        /* FEATURES DROPDOWN */
+
+        if (featuresToggle && featuresDropdown) {
+
+            featuresToggle.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        featuresDropdown.classList.toggle("open");
+
+                    featuresToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen ? "true" : "false"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* RESCUE & ADOPTION SUBMENU */
+
+        if (submenuToggle && submenu) {
+
+            submenuToggle.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        submenu.classList.toggle("open");
+
+                    submenuToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen ? "true" : "false"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* CLOSE DROPDOWNS */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    featuresDropdown &&
+                    !featuresDropdown.contains(event.target)
+                ) {
+
+                    featuresDropdown.classList.remove("open");
+
+                    if (featuresToggle) {
+
+                        featuresToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                    if (submenu) {
+                        submenu.classList.remove("open");
+                    }
+
+                    if (submenuToggle) {
+
+                        submenuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+</script>
+
+
+<!-- =====================================================
+     PET PASSPORT FUNCTIONALITY
+     ===================================================== -->
+
+<script src="../js/pet-passport.js"></script>
+
 
 </body>
 </html>

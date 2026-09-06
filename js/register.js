@@ -222,6 +222,15 @@ form.addEventListener("submit", async (event) => {
             data
         );
 
+        if (data.user) {
+            localStorage.setItem("pawpal-current-user", JSON.stringify({
+                id: data.user.id,
+                name: `${firstName} ${lastName}`.trim(),
+                email: data.user.email,
+                role: role
+            }));
+        }
+
 
         showMessage(
             "Account created successfully! 🎉 You can now log in.",

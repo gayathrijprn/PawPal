@@ -884,7 +884,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (adoptButton) {
 
                 adoptButton.href =
-                    "#";
+                    "rescue-adoption.html";
 
 
                 adoptButton.textContent =
@@ -910,7 +910,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sidebarAdoptButton) {
 
                 sidebarAdoptButton.href =
-                    "#";
+                    "rescue-adoption.html";
 
 
                 sidebarAdoptButton.textContent =
