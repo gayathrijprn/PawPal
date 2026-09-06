@@ -2,17 +2,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     /* =====================================================
        PAWPAL ADOPTION APPLICATION STATUS
-       SUPABASE VERSION
+       -----------------------------------------------------
+       Loads the logged-in adopter's application from Supabase.
     ===================================================== */
-
-    const toast =
-        document.getElementById("statusToast");
-
-    const updateButton =
-        document.getElementById("updateButton");
-
-    const helpButton =
-        document.getElementById("helpButton");
 
 
     /* =====================================================
@@ -22,48 +14,65 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!window.supabase) {
 
         console.error(
-            "Supabase library was not loaded."
+            "Supabase library is not loaded."
         );
 
         showToast(
-            "Unable to connect to PawPal database."
+            "Unable to connect to PawPal."
         );
 
         return;
+
     }
 
 
     /* =====================================================
        SUPABASE CLIENT
        -----------------------------------------------------
-       Make sure supabase-config.js is loaded BEFORE this
-       file if you are using a shared supabaseClient.
+       IMPORTANT:
+       This assumes supabaseClient is created globally
+       before adoption-status.js is loaded.
     ===================================================== */
 
-    let supabaseClient =
+    if (!window.supabaseClient) {
+
+        console.error(
+            "supabaseClient is not available."
+        );
+
+        showToast(
+            "Supabase connection is not configured."
+        );
+
+        return;
+
+    }
+
+
+    const supabaseClient =
         window.supabaseClient;
 
 
-    /*
-     * If supabaseClient does not already exist,
-     * create it here.
-     */
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-    if (!supabaseClient) {
+    const updateButton =
+        document.getElementById(
+            "updateButton"
+        );
 
-        const SUPABASE_URL =
-            "https://ejyjcmdfhzohwzbatswl.supabase.co";
 
-        const SUPABASE_KEY =
-            "sb_publishable_2knQMrwM9VhMbhlV4EiXzg_GdQGEMN5";
+    const helpButton =
+        document.getElementById(
+            "helpButton"
+        );
 
-        supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
-            );
 
-    }
+    const toast =
+        document.getElementById(
+            "statusToast"
+        );
 
 
     /* =====================================================
@@ -85,7 +94,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             message;
 
 
-        toast.classList.add("show");
+        toast.classList.add(
+            "show"
+        );
 
 
         clearTimeout(
@@ -94,13 +105,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
         window.pawpalStatusToast =
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                toast.classList.remove(
-                    "show"
-                );
+                    toast.classList.remove(
+                        "show"
+                    );
 
-            }, 2800);
+                },
+                2800
+            );
 
     }
 
@@ -108,9 +122,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     /* =====================================================
        GET CURRENT PAWPAL USER
        -----------------------------------------------------
-       Your existing auth.js stores the logged-in user in:
-
-       pawpal-current-user
+       Your auth.js stores the logged-in user here.
     ===================================================== */
 
     function getCurrentUser() {
@@ -142,13 +154,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =====================================================
-       REQUIRE LOGIN
+       CHECK LOGIN
     ===================================================== */
 
     if (!currentUser) {
 
         showToast(
-            "Please log in to view your adoption applications."
+            "Please log in to view your adoption application."
         );
 
 
@@ -165,20 +177,38 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
 
-    console.log(
-        "Current PawPal user:",
-        currentUser
-    );
+    /* =====================================================
+       ONLY ADOPTERS SHOULD SEE THIS PAGE
+    ===================================================== */
+
+    const userRole =
+        String(
+            currentUser.role || ""
+        )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /_/g,
+            " "
+        );
+
+
+    if (
+        userRole !== "adopter"
+    ) {
+
+        console.warn(
+            "Current user is not an adopter."
+        );
+
+    }
 
 
     /* =====================================================
-       GET PET FROM URL
+       GET OPTIONAL PET FROM URL
        -----------------------------------------------------
        Example:
-
-       adoption-status.html?pet=123
-
-       The value is treated as the pet ID.
+       adoption-status.html?pet=12
     ===================================================== */
 
     const params =
@@ -187,8 +217,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
 
 
-    const petId =
+    const petIdFromUrl =
         params.get("pet");
+
+
+    /* =====================================================
+       APPLICATION VARIABLE
+    ===================================================== */
+
+    let application = null;
 
 
     /* =====================================================
@@ -220,47 +257,61 @@ document.addEventListener("DOMContentLoaded", async function () {
                             rescue_location,
                             image_url,
                             status
+                        ),
+                        profiles (
+                            id,
+                            full_name,
+                            email,
+                            phone,
+                            role
                         )
                     `)
                     .eq(
                         "adopter_id",
                         currentUser.id
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
                     );
 
 
-            /*
-             * If a pet ID exists in the URL,
-             * show the application for that pet.
-             */
+            /* ---------------------------------------------
+               IF PET ID EXISTS IN URL
+            --------------------------------------------- */
 
-            if (petId) {
+            if (petIdFromUrl) {
 
-                query =
-                    query.eq(
-                        "pet_id",
-                        petId
+                const numericPetId =
+                    Number(
+                        petIdFromUrl
                     );
+
+
+                if (
+                    Number.isInteger(
+                        numericPetId
+                    )
+                ) {
+
+                    query =
+                        query.eq(
+                            "pet_id",
+                            numericPetId
+                        );
+
+                }
 
             }
-
-
-            /*
-             * Newest application first.
-             */
-
-            query =
-                query.order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
 
 
             const {
                 data,
                 error
-            } = await query;
+            } =
+                await query;
 
 
             if (error) {
@@ -271,7 +322,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 );
 
                 showToast(
-                    "Unable to load your adoption application."
+                    "Unable to load your application."
                 );
 
                 return;
@@ -279,9 +330,23 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
 
-            if (!data || data.length === 0) {
+            if (
+                !data ||
+                data.length === 0
+            ) {
 
-                showNoApplication();
+                console.warn(
+                    "No adoption application found."
+                );
+
+
+                showToast(
+                    "No adoption application found for your account."
+                );
+
+
+                updateEmptyApplicationState();
+
 
                 return;
 
@@ -289,42 +354,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
             /*
-             * Use the first matching application.
+             * Use the newest application.
              */
-
-            const application =
+            application =
                 data[0];
 
 
             console.log(
-                "Loaded adoption application:",
+                "PawPal application loaded:",
                 application
             );
 
 
-            updateApplicationDisplay(
-                application
-            );
-
-
-            updateProgress(
-                application.status
-            );
-
-
-            updateCurrentStatus(
-                application
-            );
-
-
-            updateTimeline(
-                application
-            );
-
-
-            updateApplicationDetails(
-                application
-            );
+            updateApplicationDisplay();
 
 
         } catch (error) {
@@ -333,6 +375,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 "Unexpected application loading error:",
                 error
             );
+
 
             showToast(
                 "Something went wrong while loading your application."
@@ -344,107 +387,387 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =====================================================
-       FORMAT STATUS
+       STATUS HELPERS
     ===================================================== */
 
-    function formatStatus(status) {
+    function normalizeStatus(status) {
+
+        return String(
+            status || "pending"
+        )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /[_-]/g,
+            " "
+        );
+
+    }
+
+
+    function getStatusInformation(status) {
 
         const normalized =
-            String(status || "")
-                .trim()
-                .toLowerCase()
-                .replace(/_/g, " ");
+            normalizeStatus(
+                status
+            );
 
 
         const statusMap = {
 
-            pending:
-                "Application Under Review",
+            pending: {
 
-            under_review:
-                "Application Under Review",
+                title:
+                    "Application Submitted",
 
-            "under review":
-                "Application Under Review",
+                icon:
+                    "📩",
 
-            home_verification:
-                "Home Verification",
+                description:
+                    "Your adoption application has been submitted and is waiting for the shelter to review it."
 
-            "home verification":
-                "Home Verification",
+            },
 
-            meet_greet:
-                "Meet & Greet",
 
-            "meet & greet":
-                "Meet & Greet",
+            submitted: {
 
-            approved:
-                "Adoption Approved",
+                title:
+                    "Application Submitted",
 
-            adoption_approved:
-                "Adoption Approved",
+                icon:
+                    "📩",
 
-            completed:
-                "Adoption Completed",
+                description:
+                    "Your adoption application has been successfully submitted to the shelter."
 
-            adoption_completed:
-                "Adoption Completed",
+            },
 
-            rejected:
-                "Application Rejected",
 
-            cancelled:
-                "Application Cancelled"
+            under_review: {
+
+                title:
+                    "Application Under Review",
+
+                icon:
+                    "🔍",
+
+                description:
+                    "The shelter is currently reviewing your adoption application."
+
+            },
+
+
+            "under review": {
+
+                title:
+                    "Application Under Review",
+
+                icon:
+                    "🔍",
+
+                description:
+                    "The shelter is currently reviewing your adoption application."
+
+            },
+
+
+            home_verification: {
+
+                title:
+                    "Home Verification",
+
+                icon:
+                    "🏠",
+
+                description:
+                    "The shelter is checking your living environment and adoption suitability."
+
+            },
+
+
+            "home verification": {
+
+                title:
+                    "Home Verification",
+
+                icon:
+                    "🏠",
+
+                description:
+                    "The shelter is checking your living environment and adoption suitability."
+
+            },
+
+
+            meet_greet: {
+
+                title:
+                    "Meet & Greet",
+
+                icon:
+                    "🐾",
+
+                description:
+                    "The next step is to meet the pet and spend some time getting to know each other."
+
+            },
+
+
+            "meet & greet": {
+
+                title:
+                    "Meet & Greet",
+
+                icon:
+                    "🐾",
+
+                description:
+                    "The next step is to meet the pet and spend some time getting to know each other."
+
+            },
+
+
+            approved: {
+
+                title:
+                    "Adoption Approved",
+
+                icon:
+                    "❤️",
+
+                description:
+                    "Congratulations! Your adoption application has been approved."
+
+            },
+
+
+            completed: {
+
+                title:
+                    "Adoption Completed",
+
+                icon:
+                    "🎉",
+
+                description:
+                    "Congratulations! The adoption has been completed."
+
+            },
+
+
+            rejected: {
+
+                title:
+                    "Application Not Approved",
+
+                icon:
+                    "ℹ️",
+
+                description:
+                    "Unfortunately, the shelter has not approved this adoption application."
+
+            },
+
+
+            cancelled: {
+
+                title:
+                    "Application Cancelled",
+
+                icon:
+                    "ℹ️",
+
+                description:
+                    "This adoption application has been cancelled."
+
+            }
 
         };
 
 
         return (
             statusMap[normalized] ||
-            (
-                status
-                    ? String(status)
-                        .replace(/_/g, " ")
-                        .replace(/\b\w/g, function (letter) {
-                            return letter.toUpperCase();
-                        })
-                    : "Application Under Review"
-            )
+            {
+
+                title:
+                    formatStatus(status),
+
+                icon:
+                    "🐾",
+
+                description:
+                    "Your application status has been updated by the shelter."
+
+            }
+        );
+
+    }
+
+
+    function formatStatus(status) {
+
+        return String(
+            status || "Pending"
+        )
+        .replace(
+            /[_-]/g,
+            " "
+        )
+        .replace(
+            /\b\w/g,
+            function (letter) {
+                return letter.toUpperCase();
+            }
         );
 
     }
 
 
     /* =====================================================
-       STATUS KEY
+       PROGRESS
     ===================================================== */
 
-    function getStatusKey(status) {
+    function getProgress(status) {
 
-        return String(status || "")
-            .trim()
-            .toLowerCase()
-            .replace(/_/g, " ");
+        const normalized =
+            normalizeStatus(
+                status
+            );
+
+
+        const progressMap = {
+
+            pending:
+                17,
+
+            submitted:
+                17,
+
+            under_review:
+                33,
+
+            "under review":
+                33,
+
+            home_verification:
+                50,
+
+            "home verification":
+                50,
+
+            meet_greet:
+                67,
+
+            "meet & greet":
+                67,
+
+            approved:
+                83,
+
+            completed:
+                100,
+
+            rejected:
+                0,
+
+            cancelled:
+                0
+
+        };
+
+
+        return (
+            progressMap[normalized] ??
+            17
+        );
 
     }
 
 
     /* =====================================================
-       UPDATE BASIC APPLICATION INFORMATION
+       UPDATE APPLICATION DISPLAY
     ===================================================== */
 
-    function updateApplicationDisplay(
-        application
-    ) {
+    function updateApplicationDisplay() {
+
+        if (!application) {
+            return;
+        }
+
 
         const pet =
             application.pets || {};
 
 
-        /*
-         * Pet name
-         */
+        const profile =
+            application.profiles || {};
+
+
+        const statusInfo =
+            getStatusInformation(
+                application.status
+            );
+
+
+        const progress =
+            getProgress(
+                application.status
+            );
+
+
+        const petName =
+            pet.name ||
+            "Pet";
+
+
+        const breed =
+            pet.breed ||
+            "Breed not specified";
+
+
+        const age =
+            pet.age ||
+            "Age not specified";
+
+
+        const gender =
+            pet.gender ||
+            "Gender not specified";
+
+
+        const location =
+            pet.rescue_location ||
+            "Location not specified";
+
+
+        const applicantName =
+            profile.full_name ||
+            currentUser.name ||
+            "PawPal User";
+
+
+        const applicantEmail =
+            profile.email ||
+            currentUser.email ||
+            "";
+
+
+        const applicationDate =
+            formatDate(
+                application.created_at
+            );
+
+
+        const updatedDate =
+            formatDate(
+                application.updated_at ||
+                application.created_at
+            );
+
+
+        /* ---------------------------------------------
+           PET NAME
+        --------------------------------------------- */
 
         document
             .querySelectorAll(
@@ -453,14 +776,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             .forEach(function (element) {
 
                 element.textContent =
-                    pet.name || "Pet";
+                    petName;
 
             });
 
 
-        /*
-         * Application ID
-         */
+        /* ---------------------------------------------
+           APPLICATION ID
+        --------------------------------------------- */
 
         document
             .querySelectorAll(
@@ -476,9 +799,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             });
 
 
-        /*
-         * Status
-         */
+        /* ---------------------------------------------
+           STATUS
+        --------------------------------------------- */
 
         document
             .querySelectorAll(
@@ -487,16 +810,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             .forEach(function (element) {
 
                 element.textContent =
-                    formatStatus(
-                        application.status
-                    );
+                    statusInfo.title;
 
             });
 
 
-        /*
-         * Pet image
-         */
+        /* ---------------------------------------------
+           PET IMAGE
+        --------------------------------------------- */
 
         const petImage =
             document.querySelector(
@@ -513,108 +834,76 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             }
 
-
             petImage.alt =
-                pet.name ||
-                "Adoptable pet";
+                petName;
 
         }
 
 
-        /*
-         * Pet heading
-         */
+        /* ---------------------------------------------
+           PET INFORMATION
+        --------------------------------------------- */
 
-        const petHeading =
+        const petInfo =
             document.querySelector(
-                ".application-pet-info h2"
+                ".application-pet-info"
             );
 
 
-        if (petHeading) {
+        if (petInfo) {
 
-            petHeading.textContent =
-                pet.name || "Pet";
-
-        }
-
-
-        /*
-         * Breed / age / gender
-         */
-
-        const petDescription =
-            document.querySelector(
-                ".application-pet-info p"
-            );
-
-
-        if (petDescription) {
-
-            const details = [];
-
-            if (pet.breed) {
-                details.push(pet.breed);
-            }
-
-            if (pet.age) {
-                details.push(pet.age);
-            }
-
-            if (pet.gender) {
-                details.push(pet.gender);
-            }
-
-
-            petDescription.textContent =
-                details.join(" · ");
-
-        }
-
-
-        /*
-         * Location
-         */
-
-        const locationElement =
-            document.querySelector(
-                ".application-location"
-            );
-
-
-        if (locationElement) {
-
-            locationElement.textContent =
-                pet.rescue_location
-                    ? "📍 " + pet.rescue_location
-                    : "";
-
-        }
-
-
-        /*
-         * Current status in summary
-         */
-
-        const currentStatusText =
-            document.querySelector(
-                ".current-status-text"
-            );
-
-
-        if (currentStatusText) {
-
-            currentStatusText.textContent =
-                formatStatus(
-                    application.status
+            const heading =
+                petInfo.querySelector(
+                    "h2"
                 );
 
+
+            const description =
+                petInfo.querySelector(
+                    "p"
+                );
+
+
+            const locationElement =
+                petInfo.querySelector(
+                    ".application-location"
+                );
+
+
+            if (heading) {
+
+                heading.textContent =
+                    petName;
+
+            }
+
+
+            if (description) {
+
+                description.textContent =
+                    breed +
+                    " · " +
+                    age +
+                    " · " +
+                    gender;
+
+            }
+
+
+            if (locationElement) {
+
+                locationElement.textContent =
+                    "📍 " +
+                    location;
+
+            }
+
         }
 
 
-        /*
-         * Submitted date
-         */
+        /* ---------------------------------------------
+           APPLICATION DETAILS
+        --------------------------------------------- */
 
         const detailItems =
             document.querySelectorAll(
@@ -625,10 +914,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         detailItems.forEach(function (item) {
 
             const label =
-                item.querySelector("span");
+                item.querySelector(
+                    "span"
+                );
+
 
             const value =
-                item.querySelector("strong");
+                item.querySelector(
+                    "strong"
+                );
 
 
             if (!label || !value) {
@@ -636,13 +930,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
 
-            const text =
+            const labelText =
                 label.textContent
                     .trim()
                     .toLowerCase();
 
 
-            if (text === "application id") {
+            if (
+                labelText ===
+                "application id"
+            ) {
 
                 value.textContent =
                     formatApplicationId(
@@ -652,196 +949,60 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
 
-            if (text === "submitted") {
+            if (
+                labelText ===
+                "submitted"
+            ) {
 
                 value.textContent =
-                    formatDate(
-                        application.created_at
-                    );
+                    applicationDate;
 
             }
 
 
-            if (text === "current status") {
+            if (
+                labelText ===
+                "shelter"
+            ) {
+
+                /*
+                 * There is currently no shelter_id column
+                 * in adoption_applications.
+                 *
+                 * Keep the existing text unless you later
+                 * add a shelter/owner relationship.
+                 */
+
+            }
+
+
+            if (
+                labelText ===
+                "current status"
+            ) {
 
                 value.textContent =
-                    formatStatus(
-                        application.status
-                    );
+                    statusInfo.title;
 
             }
 
         });
 
-    }
 
+        /* ---------------------------------------------
+           PROGRESS
+        --------------------------------------------- */
 
-    /* =====================================================
-       FORMAT APPLICATION ID
-    ===================================================== */
-
-    function formatApplicationId(id) {
-
-        if (!id) {
-            return "Application";
-        }
-
-
-        /*
-         * Supabase ID is UUID.
-         * Keep it readable while preserving the actual ID.
-         */
-
-        return "#" + id;
-
-    }
-
-
-    /* =====================================================
-       FORMAT DATE
-    ===================================================== */
-
-    function formatDate(dateValue) {
-
-        if (!dateValue) {
-            return "—";
-        }
-
-
-        const date =
-            new Date(dateValue);
-
-
-        if (Number.isNaN(
-            date.getTime()
-        )) {
-
-            return "—";
-
-        }
-
-
-        return date.toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                day: "numeric",
-                year: "numeric"
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       FORMAT DATE + TIME
-    ===================================================== */
-
-    function formatDateTime(dateValue) {
-
-        if (!dateValue) {
-            return "";
-        }
-
-
-        const date =
-            new Date(dateValue);
-
-
-        if (Number.isNaN(
-            date.getTime()
-        )) {
-
-            return "";
-
-        }
-
-
-        return date.toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                day: "numeric",
-                year: "numeric"
-            }
-        ) +
-        " · " +
-        date.toLocaleTimeString(
-            "en-US",
-            {
-                hour: "numeric",
-                minute: "2-digit"
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       PROGRESS
-    ===================================================== */
-
-    function getProgress(status) {
-
-        const key =
-            getStatusKey(status);
-
-
-        switch (key) {
-
-            case "pending":
-            case "under review":
-                return 20;
-
-
-            case "home verification":
-                return 50;
-
-
-            case "meet greet":
-            case "meet & greet":
-                return 67;
-
-
-            case "approved":
-            case "adoption approved":
-                return 83;
-
-
-            case "completed":
-            case "adoption completed":
-                return 100;
-
-
-            case "rejected":
-            case "cancelled":
-                return 0;
-
-
-            default:
-                return 20;
-
-        }
-
-    }
-
-
-    function updateProgress(status) {
-
-        const percentage =
-            getProgress(status);
-
-
-        const percentageElement =
+        const progressPercentage =
             document.querySelector(
                 ".progress-percentage"
             );
 
 
-        if (percentageElement) {
+        if (progressPercentage) {
 
-            percentageElement.textContent =
-                percentage + "%";
+            progressPercentage.textContent =
+                progress + "%";
 
         }
 
@@ -855,7 +1016,216 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (progressFill) {
 
             progressFill.style.width =
-                percentage + "%";
+                progress + "%";
+
+        }
+
+
+        /* ---------------------------------------------
+           CURRENT STATUS CARD
+        --------------------------------------------- */
+
+        const currentStatusTitle =
+            document.querySelector(
+                ".current-status-content h2"
+            );
+
+
+        if (currentStatusTitle) {
+
+            currentStatusTitle.textContent =
+                statusInfo.title;
+
+        }
+
+
+        const currentStatusDescription =
+            document.querySelector(
+                ".current-status-content p"
+            );
+
+
+        if (currentStatusDescription) {
+
+            currentStatusDescription.textContent =
+                statusInfo.description
+                    .replace(
+                        "the pet",
+                        petName
+                    );
+
+        }
+
+
+        const currentStatusIcon =
+            document.querySelector(
+                ".current-status-icon"
+            );
+
+
+        if (currentStatusIcon) {
+
+            currentStatusIcon.textContent =
+                statusInfo.icon;
+
+        }
+
+
+        const currentStatusIndicator =
+            document.querySelector(
+                ".current-status-indicator"
+            );
+
+
+        if (currentStatusIndicator) {
+
+            currentStatusIndicator.innerHTML =
+                "<span></span>" +
+                getStatusIndicatorText(
+                    application.status
+                );
+
+        }
+
+
+        /* ---------------------------------------------
+           LAST UPDATED
+        --------------------------------------------- */
+
+        const lastUpdated =
+            document.querySelector(
+                ".current-status-update strong"
+            );
+
+
+        if (lastUpdated) {
+
+            lastUpdated.textContent =
+                updatedDate;
+
+        }
+
+
+        /* ---------------------------------------------
+           APPLICANT INFORMATION
+        --------------------------------------------- */
+
+        const infoItems =
+            document.querySelectorAll(
+                ".info-item"
+            );
+
+
+        infoItems.forEach(function (item) {
+
+            const label =
+                item.querySelector(
+                    "span"
+                );
+
+
+            const value =
+                item.querySelector(
+                    "strong"
+                );
+
+
+            if (!label || !value) {
+                return;
+            }
+
+
+            const labelText =
+                label.textContent
+                    .trim()
+                    .toLowerCase();
+
+
+            switch (labelText) {
+
+                case "applicant":
+
+                    value.textContent =
+                        applicantName;
+
+                    break;
+
+
+                case "email":
+
+                    value.textContent =
+                        applicantEmail;
+
+                    break;
+
+
+                case "pet":
+
+                    value.textContent =
+                        petName;
+
+                    break;
+
+
+                case "application date":
+
+                    value.textContent =
+                        applicationDate;
+
+                    break;
+
+
+                case "application status":
+
+                    value.textContent =
+                        statusInfo.title;
+
+                    break;
+
+            }
+
+        });
+
+
+        /* ---------------------------------------------
+           TIMELINE
+        --------------------------------------------- */
+
+        updateTimeline(
+            application.status,
+            petName,
+            application.created_at,
+            application.updated_at
+        );
+
+
+        /* ---------------------------------------------
+           NEXT STEP CARD
+        --------------------------------------------- */
+
+        updateNextStep(
+            application.status,
+            petName
+        );
+
+
+        /* ---------------------------------------------
+           PAGE BADGE
+        --------------------------------------------- */
+
+        const headingBadge =
+            document.querySelector(
+                ".status-heading-badge"
+            );
+
+
+        if (headingBadge) {
+
+            headingBadge.innerHTML =
+                '<span class="status-badge-dot"></span>' +
+                getStatusIndicatorText(
+                    application.status
+                );
 
         }
 
@@ -863,197 +1233,357 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =====================================================
-       CURRENT STATUS CARD
+       APPLICATION ID
     ===================================================== */
 
-    function updateCurrentStatus(
-        application
-    ) {
+    function formatApplicationId(id) {
 
-        const status =
-            formatStatus(
-                application.status
-            );
-
-
-        const currentStatusHeading =
-            document.querySelector(
-                ".current-status-content h2"
-            );
-
-
-        if (currentStatusHeading) {
-
-            currentStatusHeading.textContent =
-                status;
-
-        }
-
-
-        const currentStatusLabel =
-            document.querySelector(
-                ".current-status-label"
-            );
-
-
-        if (currentStatusLabel) {
-
-            currentStatusLabel.textContent =
-                "CURRENT STEP";
-
-        }
-
-
-        const updateDate =
-            document.querySelector(
-                ".current-status-update strong"
-            );
-
-
-        if (updateDate) {
-
-            updateDate.textContent =
-                formatDate(
-                    application.updated_at ||
-                    application.created_at
-                );
-
-        }
-
-
-        const indicator =
-            document.querySelector(
-                ".current-status-indicator"
-            );
-
-
-        if (indicator) {
-
-            const key =
-                getStatusKey(
-                    application.status
-                );
-
-
-            if (
-                key === "approved" ||
-                key === "adoption approved"
-            ) {
-
-                indicator.innerHTML =
-                    "<span></span> Approved";
-
-            } else if (
-                key === "completed" ||
-                key === "adoption completed"
-            ) {
-
-                indicator.innerHTML =
-                    "<span></span> Completed";
-
-            } else if (
-                key === "rejected"
-            ) {
-
-                indicator.innerHTML =
-                    "<span></span> Rejected";
-
-            } else {
-
-                indicator.innerHTML =
-                    "<span></span> In progress";
-
-            }
-
+        if (!id) {
+            return "Not available";
         }
 
 
         /*
-         * Update description.
+         * Supabase id is UUID.
+         *
+         * Display a short readable version.
          */
+        const idString =
+            String(id);
 
-        const description =
-            document.querySelector(
-                ".current-status-content > p"
+
+        if (
+            idString.startsWith(
+                "PP-"
+            )
+        ) {
+
+            return "#" + idString;
+
+        }
+
+
+        return "#" +
+            idString
+                .substring(
+                    0,
+                    8
+                )
+                .toUpperCase();
+
+    }
+
+
+    /* =====================================================
+       FORMAT DATE
+    ===================================================== */
+
+    function formatDate(dateValue) {
+
+        if (!dateValue) {
+
+            return "Not available";
+
+        }
+
+
+        const date =
+            new Date(
+                dateValue
             );
 
 
-        if (description) {
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
 
-            const petName =
-                application.pets &&
-                application.pets.name
-                    ? application.pets.name
-                    : "your pet";
+            return "Not available";
 
-
-            const key =
-                getStatusKey(
-                    application.status
-                );
+        }
 
 
-            if (key === "pending") {
-
-                description.textContent =
-                    "Your adoption application has been submitted and is waiting for the shelter to review it.";
-
-            } else if (
-                key === "under review"
-            ) {
-
-                description.textContent =
-                    "The shelter is currently reviewing your adoption application.";
-
-            } else if (
-                key === "home verification"
-            ) {
-
-                description.textContent =
-                    "The shelter is reviewing your home environment to make sure " +
-                    petName +
-                    " will have a safe, comfortable and loving place to live.";
-
-            } else if (
-                key === "meet greet" ||
-                key === "meet & greet"
-            ) {
-
-                description.textContent =
-                    "Your next step is to meet " +
-                    petName +
-                    " and spend some time getting to know each other.";
-
-            } else if (
-                key === "approved" ||
-                key === "adoption approved"
-            ) {
-
-                description.textContent =
-                    "Great news! Your adoption application has been approved.";
-
-            } else if (
-                key === "completed" ||
-                key === "adoption completed"
-            ) {
-
-                description.textContent =
-                    petName +
-                    " has officially become part of your family. ❤️";
-
-            } else if (
-                key === "rejected"
-            ) {
-
-                description.textContent =
-                    "The shelter has decided not to approve this adoption application.";
-
-            } else {
-
-                description.textContent =
-                    "Your adoption application is being processed by the shelter.";
-
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
             }
+        );
+
+    }
+
+
+    /* =====================================================
+       STATUS INDICATOR TEXT
+    ===================================================== */
+
+    function getStatusIndicatorText(status) {
+
+        const normalized =
+            normalizeStatus(
+                status
+            );
+
+
+        if (
+            normalized ===
+            "completed"
+        ) {
+
+            return "Completed";
+
+        }
+
+
+        if (
+            normalized ===
+            "approved"
+        ) {
+
+            return "Approved";
+
+        }
+
+
+        if (
+            normalized ===
+            "rejected" ||
+            normalized ===
+            "cancelled"
+        ) {
+
+            return formatStatus(
+                status
+            );
+
+        }
+
+
+        return "In progress";
+
+    }
+
+
+    /* =====================================================
+       UPDATE NEXT STEP
+    ===================================================== */
+
+    function updateNextStep(
+        status,
+        petName
+    ) {
+
+        const nextStepCard =
+            document.querySelector(
+                ".next-step-card"
+            );
+
+
+        if (!nextStepCard) {
+            return;
+        }
+
+
+        const normalized =
+            normalizeStatus(
+                status
+            );
+
+
+        const icon =
+            nextStepCard.querySelector(
+                ".next-step-icon"
+            );
+
+
+        const title =
+            nextStepCard.querySelector(
+                "h2"
+            );
+
+
+        const description =
+            nextStepCard.querySelector(
+                "p"
+            );
+
+
+        if (
+            normalized ===
+            "pending" ||
+            normalized ===
+            "submitted"
+        ) {
+
+            if (icon) {
+                icon.textContent = "📩";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Application Review";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    "The shelter will review your application. Keep your contact information available in case they need to reach you.";
+            }
+
+            return;
+
+        }
+
+
+        if (
+            normalized ===
+            "under review" ||
+            normalized ===
+            "under_review"
+        ) {
+
+            if (icon) {
+                icon.textContent = "🔍";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Application Review";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    "Your application is currently being reviewed by the shelter.";
+            }
+
+            return;
+
+        }
+
+
+        if (
+            normalized ===
+            "home verification" ||
+            normalized ===
+            "home_verification"
+        ) {
+
+            if (icon) {
+                icon.textContent = "🏠";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Home Verification";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    "Make sure your home is ready and keep your phone available in case the shelter contacts you.";
+            }
+
+            return;
+
+        }
+
+
+        if (
+            normalized ===
+            "meet & greet" ||
+            normalized ===
+            "meet_greet"
+        ) {
+
+            if (icon) {
+                icon.textContent = "🐾";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Meet & Greet";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    "Get ready to meet " +
+                    petName +
+                    " and spend some time together.";
+            }
+
+            return;
+
+        }
+
+
+        if (
+            normalized ===
+            "approved"
+        ) {
+
+            if (icon) {
+                icon.textContent = "❤️";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Adoption Approved";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    "Congratulations! Your adoption application has been approved. Please follow the shelter's instructions for completing the adoption.";
+            }
+
+            return;
+
+        }
+
+
+        if (
+            normalized ===
+            "completed"
+        ) {
+
+            if (icon) {
+                icon.textContent = "🎉";
+            }
+
+
+            if (title) {
+                title.textContent =
+                    "Adoption Completed";
+            }
+
+
+            if (description) {
+                description.textContent =
+                    petName +
+                    " is officially part of your family. ❤️";
+            }
+
+            return;
+
+        }
+
+
+        if (title) {
+
+            title.textContent =
+                formatStatus(
+                    status
+                );
 
         }
 
@@ -1065,14 +1595,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     ===================================================== */
 
     function updateTimeline(
-        application
+        status,
+        petName,
+        createdAt,
+        updatedAt
     ) {
-
-        const status =
-            getStatusKey(
-                application.status
-            );
-
 
         const steps =
             document.querySelectorAll(
@@ -1085,77 +1612,83 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
 
-        /*
-         * Timeline order:
-         *
-         * 0 = submitted
-         * 1 = under review
-         * 2 = home verification
-         * 3 = meet & greet
-         * 4 = approved
-         * 5 = completed
-         */
-
-        let currentIndex = 0;
+        const normalized =
+            normalizeStatus(
+                status
+            );
 
 
-        switch (status) {
+        let currentIndex =
+            0;
+
+
+        switch (normalized) {
 
             case "pending":
+            case "submitted":
 
-                currentIndex = 0;
+                currentIndex =
+                    0;
 
                 break;
 
 
             case "under review":
+            case "under_review":
 
-                currentIndex = 1;
+                currentIndex =
+                    1;
 
                 break;
 
 
             case "home verification":
+            case "home_verification":
 
-                currentIndex = 2;
+                currentIndex =
+                    2;
 
                 break;
 
 
-            case "meet greet":
             case "meet & greet":
+            case "meet_greet":
 
-                currentIndex = 3;
+                currentIndex =
+                    3;
 
                 break;
 
 
             case "approved":
-            case "adoption approved":
 
-                currentIndex = 4;
+                currentIndex =
+                    4;
 
                 break;
 
 
             case "completed":
-            case "adoption completed":
 
-                currentIndex = 5;
+                currentIndex =
+                    5;
 
                 break;
 
 
             case "rejected":
+            case "cancelled":
 
-                currentIndex = 1;
+                currentIndex =
+                    0;
 
                 break;
 
 
             default:
 
-                currentIndex = 0;
+                currentIndex =
+                    0;
 
         }
 
@@ -1184,7 +1717,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                 );
 
 
-            if (index < currentIndex) {
+            if (
+                index <
+                currentIndex
+            ) {
 
                 step.classList.add(
                     "completed"
@@ -1209,26 +1745,72 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 }
 
-            } else if (
-                index === currentIndex
+            }
+
+
+            else if (
+                index ===
+                currentIndex
             ) {
 
-                step.classList.add(
-                    "active"
-                );
+                /*
+                 * Completed adoption:
+                 * every step becomes completed.
+                 */
+
+                if (
+                    normalized ===
+                    "completed"
+                ) {
+
+                    step.classList.add(
+                        "completed"
+                    );
 
 
-                if (statusLabel) {
+                    if (marker) {
 
-                    statusLabel.textContent =
-                        "In Progress";
+                        marker.textContent =
+                            "✓";
 
-                    statusLabel.className =
-                        "timeline-status active-label";
+                    }
+
+
+                    if (statusLabel) {
+
+                        statusLabel.textContent =
+                            "Completed";
+
+                        statusLabel.className =
+                            "timeline-status completed-label";
+
+                    }
 
                 }
 
-            } else {
+                else {
+
+                    step.classList.add(
+                        "active"
+                    );
+
+
+                    if (statusLabel) {
+
+                        statusLabel.textContent =
+                            "In Progress";
+
+                        statusLabel.className =
+                            "timeline-status active-label";
+
+                    }
+
+                }
+
+            }
+
+
+            else {
 
                 step.classList.add(
                     "upcoming"
@@ -1251,93 +1833,78 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
         /*
-         * Update pet name inside timeline text.
+         * Replace Bruno with actual pet name
+         * inside timeline descriptions.
          */
 
-        const petName =
-            application.pets &&
-            application.pets.name
-                ? application.pets.name
-                : "your pet";
-
-
-        const timelineParagraphs =
-            document.querySelectorAll(
+        document
+            .querySelectorAll(
                 ".timeline-content p"
-            );
+            )
+            .forEach(function (paragraph) {
 
+                paragraph.textContent =
+                    paragraph.textContent.replace(
+                        /Bruno/g,
+                        petName
+                    );
 
-        timelineParagraphs.forEach(function (
-            paragraph
-        ) {
-
-            paragraph.textContent =
-                paragraph.textContent.replace(
-                    /Bruno/g,
-                    petName
-                );
-
-        });
+            });
 
 
         /*
-         * Update first timeline date.
+         * First timeline date.
          */
 
-        if (steps[0]) {
+        const firstDate =
+            steps[0]
+                ? steps[0].querySelector(
+                    ".timeline-date"
+                )
+                : null;
 
-            const dateElement =
-                steps[0].querySelector(
+
+        if (
+            firstDate &&
+            createdAt
+        ) {
+
+            firstDate.textContent =
+                formatDateTime(
+                    createdAt
+                );
+
+        }
+
+
+        /*
+         * Current step date.
+         */
+
+        const activeStep =
+            document.querySelector(
+                ".timeline-step.active"
+            );
+
+
+        if (activeStep) {
+
+            const activeDate =
+                activeStep.querySelector(
                     ".timeline-date"
                 );
 
 
-            if (dateElement) {
+            if (
+                activeDate &&
+                updatedAt
+            ) {
 
-                dateElement.textContent =
-                    formatDateTime(
-                        application.created_at
+                activeDate.textContent =
+                    "Last updated " +
+                    formatDate(
+                        updatedAt
                     );
-
-            }
-
-        }
-
-
-        /*
-         * Update active step date.
-         */
-
-        if (
-            steps[currentIndex]
-        ) {
-
-            const dateElement =
-                steps[currentIndex]
-                    .querySelector(
-                        ".timeline-date"
-                    );
-
-
-            if (dateElement) {
-
-                if (currentIndex === 0) {
-
-                    dateElement.textContent =
-                        formatDateTime(
-                            application.created_at
-                        );
-
-                } else {
-
-                    dateElement.textContent =
-                        "Last updated " +
-                        formatDate(
-                            application.updated_at ||
-                            application.created_at
-                        );
-
-                }
 
             }
 
@@ -1347,175 +1914,107 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     /* =====================================================
-       APPLICATION DETAILS
+       DATE + TIME
     ===================================================== */
 
-    function updateApplicationDetails(
-        application
+    function formatDateTime(
+        dateValue
     ) {
 
-        const pet =
-            application.pets || {};
+        if (!dateValue) {
+            return "";
+        }
 
 
-        const infoItems =
-            document.querySelectorAll(
-                ".info-item"
+        const date =
+            new Date(
+                dateValue
             );
 
 
-        infoItems.forEach(function (item) {
-
-            const label =
-                item.querySelector("span");
-
-            const value =
-                item.querySelector("strong");
-
-
-            if (!label || !value) {
-                return;
-            }
-
-
-            const text =
-                label.textContent
-                    .trim()
-                    .toLowerCase();
-
-
-            switch (text) {
-
-                case "pet":
-
-                    value.textContent =
-                        pet.name || "—";
-
-                    break;
-
-
-                case "application date":
-
-                    value.textContent =
-                        formatDate(
-                            application.created_at
-                        );
-
-                    break;
-
-
-                case "application status":
-
-                    value.textContent =
-                        formatStatus(
-                            application.status
-                        );
-
-                    break;
-
-            }
-
-        });
-
-
-        /*
-         * Applicant information comes from the
-         * logged-in PawPal user.
-         */
-
-        const applicantItems =
-            document.querySelectorAll(
-                ".info-item"
-            );
-
-
-        applicantItems.forEach(function (
-            item
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
         ) {
 
-            const label =
-                item.querySelector("span");
+            return "";
 
-            const value =
-                item.querySelector("strong");
+        }
 
 
-            if (!label || !value) {
-                return;
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
             }
-
-
-            const text =
-                label.textContent
-                    .trim()
-                    .toLowerCase();
-
-
-            if (text === "applicant") {
-
-                value.textContent =
-                    currentUser.name ||
-                    "PawPal User";
-
+        ) +
+        " · " +
+        date.toLocaleTimeString(
+            "en-US",
+            {
+                hour: "numeric",
+                minute: "2-digit"
             }
-
-
-            if (text === "email") {
-
-                value.textContent =
-                    currentUser.email ||
-                    "—";
-
-            }
-
-
-        });
+        );
 
     }
 
 
     /* =====================================================
-       NO APPLICATION
+       EMPTY APPLICATION STATE
     ===================================================== */
 
-    function showNoApplication() {
+    function updateEmptyApplicationState() {
 
-        console.warn(
-            "No adoption application found."
-        );
+        document
+            .querySelectorAll(
+                "[data-pet-name]"
+            )
+            .forEach(function (element) {
+
+                element.textContent =
+                    "No application";
+
+            });
 
 
-        const heading =
+        const currentStatusTitle =
             document.querySelector(
-                ".status-heading h1"
+                ".current-status-content h2"
             );
 
 
-        if (heading) {
+        if (currentStatusTitle) {
 
-            heading.textContent =
+            currentStatusTitle.textContent =
                 "No application found";
 
         }
 
 
-        const description =
+        const currentStatusDescription =
             document.querySelector(
-                ".status-heading p"
+                ".current-status-content p"
             );
 
 
-        if (description) {
+        if (currentStatusDescription) {
 
-            description.textContent =
-                "We couldn't find an adoption application associated with this account.";
+            currentStatusDescription.textContent =
+                "We couldn't find an adoption application linked to your account.";
 
         }
 
 
-        showToast(
-            "No adoption application found."
-        );
+        if (updateButton) {
+
+            updateButton.disabled =
+                true;
+
+        }
 
     }
 
@@ -1530,6 +2029,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             "click",
             async function () {
 
+                if (!application) {
+
+                    showToast(
+                        "No application to check."
+                    );
+
+                    return;
+
+                }
+
+
                 updateButton.disabled =
                     true;
 
@@ -1540,22 +2050,82 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 try {
 
-                    /*
-                     * Reload the page data from Supabase.
-                     */
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .from(
+                                "adoption_applications"
+                            )
+                            .select(`
+                                id,
+                                pet_id,
+                                adopter_id,
+                                status,
+                                message,
+                                created_at,
+                                updated_at,
+                                pets (
+                                    id,
+                                    name,
+                                    animal_type,
+                                    breed,
+                                    age,
+                                    gender,
+                                    rescue_location,
+                                    image_url,
+                                    status
+                                ),
+                                profiles (
+                                    id,
+                                    full_name,
+                                    email,
+                                    phone,
+                                    role
+                                )
+                            `)
+                            .eq(
+                                "id",
+                                application.id
+                            )
+                            .single();
 
-                    await loadApplication();
+
+                    if (error) {
+
+                        console.error(
+                            "Update check error:",
+                            error
+                        );
+
+
+                        showToast(
+                            "Unable to check for updates."
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    application =
+                        data;
+
+
+                    updateApplicationDisplay();
 
 
                     showToast(
-                        "Your application status is up to date. 🐾"
+                        application.pets?.name +
+                        "'s application is up to date. 🐾"
                     );
 
 
                 } catch (error) {
 
                     console.error(
-                        "Update check failed:",
                         error
                     );
 
@@ -1564,15 +2134,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                         "Unable to check for updates."
                     );
 
+                } finally {
+
+                    updateButton.disabled =
+                        false;
+
+
+                    updateButton.textContent =
+                        "Check for Updates";
+
                 }
-
-
-                updateButton.disabled =
-                    false;
-
-
-                updateButton.textContent =
-                    "Check for Updates";
 
             }
         );
@@ -1639,8 +2210,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                         "translateY(0)";
 
                 },
-                100 + (
-                    index * 100
+                100 +
+                (
+                    index *
+                    100
                 )
             );
 
@@ -1660,7 +2233,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     ===================================================== */
 
     console.log(
-        "PawPal Supabase adoption status loaded."
+        "PawPal adoption status loaded."
     );
 
 });
