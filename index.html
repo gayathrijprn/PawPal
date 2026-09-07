@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="css/nav-fixes.css">
     <link rel="stylesheet" href="CSS/assistant.css">
-    
+
 </head>
 
 <body>
@@ -42,7 +43,9 @@
         type="button"
         aria-label="Open navigation menu"
         aria-expanded="false">
+
         ☰
+
     </button>
 
     <nav
@@ -91,8 +94,6 @@
 
                 <div class="dropdown-divider"></div>
 
-                <!-- SMART MATCHING -->
-
                 <a
                     href="pages/pets.html"
                     class="dropdown-link">
@@ -107,8 +108,6 @@
                     </span>
 
                 </a>
-
-                <!-- PET CARE -->
 
                 <a
                     href="pages/pet-care.html"
@@ -125,8 +124,6 @@
 
                 </a>
 
-                <!-- HEALTH -->
-
                 <a
                     href="pages/pet-care.html#health-timeline"
                     class="dropdown-link">
@@ -142,8 +139,6 @@
 
                 </a>
 
-                <!-- PET PASSPORT -->
-
                 <a
                     href="pages/pet-passport.html"
                     class="dropdown-link">
@@ -158,8 +153,6 @@
                     </span>
 
                 </a>
-
-                <!-- ADOPTION STATUS -->
 
                 <a
                     href="pages/adoption-status.html"
@@ -269,8 +262,6 @@
 
                 </div>
 
-                <!-- FUNDRAISERS -->
-
                 <a
                     href="pages/start-fundraiser.html"
                     class="dropdown-link">
@@ -286,8 +277,6 @@
 
                 </a>
 
-                <!-- DONATE -->
-
                 <a
                     href="pages/donation.html"
                     class="dropdown-link">
@@ -302,8 +291,6 @@
                     </span>
 
                 </a>
-
-                <!-- SHOP -->
 
                 <a
                     href="pages/shop.html"
@@ -321,8 +308,6 @@
                 </a>
 
                 <div class="dropdown-divider"></div>
-
-                <!-- HOW PAWPAL WORKS -->
 
                 <a
                     href="pages/how-it-works.html"
@@ -357,26 +342,64 @@
 
     </nav>
 
+
+    <!-- =====================================================
+         AUTH NAVIGATION
+    ====================================================== -->
+
     <div class="nav-right" id="authNav">
 
-    <a
-        href="pages/login.html"
-        class="login"
-        id="loginNavButton">
-        Log in
-    </a>
+        <!-- LOGGED OUT -->
 
-    <a
-        href="pages/register.html"
-        class="nav-button"
-        id="signupNavButton">
+        <a
+            href="pages/login.html"
+            class="login"
+            id="loginNavButton"
+            data-login-link>
 
-        Get Started
-        <span>→</span>
+            Log in
 
-    </a>
+        </a>
 
-</div>
+        <a
+            href="pages/register.html"
+            class="nav-button"
+            id="signupNavButton"
+            data-signup-link>
+
+            Get Started
+            <span>→</span>
+
+        </a>
+
+
+        <!-- LOGGED IN -->
+
+        <a
+            href="pages/dashboard-adopter.html"
+            class="nav-button"
+            id="dashboardNavButton"
+            data-dashboard-link
+            style="display: none;"
+            aria-hidden="true">
+
+            Dashboard
+            <span>→</span>
+
+        </a>
+
+        <button
+            type="button"
+            class="login"
+            id="logoutNavButton"
+            data-logout
+            style="display: none;">
+
+            Logout
+
+        </button>
+
+    </div>
 
 </header>
 
@@ -422,7 +445,8 @@
 
                 <a
                     href="pages/register.html"
-                    class="secondary-button">
+                    class="secondary-button"
+                    data-home-register>
 
                     Join PawPal
 
@@ -523,8 +547,7 @@
 
             <div class="feature-menu-grid">
 
-                <a
-                    href="pages/pets.html"
+                <a href="pages/pets.html"
                     class="feature-menu-card feature-card-coral">
 
                     <div class="feature-menu-icon">🐾</div>
@@ -542,8 +565,7 @@
 
                 </a>
 
-                <a
-                    href="pages/pets.html"
+                <a href="pages/pets.html"
                     class="feature-menu-card feature-card-pink">
 
                     <div class="feature-menu-icon">💕</div>
@@ -561,8 +583,7 @@
 
                 </a>
 
-                <a
-                    href="pages/pet-care.html#health-timeline"
+                <a href="pages/pet-care.html#health-timeline"
                     class="feature-menu-card feature-card-sage">
 
                     <div class="feature-menu-icon">🩺</div>
@@ -580,8 +601,7 @@
 
                 </a>
 
-                <a
-                    href="pages/pet-passport.html"
+                <a href="pages/pet-passport.html"
                     class="feature-menu-card feature-card-lavender">
 
                     <div class="feature-menu-icon">📘</div>
@@ -599,8 +619,7 @@
 
                 </a>
 
-                <a
-                    href="pages/adoption-status.html"
+                <a href="pages/adoption-status.html"
                     class="feature-menu-card feature-card-yellow">
 
                     <div class="feature-menu-icon">📋</div>
@@ -618,8 +637,7 @@
 
                 </a>
 
-                <a
-                    href="pages/rescue-adoption.html"
+                <a href="pages/rescue-adoption.html"
                     class="feature-menu-card feature-card-peach">
 
                     <div class="feature-menu-icon">🚑</div>
@@ -637,8 +655,7 @@
 
                 </a>
 
-                <a
-                    href="pages/start-fundraiser.html"
+                <a href="pages/start-fundraiser.html"
                     class="feature-menu-card feature-card-green">
 
                     <div class="feature-menu-icon">💰</div>
@@ -656,8 +673,7 @@
 
                 </a>
 
-                <a
-                    href="pages/pet-care.html"
+                <a href="pages/pet-care.html"
                     class="feature-menu-card feature-card-cream">
 
                     <div class="feature-menu-icon">🐶</div>
@@ -675,8 +691,7 @@
 
                 </a>
 
-                <a
-                    href="pages/donation.html"
+                <a href="pages/donation.html"
                     class="feature-menu-card feature-card-pink">
 
                     <div class="feature-menu-icon">❤️</div>
@@ -741,7 +756,6 @@
             <article class="step-card">
 
                 <div class="step-number">01</div>
-
                 <div class="step-icon">🔎</div>
 
                 <h3>Discover</h3>
@@ -751,9 +765,7 @@
                     personality and more.
                 </p>
 
-                <a
-                    href="pages/pets.html"
-                    class="step-link">
+                <a href="pages/pets.html" class="step-link">
                     Browse pets →
                 </a>
 
@@ -762,7 +774,6 @@
             <article class="step-card">
 
                 <div class="step-number">02</div>
-
                 <div class="step-icon">💌</div>
 
                 <h3>Connect</h3>
@@ -772,9 +783,7 @@
                     connect with their owners or shelters.
                 </p>
 
-                <a
-                    href="pages/pets.html"
-                    class="step-link">
+                <a href="pages/pets.html" class="step-link">
                     Meet pets →
                 </a>
 
@@ -783,7 +792,6 @@
             <article class="step-card">
 
                 <div class="step-number">03</div>
-
                 <div class="step-icon">🏡</div>
 
                 <h3>Adopt</h3>
@@ -793,9 +801,7 @@
                     welcome your new best friend home.
                 </p>
 
-                <a
-                    href="pages/adoption-status.html"
-                    class="step-link">
+                <a href="pages/adoption-status.html" class="step-link">
                     Track adoption →
                 </a>
 
@@ -830,10 +836,7 @@
 
         <div class="home-pets-grid">
 
-            <article
-                class="home-pet-card"
-                data-pet="milo"
-                tabindex="0">
+            <article class="home-pet-card" data-pet="milo" tabindex="0">
 
                 <div class="home-pet-image">
 
@@ -850,7 +853,9 @@
                         type="button"
                         data-pet="milo"
                         aria-label="Add Milo to favourites">
+
                         ♡
+
                     </button>
 
                 </div>
@@ -867,9 +872,7 @@
                         📍 Kollam
                     </div>
 
-                    <a
-                        href="pages/pets.html"
-                        class="pet-view-link">
+                    <a href="pages/pets.html" class="pet-view-link">
                         View Milo →
                     </a>
 
@@ -878,10 +881,7 @@
             </article>
 
 
-            <article
-                class="home-pet-card"
-                data-pet="luna"
-                tabindex="0">
+            <article class="home-pet-card" data-pet="luna" tabindex="0">
 
                 <div class="home-pet-image">
 
@@ -898,7 +898,9 @@
                         type="button"
                         data-pet="luna"
                         aria-label="Add Luna to favourites">
+
                         ♡
+
                     </button>
 
                 </div>
@@ -915,9 +917,7 @@
                         📍 Kochi
                     </div>
 
-                    <a
-                        href="pages/pets.html"
-                        class="pet-view-link">
+                    <a href="pages/pets.html" class="pet-view-link">
                         View Luna →
                     </a>
 
@@ -926,10 +926,7 @@
             </article>
 
 
-            <article
-                class="home-pet-card"
-                data-pet="bruno"
-                tabindex="0">
+            <article class="home-pet-card" data-pet="bruno" tabindex="0">
 
                 <div class="home-pet-image">
 
@@ -946,7 +943,9 @@
                         type="button"
                         data-pet="bruno"
                         aria-label="Add Bruno to favourites">
+
                         ♡
+
                     </button>
 
                 </div>
@@ -963,9 +962,7 @@
                         📍 Trivandrum
                     </div>
 
-                    <a
-                        href="pages/pets.html"
-                        class="pet-view-link">
+                    <a href="pages/pets.html" class="pet-view-link">
                         View Bruno →
                     </a>
 
@@ -977,13 +974,9 @@
 
         <div class="centered section-action">
 
-            <a
-                href="pages/pets.html"
-                class="secondary-button">
-
+            <a href="pages/pets.html" class="secondary-button">
                 View all pets
                 <span>→</span>
-
             </a>
 
         </div>
@@ -1709,7 +1702,8 @@
 
                 <a
                     href="pages/register.html"
-                    class="secondary-button">
+                    class="secondary-button"
+                    data-home-register>
 
                     Create Account
 
@@ -1821,16 +1815,28 @@
 
                 <h4>PawPal</h4>
 
-                <a href="pages/about.html">
+                <a
+                    href="pages/about.html">
                     About Us
                 </a>
 
-                <a href="pages/login.html">
+                <a
+                    href="pages/login.html"
+                    data-login-link>
                     Log in
                 </a>
 
-                <a href="pages/register.html">
+                <a
+                    href="pages/register.html"
+                    data-signup-link>
                     Get Started
+                </a>
+
+                <a
+                    href="pages/dashboard-adopter.html"
+                    data-dashboard-link
+                    style="display:none;">
+                    Dashboard
                 </a>
 
             </div>
@@ -1898,7 +1904,6 @@
 
     </div>
 
-
     <div
         id="pawpal-assistant-messages"
         class="pawpal-assistant-messages">
@@ -1916,7 +1921,6 @@
         </div>
 
     </div>
-
 
     <div class="pawpal-assistant-controls">
 
@@ -1946,7 +1950,18 @@
 
 
 <!-- =====================================================
-     SCRIPTS
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase-config.js"></script>
+
+<script src="js/auth.js"></script>
+
+
+<!-- =====================================================
+     HOME PAGE JAVASCRIPT
 ===================================================== -->
 
 <script>
@@ -1954,42 +1969,480 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
+       AUTHENTICATION / DASHBOARD NAVIGATION
+    ===================================================== */
+
+    const loginButton =
+        document.getElementById("loginNavButton");
+
+    const signupButton =
+        document.getElementById("signupNavButton");
+
+    const dashboardButton =
+        document.getElementById("dashboardNavButton");
+
+    const logoutButton =
+        document.getElementById("logoutNavButton");
+
+    const homeRegisterButtons =
+        document.querySelectorAll(
+            "[data-home-register]"
+        );
+
+
+    function getDashboardForRole(role) {
+
+        role =
+            String(role || "adopter")
+                .trim()
+                .toLowerCase();
+
+
+        /*
+         * ADMIN
+         */
+        if (
+            role === "admin" ||
+            role === "administrator"
+        ) {
+
+            return "pages/dashboard-admin.html";
+
+        }
+
+
+        /*
+         * OWNER
+         */
+        if (
+            role === "owner" ||
+            role === "pet_owner"
+        ) {
+
+            return "pages/dashboard-owner.html";
+
+        }
+
+
+        /*
+         * SHELTER
+         *
+         * PawPal currently has no shelter dashboard.
+         * Therefore shelter users use adopter dashboard.
+         */
+        if (role === "shelter") {
+
+            return "pages/dashboard-adopter.html";
+
+        }
+
+
+        /*
+         * ADOPTER
+         */
+        return "pages/dashboard-adopter.html";
+
+    }
+
+
+    function setupHomeAuthentication() {
+
+        let user = null;
+
+
+        /*
+         * Get the currently logged-in PawPal user.
+         */
+        if (
+            window.PawPalAuth &&
+            typeof window.PawPalAuth.getCurrentUser ===
+                "function"
+        ) {
+
+            user =
+                window.PawPalAuth.getCurrentUser();
+
+        }
+
+
+        console.log(
+            "PawPal home authentication:",
+            user
+        );
+
+
+        /* =================================================
+           LOGGED IN
+        ================================================= */
+
+        if (user) {
+
+            /*
+             * Hide Login.
+             */
+            if (loginButton) {
+
+                loginButton.style.display =
+                    "none";
+
+            }
+
+
+            /*
+             * Hide Get Started.
+             */
+            if (signupButton) {
+
+                signupButton.style.display =
+                    "none";
+
+            }
+
+
+            /*
+             * Dashboard
+             */
+            if (dashboardButton) {
+
+                const dashboardPath =
+                    getDashboardForRole(
+                        user.role
+                    );
+
+
+                console.log(
+                    "PawPal role:",
+                    user.role
+                );
+
+                console.log(
+                    "PawPal dashboard path:",
+                    dashboardPath
+                );
+
+
+                /*
+                 * Set the ACTUAL dashboard URL.
+                 */
+                dashboardButton.href =
+                    dashboardPath;
+
+
+                /*
+                 * Make dashboard visible.
+                 */
+                dashboardButton.style.display =
+                    "inline-flex";
+
+
+                dashboardButton.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+            }
+
+
+            /*
+             * Logout button.
+             */
+            if (logoutButton) {
+
+                logoutButton.style.display =
+                    "inline-flex";
+
+            }
+
+
+            /*
+             * Hide homepage Join PawPal /
+             * Create Account buttons.
+             */
+            homeRegisterButtons.forEach(
+                function (button) {
+
+                    button.style.display =
+                        "none";
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           LOGGED OUT
+        ================================================= */
+
+        else {
+
+            /*
+             * Show Login.
+             */
+            if (loginButton) {
+
+                loginButton.style.display =
+                    "";
+
+            }
+
+
+            /*
+             * Show Get Started.
+             */
+            if (signupButton) {
+
+                signupButton.style.display =
+                    "";
+
+            }
+
+
+            /*
+             * Hide Dashboard.
+             */
+            if (dashboardButton) {
+
+                dashboardButton.style.display =
+                    "none";
+
+                dashboardButton.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                dashboardButton.href =
+                    "pages/dashboard-adopter.html";
+
+            }
+
+
+            /*
+             * Hide Logout.
+             */
+            if (logoutButton) {
+
+                logoutButton.style.display =
+                    "none";
+
+            }
+
+
+            /*
+             * Show homepage registration buttons.
+             */
+            homeRegisterButtons.forEach(
+                function (button) {
+
+                    button.style.display =
+                        "";
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Run authentication setup.
+     */
+    setupHomeAuthentication();
+
+
+    /*
+     * Run again shortly after page load.
+     *
+     * This gives auth.js time to finish
+     * initializing in case the page loads
+     * very quickly.
+     */
+    setTimeout(
+        setupHomeAuthentication,
+        300
+    );
+
+
+    /* =====================================================
+       DASHBOARD CLICK SAFETY
+    ===================================================== */
+
+    if (dashboardButton) {
+
+        dashboardButton.addEventListener(
+            "click",
+            function (event) {
+
+                const user =
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.getCurrentUser ===
+                        "function"
+                        ? window.PawPalAuth.getCurrentUser()
+                        : null;
+
+
+                /*
+                 * If no user exists, send them
+                 * to login instead.
+                 */
+                if (!user) {
+
+                    event.preventDefault();
+
+                    window.location.href =
+                        "pages/login.html";
+
+                    return;
+
+                }
+
+
+                /*
+                 * Always calculate the dashboard
+                 * again from the current role.
+                 */
+                const dashboardPath =
+                    getDashboardForRole(
+                        user.role
+                    );
+
+
+                event.preventDefault();
+
+                console.log(
+                    "Opening dashboard:",
+                    dashboardPath
+                );
+
+
+                window.location.href =
+                    dashboardPath;
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const confirmed =
+                    confirm(
+                        "Are you sure you want to log out?"
+                    );
+
+
+                if (!confirmed) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Use PawPalAuth logout.
+                 */
+                if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.logoutUser ===
+                        "function"
+                ) {
+
+                    await window.PawPalAuth.logoutUser();
+
+                }
+
+                else if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.logout ===
+                        "function"
+                ) {
+
+                    await window.PawPalAuth.logout();
+
+                }
+
+                else {
+
+                    localStorage.removeItem(
+                        "pawpal-current-user"
+                    );
+
+                    window.location.href =
+                        "pages/login.html";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
        MOBILE MENU
     ===================================================== */
 
     const menuButton =
-        document.getElementById("mobileMenuButton");
+        document.getElementById(
+            "mobileMenuButton"
+        );
 
     const navigation =
-        document.getElementById("mainNavigation");
+        document.getElementById(
+            "mainNavigation"
+        );
 
 
     if (menuButton && navigation) {
 
-        menuButton.addEventListener("click", function (event) {
+        menuButton.addEventListener(
+            "click",
+            function (event) {
 
-            event.preventDefault();
-            event.stopPropagation();
+                event.preventDefault();
+                event.stopPropagation();
 
-            const isOpen =
-                navigation.classList.toggle("mobile-open");
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                String(isOpen)
-            );
+                const isOpen =
+                    navigation.classList.toggle(
+                        "mobile-open"
+                    );
 
-            menuButton.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Close navigation menu"
-                    : "Open navigation menu"
-            );
 
-            menuButton.textContent =
-                isOpen ? "✕" : "☰";
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
 
-        });
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    isOpen
+                        ? "Close navigation menu"
+                        : "Open navigation menu"
+                );
+
+
+                menuButton.textContent =
+                    isOpen
+                        ? "✕"
+                        : "☰";
+
+            }
+        );
 
     }
 
@@ -1999,17 +2452,24 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const featuresDropdown =
-        document.getElementById("featuresDropdown");
+        document.getElementById(
+            "featuresDropdown"
+        );
 
     const featuresButton =
-        document.getElementById("featuresButton");
+        document.getElementById(
+            "featuresButton"
+        );
 
     const featuresMenu =
-        document.getElementById("featuresMenu");
-
+        document.getElementById(
+            "featuresMenu"
+        );
 
     const rescueDropdown =
-        document.getElementById("rescueDropdown");
+        document.getElementById(
+            "rescueDropdown"
+        );
 
     const rescueButton =
         document.getElementById(
@@ -2031,6 +2491,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         }
+
 
         if (rescueButton) {
 
@@ -2054,6 +2515,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
         if (featuresButton) {
 
             featuresButton.setAttribute(
@@ -2063,12 +2525,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
         closeRescueDropdown();
 
     }
 
 
-    if (featuresButton && featuresDropdown) {
+    if (
+        featuresButton &&
+        featuresDropdown
+    ) {
 
         featuresButton.addEventListener(
             "click",
@@ -2077,18 +2543,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
                 event.stopPropagation();
 
+
                 const isOpen =
                     featuresDropdown.classList.toggle(
                         "dropdown-open"
                     );
+
 
                 featuresButton.setAttribute(
                     "aria-expanded",
                     String(isOpen)
                 );
 
+
                 if (!isOpen) {
+
                     closeRescueDropdown();
+
                 }
 
             }
@@ -2112,10 +2583,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       RESCUE NESTED DROPDOWN
+       RESCUE DROPDOWN
     ===================================================== */
 
-    if (rescueDropdown && rescueButton) {
+    if (
+        rescueDropdown &&
+        rescueButton
+    ) {
 
         rescueButton.addEventListener(
             "click",
@@ -2123,6 +2597,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
                 event.stopPropagation();
+
 
                 const isAlreadyOpen =
                     rescueDropdown.classList.contains(
@@ -2143,6 +2618,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 rescueDropdown.classList.add(
                     "nested-open"
                 );
+
 
                 rescueButton.setAttribute(
                     "aria-expanded",
@@ -2179,7 +2655,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (
                 featuresDropdown &&
-                !featuresDropdown.contains(event.target)
+                !featuresDropdown.contains(
+                    event.target
+                )
             ) {
 
                 closeFeaturesDropdown();
@@ -2198,8 +2676,12 @@ document.addEventListener("DOMContentLoaded", function () {
         "keydown",
         function (event) {
 
-            if (event.key !== "Escape") {
+            if (
+                event.key !== "Escape"
+            ) {
+
                 return;
+
             }
 
 
@@ -2222,12 +2704,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     "false"
                 );
 
+
                 menuButton.setAttribute(
                     "aria-label",
                     "Open navigation menu"
                 );
 
-                menuButton.textContent = "☰";
+
+                menuButton.textContent =
+                    "☰";
 
             }
 
@@ -2243,45 +2728,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         navigation
             .querySelectorAll("a")
-            .forEach(function (link) {
+            .forEach(
+                function (link) {
 
-                link.addEventListener(
-                    "click",
-                    function () {
+                    link.addEventListener(
+                        "click",
+                        function () {
 
-                        if (
-                            window.innerWidth <= 900
-                        ) {
+                            if (
+                                window.innerWidth <= 900
+                            ) {
 
-                            navigation.classList.remove(
-                                "mobile-open"
-                            );
-
-                            if (menuButton) {
-
-                                menuButton.setAttribute(
-                                    "aria-expanded",
-                                    "false"
+                                navigation.classList.remove(
+                                    "mobile-open"
                                 );
 
-                                menuButton.setAttribute(
-                                    "aria-label",
-                                    "Open navigation menu"
-                                );
 
-                                menuButton.textContent =
-                                    "☰";
+                                if (menuButton) {
+
+                                    menuButton.setAttribute(
+                                        "aria-expanded",
+                                        "false"
+                                    );
+
+
+                                    menuButton.setAttribute(
+                                        "aria-label",
+                                        "Open navigation menu"
+                                    );
+
+
+                                    menuButton.textContent =
+                                        "☰";
+
+                                }
+
+
+                                closeFeaturesDropdown();
 
                             }
 
-                            closeFeaturesDropdown();
-
                         }
+                    );
 
-                    }
-                );
-
-            });
+                }
+            );
 
     }
 
@@ -2312,14 +2803,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (
-                favourites.includes(petName)
+                favourites.includes(
+                    petName
+                )
             ) {
 
                 button.classList.add(
                     "favourite-active"
                 );
 
-                button.textContent = "♥";
+
+                button.textContent =
+                    "♥";
 
             }
 
@@ -2333,38 +2828,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     if (
-                        favourites.includes(petName)
+                        favourites.includes(
+                            petName
+                        )
                     ) {
 
                         favourites =
                             favourites.filter(
                                 function (pet) {
-                                    return pet !== petName;
+
+                                    return pet !==
+                                        petName;
+
                                 }
                             );
+
 
                         button.classList.remove(
                             "favourite-active"
                         );
 
-                        button.textContent = "♡";
 
-                    } else {
+                        button.textContent =
+                            "♡";
 
-                        favourites.push(petName);
+                    }
+
+                    else {
+
+                        favourites.push(
+                            petName
+                        );
+
 
                         button.classList.add(
                             "favourite-active"
                         );
 
-                        button.textContent = "♥";
+
+                        button.textContent =
+                            "♥";
 
                     }
 
 
                     localStorage.setItem(
                         "pawpal-favourites",
-                        JSON.stringify(favourites)
+                        JSON.stringify(
+                            favourites
+                        )
                     );
 
                 }
@@ -2396,14 +2908,18 @@ document.addEventListener("DOMContentLoaded", function () {
                             ".heart-button"
                         )
                     ) {
+
                         return;
+
                     }
 
 
                     if (
                         event.target.closest("a")
                     ) {
+
                         return;
+
                     }
 
 
@@ -2424,6 +2940,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ) {
 
                         event.preventDefault();
+
 
                         window.location.href =
                             "pages/pets.html";
@@ -2458,10 +2975,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script>
+
+<!-- =====================================================
+     OTHER PAWPAL SCRIPTS
+===================================================== -->
+
 <script src="js/profile.js"></script>
 <script src="js/assistant.js"></script>
 <script src="js/navbar.js"></script>
+
 </body>
 </html>

@@ -1,7 +1,8 @@
+```javascript
 document.addEventListener("DOMContentLoaded", function () {
     /* =====================================================
        PAWPAL ADOPTER DASHBOARD
-       FRONTEND ONLY
+       FRONTEND + AUTH INTEGRATION
     ====================================================== */
 
     const currentUser =
@@ -9,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
         typeof window.PawPalAuth.getCurrentUser === "function"
             ? window.PawPalAuth.getCurrentUser()
             : null;
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
 
     const sidebar =
         document.querySelector(".dashboard-sidebar");
@@ -36,22 +41,35 @@ document.addEventListener("DOMContentLoaded", function () {
     ====================================================== */
 
     function openSidebar() {
-        if (sidebar) sidebar.classList.add("open");
-        if (sidebarOverlay) sidebarOverlay.classList.add("show");
+        if (sidebar) {
+            sidebar.classList.add("open");
+        }
+
+        if (sidebarOverlay) {
+            sidebarOverlay.classList.add("show");
+        }
 
         document.body.classList.add("sidebar-open");
     }
 
     function closeSidebar() {
-        if (sidebar) sidebar.classList.remove("open");
-        if (sidebarOverlay) sidebarOverlay.classList.remove("show");
+        if (sidebar) {
+            sidebar.classList.remove("open");
+        }
+
+        if (sidebarOverlay) {
+            sidebarOverlay.classList.remove("show");
+        }
 
         document.body.classList.remove("sidebar-open");
     }
 
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener("click", function () {
-            if (sidebar && sidebar.classList.contains("open")) {
+            if (
+                sidebar &&
+                sidebar.classList.contains("open")
+            ) {
                 closeSidebar();
             } else {
                 openSidebar();
@@ -60,7 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (sidebarOverlay) {
-        sidebarOverlay.addEventListener("click", closeSidebar);
+        sidebarOverlay.addEventListener(
+            "click",
+            closeSidebar
+        );
     }
 
     /* =====================================================
@@ -69,11 +90,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showToast(message, type = "success") {
         if (!toast) {
-            alert(message);
+            console.log(message);
             return;
         }
 
         toast.textContent = message;
+
         toast.className =
             "dashboard-toast show " + type;
 
@@ -90,10 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ====================================================== */
 
     function showSection(sectionId, title) {
-        sections.forEach(function (section) {
-            section.style.display = "none";
-        });
-
         const target =
             document.getElementById(sectionId);
 
@@ -105,6 +123,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        sections.forEach(function (section) {
+            section.style.display = "none";
+        });
+
         target.style.display = "block";
 
         if (topbarTitle && title) {
@@ -114,16 +136,24 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebarLinks.forEach(function (link) {
             link.classList.remove("active");
 
-            if (link.dataset.section === sectionId) {
+            if (
+                link.dataset.section === sectionId
+            ) {
                 link.classList.add("active");
             }
         });
 
         closeSidebar();
 
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+        window.history.replaceState(
+            null,
+            "",
+            "#" + sectionId
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
     }
 
@@ -136,6 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const section =
                 link.dataset.section;
 
+            /*
+             * Links without data-section are normal
+             * navigation links such as Back to PawPal.
+             */
             if (!section) {
                 return;
             }
@@ -173,16 +207,40 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (!document.getElementById(hash)) {
+        const target =
+            document.getElementById(hash);
+
+        if (!target) {
             return;
         }
 
-        const title =
-            hash
-                .replace(/-/g, " ")
-                .replace(/\b\w/g, function (letter) {
-                    return letter.toUpperCase();
-                });
+        const matchingLink =
+            document.querySelector(
+                '.sidebar-link[data-section="' +
+                hash +
+                '"]'
+            );
+
+        let title = "Dashboard";
+
+        if (matchingLink) {
+            const titleElement =
+                matchingLink.querySelector(
+                    ".sidebar-link-text"
+                );
+
+            if (titleElement) {
+                title =
+                    titleElement.textContent.trim();
+            }
+        } else {
+            title =
+                hash
+                    .replace(/-/g, " ")
+                    .replace(/\b\w/g, function (letter) {
+                        return letter.toUpperCase();
+                    });
+        }
 
         showSection(
             hash,
@@ -203,54 +261,64 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
     petSearchInputs.forEach(function (input) {
-        input.addEventListener("input", function () {
-            const searchTerm =
-                input.value
-                    .trim()
-                    .toLowerCase();
+        input.addEventListener(
+            "input",
+            function () {
+                const searchTerm =
+                    input.value
+                        .trim()
+                        .toLowerCase();
 
-            const section =
-                input.closest(
-                    ".dashboard-section"
-                );
+                const section =
+                    input.closest(
+                        ".dashboard-section"
+                    );
 
-            if (!section) {
-                return;
-            }
-
-            const cards =
-                section.querySelectorAll(
-                    ".pet-card"
-                );
-
-            let visibleCount = 0;
-
-            cards.forEach(function (card) {
-                const text =
-                    card.textContent.toLowerCase();
-
-                const matches =
-                    !searchTerm ||
-                    text.includes(searchTerm);
-
-                card.style.display =
-                    matches ? "" : "none";
-
-                if (matches) {
-                    visibleCount++;
+                if (!section) {
+                    return;
                 }
-            });
 
-            if (
-                searchTerm &&
-                visibleCount === 0
-            ) {
-                showToast(
-                    "No pets matched your search.",
-                    "info"
-                );
+                const cards =
+                    section.querySelectorAll(
+                        ".pet-card"
+                    );
+
+                let visibleCount = 0;
+
+                cards.forEach(function (card) {
+                    const text =
+                        card.textContent
+                            .toLowerCase();
+
+                    const matches =
+                        !searchTerm ||
+                        text.includes(searchTerm);
+
+                    card.style.display =
+                        matches
+                            ? ""
+                            : "none";
+
+                    if (matches) {
+                        visibleCount++;
+                    }
+                });
+
+                /*
+                 * Only show the message when the user
+                 * actually searched and nothing matched.
+                 */
+                if (
+                    searchTerm &&
+                    visibleCount === 0
+                ) {
+                    showToast(
+                        "No pets matched your search.",
+                        "info"
+                    );
+                }
             }
-        });
+        );
     });
 
     /* =====================================================
@@ -279,24 +347,84 @@ document.addEventListener("DOMContentLoaded", function () {
 
         card.style.cursor = "pointer";
 
-        card.addEventListener("click", function (event) {
-            if (
-                event.target.closest(
-                    ".pet-favourite"
-                )
-            ) {
-                return;
-            }
+        card.addEventListener(
+            "click",
+            function (event) {
+                /*
+                 * Don't navigate when clicking
+                 * favourite or another interactive element.
+                 */
+                if (
+                    event.target.closest(
+                        ".pet-favourite, button, a, input"
+                    )
+                ) {
+                    return;
+                }
 
-            window.location.href =
-                "pet-details.html?pet=" +
-                encodeURIComponent(petId);
-        });
+                window.location.href =
+                    "pet-details.html?pet=" +
+                    encodeURIComponent(
+                        petId
+                    );
+            }
+        );
     });
 
     /* =====================================================
        FAVOURITES
     ====================================================== */
+
+    function getPetId(card) {
+        return (
+            card.dataset.details ||
+            card.dataset.pet ||
+            card.dataset.name ||
+            "pet"
+        );
+    }
+
+    function getFavouriteKey(petId) {
+        return (
+            "pawpal-favorite-" +
+            String(petId)
+                .toLowerCase()
+                .trim()
+        );
+    }
+
+    function updateFavouriteButton(button) {
+        const card =
+            button.closest(".pet-card");
+
+        if (!card) {
+            return;
+        }
+
+        const petId =
+            getPetId(card);
+
+        const storageKey =
+            getFavouriteKey(petId);
+
+        const saved =
+            localStorage.getItem(
+                storageKey
+            ) === "true";
+
+        button.classList.toggle(
+            "active",
+            saved
+        );
+
+        button.textContent =
+            saved ? "♥" : "♡";
+
+        button.setAttribute(
+            "aria-pressed",
+            String(saved)
+        );
+    }
 
     document.querySelectorAll(
         ".pet-favourite"
@@ -308,49 +436,47 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const petId =
-            card.dataset.details ||
-            card.dataset.pet ||
-            card.dataset.name ||
-            "pet";
+        updateFavouriteButton(button);
 
-        const storageKey =
-            "pawpal-favorite-" +
-            String(petId).toLowerCase();
+        button.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-        const saved =
-            localStorage.getItem(storageKey) === "true";
+                const petId =
+                    getPetId(card);
 
-        if (saved) {
-            button.classList.add("active");
-            button.textContent = "♥";
-        } else {
-            button.classList.remove("active");
-            button.textContent = "♡";
-        }
+                const storageKey =
+                    getFavouriteKey(petId);
 
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
+                const currentlySaved =
+                    localStorage.getItem(
+                        storageKey
+                    ) === "true";
 
-            const isFavorite =
-                button.classList.toggle("active");
+                const newState =
+                    !currentlySaved;
 
-            button.textContent =
-                isFavorite ? "♥" : "♡";
+                localStorage.setItem(
+                    storageKey,
+                    String(newState)
+                );
 
-            localStorage.setItem(
-                storageKey,
-                String(isFavorite)
-            );
+                updateFavouriteButton(
+                    button
+                );
 
-            showToast(
-                isFavorite
-                    ? "Pet saved to your favourites 💗"
-                    : "Pet removed from your favourites.",
-                "success"
-            );
-        });
+                showToast(
+                    newState
+                        ? "Pet saved to your favourites 💗"
+                        : "Pet removed from your favourites.",
+                    "success"
+                );
+
+                updateSavedPets();
+            }
+        );
     });
 
     /* =====================================================
@@ -362,17 +488,15 @@ document.addEventListener("DOMContentLoaded", function () {
             "#saved-pets .pet-card"
         ).forEach(function (card) {
             const petId =
-                card.dataset.details ||
-                card.dataset.pet ||
-                card.dataset.name ||
-                "";
+                getPetId(card);
 
             const storageKey =
-                "pawpal-favorite-" +
-                String(petId).toLowerCase();
+                getFavouriteKey(petId);
 
             const isSaved =
-                localStorage.getItem(storageKey) === "true";
+                localStorage.getItem(
+                    storageKey
+                ) === "true";
 
             card.classList.toggle(
                 "saved",
@@ -390,21 +514,27 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         "[data-adopt-pet]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+        button.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-            const pet =
-                button.dataset.adoptPet;
+                const pet =
+                    button.dataset.adoptPet;
 
-            if (pet) {
-                window.location.href =
-                    "adoption-form.html?pet=" +
-                    encodeURIComponent(pet);
-            } else {
-                window.location.href =
-                    "adoption-form.html";
+                if (pet) {
+                    window.location.href =
+                        "adoption-form.html?pet=" +
+                        encodeURIComponent(
+                            pet
+                        );
+                } else {
+                    window.location.href =
+                        "adoption-form.html";
+                }
             }
-        });
+        );
     });
 
     /* =====================================================
@@ -414,55 +544,62 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         "[data-application-action]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+        button.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
 
-            const action =
-                button.dataset.applicationAction;
+                const action =
+                    button.dataset.applicationAction;
 
-            if (action === "view") {
-                window.location.href = "adoption-status.html";
-                return;
-            }
-
-            if (action !== "cancel") {
-                return;
-            }
-
-            const confirmed =
-                confirm(
-                    "Are you sure you want to cancel this adoption application?"
-                );
-
-            if (!confirmed) {
-                return;
-            }
-
-            const row =
-                button.closest(
-                    "tr, .application-item"
-                );
-
-            if (row) {
-                const status =
-                    row.querySelector(".status");
-
-                if (status) {
-                    status.textContent =
-                        "Cancelled";
-
-                    status.className =
-                        "status status-rejected";
+                if (action === "view") {
+                    window.location.href =
+                        "adoption-status.html";
+                    return;
                 }
 
-                button.style.display = "none";
-            }
+                if (action !== "cancel") {
+                    return;
+                }
 
-            showToast(
-                "Application cancelled.",
-                "success"
-            );
-        });
+                const confirmed =
+                    confirm(
+                        "Are you sure you want to cancel this adoption application?"
+                    );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                const row =
+                    button.closest(
+                        "tr, .application-item"
+                    );
+
+                if (row) {
+                    const status =
+                        row.querySelector(
+                            ".status"
+                        );
+
+                    if (status) {
+                        status.textContent =
+                            "Cancelled";
+
+                        status.className =
+                            "status status-rejected";
+                    }
+
+                    button.style.display =
+                        "none";
+                }
+
+                showToast(
+                    "Application cancelled.",
+                    "success"
+                );
+            }
+        );
     });
 
     /* =====================================================
@@ -472,31 +609,39 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         "[data-journey-action]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+        button.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
 
-            const action =
-                button.dataset.journeyAction;
+                const action =
+                    button.dataset.journeyAction;
 
-            if (action === "meet") {
-                showToast(
-                    "Meet & greet request sent! 🐾",
-                    "success"
-                );
+                if (action === "meet") {
+                    showToast(
+                        "Meet & greet request sent! 🐾",
+                        "success"
+                    );
 
-                button.textContent =
-                    "Request Sent";
+                    button.textContent =
+                        "Request Sent";
 
-                button.disabled = true;
+                    button.disabled =
+                        true;
+
+                    button.classList.add(
+                        "disabled"
+                    );
+                }
+
+                if (action === "continue") {
+                    showToast(
+                        "Your adoption journey continues! 💗",
+                        "success"
+                    );
+                }
             }
-
-            if (action === "continue") {
-                showToast(
-                    "Your adoption journey continues! 💗",
-                    "success"
-                );
-            }
-        });
+        );
     });
 
     /* =====================================================
@@ -504,27 +649,34 @@ document.addEventListener("DOMContentLoaded", function () {
     ====================================================== */
 
     const notificationButton =
-        document.querySelector(".topbar-icon-btn");
+        document.querySelector(
+            ".topbar-icon-btn"
+        );
 
     if (notificationButton) {
-        notificationButton.addEventListener("click", function () {
-            const notificationSection =
-                document.getElementById(
-                    "notifications"
-                );
+        notificationButton.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
 
-            if (notificationSection) {
-                showSection(
-                    "notifications",
-                    "Notifications"
-                );
-            } else {
-                showToast(
-                    "You have new PawPal notifications 🐾",
-                    "info"
-                );
+                const notificationSection =
+                    document.getElementById(
+                        "notifications"
+                    );
+
+                if (notificationSection) {
+                    showSection(
+                        "notifications",
+                        "Notifications"
+                    );
+                } else {
+                    showToast(
+                        "You have new PawPal notifications 🐾",
+                        "info"
+                    );
+                }
             }
-        });
+        );
     }
 
     /* =====================================================
@@ -534,9 +686,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         ".notification-item, .activity-item"
     ).forEach(function (item) {
-        item.addEventListener("click", function () {
-            item.classList.add("read");
-        });
+        item.addEventListener(
+            "click",
+            function () {
+                item.classList.add(
+                    "read"
+                );
+            }
+        );
     });
 
     /* =====================================================
@@ -546,32 +703,37 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         ".toggle input"
     ).forEach(function (toggle) {
-        toggle.addEventListener("change", function () {
-            const row =
-                toggle.closest(".setting-row");
+        toggle.addEventListener(
+            "change",
+            function () {
+                const row =
+                    toggle.closest(
+                        ".setting-row"
+                    );
 
-            const title =
-                row
-                    ? row.querySelector(
-                          "h4, h3, .setting-title"
-                      )
-                    : null;
+                const title =
+                    row
+                        ? row.querySelector(
+                              "h4, h3, .setting-title"
+                          )
+                        : null;
 
-            const settingName =
-                title
-                    ? title.textContent.trim()
-                    : "Setting";
+                const settingName =
+                    title
+                        ? title.textContent.trim()
+                        : "Setting";
 
-            showToast(
-                settingName +
-                    (
-                        toggle.checked
-                            ? " enabled."
-                            : " disabled."
-                    ),
-                "success"
-            );
-        });
+                showToast(
+                    settingName +
+                        (
+                            toggle.checked
+                                ? " enabled."
+                                : " disabled."
+                        ),
+                    "success"
+                );
+            }
+        );
     });
 
     /* =====================================================
@@ -579,43 +741,125 @@ document.addEventListener("DOMContentLoaded", function () {
     ====================================================== */
 
     const profileForm =
-        document.getElementById("profileForm");
+        document.getElementById(
+            "profileForm"
+        );
 
     if (profileForm) {
+        const nameInput =
+            profileForm.querySelector(
+                '[name="name"]'
+            );
+
+        /*
+         * Load current user information
+         * into the profile form.
+         */
+        if (
+            nameInput &&
+            currentUser
+        ) {
+            nameInput.value =
+                currentUser.name || "";
+        }
+
         profileForm.addEventListener(
             "submit",
-            function (event) {
+            async function (event) {
                 event.preventDefault();
 
-                const nameInput =
-                    profileForm.querySelector(
-                        '[name="name"]'
-                    );
+                const newName =
+                    nameInput
+                        ? nameInput.value.trim()
+                        : "";
 
+                if (!newName) {
+                    showToast(
+                        "Please enter your name.",
+                        "error"
+                    );
+                    return;
+                }
+
+                /*
+                 * Update PawPal local auth information.
+                 */
                 if (
                     currentUser &&
-                    nameInput &&
-                    nameInput.value.trim()
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.saveCurrentUser ===
+                        "function"
                 ) {
                     currentUser.name =
-                        nameInput.value.trim();
+                        newName;
 
-                    if (
-                        window.PawPalAuth &&
-                        typeof window.PawPalAuth.saveCurrentUser === "function"
-                    ) {
-                        window.PawPalAuth.saveCurrentUser(
-                            currentUser
+                    window.PawPalAuth.saveCurrentUser(
+                        currentUser
+                    );
+                }
+
+                /*
+                 * Also update Supabase metadata
+                 * when Supabase is available.
+                 */
+                if (
+                    window.supabaseClient &&
+                    typeof window.supabaseClient.auth
+                        .updateUser ===
+                        "function"
+                ) {
+                    try {
+                        await window.supabaseClient.auth.updateUser(
+                            {
+                                data: {
+                                    full_name: newName,
+                                    first_name:
+                                        newName.split(" ")[0]
+                                }
+                            }
+                        );
+                    } catch (error) {
+                        console.warn(
+                            "Supabase profile update warning:",
+                            error
                         );
                     }
-
-                    document.querySelectorAll(
-                        "[data-user-name]"
-                    ).forEach(function (element) {
-                        element.textContent =
-                            currentUser.name;
-                    });
                 }
+
+                /*
+                 * Update visible name immediately.
+                 */
+                document.querySelectorAll(
+                    "[data-user-name]"
+                ).forEach(function (element) {
+                    element.textContent =
+                        newName;
+                });
+
+                document.querySelectorAll(
+                    "[data-profile-name]"
+                ).forEach(function (element) {
+                    element.value =
+                        newName;
+                });
+
+                /*
+                 * Update avatar initials.
+                 */
+                document.querySelectorAll(
+                    "[data-user-avatar]"
+                ).forEach(function (element) {
+                    if (
+                        window.PawPalAuth &&
+                        typeof window.PawPalAuth.getInitials ===
+                            "function"
+                    ) {
+                        element.textContent =
+                            window.PawPalAuth.getInitials(
+                                newName
+                            );
+                    }
+                });
 
                 showToast(
                     "Profile updated successfully.",
@@ -649,7 +893,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ).forEach(function (element) {
             element.textContent =
                 window.PawPalAuth &&
-                typeof window.PawPalAuth.formatRole === "function"
+                typeof window.PawPalAuth.formatRole ===
+                    "function"
                     ? window.PawPalAuth.formatRole(
                           currentUser.role
                       )
@@ -661,7 +906,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ).forEach(function (element) {
             element.textContent =
                 window.PawPalAuth &&
-                typeof window.PawPalAuth.getInitials === "function"
+                typeof window.PawPalAuth.getInitials ===
+                    "function"
                     ? window.PawPalAuth.getInitials(
                           currentUser.name || ""
                       )
@@ -676,73 +922,96 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         "[data-dashboard-action]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+        button.addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
 
-            const action =
-                button.dataset.dashboardAction;
+                const action =
+                    button.dataset.dashboardAction;
 
-            const actions = {
-                "explore-pets": [
-                    "explore-pets",
-                    "Explore Pets"
-                ],
-                "saved-pets": [
-                    "saved-pets",
-                    "Saved Pets"
-                ],
-                "applications": [
-                    "applications",
-                    "My Applications"
-                ],
-                "journey": [
-                    "adoption-journey",
-                    "Adoption Journey"
-                ],
-                "notifications": [
-                    "notifications",
-                    "Notifications"
-                ]
-            };
+                const actions = {
+                    "explore-pets": [
+                        "explore-pets",
+                        "Explore Pets"
+                    ],
 
-            if (actions[action]) {
-                showSection(
-                    actions[action][0],
-                    actions[action][1]
-                );
+                    "saved-pets": [
+                        "saved-pets",
+                        "Saved Pets"
+                    ],
+
+                    "applications": [
+                        "applications",
+                        "My Applications"
+                    ],
+
+                    "journey": [
+                        "adoption-journey",
+                        "Adoption Journey"
+                    ],
+
+                    "notifications": [
+                        "notifications",
+                        "Notifications"
+                    ]
+                };
+
+                if (actions[action]) {
+                    showSection(
+                        actions[action][0],
+                        actions[action][1]
+                    );
+                }
             }
-        });
+        );
     });
 
     /* =====================================================
        LOGOUT
+       IMPORTANT:
+       Use PawPalAuth.logoutUser()
+       instead of PawPalAuth.logout()
     ====================================================== */
 
     document.querySelectorAll(
         ".logout-btn, [data-logout]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+        button.addEventListener(
+            "click",
+            async function (event) {
+                event.preventDefault();
+                event.stopPropagation();
 
-            const confirmed =
-                confirm(
-                    "Are you sure you want to log out?"
+                const confirmed =
+                    confirm(
+                        "Are you sure you want to log out?"
+                    );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.logoutUser ===
+                        "function"
+                ) {
+                    await window.PawPalAuth.logoutUser();
+                    return;
+                }
+
+                /*
+                 * Emergency fallback.
+                 */
+                localStorage.removeItem(
+                    "pawpal-current-user"
                 );
 
-            if (!confirmed) {
-                return;
-            }
-
-            if (
-                window.PawPalAuth &&
-                typeof window.PawPalAuth.logout === "function"
-            ) {
-                window.PawPalAuth.logout();
-            } else {
                 window.location.href =
                     "login.html";
             }
-        });
+        );
     });
 
     /* =====================================================
@@ -752,22 +1021,63 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(
         ".back-to-pawpal, [data-back-home]"
     ).forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            const href =
-                button.getAttribute("href");
+        button.addEventListener(
+            "click",
+            function (event) {
+                const href =
+                    button.getAttribute(
+                        "href"
+                    );
 
-            if (href) {
-                return;
+                if (href) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                window.location.href =
+                    "../index.html";
             }
-
-            event.preventDefault();
-
-            window.location.href =
-                "../index.html";
-        });
+        );
     });
 
+    /* =====================================================
+       INITIAL DASHBOARD STATE
+    ====================================================== */
+
+    /*
+     * If there is no hash, show Explore Pets.
+     */
+    if (!window.location.hash) {
+        const exploreSection =
+            document.getElementById(
+                "explore-pets"
+            );
+
+        if (exploreSection) {
+            sections.forEach(function (section) {
+                section.style.display =
+                    "none";
+            });
+
+            exploreSection.style.display =
+                "block";
+        }
+
+        const exploreLink =
+            document.querySelector(
+                '.sidebar-link[data-section="explore-pets"]'
+            );
+
+        if (exploreLink) {
+            exploreLink.classList.add(
+                "active"
+            );
+        }
+    }
+
     console.log(
-        "PawPal Adopter Dashboard loaded successfully."
+        "🐾 PawPal Adopter Dashboard loaded successfully."
     );
 });
+```

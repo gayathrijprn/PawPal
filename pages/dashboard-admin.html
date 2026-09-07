@@ -3,17 +3,16 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+```
 <title>PawPal | Admin Dashboard</title>
 
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/nav-fixes.css">
 <link rel="stylesheet" href="../css/dashboard.css">
-
+```
 
 </head>
 
@@ -21,936 +20,752 @@
 
 <div class="dashboard-layout">
 
-
-<!-- =========================
+<!-- =====================================================
      SIDEBAR
-========================== -->
+===================================================== -->
 
 <aside class="dashboard-sidebar">
 
-    <div class="sidebar-brand">
+```
+<div class="sidebar-brand">
+    <a href="../index.html">
+        🐾 <span>PawPal</span>
+    </a>
+</div>
 
-        <a href="../index.html">
-            🐾 <span>PawPal</span>
-        </a>
+<nav class="sidebar-nav">
 
-    </div>
+    <a href="#overview"
+       class="sidebar-link active"
+       data-section="overview">
+        <span>📊</span>
+        <span class="sidebar-link-text">Overview</span>
+    </a>
 
+    <a href="#pets"
+       class="sidebar-link"
+       data-section="pets">
+        <span>🐾</span>
+        <span class="sidebar-link-text">Pets</span>
+    </a>
 
-    <nav class="sidebar-nav">
+    <a href="#applications"
+       class="sidebar-link"
+       data-section="applications">
+        <span>📋</span>
+        <span class="sidebar-link-text">Applications</span>
+    </a>
 
-        <a href="#overview"
-           class="sidebar-link active"
-           data-section="overview">
+    <a href="#users"
+       class="sidebar-link"
+       data-section="users">
+        <span>👥</span>
+        <span class="sidebar-link-text">Users</span>
+    </a>
 
-            <span>📊</span>
-            <span class="sidebar-link-text">Overview</span>
+    <a href="#reports"
+       class="sidebar-link"
+       data-section="reports">
+        <span>📈</span>
+        <span class="sidebar-link-text">Reports</span>
+    </a>
 
-        </a>
+    <a href="#notifications"
+       class="sidebar-link"
+       data-section="notifications">
+        <span>🔔</span>
+        <span class="sidebar-link-text">Notifications</span>
+    </a>
 
+    <a href="#settings"
+       class="sidebar-link"
+       data-section="settings">
+        <span>⚙️</span>
+        <span class="sidebar-link-text">Settings</span>
+    </a>
 
-        <a href="#pets"
-           class="sidebar-link"
-           data-section="pets">
+    <a href="#profile"
+       class="sidebar-link"
+       data-section="profile">
+        <span>👤</span>
+        <span class="sidebar-link-text">Profile</span>
+    </a>
 
-            <span>🐾</span>
-            <span class="sidebar-link-text">Pets</span>
+</nav>
 
-        </a>
+<div class="sidebar-bottom">
 
+    <a href="../index.html"
+       class="sidebar-link back-to-pawpal">
+        <span>←</span>
+        <span class="sidebar-link-text">Back to PawPal</span>
+    </a>
 
-        <a href="#applications"
-           class="sidebar-link"
-           data-section="applications">
+    <button
+        type="button"
+        class="sidebar-link logout-btn"
+        data-logout>
 
-            <span>📋</span>
-            <span class="sidebar-link-text">Applications</span>
+        <span>🚪</span>
+        <span class="sidebar-link-text">Logout</span>
 
-        </a>
+    </button>
 
-
-        <a href="#users"
-           class="sidebar-link"
-           data-section="users">
-
-            <span>👥</span>
-            <span class="sidebar-link-text">Users</span>
-
-        </a>
-
-
-        <a href="#reports"
-           class="sidebar-link"
-           data-section="reports">
-
-            <span>📈</span>
-            <span class="sidebar-link-text">Reports</span>
-
-        </a>
-
-
-        <a href="#notifications"
-           class="sidebar-link"
-           data-section="notifications">
-
-            <span>🔔</span>
-            <span class="sidebar-link-text">Notifications</span>
-
-        </a>
-
-
-        <a href="#settings"
-           class="sidebar-link"
-           data-section="settings">
-
-            <span>⚙️</span>
-            <span class="sidebar-link-text">Settings</span>
-
-        </a>
-
-
-        <a href="#profile"
-           class="sidebar-link"
-           data-section="profile">
-
-            <span>👤</span>
-            <span class="sidebar-link-text">Profile</span>
-
-        </a>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-        <a href="../index.html"
-           class="sidebar-link back-to-pawpal">
-
-            <span>←</span>
-            <span class="sidebar-link-text">Back to PawPal</span>
-
-        </a>
-
-
-        <a href="#"
-           class="sidebar-link logout-btn">
-
-            <span>🚪</span>
-            <span class="sidebar-link-text">Logout</span>
-
-        </a>
-
-    </div>
+</div>
+```
 
 </aside>
 
-
-<!-- =========================
+<!-- =====================================================
      MOBILE OVERLAY
-========================== -->
+===================================================== -->
 
 <div class="sidebar-overlay"></div>
 
-
-<!-- =========================
+<!-- =====================================================
      MAIN CONTENT
-========================== -->
+===================================================== -->
 
 <main class="dashboard-main">
 
+```
+<!-- TOPBAR -->
 
-    <!-- =========================
-         TOPBAR
-    ========================== -->
+<header class="dashboard-topbar">
 
-    <header class="dashboard-topbar">
+    <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Open menu">
+
+        ☰
+
+    </button>
+
+    <h1 class="topbar-title" id="dashboardPageTitle">
+        Overview
+    </h1>
+
+    <div class="topbar-actions">
 
         <button
-            class="mobile-menu-btn"
+            class="topbar-icon-btn"
             type="button"
-            aria-label="Open menu">
+            aria-label="Notifications"
+            data-section-target="notifications">
 
-            ☰
+            🔔
 
         </button>
 
+        <div class="topbar-user">
 
-        <h1 class="topbar-title">
-            Overview
-        </h1>
+            <div
+                class="user-avatar"
+                data-user-avatar>
+                AD
+            </div>
 
+            <div>
 
-        <div class="topbar-actions">
+                <strong data-user-name>
+                    Admin
+                </strong>
 
-            <button
-                class="topbar-icon-btn"
-                type="button"
-                aria-label="Notifications">
-
-                🔔
-
-            </button>
-
-
-            <div class="topbar-user">
-
-                <div
-                    class="user-avatar"
-                    data-user-avatar>
-
-                    AD
-
-                </div>
-
-
-                <div>
-
-                    <strong data-user-name>
-                        Admin
-                    </strong>
-
-                    <small data-user-role>
-                        Admin
-                    </small>
-
-                </div>
+                <small data-user-role>
+                    Admin
+                </small>
 
             </div>
 
         </div>
 
-    </header>
+    </div>
+
+</header>
 
 
-    <!-- =========================
-         DASHBOARD CONTENT
-    ========================== -->
+<!-- =================================================
+     DASHBOARD CONTENT
+================================================= -->
 
-    <div class="dashboard-content">
-
-
-        <!-- =========================
-             OVERVIEW
-        ========================== -->
-
-        <section
-            id="overview"
-            class="dashboard-section">
+<div class="dashboard-content">
 
 
-            <div class="dashboard-header">
+    <!-- OVERVIEW -->
 
-                <div>
+    <section
+        id="overview"
+        class="dashboard-section">
 
-                    <h2>
-                        Admin Dashboard
-                    </h2>
+        <div class="dashboard-header">
 
-                    <p>
-                        Welcome back,
-                        <span data-user-name>Admin</span>.
-                    </p>
+            <div>
 
-                </div>
+                <h2>
+                    Admin Dashboard
+                </h2>
+
+                <p>
+                    Welcome back,
+                    <span data-user-name>Admin</span>.
+                </p>
 
             </div>
 
-
-            <!-- STATISTICS -->
-
-            <div class="dashboard-stats">
-
-                <div class="stat-card">
-
-                    <span>🐾</span>
-
-                    <h3>
-                        Pets
-                    </h3>
-
-                    <strong>
-                        0
-                    </strong>
-
-                </div>
+        </div>
 
 
-                <div class="stat-card">
+        <div class="dashboard-stats">
 
-                    <span>👥</span>
-
-                    <h3>
-                        Users
-                    </h3>
-
-                    <strong>
-                        0
-                    </strong>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <span>📋</span>
-
-                    <h3>
-                        Applications
-                    </h3>
-
-                    <strong>
-                        0
-                    </strong>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <span>❤️</span>
-
-                    <h3>
-                        Adoptions
-                    </h3>
-
-                    <strong>
-                        0
-                    </strong>
-
-                </div>
-
+            <div class="stat-card">
+                <span>🐾</span>
+                <h3>Pets</h3>
+                <strong>0</strong>
             </div>
 
-
-            <!-- QUICK ACTIONS -->
-
-            <div class="dashboard-card">
-
-                <h3>
-                    Quick Actions
-                </h3>
-
-
-                <div class="dashboard-actions">
-
-                    <button
-                        type="button"
-                        data-dashboard-action="manage-pets">
-
-                        Manage Pets
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-dashboard-action="applications">
-
-                        Applications
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-dashboard-action="users">
-
-                        Users
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-dashboard-action="reports">
-
-                        Reports
-
-                    </button>
-
-                </div>
-
+            <div class="stat-card">
+                <span>👥</span>
+                <h3>Users</h3>
+                <strong>0</strong>
             </div>
 
-        </section>
+            <div class="stat-card">
+                <span>📋</span>
+                <h3>Applications</h3>
+                <strong>0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>❤️</span>
+                <h3>Adoptions</h3>
+                <strong>0</strong>
+            </div>
+
+        </div>
 
 
-        <!-- =========================
-             PETS
-        ========================== -->
+        <div class="dashboard-card">
 
-        <section
-            id="pets"
-            class="dashboard-section"
-            style="display: none;">
+            <h3>
+                Quick Actions
+            </h3>
 
-
-            <div class="dashboard-header">
-
-                <div>
-
-                    <h2>
-                        Pets
-                    </h2>
-
-                    <p>
-                        Manage pets listed on PawPal.
-                    </p>
-
-                </div>
-
+            <div class="dashboard-actions">
 
                 <button
                     type="button"
-                    class="add-pet-btn"
-                    data-add-pet>
+                    data-dashboard-action="manage-pets">
+                    Manage Pets
+                </button>
 
-                    + Add Pet
+                <button
+                    type="button"
+                    data-dashboard-action="applications">
+                    Applications
+                </button>
 
+                <button
+                    type="button"
+                    data-dashboard-action="users">
+                    Users
+                </button>
+
+                <button
+                    type="button"
+                    data-dashboard-action="reports">
+                    Reports
                 </button>
 
             </div>
 
+        </div>
 
-            <div class="dashboard-search">
-
-                <input
-                    type="search"
-                    placeholder="Search pets..."
-                    aria-label="Search pets">
-
-            </div>
+    </section>
 
 
-            <div class="pet-grid">
+    <!-- PETS -->
 
-                <article
-                    class="pet-card"
-                    data-name="Sample Pet">
+    <section
+        id="pets"
+        class="dashboard-section"
+        style="display:none;">
 
+        <div class="dashboard-header">
 
-                    <div class="pet-card-image">
-                        🐶
-                    </div>
+            <div>
 
+                <h2>Pets</h2>
 
-                    <h3 class="pet-name">
-                        Sample Pet
-                    </h3>
-
-
-                    <p>
-                        Mixed Breed
-                    </p>
-
-
-                    <div class="pet-actions">
-
-                        <button
-                            type="button"
-                            class="btn-edit"
-                            data-action="edit">
-
-                            Edit
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="btn-delete"
-                            data-action="delete">
-
-                            Delete
-
-                        </button>
-
-                    </div>
-
-                </article>
+                <p>
+                    Manage pets listed on PawPal.
+                </p>
 
             </div>
 
-        </section>
+            <button
+                type="button"
+                class="add-pet-btn"
+                data-add-pet>
+                + Add Pet
+            </button>
+
+        </div>
 
 
-        <!-- =========================
-             ADD PET
-        ========================== -->
+        <div class="dashboard-search">
 
-        <section
-            id="add-pet"
-            class="dashboard-section"
-            style="display: none;">
+            <input
+                type="search"
+                placeholder="Search pets..."
+                aria-label="Search pets">
 
-
-            <div class="dashboard-card">
-
-                <h2>
-                    Add a Pet
-                </h2>
+        </div>
 
 
-                <form id="addPetForm">
+        <div class="pet-grid">
 
+            <article
+                class="pet-card"
+                data-name="Sample Pet">
 
-                    <div class="form-group">
+                <div class="pet-card-image">
+                    🐶
+                </div>
 
-                        <label for="pet-name">
-                            Pet Name
-                        </label>
+                <h3 class="pet-name">
+                    Sample Pet
+                </h3>
 
-                        <input
-                            id="pet-name"
-                            name="name"
-                            type="text"
-                            required>
+                <p>
+                    Mixed Breed
+                </p>
 
-                    </div>
+                <div class="pet-actions">
 
-
-                    <div class="form-group">
-
-                        <label for="pet-breed">
-                            Breed
-                        </label>
-
-                        <input
-                            id="pet-breed"
-                            name="breed"
-                            type="text">
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="pet-age">
-                            Age
-                        </label>
-
-                        <input
-                            id="pet-age"
-                            name="age"
-                            type="number"
-                            min="0">
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="pet-gender">
-                            Gender
-                        </label>
-
-
-                        <select
-                            id="pet-gender"
-                            name="gender">
-
-                            <option value="male">
-                                Male
-                            </option>
-
-                            <option value="female">
-                                Female
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <button type="submit">
-                        Add Pet
+                    <button
+                        type="button"
+                        class="btn-edit"
+                        data-action="edit">
+                        Edit
                     </button>
 
-                </form>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             APPLICATIONS
-        ========================== -->
-
-        <section
-            id="applications"
-            class="dashboard-section"
-            style="display: none;">
-
-
-            <h2>
-                Adoption Applications
-            </h2>
-
-
-            <div class="dashboard-search">
-
-                <input
-                    type="search"
-                    placeholder="Search applications..."
-                    aria-label="Search applications">
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <table class="dashboard-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Applicant
-                            </th>
-
-                            <th>
-                                Pet
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                            <th>
-                                Actions
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>
-                                Sample User
-                            </td>
-
-                            <td>
-                                Sample Pet
-                            </td>
-
-                            <td>
-
-                                <span class="status">
-                                    Pending
-                                </span>
-
-                            </td>
-
-                            <td class="table-actions">
-
-
-                                <button
-                                    type="button"
-                                    data-application-action="view">
-
-                                    View
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    data-application-action="approve">
-
-                                    Approve
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    data-application-action="reject">
-
-                                    Reject
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             USERS
-        ========================== -->
-
-        <section
-            id="users"
-            class="dashboard-section"
-            style="display: none;">
-
-
-            <h2>
-                Users
-            </h2>
-
-
-            <div class="dashboard-search">
-
-                <input
-                    type="search"
-                    placeholder="Search users..."
-                    aria-label="Search users">
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <table class="dashboard-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Name
-                            </th>
-
-                            <th>
-                                Email
-                            </th>
-
-                            <th>
-                                Phone
-                            </th>
-
-                            <th>
-                                Role
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>
-                                Sample User
-                            </td>
-
-                            <td>
-                                user@example.com
-                            </td>
-
-                            <td>
-                                0000000000
-                            </td>
-
-                            <td>
-                                User
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             REPORTS
-        ========================== -->
-
-        <section
-            id="reports"
-            class="dashboard-section"
-            style="display: none;">
-
-
-            <div class="dashboard-card">
-
-                <h2>
-                    Reports
-                </h2>
-
-                <p>
-                    PawPal adoption statistics
-                    and reports will appear here.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             NOTIFICATIONS
-        ========================== -->
-
-        <section
-            id="notifications"
-            class="dashboard-section"
-            style="display: none;">
-
-
-            <h2>
-                Notifications
-            </h2>
-
-
-            <div class="notification-item">
-
-                <strong>
-                    Welcome to PawPal.
-                </strong>
-
-                <p>
-                    Your admin dashboard is ready.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SETTINGS
-        ========================== -->
-
-        <section
-            id="settings"
-            class="dashboard-section"
-            style="display: none;">
-
-
-            <div class="dashboard-card">
-
-                <h2>
-                    Settings
-                </h2>
-
-
-                <div class="setting-row">
-
-                    <div>
-
-                        <h4>
-                            Email Notifications
-                        </h4>
-
-                        <p>
-                            Receive email notifications.
-                        </p>
-
-                    </div>
-
-
-                    <label class="toggle">
-
-                        <input
-                            type="checkbox"
-                            checked>
-
-                        <span></span>
-
-                    </label>
+                    <button
+                        type="button"
+                        class="btn-delete"
+                        data-action="delete">
+                        Delete
+                    </button>
 
                 </div>
 
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADD PET -->
+
+    <section
+        id="add-pet"
+        class="dashboard-section"
+        style="display:none;">
+
+        <div class="dashboard-card">
+
+            <h2>
+                Add a Pet
+            </h2>
+
+            <form id="addPetForm">
+
+                <div class="form-group">
+
+                    <label for="pet-name">
+                        Pet Name
+                    </label>
+
+                    <input
+                        id="pet-name"
+                        name="name"
+                        type="text"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="pet-breed">
+                        Breed
+                    </label>
+
+                    <input
+                        id="pet-breed"
+                        name="breed"
+                        type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="pet-age">
+                        Age
+                    </label>
+
+                    <input
+                        id="pet-age"
+                        name="age"
+                        type="number"
+                        min="0">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="pet-gender">
+                        Gender
+                    </label>
+
+                    <select
+                        id="pet-gender"
+                        name="gender">
+
+                        <option value="male">
+                            Male
+                        </option>
+
+                        <option value="female">
+                            Female
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button type="submit">
+                    Add Pet
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPLICATIONS -->
+
+    <section
+        id="applications"
+        class="dashboard-section"
+        style="display:none;">
+
+        <h2>
+            Adoption Applications
+        </h2>
+
+        <div class="dashboard-search">
+
+            <input
+                type="search"
+                placeholder="Search applications..."
+                aria-label="Search applications">
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Applicant</th>
+                        <th>Pet</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            Sample User
+                        </td>
+
+                        <td>
+                            Sample Pet
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Pending
+                            </span>
+                        </td>
+
+                        <td class="table-actions">
+
+                            <button
+                                type="button"
+                                data-application-action="view">
+                                View
+                            </button>
+
+                            <button
+                                type="button"
+                                data-application-action="approve">
+                                Approve
+                            </button>
+
+                            <button
+                                type="button"
+                                data-application-action="reject">
+                                Reject
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- USERS -->
+
+    <section
+        id="users"
+        class="dashboard-section"
+        style="display:none;">
+
+        <h2>
+            Users
+        </h2>
+
+        <div class="dashboard-search">
+
+            <input
+                type="search"
+                placeholder="Search users..."
+                aria-label="Search users">
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            Sample User
+                        </td>
+
+                        <td>
+                            user@example.com
+                        </td>
+
+                        <td>
+                            0000000000
+                        </td>
+
+                        <td>
+                            User
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+
+    <section
+        id="reports"
+        class="dashboard-section"
+        style="display:none;">
+
+        <div class="dashboard-card">
+
+            <h2>
+                Reports
+            </h2>
+
+            <p>
+                PawPal adoption statistics
+                and reports will appear here.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+
+    <section
+        id="notifications"
+        class="dashboard-section"
+        style="display:none;">
+
+        <h2>
+            Notifications
+        </h2>
+
+        <div class="notification-item">
+
+            <strong>
+                Welcome to PawPal.
+            </strong>
+
+            <p>
+                Your admin dashboard is ready.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section
+        id="settings"
+        class="dashboard-section"
+        style="display:none;">
+
+        <div class="dashboard-card">
+
+            <h2>
+                Settings
+            </h2>
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h4>
+                        Email Notifications
+                    </h4>
+
+                    <p>
+                        Receive email notifications.
+                    </p>
+
+                </div>
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span></span>
+
+                </label>
+
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             PROFILE
-        ========================== -->
+    <!-- PROFILE -->
 
-        <section
-            id="profile"
-            class="dashboard-section"
-            style="display: none;">
+    <section
+        id="profile"
+        class="dashboard-section"
+        style="display:none;">
 
+        <div class="dashboard-card">
 
-            <div class="dashboard-card">
+            <h2>
+                My Profile
+            </h2>
 
-                <h2>
-                    My Profile
-                </h2>
+            <form id="profileForm">
 
+                <div class="form-group">
 
-                <form id="profileForm">
+                    <label for="profile-name">
+                        Name
+                    </label>
 
+                    <input
+                        id="profile-name"
+                        type="text"
+                        name="name"
+                        data-profile-name>
 
-                    <div class="form-group">
+                </div>
 
-                        <label for="profile-name">
-                            Name
-                        </label>
+                <div class="form-group">
 
-                        <input
-                            id="profile-name"
-                            type="text"
-                            name="name"
-                            data-profile-name>
+                    <label for="profile-email">
+                        Email
+                    </label>
 
-                    </div>
+                    <input
+                        id="profile-email"
+                        type="email"
+                        name="email"
+                        data-user-email
+                        disabled>
 
+                </div>
 
-                    <div class="form-group">
+                <button type="submit">
+                    Save Changes
+                </button>
 
-                        <label for="profile-email">
-                            Email
-                        </label>
+            </form>
 
-                        <input
-                            id="profile-email"
-                            type="email"
-                            name="email"
-                            data-user-email
-                            disabled>
+        </div>
 
-                    </div>
+    </section>
 
-
-                    <button type="submit">
-                        Save Changes
-                    </button>
-
-                </form>
-
-            </div>
-
-        </section>
-
-
-    </div>
+</div>
+```
 
 </main>
 
-
 </div>
 
-<!-- =========================
+<!-- =====================================================
      TOAST
-========================== -->
+===================================================== -->
 
 <div
     id="dashboardToast"
@@ -959,18 +774,533 @@
     aria-live="polite">
 </div>
 
-<!-- =========================
-     AUTH
-========================== -->
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/supabase-config.js"></script>
 
 <script src="../js/auth.js"></script>
 
-<!-- =========================
+<!-- =====================================================
      ADMIN DASHBOARD JS
-========================== -->
+===================================================== -->
 
 <script src="../js/dashboard-admin.js"></script>
 
-</body>
+<!-- =====================================================
+     SIDEBAR NAVIGATION FIX
+===================================================== -->
 
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebarLinks =
+        document.querySelectorAll(
+            ".sidebar-nav .sidebar-link[data-section]"
+        );
+
+    const sections =
+        document.querySelectorAll(
+            ".dashboard-section"
+        );
+
+    const pageTitle =
+        document.getElementById(
+            "dashboardPageTitle"
+        );
+
+
+    /* =====================================================
+       SECTION TITLES
+    ===================================================== */
+
+    const sectionTitles = {
+
+        overview: "Overview",
+
+        pets: "Pets",
+
+        applications: "Applications",
+
+        users: "Users",
+
+        reports: "Reports",
+
+        notifications: "Notifications",
+
+        settings: "Settings",
+
+        profile: "Profile",
+
+        "add-pet": "Add a Pet"
+
+    };
+
+
+    /* =====================================================
+       SHOW SECTION
+    ===================================================== */
+
+    function showSection(sectionId) {
+
+        if (!sectionId) {
+            sectionId = "overview";
+        }
+
+
+        /*
+         * Hide every dashboard section.
+         */
+
+        sections.forEach(function (section) {
+
+            section.style.display = "none";
+
+        });
+
+
+        /*
+         * Show requested section.
+         */
+
+        const target =
+            document.getElementById(sectionId);
+
+        if (target) {
+
+            target.style.display = "";
+
+        } else {
+
+            /*
+             * If an invalid section is requested,
+             * return to Overview.
+             */
+
+            const overview =
+                document.getElementById("overview");
+
+            if (overview) {
+                overview.style.display = "";
+            }
+
+            sectionId = "overview";
+
+        }
+
+
+        /*
+         * Update sidebar active state.
+         */
+
+        sidebarLinks.forEach(function (link) {
+
+            const linkSection =
+                link.getAttribute("data-section");
+
+            link.classList.toggle(
+                "active",
+                linkSection === sectionId
+            );
+
+        });
+
+
+        /*
+         * Update topbar title.
+         */
+
+        if (pageTitle) {
+
+            pageTitle.textContent =
+                sectionTitles[sectionId] ||
+                sectionId.charAt(0).toUpperCase() +
+                sectionId.slice(1);
+
+        }
+
+
+        /*
+         * Update URL hash without
+         * jumping the page.
+         */
+
+        if (
+            window.location.hash !==
+            "#" + sectionId
+        ) {
+
+            history.replaceState(
+                null,
+                "",
+                "#" + sectionId
+            );
+
+        }
+
+
+        /*
+         * Close mobile sidebar.
+         */
+
+        const sidebar =
+            document.querySelector(
+                ".dashboard-sidebar"
+            );
+
+        const overlay =
+            document.querySelector(
+                ".sidebar-overlay"
+            );
+
+        if (sidebar) {
+
+            sidebar.classList.remove(
+                "mobile-open"
+            );
+
+        }
+
+        if (overlay) {
+
+            overlay.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SIDEBAR CLICK
+    ===================================================== */
+
+    sidebarLinks.forEach(function (link) {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                const section =
+                    link.getAttribute(
+                        "data-section"
+                    );
+
+                showSection(section);
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       TOPBAR NOTIFICATION BUTTON
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-section-target]"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const target =
+                        button.getAttribute(
+                            "data-section-target"
+                        );
+
+                    showSection(target);
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       QUICK ACTIONS
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-dashboard-action]"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const action =
+                        button.getAttribute(
+                            "data-dashboard-action"
+                        );
+
+                    const actionMap = {
+
+                        "manage-pets": "pets",
+
+                        "applications": "applications",
+
+                        "users": "users",
+
+                        "reports": "reports"
+
+                    };
+
+                    if (
+                        actionMap[action]
+                    ) {
+
+                        showSection(
+                            actionMap[action]
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       ADD PET BUTTON
+    ===================================================== */
+
+    const addPetButton =
+        document.querySelector(
+            "[data-add-pet]"
+        );
+
+    if (addPetButton) {
+
+        addPetButton.addEventListener(
+            "click",
+            function () {
+
+                showSection("add-pet");
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       HASH NAVIGATION
+    ===================================================== */
+
+    function loadHashSection() {
+
+        const hash =
+            window.location.hash
+                .replace("#", "")
+                .trim();
+
+        if (hash) {
+
+            showSection(hash);
+
+        } else {
+
+            showSection("overview");
+
+        }
+
+    }
+
+
+    loadHashSection();
+
+
+    window.addEventListener(
+        "hashchange",
+        function () {
+
+            const hash =
+                window.location.hash
+                    .replace("#", "")
+                    .trim();
+
+            showSection(
+                hash || "overview"
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const mobileMenuButton =
+        document.querySelector(
+            ".mobile-menu-btn"
+        );
+
+    const sidebar =
+        document.querySelector(
+            ".dashboard-sidebar"
+        );
+
+    const overlay =
+        document.querySelector(
+            ".sidebar-overlay"
+        );
+
+
+    function openMobileSidebar() {
+
+        if (sidebar) {
+
+            sidebar.classList.add(
+                "mobile-open"
+            );
+
+        }
+
+        if (overlay) {
+
+            overlay.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    function closeMobileSidebar() {
+
+        if (sidebar) {
+
+            sidebar.classList.remove(
+                "mobile-open"
+            );
+
+        }
+
+        if (overlay) {
+
+            overlay.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    if (mobileMenuButton) {
+
+        mobileMenuButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    sidebar &&
+                    sidebar.classList.contains(
+                        "mobile-open"
+                    )
+                ) {
+
+                    closeMobileSidebar();
+
+                } else {
+
+                    openMobileSidebar();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            function () {
+
+                closeMobileSidebar();
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    const logoutButton =
+        document.querySelector(
+            ".logout-btn"
+        );
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            async function (event) {
+
+                event.preventDefault();
+
+                const confirmed =
+                    confirm(
+                        "Are you sure you want to log out?"
+                    );
+
+                if (!confirmed) {
+                    return;
+                }
+
+
+                if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.logoutUser ===
+                        "function"
+                ) {
+
+                    await window.PawPalAuth.logoutUser();
+
+                } else {
+
+                    localStorage.removeItem(
+                        "pawpal-current-user"
+                    );
+
+                    window.location.href =
+                        "../pages/login.html";
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
 </html>

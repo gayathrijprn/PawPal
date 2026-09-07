@@ -1,26 +1,65 @@
-document.addEventListener("DOMContentLoaded", () => {
 
-    const loginForm = document.getElementById("loginForm");
+/* =========================================================
+   PAWPAL — LOGIN
+   =========================================================
+
+   Responsibilities:
+   - Validate login form
+   - Authenticate using Supabase
+   - Read user's role
+   - Save current user
+   - Redirect to the correct dashboard
+
+   Roles:
+   adopter -> dashboard-adopter.html
+   owner   -> dashboard-owner.html
+   shelter -> dashboard-adopter.html (temporary)
+   admin   -> dashboard-admin.html
+
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       GET ELEMENTS
+    ===================================================== */
+
+    const form = document.getElementById("loginForm");
     const emailInput = document.getElementById("loginEmail");
     const passwordInput = document.getElementById("loginPassword");
-    const rememberMe = document.getElementById("rememberMe");
-    const loginButton = document.getElementById("loginButton");
-    const loginMessage = document.getElementById("loginMessage");
     const togglePassword = document.getElementById("togglePassword");
+    const rememberMe = document.getElementById("rememberMe");
+    const message = document.getElementById("loginMessage");
+    const loginButton = document.getElementById("loginButton");
 
 
-    // ==========================================
-    // SHOW / HIDE PASSWORD
-    // ==========================================
+    /* =====================================================
+       SAFETY CHECK
+    ===================================================== */
 
-    if (togglePassword) {
+    if (!form) {
+        console.error("PawPal Login: #loginForm was not found.");
+        return;
+    }
 
-        togglePassword.addEventListener("click", () => {
 
-            if (passwordInput.type === "password") {
+    /* =====================================================
+       SHOW / HIDE PASSWORD
+    ===================================================== */
+
+    if (togglePassword && passwordInput) {
+
+        togglePassword.addEventListener("click", function () {
+
+            const isPassword =
+                passwordInput.type === "password";
+
+            if (isPassword) {
 
                 passwordInput.type = "text";
+
                 togglePassword.textContent = "Hide";
+
                 togglePassword.setAttribute(
                     "aria-label",
                     "Hide password"
@@ -29,175 +68,460 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
 
                 passwordInput.type = "password";
+
                 togglePassword.textContent = "Show";
+
                 togglePassword.setAttribute(
                     "aria-label",
                     "Show password"
                 );
-
             }
-
         });
-
     }
 
 
-    // ==========================================
-    // MESSAGE FUNCTION
-    // ==========================================
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
-    function showMessage(message, type) {
+    function showMessage(text, type) {
 
-        if (!loginMessage) return;
-
-        loginMessage.textContent = message;
-
-        loginMessage.className = "login-message";
-
-        if (type === "error") {
-            loginMessage.classList.add("error");
+        if (!message) {
+            return;
         }
 
-        if (type === "success") {
-            loginMessage.classList.add("success");
-        }
+        message.textContent = text;
 
+        message.className = "login-message " + type;
+
+        message.style.display = "block";
     }
 
 
-    // ==========================================
-    // LOGIN
-    // ==========================================
+    function hideMessage() {
 
-    if (loginForm) {
+        if (!message) {
+            return;
+        }
 
-        loginForm.addEventListener("submit", async (event) => {
+        message.textContent = "";
 
-            event.preventDefault();
+        message.className = "login-message";
 
-
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-
-
-            // Clear previous message
-
-            showMessage("", "");
+        message.style.display = "none";
+    }
 
 
-            // ======================================
-            // BASIC VALIDATION
-            // ======================================
+    /* =====================================================
+       LOADING BUTTON
+    ===================================================== */
 
-            if (!email) {
+    function setLoading(isLoading) {
 
-                showMessage(
-                    "Please enter your email address.",
-                    "error"
-                );
+        if (!loginButton) {
+            return;
+        }
 
-                emailInput.focus();
+        loginButton.disabled = isLoading;
 
-                return;
-
-            }
-
-
-            if (!password) {
-
-                showMessage(
-                    "Please enter your password.",
-                    "error"
-                );
-
-                passwordInput.focus();
-
-                return;
-
-            }
-
-
-            // ======================================
-            // DISABLE BUTTON
-            // ======================================
-
-            loginButton.disabled = true;
+        if (isLoading) {
 
             loginButton.innerHTML = `
                 <span>Logging in...</span>
-                <span>•</span>
+                <span>⏳</span>
             `;
 
+        } else {
 
-            try {
-
-                // ==================================
-                // SUPABASE LOGIN
-                // ==================================
-
-                const { data, error } =
-                    await supabaseClient.auth.signInWithPassword({
-
-                        email: email,
-                        password: password
-
-                    });
+            loginButton.innerHTML = `
+                <span>Log In</span>
+                <span>→</span>
+            `;
+        }
+    }
 
 
-                // ==================================
-                // LOGIN ERROR
-                // ==================================
+    /* =====================================================
+       NORMALIZE ROLE
+    ===================================================== */
 
-                if (error) {
+    function normalizeRole(role) {
 
-                    console.error("Login error:", error);
+        if (!role) {
+            return "adopter";
+        }
 
-                    showMessage(
-                        getLoginErrorMessage(error),
-                        "error"
-                    );
+        const normalized = String(role)
+            .trim()
+            .toLowerCase()
+            .replace(/[_-]+/g, " ");
 
-                    loginButton.disabled = false;
+        switch (normalized) {
 
-                    loginButton.innerHTML = `
-                        <span>Log In</span>
-                        <span>→</span>
-                    `;
+            case "admin":
+            case "administrator":
+                return "admin";
 
-                    return;
+            case "owner":
+            case "pet owner":
+                return "owner";
 
+            case "shelter":
+            case "rescue":
+            case "rescue shelter":
+            case "shelter rescue":
+            case "shelter / rescue":
+                return "shelter";
+
+            case "adopter":
+            case "pet adopter":
+                return "adopter";
+
+            default:
+                return "adopter";
+        }
+    }
+
+
+    /* =====================================================
+       DASHBOARD PATH
+    ===================================================== */
+
+    function getDashboardPath(role) {
+
+        const normalizedRole = normalizeRole(role);
+
+        /*
+         * IMPORTANT:
+         * There is currently no shelter dashboard.
+         * Therefore shelter users temporarily go to
+         * the adopter dashboard.
+         *
+         * We can replace this once the shelter dashboard
+         * is created.
+         */
+
+        switch (normalizedRole) {
+
+            case "admin":
+                return "dashboard-admin.html";
+
+            case "owner":
+                return "dashboard-owner.html";
+
+            case "shelter":
+                return "dashboard-adopter.html";
+
+            case "adopter":
+            default:
+                return "dashboard-adopter.html";
+        }
+    }
+
+
+    /* =====================================================
+       CREATE CURRENT USER OBJECT
+    ===================================================== */
+
+    function createCurrentUser(user) {
+
+        const metadata = user.user_metadata || {};
+
+        const role = normalizeRole(metadata.role);
+
+        const firstName =
+            metadata.first_name || "";
+
+        const lastName =
+            metadata.last_name || "";
+
+        const metadataName =
+            `${firstName} ${lastName}`.trim();
+
+        const displayName =
+            metadataName ||
+            metadata.full_name ||
+            metadata.name ||
+            user.email?.split("@")[0] ||
+            "PawPal User";
+
+        return {
+
+            id: user.id || "",
+
+            name: displayName,
+
+            email: user.email || "",
+
+            role: role
+        };
+    }
+
+
+    /* =====================================================
+       LOGIN SUBMIT
+    ===================================================== */
+
+    form.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        /* =================================================
+           GET VALUES
+        ================================================= */
+
+        const email =
+            emailInput
+                ? emailInput.value.trim().toLowerCase()
+                : "";
+
+        const password =
+            passwordInput
+                ? passwordInput.value
+                : "";
+
+
+        /* =================================================
+           VALIDATION
+        ================================================= */
+
+        if (!email) {
+
+            showMessage(
+                "Please enter your email address.",
+                "error"
+            );
+
+            if (emailInput) {
+                emailInput.focus();
+            }
+
+            return;
+        }
+
+
+        if (!password) {
+
+            showMessage(
+                "Please enter your password.",
+                "error"
+            );
+
+            if (passwordInput) {
+                passwordInput.focus();
+            }
+
+            return;
+        }
+
+
+        /*
+         * Correct email regex.
+         */
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (!emailPattern.test(email)) {
+
+            showMessage(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            if (emailInput) {
+                emailInput.focus();
+            }
+
+            return;
+        }
+
+
+        /* =================================================
+           CHECK SUPABASE
+        ================================================= */
+
+        if (
+            typeof window.supabaseClient === "undefined" ||
+            !window.supabaseClient
+        ) {
+
+            console.error(
+                "PawPal Login: supabaseClient is unavailable."
+            );
+
+            showMessage(
+                "Authentication service is unavailable. Please refresh the page and try again.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* =================================================
+           LOADING
+        ================================================= */
+
+        setLoading(true);
+
+
+        try {
+
+            /* =============================================
+               REMOVE STALE LOCAL USER
+            ============================================= */
+
+            if (
+                window.PawPalAuth &&
+                typeof window.PawPalAuth.clearCurrentUser === "function"
+            ) {
+
+                window.PawPalAuth.clearCurrentUser();
+
+            } else {
+
+                localStorage.removeItem(
+                    "pawpal-current-user"
+                );
+            }
+
+
+            /* =============================================
+               SUPABASE LOGIN
+            ============================================= */
+
+            const {
+                data,
+                error
+            } = await window.supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+            });
+
+
+            /* =============================================
+               HANDLE SUPABASE ERROR
+            ============================================= */
+
+            if (error) {
+
+                console.error(
+                    "PawPal Login Error:",
+                    error
+                );
+
+                const errorText =
+                    String(error.message || "")
+                        .toLowerCase();
+
+                let errorMessage =
+                    "Unable to log in. Please check your email and password.";
+
+
+                if (
+                    errorText.includes("email not confirmed")
+                ) {
+
+                    errorMessage =
+                        "Please confirm your email address before logging in.";
+
+                } else if (
+                    errorText.includes("invalid login credentials")
+                ) {
+
+                    errorMessage =
+                        "Incorrect email or password.";
+
+                } else if (
+                    errorText.includes("too many requests")
+                ) {
+
+                    errorMessage =
+                        "Too many login attempts. Please wait a moment and try again.";
+
+                } else if (error.message) {
+
+                    errorMessage =
+                        error.message;
                 }
 
 
-                // ==================================
-                // SUCCESS
-                // ==================================
-
-                console.log("Login successful:", data);
-
-                const profile = data.user?.user_metadata || {};
-                const displayName = [profile.first_name, profile.last_name]
-                    .filter(Boolean)
-                    .join(" ") || email.split("@")[0];
-
-                localStorage.setItem("pawpal-current-user", JSON.stringify({
-                    id: data.user.id,
-                    name: displayName,
-                    email: data.user.email,
-                    role: profile.role || "adopter"
-                }));
-
                 showMessage(
-                    "Login successful! Welcome back 🐾",
-                    "success"
+                    errorMessage,
+                    "error"
                 );
 
+                return;
+            }
 
-                // ==================================
-                // REMEMBER ME
-                // ==================================
 
-                if (rememberMe && rememberMe.checked) {
+            /* =============================================
+               USER CHECK
+            ============================================= */
+
+            const user = data?.user;
+
+
+            if (!user) {
+
+                showMessage(
+                    "Login failed. No user account was returned.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /* =============================================
+               CREATE CURRENT USER
+            ============================================= */
+
+            const currentUser =
+                createCurrentUser(user);
+
+
+            console.log(
+                "PawPal: Logged in user:",
+                currentUser
+            );
+
+
+            /* =============================================
+               SAVE CURRENT USER
+            ============================================= */
+
+            if (
+                window.PawPalAuth &&
+                typeof window.PawPalAuth.saveCurrentUser === "function"
+            ) {
+
+                window.PawPalAuth.saveCurrentUser(
+                    currentUser
+                );
+
+            } else {
+
+                localStorage.setItem(
+                    "pawpal-current-user",
+                    JSON.stringify(currentUser)
+                );
+            }
+
+
+            /* =============================================
+               REMEMBER ME
+            ============================================= */
+
+            if (rememberMe) {
+
+                if (rememberMe.checked) {
 
                     localStorage.setItem(
                         "pawpalRememberMe",
@@ -209,96 +533,108 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.removeItem(
                         "pawpalRememberMe"
                     );
-
                 }
-
-
-                // ==================================
-                // REDIRECT
-                // ==================================
-
-                setTimeout(() => {
-
-                    window.location.href = "../index.html";
-
-                }, 1000);
-
-
-            } catch (error) {
-
-                console.error(
-                    "Unexpected login error:",
-                    error
-                );
-
-                showMessage(
-                    "Something went wrong. Please try again.",
-                    "error"
-                );
-
-                loginButton.disabled = false;
-
-                loginButton.innerHTML = `
-                    <span>Log In</span>
-                    <span>→</span>
-                `;
-
             }
 
-        });
 
+            /* =============================================
+               SUCCESS MESSAGE
+            ============================================= */
+
+            showMessage(
+                `Welcome back, ${currentUser.name}! 🐾`,
+                "success"
+            );
+
+
+            /* =============================================
+               DASHBOARD
+            ============================================= */
+
+            const dashboard =
+                getDashboardPath(
+                    currentUser.role
+                );
+
+
+            console.log(
+                "PawPal: Redirecting to:",
+                dashboard
+            );
+
+
+            /* =============================================
+               REDIRECT
+            ============================================= */
+
+            setTimeout(function () {
+
+                window.location.href = dashboard;
+
+            }, 700);
+
+
+        } catch (error) {
+
+            console.error(
+                "PawPal Login Exception:",
+                error
+            );
+
+            showMessage(
+                error?.message ||
+                "Something went wrong while logging in. Please try again.",
+                "error"
+            );
+
+        } finally {
+
+            /*
+             * Re-enable button after a short delay.
+             */
+            setTimeout(function () {
+
+                if (document.visibilityState === "visible") {
+                    setLoading(false);
+                }
+
+            }, 1000);
+        }
+
+    });
+
+
+    /* =====================================================
+       AUTO FOCUS
+    ===================================================== */
+
+    if (
+        emailInput &&
+        !emailInput.value
+    ) {
+
+        emailInput.focus();
     }
 
 
-    // ==========================================
-    // SUPABASE ERROR MESSAGES
-    // ==========================================
+    /* =====================================================
+       REGISTERED MESSAGE
+    ===================================================== */
 
-    function getLoginErrorMessage(error) {
+    const urlParams =
+        new URLSearchParams(window.location.search);
 
-        const message =
-            error?.message?.toLowerCase() || "";
+    if (
+        urlParams.get("registered") === "true"
+    ) {
 
-
-        if (
-            message.includes("invalid login credentials")
-        ) {
-
-            return "Incorrect email or password.";
-
-        }
-
-
-        if (
-            message.includes("email not confirmed")
-        ) {
-
-            return "Please confirm your email before logging in.";
-
-        }
-
-
-        if (
-            message.includes("too many requests")
-        ) {
-
-            return "Too many login attempts. Please wait a moment and try again.";
-
-        }
-
-
-        if (
-            message.includes("network")
-        ) {
-
-            return "Network error. Please check your internet connection.";
-
-        }
-
-
-        return error?.message ||
-            "Unable to log in. Please try again.";
-
+        showMessage(
+            "Account created successfully! Please log in with your new account. 🐾",
+            "success"
+        );
     }
 
 });
+
+
+
