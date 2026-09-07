@@ -2234,7 +2234,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         checkoutButton.addEventListener(
             "click",
-            event => {
+            async event => {
 
                 event.preventDefault();
 
@@ -2261,25 +2261,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     getCartSubtotal();
 
 
-                const confirmed =
-                    window.confirm(
-                        `Ready to checkout?\n\n` +
-                        `Items: ${quantity}\n` +
-                        `Subtotal: ${formatPrice(subtotal)}\n\n` +
-                        `Place this demo order now?`
-                    );
+                checkoutButton.disabled = true;
+                checkoutButton.textContent = "Opening secure checkout...";
 
-
-                if (confirmed) {
-
-                    clearCart();
-                    closeCart();
-
-                    showToast(
-                        "Order placed successfully! We will be in touch soon. 🐾"
-                    );
-
+                if (!window.PawPalPayments) {
+                    showToast("Secure checkout is unavailable. Please try again shortly.");
+                } else {
+                    await window.PawPalPayments.start({
+                    amount: Math.round(subtotal),
+                    description: `PawPal shop order (${quantity} item${quantity === 1 ? "" : "s"})`,
+                    purpose: "shop",
+                    onSuccess: () => {
+                        clearCart();
+                        closeCart();
+                        showToast("Payment received. Your PawPal order is confirmed. 🐾");
+                    },
+                    onError: error => showToast(error.message || "Payment could not be completed.")
+                    });
                 }
+
+                checkoutButton.disabled = false;
+                checkoutButton.textContent = "Continue to checkout →";
 
             }
         );

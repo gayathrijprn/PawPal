@@ -920,7 +920,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         donateButton.addEventListener(
             "click",
-            () => {
+            async () => {
 
                 const amount =
                     Number(
@@ -961,27 +961,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                /*
-                 * This is intentionally a DEMO.
-                 * No real payment is processed.
-                 */
+                donateButton.disabled = true;
+                donateButton.textContent = "Opening secure checkout...";
 
-                currentRaised += amount;
+                if (!window.PawPalPayments) {
+                    showToast("Secure checkout is unavailable. Please try again shortly.");
+                } else {
+                    await window.PawPalPayments.start({
+                    amount: Math.round(amount),
+                    description: `Donation for ${campaign.name}`,
+                    purpose: `donation:${campaign.id || "campaign"}`,
+                    onSuccess: () => {
+                        currentRaised += amount;
+                        currentDonors += 1;
+                        updateNumbers();
+                        addDonor(amount);
+                        showDonationModal(amount);
+                    },
+                    onError: error => showToast(error.message || "Payment could not be completed.")
+                    });
+                }
 
-                currentDonors += 1;
-
-
-                updateNumbers();
-
-
-                addDonor(
-                    amount
-                );
-
-
-                showDonationModal(
-                    amount
-                );
+                donateButton.disabled = false;
+                donateButton.textContent = `Donate ₹${amount}`;
 
             }
         );
