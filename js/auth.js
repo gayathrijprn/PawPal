@@ -1,11 +1,12 @@
-
 /* =========================================================
    PAWPAL — SHARED AUTHENTICATION
    =========================================================
-
    Responsibilities:
+
    - Store current user's basic information
    - Update navbar authentication state
+   - Show Login / Get Started when logged out
+   - Show Logout when logged in
    - Handle logout
    - Protect dashboards
    - Redirect users according to role
@@ -36,7 +37,7 @@ function normalizeRole(role) {
     const normalized = String(role)
         .trim()
         .toLowerCase()
-        .replace(/[_-]+/g, " ");
+        .replace(/[\_-]+/g, " ");
 
     switch (normalized) {
 
@@ -83,6 +84,7 @@ function getDashboardPath(role) {
          * There is currently no shelter dashboard.
          * Temporarily use adopter dashboard.
          */
+
         case "shelter":
             return "dashboard-adopter.html";
 
@@ -138,10 +140,13 @@ function getCurrentUser() {
 
         return {
 
-            id: user.id || "",
+            id:
+                user.id || "",
 
             name:
                 user.name ||
+                user.full_name ||
+                user.email?.split("@")[0] ||
                 "PawPal User",
 
             email:
@@ -150,6 +155,7 @@ function getCurrentUser() {
 
             role:
                 normalizeRole(user.role)
+
         };
 
     } catch (error) {
@@ -191,6 +197,7 @@ function saveCurrentUser(user) {
 
         role:
             normalizeRole(user.role)
+
     };
 
     try {
@@ -305,11 +312,34 @@ async function logoutUser() {
     /*
      * Clear local PawPal user immediately.
      */
+
     clearCurrentUser();
+
+
+    /*
+     * Also clear common authentication keys
+     * if they exist.
+     */
+
+    try {
+
+        localStorage.removeItem("pawpal-user");
+        localStorage.removeItem("pawpalUser");
+        localStorage.removeItem("currentUser");
+
+    } catch (error) {
+
+        console.warn(
+            "PawPal: Could not clear additional auth storage.",
+            error
+        );
+    }
+
 
     /*
      * Sign out from Supabase.
      */
+
     try {
 
         if (
@@ -329,9 +359,11 @@ async function logoutUser() {
         );
     }
 
+
     /*
      * Redirect to login.
      */
+
     window.location.href =
         getPagesPath("login.html");
 }
@@ -365,10 +397,6 @@ function isDashboardPage() {
 
         "dashboard-admin.html"
 
-        /*
-         * dashboard-shelter.html intentionally excluded
-         * because it does not currently exist.
-         */
     ];
 
     return dashboardPages.includes(
@@ -413,9 +441,11 @@ function protectDashboard() {
     const currentUser =
         getCurrentUser();
 
+
     /*
      * Not logged in.
      */
+
     if (!currentUser) {
 
         window.location.replace(
@@ -425,26 +455,32 @@ function protectDashboard() {
         return;
     }
 
+
     const userRole =
         normalizeRole(currentUser.role);
 
     const requiredRole =
         getRequiredDashboardRole();
 
+
     if (!requiredRole) {
         return;
     }
 
+
     /*
      * Correct dashboard.
      */
+
     if (userRole === requiredRole) {
         return;
     }
 
+
     /*
-     * Redirect to the correct dashboard.
+     * Redirect to correct dashboard.
      */
+
     const correctDashboard =
         getDashboardPath(userRole);
 
@@ -476,6 +512,350 @@ function escapeHtml(value) {
 
 
 /* =========================================================
+   CREATE LOGOUT BUTTON
+========================================================= */
+
+function createNavbarLogoutButton() {
+
+    /*
+     * Existing logout button?
+     */
+
+    let logoutButton =
+        document.querySelector(
+            "#logoutNavButton, [data-navbar-logout]"
+        );
+
+
+    if (logoutButton) {
+
+        logoutButton.style.display = "";
+        logoutButton.removeAttribute("aria-hidden");
+
+        attachLogoutListener(logoutButton);
+
+        return logoutButton;
+    }
+
+
+    /*
+     * Find the existing signup button.
+     * We place Logout where Get Started used to be.
+     */
+
+    const signupButton =
+        document.getElementById(
+            "signupNavButton"
+        );
+
+
+    if (!signupButton) {
+        return null;
+    }
+
+
+    /*
+     * Create logout button.
+     */
+
+    logoutButton =
+        document.createElement("button");
+
+    logoutButton.type = "button";
+
+    logoutButton.id =
+        "logoutNavButton";
+
+    logoutButton.className =
+        signupButton.className || "auth-signup";
+
+    logoutButton.textContent =
+        "Logout";
+
+    logoutButton.setAttribute(
+        "data-navbar-logout",
+        "true"
+    );
+
+
+    /*
+     * Copy useful styling-related attributes.
+     */
+
+    if (signupButton.getAttribute("aria-label")) {
+
+        logoutButton.setAttribute(
+            "aria-label",
+            "Logout from PawPal"
+        );
+    }
+
+
+    /*
+     * Replace signup button.
+     */
+
+    signupButton.replaceWith(
+        logoutButton
+    );
+
+
+    attachLogoutListener(
+        logoutButton
+    );
+
+
+    return logoutButton;
+}
+
+
+/* =========================================================
+   LOGOUT LISTENER
+========================================================= */
+
+function attachLogoutListener(button) {
+
+    if (!button) {
+        return;
+    }
+
+    if (
+        button.dataset.logoutAttached === "true"
+    ) {
+        return;
+    }
+
+    button.dataset.logoutAttached =
+        "true";
+
+    button.addEventListener(
+        "click",
+        async function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            await logoutUser();
+        }
+    );
+}
+
+
+/* =========================================================
+   UPDATE EXISTING PAWPAL NAVBAR
+========================================================= */
+
+function updateStandardNavbar(currentUser) {
+
+    /*
+     * Your current PawPal navbar uses:
+     *
+     * #loginNavButton
+     * #signupNavButton
+     * #cart-button
+     *
+     * Keep the cart untouched.
+     */
+
+
+    const loginButton =
+        document.getElementById(
+            "loginNavButton"
+        );
+
+    let signupButton =
+        document.getElementById(
+            "signupNavButton"
+        );
+
+
+    /*
+     * -----------------------------------------------------
+     * LOGGED IN
+     * -----------------------------------------------------
+     */
+
+    if (currentUser) {
+
+        /*
+         * Hide Login.
+         */
+
+        if (loginButton) {
+
+            loginButton.style.display =
+                "none";
+
+            loginButton.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+        }
+
+
+        /*
+         * Hide/replace Get Started
+         * with Logout.
+         */
+
+        if (signupButton) {
+
+            const logoutButton =
+                createNavbarLogoutButton();
+
+            if (logoutButton) {
+
+                logoutButton.style.display =
+                    "";
+
+                logoutButton.removeAttribute(
+                    "aria-hidden"
+                );
+            }
+
+        } else {
+
+            createNavbarLogoutButton();
+        }
+
+
+        /*
+         * Make sure any old standalone
+         * signup link is hidden.
+         */
+
+        document
+            .querySelectorAll(
+                "[data-signup-link]"
+            )
+            .forEach(function (element) {
+
+                element.style.display =
+                    "none";
+
+            });
+
+
+        /*
+         * Hide standalone login links.
+         */
+
+        document
+            .querySelectorAll(
+                "[data-login-link]"
+            )
+            .forEach(function (element) {
+
+                element.style.display =
+                    "none";
+
+            });
+
+    }
+
+
+    /*
+     * -----------------------------------------------------
+     * LOGGED OUT
+     * -----------------------------------------------------
+     */
+
+    else {
+
+        /*
+         * Show Login.
+         */
+
+        if (loginButton) {
+
+            loginButton.style.display =
+                "";
+
+            loginButton.removeAttribute(
+                "aria-hidden"
+            );
+        }
+
+
+        /*
+         * If a logout button exists,
+         * turn it back into Get Started.
+         */
+
+        const existingLogout =
+            document.getElementById(
+                "logoutNavButton"
+            );
+
+
+        if (existingLogout) {
+
+            const newSignup =
+                document.createElement("a");
+
+            newSignup.id =
+                "signupNavButton";
+
+            newSignup.href =
+                getPagesPath("register.html");
+
+            newSignup.className =
+                existingLogout.className ||
+                "auth-signup";
+
+            newSignup.textContent =
+                "Get Started";
+
+            existingLogout.replaceWith(
+                newSignup
+            );
+
+        } else if (signupButton) {
+
+            signupButton.style.display =
+                "";
+
+            signupButton.removeAttribute(
+                "aria-hidden"
+            );
+        }
+
+
+        /*
+         * Show standalone signup links.
+         */
+
+        document
+            .querySelectorAll(
+                "[data-signup-link]"
+            )
+            .forEach(function (element) {
+
+                element.style.display =
+                    "";
+
+            });
+
+
+        /*
+         * Show standalone login links.
+         */
+
+        document
+            .querySelectorAll(
+                "[data-login-link]"
+            )
+            .forEach(function (element) {
+
+                element.style.display =
+                    "";
+
+            });
+    }
+}
+
+
+/* =========================================================
    UPDATE AUTH NAVIGATION
 ========================================================= */
 
@@ -486,11 +866,22 @@ function updateAuthNavigation() {
 
 
     /* =====================================================
+       CURRENT PAWPAL NAVBAR
+    ===================================================== */
+
+    updateStandardNavbar(
+        currentUser
+    );
+
+
+    /* =====================================================
        DASHBOARD LINKS
     ===================================================== */
 
     document
-        .querySelectorAll("[data-dashboard-link]")
+        .querySelectorAll(
+            "[data-dashboard-link]"
+        )
         .forEach(function (link) {
 
             if (currentUser) {
@@ -503,7 +894,8 @@ function updateAuthNavigation() {
                 link.href =
                     getPagesPath(dashboard);
 
-                link.style.display = "";
+                link.style.display =
+                    "";
 
                 link.removeAttribute(
                     "aria-hidden"
@@ -511,7 +903,8 @@ function updateAuthNavigation() {
 
             } else {
 
-                link.style.display = "none";
+                link.style.display =
+                    "none";
 
                 link.setAttribute(
                     "aria-hidden",
@@ -541,7 +934,9 @@ function updateAuthNavigation() {
                 "User";
 
             const role =
-                formatRole(currentUser.role);
+                formatRole(
+                    currentUser.role
+                );
 
             const initials =
                 getInitials(name);
@@ -550,6 +945,7 @@ function updateAuthNavigation() {
             /*
              * Logged-in navbar.
              */
+
             container.innerHTML = `
 
                 <div class="auth-user">
@@ -575,7 +971,9 @@ function updateAuthNavigation() {
 
                     <a
                         href="${getPagesPath(
-                            getDashboardPath(currentUser.role)
+                            getDashboardPath(
+                                currentUser.role
+                            )
                         )}"
                         class="auth-dashboard"
                     >
@@ -591,6 +989,7 @@ function updateAuthNavigation() {
                     </button>
 
                 </div>
+
             `;
 
         } else {
@@ -598,25 +997,31 @@ function updateAuthNavigation() {
             /*
              * Logged-out navbar.
              */
+
             container.innerHTML = `
 
                 <div class="auth-logged-out">
 
                     <a
-                        href="${getPagesPath("login.html")}"
+                        href="${getPagesPath(
+                            "login.html"
+                        )}"
                         class="auth-login"
                     >
                         Log In
                     </a>
 
                     <a
-                        href="${getPagesPath("register.html")}"
+                        href="${getPagesPath(
+                            "register.html"
+                        )}"
                         class="auth-signup"
                     >
                         Get Started
                     </a>
 
                 </div>
+
             `;
         }
     });
@@ -627,11 +1032,16 @@ function updateAuthNavigation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-login-link]")
+        .querySelectorAll(
+            "[data-login-link]"
+        )
         .forEach(function (link) {
 
             link.style.display =
-                currentUser ? "none" : "";
+                currentUser
+                    ? "none"
+                    : "";
+
         });
 
 
@@ -640,11 +1050,16 @@ function updateAuthNavigation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-signup-link]")
+        .querySelectorAll(
+            "[data-signup-link]"
+        )
         .forEach(function (link) {
 
             link.style.display =
-                currentUser ? "none" : "";
+                currentUser
+                    ? "none"
+                    : "";
+
         });
 
 
@@ -653,11 +1068,16 @@ function updateAuthNavigation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-auth-user]")
+        .querySelectorAll(
+            "[data-auth-user]"
+        )
         .forEach(function (element) {
 
             element.style.display =
-                currentUser ? "" : "none";
+                currentUser
+                    ? ""
+                    : "none";
+
         });
 
 
@@ -666,11 +1086,16 @@ function updateAuthNavigation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-auth-guest]")
+        .querySelectorAll(
+            "[data-auth-guest]"
+        )
         .forEach(function (element) {
 
             element.style.display =
-                currentUser ? "none" : "";
+                currentUser
+                    ? "none"
+                    : "";
+
         });
 
 
@@ -680,27 +1105,14 @@ function updateAuthNavigation() {
 
     document
         .querySelectorAll(
-            "[data-auth-logout], .logout-btn"
+            "[data-auth-logout], .logout-btn, [data-navbar-logout]"
         )
         .forEach(function (button) {
 
-            if (
-                button.dataset.authListenerAttached === "true"
-            ) {
-                return;
-            }
-
-            button.dataset.authListenerAttached = "true";
-
-            button.addEventListener(
-                "click",
-                async function (event) {
-
-                    event.preventDefault();
-
-                    await logoutUser();
-                }
+            attachLogoutListener(
+                button
             );
+
         });
 }
 
@@ -714,9 +1126,11 @@ function updateUserInformation() {
     const currentUser =
         getCurrentUser();
 
+
     if (!currentUser) {
         return;
     }
+
 
     const name =
         currentUser.name ||
@@ -724,7 +1138,9 @@ function updateUserInformation() {
         "PawPal User";
 
     const role =
-        formatRole(currentUser.role);
+        formatRole(
+            currentUser.role
+        );
 
     const initials =
         getInitials(name);
@@ -735,7 +1151,9 @@ function updateUserInformation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-user-name]")
+        .querySelectorAll(
+            "[data-user-name]"
+        )
         .forEach(function (element) {
 
             element.textContent =
@@ -748,7 +1166,9 @@ function updateUserInformation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-user-role]")
+        .querySelectorAll(
+            "[data-user-role]"
+        )
         .forEach(function (element) {
 
             element.textContent =
@@ -761,7 +1181,9 @@ function updateUserInformation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-user-email]")
+        .querySelectorAll(
+            "[data-user-email]"
+        )
         .forEach(function (element) {
 
             if (
@@ -785,7 +1207,9 @@ function updateUserInformation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-user-avatar]")
+        .querySelectorAll(
+            "[data-user-avatar]"
+        )
         .forEach(function (element) {
 
             element.textContent =
@@ -798,7 +1222,9 @@ function updateUserInformation() {
     ===================================================== */
 
     document
-        .querySelectorAll("[data-profile-name]")
+        .querySelectorAll(
+            "[data-profile-name]"
+        )
         .forEach(function (element) {
 
             if (!element.value) {
@@ -817,26 +1243,15 @@ function updateUserInformation() {
 function setupLogoutButtons() {
 
     document
-        .querySelectorAll(".logout-btn")
+        .querySelectorAll(
+            ".logout-btn, [data-auth-logout], [data-navbar-logout]"
+        )
         .forEach(function (button) {
 
-            if (
-                button.dataset.logoutAttached === "true"
-            ) {
-                return;
-            }
-
-            button.dataset.logoutAttached = "true";
-
-            button.addEventListener(
-                "click",
-                async function (event) {
-
-                    event.preventDefault();
-
-                    await logoutUser();
-                }
+            attachLogoutListener(
+                button
             );
+
         });
 }
 
@@ -845,31 +1260,54 @@ function setupLogoutButtons() {
    INITIALIZATION
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+function initializePawPalAuth() {
 
-        /*
-         * Protect dashboards.
-         */
-        protectDashboard();
+    /*
+     * Protect dashboards.
+     */
 
-        /*
-         * Update user information.
-         */
-        updateUserInformation();
+    protectDashboard();
 
-        /*
-         * Update navbar authentication.
-         */
-        updateAuthNavigation();
 
-        /*
-         * Setup logout buttons.
-         */
-        setupLogoutButtons();
-    }
-);
+    /*
+     * Update user information.
+     */
+
+    updateUserInformation();
+
+
+    /*
+     * Update navbar authentication.
+     */
+
+    updateAuthNavigation();
+
+
+    /*
+     * Setup logout buttons.
+     */
+
+    setupLogoutButtons();
+}
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializePawPalAuth
+    );
+
+} else {
+
+    initializePawPalAuth();
+}
 
 
 /* =========================================================
@@ -903,4 +1341,5 @@ window.PawPalAuth = {
     updateUserInformation,
 
     protectDashboard
+
 };
