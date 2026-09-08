@@ -1,8 +1,8 @@
-```javascript
 document.addEventListener("DOMContentLoaded", function () {
+
     /* =====================================================
        PAWPAL ADOPTER DASHBOARD
-       FRONTEND + AUTH INTEGRATION
+       FRONTEND + AUTH + SUPABASE FAVOURITES
     ====================================================== */
 
     const currentUser =
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         typeof window.PawPalAuth.getCurrentUser === "function"
             ? window.PawPalAuth.getCurrentUser()
             : null;
+
 
     /* =====================================================
        ELEMENTS
@@ -36,11 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const toast =
         document.getElementById("dashboardToast");
 
+
     /* =====================================================
        MOBILE SIDEBAR
     ====================================================== */
 
     function openSidebar() {
+
         if (sidebar) {
             sidebar.classList.add("open");
         }
@@ -52,7 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.add("sidebar-open");
     }
 
+
     function closeSidebar() {
+
         if (sidebar) {
             sidebar.classList.remove("open");
         }
@@ -64,33 +69,48 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.remove("sidebar-open");
     }
 
+
     if (mobileMenuButton) {
-        mobileMenuButton.addEventListener("click", function () {
-            if (
-                sidebar &&
-                sidebar.classList.contains("open")
-            ) {
-                closeSidebar();
-            } else {
-                openSidebar();
+
+        mobileMenuButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    sidebar &&
+                    sidebar.classList.contains("open")
+                ) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
             }
-        });
+        );
     }
 
+
     if (sidebarOverlay) {
+
         sidebarOverlay.addEventListener(
             "click",
             closeSidebar
         );
     }
 
+
     /* =====================================================
        TOAST
     ====================================================== */
 
-    function showToast(message, type = "success") {
+    function showToast(
+        message,
+        type = "success"
+    ) {
+
         if (!toast) {
+
             console.log(message);
+
             return;
         }
 
@@ -99,49 +119,86 @@ document.addEventListener("DOMContentLoaded", function () {
         toast.className =
             "dashboard-toast show " + type;
 
-        clearTimeout(window.pawpalAdopterToast);
+        clearTimeout(
+            window.pawpalAdopterToast
+        );
 
         window.pawpalAdopterToast =
-            setTimeout(function () {
-                toast.classList.remove("show");
-            }, 3000);
+            setTimeout(
+                function () {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3000
+            );
     }
+
 
     /* =====================================================
        SECTION NAVIGATION
     ====================================================== */
 
-    function showSection(sectionId, title) {
+    function showSection(
+        sectionId,
+        title
+    ) {
+
         const target =
-            document.getElementById(sectionId);
+            document.getElementById(
+                sectionId
+            );
 
         if (!target) {
+
             showToast(
                 "Section not found.",
                 "error"
             );
+
             return;
         }
 
-        sections.forEach(function (section) {
-            section.style.display = "none";
-        });
+        sections.forEach(
+            function (section) {
 
-        target.style.display = "block";
+                section.style.display =
+                    "none";
+            }
+        );
 
-        if (topbarTitle && title) {
-            topbarTitle.textContent = title;
+        target.style.display =
+            "block";
+
+        if (
+            topbarTitle &&
+            title
+        ) {
+
+            topbarTitle.textContent =
+                title;
         }
 
-        sidebarLinks.forEach(function (link) {
-            link.classList.remove("active");
+        sidebarLinks.forEach(
+            function (link) {
 
-            if (
-                link.dataset.section === sectionId
-            ) {
-                link.classList.add("active");
+                link.classList.remove(
+                    "active"
+                );
+
+                if (
+                    link.dataset.section ===
+                    sectionId
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+                }
             }
-        });
+        );
 
         closeSidebar();
 
@@ -157,47 +214,53 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
     /* =====================================================
        SIDEBAR NAVIGATION
     ====================================================== */
 
-    sidebarLinks.forEach(function (link) {
-        link.addEventListener("click", function (event) {
-            const section =
-                link.dataset.section;
+    sidebarLinks.forEach(
+        function (link) {
 
-            /*
-             * Links without data-section are normal
-             * navigation links such as Back to PawPal.
-             */
-            if (!section) {
-                return;
-            }
+            link.addEventListener(
+                "click",
+                function (event) {
 
-            event.preventDefault();
+                    const section =
+                        link.dataset.section;
 
-            const titleElement =
-                link.querySelector(
-                    ".sidebar-link-text"
-                );
+                    if (!section) {
+                        return;
+                    }
 
-            const title =
-                titleElement
-                    ? titleElement.textContent.trim()
-                    : "Dashboard";
+                    event.preventDefault();
 
-            showSection(
-                section,
-                title
+                    const titleElement =
+                        link.querySelector(
+                            ".sidebar-link-text"
+                        );
+
+                    const title =
+                        titleElement
+                            ? titleElement.textContent.trim()
+                            : "Dashboard";
+
+                    showSection(
+                        section,
+                        title
+                    );
+                }
             );
-        });
-    });
+        }
+    );
+
 
     /* =====================================================
        HASH NAVIGATION
     ====================================================== */
 
     function handleHash() {
+
         const hash =
             window.location.hash
                 .replace("#", "")
@@ -221,25 +284,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 '"]'
             );
 
-        let title = "Dashboard";
+        let title =
+            "Dashboard";
 
         if (matchingLink) {
+
             const titleElement =
                 matchingLink.querySelector(
                     ".sidebar-link-text"
                 );
 
             if (titleElement) {
+
                 title =
                     titleElement.textContent.trim();
             }
+
         } else {
+
             title =
                 hash
                     .replace(/-/g, " ")
-                    .replace(/\b\w/g, function (letter) {
-                        return letter.toUpperCase();
-                    });
+                    .replace(
+                        /\b\w/g,
+                        function (letter) {
+                            return letter.toUpperCase();
+                        }
+                    );
         }
 
         showSection(
@@ -248,7 +319,9 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
+
     handleHash();
+
 
     /* =====================================================
        PET SEARCH
@@ -260,389 +333,897 @@ document.addEventListener("DOMContentLoaded", function () {
             "#saved-pets .dashboard-search input"
         );
 
-    petSearchInputs.forEach(function (input) {
-        input.addEventListener(
-            "input",
-            function () {
-                const searchTerm =
-                    input.value
-                        .trim()
-                        .toLowerCase();
 
-                const section =
-                    input.closest(
-                        ".dashboard-section"
-                    );
+    petSearchInputs.forEach(
+        function (input) {
 
-                if (!section) {
-                    return;
-                }
+            input.addEventListener(
+                "input",
+                function () {
 
-                const cards =
-                    section.querySelectorAll(
-                        ".pet-card"
-                    );
-
-                let visibleCount = 0;
-
-                cards.forEach(function (card) {
-                    const text =
-                        card.textContent
+                    const searchTerm =
+                        input.value
+                            .trim()
                             .toLowerCase();
 
-                    const matches =
-                        !searchTerm ||
-                        text.includes(searchTerm);
+                    const section =
+                        input.closest(
+                            ".dashboard-section"
+                        );
 
-                    card.style.display =
-                        matches
-                            ? ""
-                            : "none";
-
-                    if (matches) {
-                        visibleCount++;
+                    if (!section) {
+                        return;
                     }
-                });
 
-                /*
-                 * Only show the message when the user
-                 * actually searched and nothing matched.
-                 */
-                if (
-                    searchTerm &&
-                    visibleCount === 0
-                ) {
-                    showToast(
-                        "No pets matched your search.",
-                        "info"
+                    const cards =
+                        section.querySelectorAll(
+                            ".pet-card"
+                        );
+
+                    let visibleCount = 0;
+
+                    cards.forEach(
+                        function (card) {
+
+                            const text =
+                                card.textContent
+                                    .toLowerCase();
+
+                            const matches =
+                                !searchTerm ||
+                                text.includes(
+                                    searchTerm
+                                );
+
+                            card.style.display =
+                                matches
+                                    ? ""
+                                    : "none";
+
+                            if (matches) {
+                                visibleCount++;
+                            }
+                        }
                     );
+
+
+                    if (
+                        searchTerm &&
+                        visibleCount === 0
+                    ) {
+
+                        showToast(
+                            "No pets matched your search.",
+                            "info"
+                        );
+                    }
                 }
-            }
-        );
-    });
+            );
+        }
+    );
+
 
     /* =====================================================
        PET CARD NAVIGATION
     ====================================================== */
 
-    document.querySelectorAll(
-        ".pet-card"
-    ).forEach(function (card) {
-        const detailsLink =
-            card.querySelector(
-                "a[href*='pet-details']"
-            );
+    document
+        .querySelectorAll(".pet-card")
+        .forEach(
+            function (card) {
 
-        if (detailsLink) {
-            return;
-        }
+                const detailsLink =
+                    card.querySelector(
+                        "a[href*='pet-details']"
+                    );
 
-        const petId =
-            card.dataset.details ||
-            card.dataset.pet;
-
-        if (!petId) {
-            return;
-        }
-
-        card.style.cursor = "pointer";
-
-        card.addEventListener(
-            "click",
-            function (event) {
-                /*
-                 * Don't navigate when clicking
-                 * favourite or another interactive element.
-                 */
-                if (
-                    event.target.closest(
-                        ".pet-favourite, button, a, input"
-                    )
-                ) {
+                if (detailsLink) {
                     return;
                 }
 
-                window.location.href =
-                    "pet-details.html?pet=" +
-                    encodeURIComponent(
-                        petId
-                    );
+                const petId =
+                    card.dataset.petId ||
+                    card.dataset.details ||
+                    card.dataset.pet;
+
+                if (!petId) {
+                    return;
+                }
+
+                card.style.cursor =
+                    "pointer";
+
+                card.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            event.target.closest(
+                                ".pet-favourite, .pet-heart, button, a, input"
+                            )
+                        ) {
+                            return;
+                        }
+
+                        window.location.href =
+                            "pet-details.html?pet=" +
+                            encodeURIComponent(
+                                petId
+                            );
+                    }
+                );
             }
         );
-    });
+
 
     /* =====================================================
-       FAVOURITES
+       FAVOURITES — SUPABASE
     ====================================================== */
 
     function getPetId(card) {
+
+        /*
+         * IMPORTANT:
+         *
+         * Your pets page uses:
+         *
+         * data-pet-id="1"
+         *
+         * So data-pet-id MUST be checked first.
+         *
+         * The other two are kept as fallbacks
+         * for older dashboard cards.
+         */
+
         return (
+            card.dataset.petId ||
             card.dataset.details ||
             card.dataset.pet ||
-            card.dataset.name ||
-            "pet"
+            ""
         );
     }
 
-    function getFavouriteKey(petId) {
-        return (
-            "pawpal-favorite-" +
-            String(petId)
-                .toLowerCase()
-                .trim()
-        );
-    }
 
-    function updateFavouriteButton(button) {
-        const card =
-            button.closest(".pet-card");
+    /* =====================================================
+       GET USER FAVOURITE PET IDS
+    ====================================================== */
 
-        if (!card) {
-            return;
+    async function getFavouritePetIds() {
+
+        if (
+            !currentUser ||
+            !currentUser.id
+        ) {
+
+            return [];
         }
 
-        const petId =
-            getPetId(card);
+        if (
+            !window.supabaseClient
+        ) {
 
-        const storageKey =
-            getFavouriteKey(petId);
+            console.error(
+                "PawPal: Supabase client unavailable."
+            );
 
-        const saved =
-            localStorage.getItem(
-                storageKey
-            ) === "true";
+            return [];
+        }
+
+        const {
+            data,
+            error
+        } =
+            await window.supabaseClient
+                .from("favourite_pets")
+                .select("pet_id")
+                .eq(
+                    "user_id",
+                    currentUser.id
+                );
+
+
+        if (error) {
+
+            console.error(
+                "PawPal: Could not load favourites:",
+                error
+            );
+
+            return [];
+        }
+
+        return (
+            data || []
+        ).map(
+            function (row) {
+
+                return String(
+                    row.pet_id
+                );
+            }
+        );
+    }
+
+
+    /* =====================================================
+       UPDATE HEART BUTTON
+    ====================================================== */
+
+    function updateFavouriteButton(
+        button,
+        saved
+    ) {
+
+        if (!button) {
+            return;
+        }
 
         button.classList.toggle(
             "active",
             saved
         );
 
+        button.classList.toggle(
+            "favourite",
+            saved
+        );
+
         button.textContent =
-            saved ? "♥" : "♡";
+            saved
+                ? "♥"
+                : "♡";
 
         button.setAttribute(
             "aria-pressed",
             String(saved)
         );
+
+        button.setAttribute(
+            "aria-label",
+            saved
+                ? "Remove from favourites"
+                : "Add to favourites"
+        );
     }
 
-    document.querySelectorAll(
-        ".pet-favourite"
-    ).forEach(function (button) {
-        const card =
-            button.closest(".pet-card");
 
-        if (!card) {
+    /* =====================================================
+       LOAD FAVOURITES
+    ====================================================== */
+
+    async function loadFavourites() {
+
+        if (!currentUser) {
+
+            console.log(
+                "PawPal: No logged-in user. Favourites not loaded."
+            );
+
             return;
         }
 
-        updateFavouriteButton(button);
+        const favouriteIds =
+            await getFavouritePetIds();
 
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
-                event.stopPropagation();
 
-                const petId =
-                    getPetId(card);
+        console.log(
+            "PawPal: Loaded favourite pet IDs:",
+            favouriteIds
+        );
 
-                const storageKey =
-                    getFavouriteKey(petId);
 
-                const currentlySaved =
-                    localStorage.getItem(
-                        storageKey
-                    ) === "true";
+        document
+            .querySelectorAll(
+                ".pet-favourite, .pet-heart"
+            )
+            .forEach(
+                function (button) {
 
-                const newState =
-                    !currentlySaved;
+                    const card =
+                        button.closest(
+                            ".pet-card"
+                        );
 
-                localStorage.setItem(
-                    storageKey,
-                    String(newState)
-                );
+                    if (!card) {
+                        return;
+                    }
 
-                updateFavouriteButton(
-                    button
+                    const petId =
+                        getPetId(card);
+
+                    if (!petId) {
+
+                        console.warn(
+                            "PawPal: Favourite button card has no pet ID.",
+                            card
+                        );
+
+                        return;
+                    }
+
+                    const saved =
+                        favouriteIds.includes(
+                            String(petId)
+                        );
+
+                    updateFavouriteButton(
+                        button,
+                        saved
+                    );
+                }
+            );
+
+
+        updateSavedPets(
+            favouriteIds
+        );
+    }
+
+
+    /* =====================================================
+       TOGGLE FAVOURITE
+    ====================================================== */
+
+    async function toggleFavourite(
+        button,
+        card
+    ) {
+
+        if (!currentUser) {
+
+            showToast(
+                "Please log in to save your favourite pets.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (!window.supabaseClient) {
+
+            showToast(
+                "Supabase is unavailable. Please refresh the page.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const petId =
+            getPetId(card);
+
+
+        if (!petId) {
+
+            showToast(
+                "Unable to identify this pet.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        const numericPetId =
+            Number(petId);
+
+
+        if (
+            !Number.isFinite(
+                numericPetId
+            )
+        ) {
+
+            console.error(
+                "PawPal: Invalid pet ID:",
+                petId
+            );
+
+            showToast(
+                "Invalid pet ID.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* =================================================
+           CHECK EXISTING FAVOURITE
+        ================================================== */
+
+        const {
+            data: existing,
+            error: checkError
+        } =
+            await window.supabaseClient
+                .from("favourite_pets")
+                .select("id")
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .eq(
+                    "pet_id",
+                    numericPetId
+                )
+                .maybeSingle();
+
+
+        if (checkError) {
+
+            console.error(
+                "PawPal: Favourite check failed:",
+                checkError
+            );
+
+            showToast(
+                "Could not update favourite. Please try again.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* =================================================
+           REMOVE FAVOURITE
+        ================================================== */
+
+        if (existing) {
+
+            const {
+                error
+            } =
+                await window.supabaseClient
+                    .from("favourite_pets")
+                    .delete()
+                    .eq(
+                        "id",
+                        existing.id
+                    )
+                    .eq(
+                        "user_id",
+                        currentUser.id
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "PawPal: Remove favourite failed:",
+                    error
                 );
 
                 showToast(
-                    newState
-                        ? "Pet saved to your favourites 💗"
-                        : "Pet removed from your favourites.",
-                    "success"
+                    "Could not remove favourite.",
+                    "error"
                 );
 
-                updateSavedPets();
+                return;
             }
-        );
-    });
 
-    /* =====================================================
-       SAVED PETS
-    ====================================================== */
 
-    function updateSavedPets() {
-        document.querySelectorAll(
-            "#saved-pets .pet-card"
-        ).forEach(function (card) {
-            const petId =
-                getPetId(card);
-
-            const storageKey =
-                getFavouriteKey(petId);
-
-            const isSaved =
-                localStorage.getItem(
-                    storageKey
-                ) === "true";
-
-            card.classList.toggle(
-                "saved",
-                isSaved
+            updateFavouriteButton(
+                button,
+                false
             );
-        });
+
+
+            showToast(
+                "Pet removed from your favourites.",
+                "success"
+            );
+
+        }
+
+
+        /* =================================================
+           ADD FAVOURITE
+        ================================================== */
+
+        else {
+
+            const {
+                error
+            } =
+                await window.supabaseClient
+                    .from("favourite_pets")
+                    .insert({
+                        user_id:
+                            currentUser.id,
+
+                        pet_id:
+                            numericPetId
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "PawPal: Save favourite failed:",
+                    error
+                );
+
+                showToast(
+                    "Could not save favourite.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            updateFavouriteButton(
+                button,
+                true
+            );
+
+
+            showToast(
+                "Pet saved to your favourites 💗",
+                "success"
+            );
+        }
+
+
+        /*
+         * Refresh the saved-pets state
+         * from Supabase.
+         */
+
+        await updateSavedPetsFromSupabase();
     }
 
-    updateSavedPets();
+
+    /* =====================================================
+       FAVOURITE BUTTON LISTENERS
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".pet-favourite, .pet-heart"
+        )
+        .forEach(
+            function (button) {
+
+                /*
+                 * Prevent duplicate listeners
+                 * if another PawPal script has already
+                 * initialized this button.
+                 */
+
+                if (
+                    button.dataset.dashboardFavouriteReady ===
+                    "true"
+                ) {
+                    return;
+                }
+
+
+                const card =
+                    button.closest(
+                        ".pet-card"
+                    );
+
+                if (!card) {
+                    return;
+                }
+
+
+                button.dataset.dashboardFavouriteReady =
+                    "true";
+
+
+                button.addEventListener(
+                    "click",
+                    async function (event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+
+                        if (
+                            button.disabled
+                        ) {
+                            return;
+                        }
+
+
+                        button.disabled =
+                            true;
+
+
+                        try {
+
+                            await toggleFavourite(
+                                button,
+                                card
+                            );
+
+                        } catch (error) {
+
+                            console.error(
+                                "PawPal: Favourite error:",
+                                error
+                            );
+
+                            showToast(
+                                "Something went wrong. Please try again.",
+                                "error"
+                            );
+
+                        } finally {
+
+                            button.disabled =
+                                false;
+                        }
+                    }
+                );
+            }
+        );
+
+
+    /* =====================================================
+       UPDATE SAVED PET CARDS
+    ====================================================== */
+
+    function updateSavedPets(
+        favouriteIds = []
+    ) {
+
+        document
+            .querySelectorAll(
+                "#saved-pets .pet-card"
+            )
+            .forEach(
+                function (card) {
+
+                    const petId =
+                        getPetId(card);
+
+                    const saved =
+                        favouriteIds.includes(
+                            String(petId)
+                        );
+
+                    card.classList.toggle(
+                        "saved",
+                        saved
+                    );
+
+
+                    /*
+                     * Also update the heart inside
+                     * saved pet cards if present.
+                     */
+
+                    const button =
+                        card.querySelector(
+                            ".pet-favourite, .pet-heart"
+                        );
+
+                    if (button) {
+
+                        updateFavouriteButton(
+                            button,
+                            saved
+                        );
+                    }
+                }
+            );
+    }
+
+
+    /* =====================================================
+       UPDATE SAVED PETS FROM SUPABASE
+    ====================================================== */
+
+    async function updateSavedPetsFromSupabase() {
+
+        if (!currentUser) {
+            return;
+        }
+
+        const favouriteIds =
+            await getFavouritePetIds();
+
+        updateSavedPets(
+            favouriteIds
+        );
+    }
+
+
+    /* =====================================================
+       INITIAL FAVOURITE LOAD
+    ====================================================== */
+
+    loadFavourites();
+
 
     /* =====================================================
        ADOPTION BUTTONS
     ====================================================== */
 
-    document.querySelectorAll(
-        "[data-adopt-pet]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
-                event.stopPropagation();
+    document
+        .querySelectorAll(
+            "[data-adopt-pet]"
+        )
+        .forEach(
+            function (button) {
 
-                const pet =
-                    button.dataset.adoptPet;
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                if (pet) {
-                    window.location.href =
-                        "adoption-form.html?pet=" +
-                        encodeURIComponent(
-                            pet
-                        );
-                } else {
-                    window.location.href =
-                        "adoption-form.html";
-                }
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const pet =
+                            button.dataset.adoptPet;
+
+                        if (pet) {
+
+                            window.location.href =
+                                "adoption-form.html?pet=" +
+                                encodeURIComponent(
+                                    pet
+                                );
+
+                        } else {
+
+                            window.location.href =
+                                "adoption-form.html";
+                        }
+                    }
+                );
             }
         );
-    });
+
 
     /* =====================================================
        APPLICATION STATUS
     ====================================================== */
 
-    document.querySelectorAll(
-        "[data-application-action]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
+    document
+        .querySelectorAll(
+            "[data-application-action]"
+        )
+        .forEach(
+            function (button) {
 
-                const action =
-                    button.dataset.applicationAction;
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                if (action === "view") {
-                    window.location.href =
-                        "adoption-status.html";
-                    return;
-                }
+                        event.preventDefault();
 
-                if (action !== "cancel") {
-                    return;
-                }
+                        const action =
+                            button.dataset.applicationAction;
 
-                const confirmed =
-                    confirm(
-                        "Are you sure you want to cancel this adoption application?"
-                    );
 
-                if (!confirmed) {
-                    return;
-                }
+                        if (action === "view") {
 
-                const row =
-                    button.closest(
-                        "tr, .application-item"
-                    );
+                            window.location.href =
+                                "adoption-status.html";
 
-                if (row) {
-                    const status =
-                        row.querySelector(
-                            ".status"
+                            return;
+                        }
+
+
+                        if (
+                            action !== "cancel"
+                        ) {
+                            return;
+                        }
+
+
+                        const confirmed =
+                            confirm(
+                                "Are you sure you want to cancel this adoption application?"
+                            );
+
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+
+                        const row =
+                            button.closest(
+                                "tr, .application-item"
+                            );
+
+
+                        if (row) {
+
+                            const status =
+                                row.querySelector(
+                                    ".status"
+                                );
+
+                            if (status) {
+
+                                status.textContent =
+                                    "Cancelled";
+
+                                status.className =
+                                    "status status-rejected";
+                            }
+
+                            button.style.display =
+                                "none";
+                        }
+
+
+                        showToast(
+                            "Application cancelled.",
+                            "success"
                         );
-
-                    if (status) {
-                        status.textContent =
-                            "Cancelled";
-
-                        status.className =
-                            "status status-rejected";
                     }
-
-                    button.style.display =
-                        "none";
-                }
-
-                showToast(
-                    "Application cancelled.",
-                    "success"
                 );
             }
         );
-    });
+
 
     /* =====================================================
        ADOPTION JOURNEY
     ====================================================== */
 
-    document.querySelectorAll(
-        "[data-journey-action]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
+    document
+        .querySelectorAll(
+            "[data-journey-action]"
+        )
+        .forEach(
+            function (button) {
 
-                const action =
-                    button.dataset.journeyAction;
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                if (action === "meet") {
-                    showToast(
-                        "Meet & greet request sent! 🐾",
-                        "success"
-                    );
+                        event.preventDefault();
 
-                    button.textContent =
-                        "Request Sent";
+                        const action =
+                            button.dataset.journeyAction;
 
-                    button.disabled =
-                        true;
 
-                    button.classList.add(
-                        "disabled"
-                    );
-                }
+                        if (
+                            action === "meet"
+                        ) {
 
-                if (action === "continue") {
-                    showToast(
-                        "Your adoption journey continues! 💗",
-                        "success"
-                    );
-                }
+                            showToast(
+                                "Meet & greet request sent! 🐾",
+                                "success"
+                            );
+
+                            button.textContent =
+                                "Request Sent";
+
+                            button.disabled =
+                                true;
+
+                            button.classList.add(
+                                "disabled"
+                            );
+                        }
+
+
+                        if (
+                            action === "continue"
+                        ) {
+
+                            showToast(
+                                "Your adoption journey continues! 💗",
+                                "success"
+                            );
+                        }
+                    }
+                );
             }
         );
-    });
+
 
     /* =====================================================
        NOTIFICATIONS
@@ -653,10 +1234,13 @@ document.addEventListener("DOMContentLoaded", function () {
             ".topbar-icon-btn"
         );
 
+
     if (notificationButton) {
+
         notificationButton.addEventListener(
             "click",
             function (event) {
+
                 event.preventDefault();
 
                 const notificationSection =
@@ -664,12 +1248,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         "notifications"
                     );
 
+
                 if (notificationSection) {
+
                     showSection(
                         "notifications",
                         "Notifications"
                     );
+
                 } else {
+
                     showToast(
                         "You have new PawPal notifications 🐾",
                         "info"
@@ -679,62 +1267,78 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
+
     /* =====================================================
        MARK NOTIFICATIONS AS READ
     ====================================================== */
 
-    document.querySelectorAll(
-        ".notification-item, .activity-item"
-    ).forEach(function (item) {
-        item.addEventListener(
-            "click",
-            function () {
-                item.classList.add(
-                    "read"
+    document
+        .querySelectorAll(
+            ".notification-item, .activity-item"
+        )
+        .forEach(
+            function (item) {
+
+                item.addEventListener(
+                    "click",
+                    function () {
+
+                        item.classList.add(
+                            "read"
+                        );
+                    }
                 );
             }
         );
-    });
+
 
     /* =====================================================
        SETTINGS
     ====================================================== */
 
-    document.querySelectorAll(
-        ".toggle input"
-    ).forEach(function (toggle) {
-        toggle.addEventListener(
-            "change",
-            function () {
-                const row =
-                    toggle.closest(
-                        ".setting-row"
-                    );
+    document
+        .querySelectorAll(
+            ".toggle input"
+        )
+        .forEach(
+            function (toggle) {
 
-                const title =
-                    row
-                        ? row.querySelector(
-                              "h4, h3, .setting-title"
-                          )
-                        : null;
+                toggle.addEventListener(
+                    "change",
+                    function () {
 
-                const settingName =
-                    title
-                        ? title.textContent.trim()
-                        : "Setting";
+                        const row =
+                            toggle.closest(
+                                ".setting-row"
+                            );
 
-                showToast(
-                    settingName +
-                        (
-                            toggle.checked
-                                ? " enabled."
-                                : " disabled."
-                        ),
-                    "success"
+                        const title =
+                            row
+                                ? row.querySelector(
+                                    "h4, h3, .setting-title"
+                                )
+                                : null;
+
+                        const settingName =
+                            title
+                                ? title.textContent.trim()
+                                : "Setting";
+
+
+                        showToast(
+                            settingName +
+                            (
+                                toggle.checked
+                                    ? " enabled."
+                                    : " disabled."
+                            ),
+                            "success"
+                        );
+                    }
                 );
             }
         );
-    });
+
 
     /* =====================================================
        PROFILE
@@ -745,27 +1349,29 @@ document.addEventListener("DOMContentLoaded", function () {
             "profileForm"
         );
 
+
     if (profileForm) {
+
         const nameInput =
             profileForm.querySelector(
                 '[name="name"]'
             );
 
-        /*
-         * Load current user information
-         * into the profile form.
-         */
+
         if (
             nameInput &&
             currentUser
         ) {
+
             nameInput.value =
                 currentUser.name || "";
         }
 
+
         profileForm.addEventListener(
             "submit",
             async function (event) {
+
                 event.preventDefault();
 
                 const newName =
@@ -773,23 +1379,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         ? nameInput.value.trim()
                         : "";
 
+
                 if (!newName) {
+
                     showToast(
                         "Please enter your name.",
                         "error"
                     );
+
                     return;
                 }
 
-                /*
-                 * Update PawPal local auth information.
-                 */
+
+                /* Update local auth */
+
                 if (
                     currentUser &&
                     window.PawPalAuth &&
                     typeof window.PawPalAuth.saveCurrentUser ===
                         "function"
                 ) {
+
                     currentUser.name =
                         newName;
 
@@ -798,27 +1408,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                 }
 
-                /*
-                 * Also update Supabase metadata
-                 * when Supabase is available.
-                 */
+
+                /* Update Supabase metadata */
+
                 if (
                     window.supabaseClient &&
+                    window.supabaseClient.auth &&
                     typeof window.supabaseClient.auth
                         .updateUser ===
                         "function"
                 ) {
+
                     try {
+
                         await window.supabaseClient.auth.updateUser(
                             {
                                 data: {
-                                    full_name: newName,
+                                    full_name:
+                                        newName,
+
                                     first_name:
-                                        newName.split(" ")[0]
+                                        newName.split(
+                                            " "
+                                        )[0]
                                 }
                             }
                         );
+
                     } catch (error) {
+
                         console.warn(
                             "Supabase profile update warning:",
                             error
@@ -826,40 +1444,58 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
 
-                /*
-                 * Update visible name immediately.
-                 */
-                document.querySelectorAll(
-                    "[data-user-name]"
-                ).forEach(function (element) {
-                    element.textContent =
-                        newName;
-                });
 
-                document.querySelectorAll(
-                    "[data-profile-name]"
-                ).forEach(function (element) {
-                    element.value =
-                        newName;
-                });
+                /* Update visible name */
 
-                /*
-                 * Update avatar initials.
-                 */
-                document.querySelectorAll(
-                    "[data-user-avatar]"
-                ).forEach(function (element) {
-                    if (
-                        window.PawPalAuth &&
-                        typeof window.PawPalAuth.getInitials ===
-                            "function"
-                    ) {
-                        element.textContent =
-                            window.PawPalAuth.getInitials(
-                                newName
-                            );
-                    }
-                });
+                document
+                    .querySelectorAll(
+                        "[data-user-name]"
+                    )
+                    .forEach(
+                        function (element) {
+
+                            element.textContent =
+                                newName;
+                        }
+                    );
+
+
+                document
+                    .querySelectorAll(
+                        "[data-profile-name]"
+                    )
+                    .forEach(
+                        function (element) {
+
+                            element.value =
+                                newName;
+                        }
+                    );
+
+
+                /* Update avatar */
+
+                document
+                    .querySelectorAll(
+                        "[data-user-avatar]"
+                    )
+                    .forEach(
+                        function (element) {
+
+                            if (
+                                window.PawPalAuth &&
+                                typeof window.PawPalAuth.getInitials ===
+                                    "function"
+                            ) {
+
+                                element.textContent =
+                                    window.PawPalAuth.getInitials(
+                                        newName
+                                    );
+                            }
+                        }
+                    );
+
 
                 showToast(
                     "Profile updated successfully.",
@@ -869,215 +1505,273 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
+
     /* =====================================================
        USER INFORMATION
     ====================================================== */
 
     if (currentUser) {
-        document.querySelectorAll(
-            "[data-user-name]"
-        ).forEach(function (element) {
-            element.textContent =
-                currentUser.name || "";
-        });
 
-        document.querySelectorAll(
-            "[data-user-email]"
-        ).forEach(function (element) {
-            element.textContent =
-                currentUser.email || "";
-        });
+        document
+            .querySelectorAll(
+                "[data-user-name]"
+            )
+            .forEach(
+                function (element) {
 
-        document.querySelectorAll(
-            "[data-user-role]"
-        ).forEach(function (element) {
-            element.textContent =
-                window.PawPalAuth &&
-                typeof window.PawPalAuth.formatRole ===
-                    "function"
-                    ? window.PawPalAuth.formatRole(
-                          currentUser.role
-                      )
-                    : "Adopter";
-        });
+                    element.textContent =
+                        currentUser.name || "";
+                }
+            );
 
-        document.querySelectorAll(
-            "[data-user-avatar]"
-        ).forEach(function (element) {
-            element.textContent =
-                window.PawPalAuth &&
-                typeof window.PawPalAuth.getInitials ===
-                    "function"
-                    ? window.PawPalAuth.getInitials(
-                          currentUser.name || ""
-                      )
-                    : "AD";
-        });
+
+        document
+            .querySelectorAll(
+                "[data-user-email]"
+            )
+            .forEach(
+                function (element) {
+
+                    element.textContent =
+                        currentUser.email || "";
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-user-role]"
+            )
+            .forEach(
+                function (element) {
+
+                    element.textContent =
+                        window.PawPalAuth &&
+                        typeof window.PawPalAuth.formatRole ===
+                            "function"
+                            ? window.PawPalAuth.formatRole(
+                                currentUser.role
+                            )
+                            : "Adopter";
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                "[data-user-avatar]"
+            )
+            .forEach(
+                function (element) {
+
+                    element.textContent =
+                        window.PawPalAuth &&
+                        typeof window.PawPalAuth.getInitials ===
+                            "function"
+                            ? window.PawPalAuth.getInitials(
+                                currentUser.name || ""
+                            )
+                            : "AD";
+                }
+            );
     }
+
 
     /* =====================================================
        QUICK ACTIONS
     ====================================================== */
 
-    document.querySelectorAll(
-        "[data-dashboard-action]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                event.preventDefault();
+    document
+        .querySelectorAll(
+            "[data-dashboard-action]"
+        )
+        .forEach(
+            function (button) {
 
-                const action =
-                    button.dataset.dashboardAction;
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                const actions = {
-                    "explore-pets": [
-                        "explore-pets",
-                        "Explore Pets"
-                    ],
+                        event.preventDefault();
 
-                    "saved-pets": [
-                        "saved-pets",
-                        "Saved Pets"
-                    ],
+                        const action =
+                            button.dataset.dashboardAction;
 
-                    "applications": [
-                        "applications",
-                        "My Applications"
-                    ],
 
-                    "journey": [
-                        "adoption-journey",
-                        "Adoption Journey"
-                    ],
+                        const actions = {
 
-                    "notifications": [
-                        "notifications",
-                        "Notifications"
-                    ]
-                };
+                            "explore-pets": [
+                                "explore-pets",
+                                "Explore Pets"
+                            ],
 
-                if (actions[action]) {
-                    showSection(
-                        actions[action][0],
-                        actions[action][1]
-                    );
-                }
+                            "saved-pets": [
+                                "saved-pets",
+                                "Saved Pets"
+                            ],
+
+                            "applications": [
+                                "applications",
+                                "My Applications"
+                            ],
+
+                            "journey": [
+                                "adoption-journey",
+                                "Adoption Journey"
+                            ],
+
+                            "notifications": [
+                                "notifications",
+                                "Notifications"
+                            ]
+                        };
+
+
+                        if (actions[action]) {
+
+                            showSection(
+                                actions[action][0],
+                                actions[action][1]
+                            );
+                        }
+                    }
+                );
             }
         );
-    });
+
 
     /* =====================================================
        LOGOUT
-       IMPORTANT:
-       Use PawPalAuth.logoutUser()
-       instead of PawPalAuth.logout()
     ====================================================== */
 
-    document.querySelectorAll(
-        ".logout-btn, [data-logout]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            async function (event) {
-                event.preventDefault();
-                event.stopPropagation();
+    document
+        .querySelectorAll(
+            ".logout-btn, [data-logout]"
+        )
+        .forEach(
+            function (button) {
 
-                const confirmed =
-                    confirm(
-                        "Are you sure you want to log out?"
-                    );
+                button.addEventListener(
+                    "click",
+                    async function (event) {
 
-                if (!confirmed) {
-                    return;
-                }
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                if (
-                    window.PawPalAuth &&
-                    typeof window.PawPalAuth.logoutUser ===
-                        "function"
-                ) {
-                    await window.PawPalAuth.logoutUser();
-                    return;
-                }
 
-                /*
-                 * Emergency fallback.
-                 */
-                localStorage.removeItem(
-                    "pawpal-current-user"
+                        const confirmed =
+                            confirm(
+                                "Are you sure you want to log out?"
+                            );
+
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+
+                        if (
+                            window.PawPalAuth &&
+                            typeof window.PawPalAuth.logoutUser ===
+                                "function"
+                        ) {
+
+                            await window.PawPalAuth.logoutUser();
+
+                            return;
+                        }
+
+
+                        localStorage.removeItem(
+                            "pawpal-current-user"
+                        );
+
+                        window.location.href =
+                            "login.html";
+                    }
                 );
-
-                window.location.href =
-                    "login.html";
             }
         );
-    });
+
 
     /* =====================================================
        BACK TO PAWPAL
     ====================================================== */
 
-    document.querySelectorAll(
-        ".back-to-pawpal, [data-back-home]"
-    ).forEach(function (button) {
-        button.addEventListener(
-            "click",
-            function (event) {
-                const href =
-                    button.getAttribute(
-                        "href"
-                    );
+    document
+        .querySelectorAll(
+            ".back-to-pawpal, [data-back-home]"
+        )
+        .forEach(
+            function (button) {
 
-                if (href) {
-                    return;
-                }
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                event.preventDefault();
+                        const href =
+                            button.getAttribute(
+                                "href"
+                            );
 
-                window.location.href =
-                    "../index.html";
+                        if (href) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+                        window.location.href =
+                            "../index.html";
+                    }
+                );
             }
         );
-    });
+
 
     /* =====================================================
        INITIAL DASHBOARD STATE
     ====================================================== */
 
-    /*
-     * If there is no hash, show Explore Pets.
-     */
     if (!window.location.hash) {
+
         const exploreSection =
             document.getElementById(
                 "explore-pets"
             );
 
+
         if (exploreSection) {
-            sections.forEach(function (section) {
-                section.style.display =
-                    "none";
-            });
+
+            sections.forEach(
+                function (section) {
+
+                    section.style.display =
+                        "none";
+                }
+            );
 
             exploreSection.style.display =
                 "block";
         }
+
 
         const exploreLink =
             document.querySelector(
                 '.sidebar-link[data-section="explore-pets"]'
             );
 
+
         if (exploreLink) {
+
             exploreLink.classList.add(
                 "active"
             );
         }
     }
 
+
     console.log(
         "🐾 PawPal Adopter Dashboard loaded successfully."
     );
+
 });
-```

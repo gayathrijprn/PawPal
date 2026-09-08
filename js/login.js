@@ -1,4 +1,3 @@
-
 /* =========================================================
    PAWPAL — LOGIN
    =========================================================
@@ -6,7 +5,7 @@
    Responsibilities:
    - Validate login form
    - Authenticate using Supabase
-   - Read user's role
+   - Read user's role from public.profiles
    - Save current user
    - Redirect to the correct dashboard
 
@@ -92,7 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         message.textContent = text;
 
-        message.className = "login-message " + type;
+        message.className =
+            "login-message " + type;
 
         message.style.display = "block";
     }
@@ -106,7 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         message.textContent = "";
 
-        message.className = "login-message";
+        message.className =
+            "login-message";
 
         message.style.display = "none";
     }
@@ -189,17 +190,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function getDashboardPath(role) {
 
-        const normalizedRole = normalizeRole(role);
-
-        /*
-         * IMPORTANT:
-         * There is currently no shelter dashboard.
-         * Therefore shelter users temporarily go to
-         * the adopter dashboard.
-         *
-         * We can replace this once the shelter dashboard
-         * is created.
-         */
+        const normalizedRole =
+            normalizeRole(role);
 
         switch (normalizedRole) {
 
@@ -208,6 +200,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             case "owner":
                 return "dashboard-owner.html";
+
+            /*
+             * There is currently no shelter dashboard.
+             * Temporarily use adopter dashboard.
+             */
 
             case "shelter":
                 return "dashboard-adopter.html";
@@ -220,14 +217,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       CREATE CURRENT USER OBJECT
+       CREATE CURRENT USER
+       
+       IMPORTANT:
+       Role and name are taken from public.profiles.
+       Auth metadata is only used as a fallback.
     ===================================================== */
 
-    function createCurrentUser(user) {
+    function createCurrentUser(user, profile) {
 
-        const metadata = user.user_metadata || {};
+        const metadata =
+            user.user_metadata || {};
 
-        const role = normalizeRole(metadata.role);
+        const role =
+            normalizeRole(
+                profile?.role || metadata.role
+            );
 
         const firstName =
             metadata.first_name || "";
@@ -239,6 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `${firstName} ${lastName}`.trim();
 
         const displayName =
+            profile?.full_name ||
             metadataName ||
             metadata.full_name ||
             metadata.name ||
@@ -247,13 +253,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return {
 
-            id: user.id || "",
+            id:
+                user.id || "",
 
-            name: displayName,
+            name:
+                displayName,
 
-            email: user.email || "",
+            email:
+                user.email || "",
 
-            role: role
+            role:
+                role
         };
     }
 
@@ -262,346 +272,444 @@ document.addEventListener("DOMContentLoaded", function () {
        LOGIN SUBMIT
     ===================================================== */
 
-    form.addEventListener("submit", async function (event) {
+    form.addEventListener(
+        "submit",
+        async function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        hideMessage();
-
-
-        /* =================================================
-           GET VALUES
-        ================================================= */
-
-        const email =
-            emailInput
-                ? emailInput.value.trim().toLowerCase()
-                : "";
-
-        const password =
-            passwordInput
-                ? passwordInput.value
-                : "";
+            hideMessage();
 
 
-        /* =================================================
-           VALIDATION
-        ================================================= */
+            /* =================================================
+               GET VALUES
+            ================================================= */
 
-        if (!email) {
+            const email =
+                emailInput
+                    ? emailInput.value.trim().toLowerCase()
+                    : "";
 
-            showMessage(
-                "Please enter your email address.",
-                "error"
-            );
-
-            if (emailInput) {
-                emailInput.focus();
-            }
-
-            return;
-        }
+            const password =
+                passwordInput
+                    ? passwordInput.value
+                    : "";
 
 
-        if (!password) {
+            /* =================================================
+               VALIDATION
+            ================================================= */
 
-            showMessage(
-                "Please enter your password.",
-                "error"
-            );
+            if (!email) {
 
-            if (passwordInput) {
-                passwordInput.focus();
-            }
-
-            return;
-        }
-
-
-        /*
-         * Correct email regex.
-         */
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (!emailPattern.test(email)) {
-
-            showMessage(
-                "Please enter a valid email address.",
-                "error"
-            );
-
-            if (emailInput) {
-                emailInput.focus();
-            }
-
-            return;
-        }
-
-
-        /* =================================================
-           CHECK SUPABASE
-        ================================================= */
-
-        if (
-            typeof window.supabaseClient === "undefined" ||
-            !window.supabaseClient
-        ) {
-
-            console.error(
-                "PawPal Login: supabaseClient is unavailable."
-            );
-
-            showMessage(
-                "Authentication service is unavailable. Please refresh the page and try again.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        /* =================================================
-           LOADING
-        ================================================= */
-
-        setLoading(true);
-
-
-        try {
-
-            /* =============================================
-               REMOVE STALE LOCAL USER
-            ============================================= */
-
-            if (
-                window.PawPalAuth &&
-                typeof window.PawPalAuth.clearCurrentUser === "function"
-            ) {
-
-                window.PawPalAuth.clearCurrentUser();
-
-            } else {
-
-                localStorage.removeItem(
-                    "pawpal-current-user"
-                );
-            }
-
-
-            /* =============================================
-               SUPABASE LOGIN
-            ============================================= */
-
-            const {
-                data,
-                error
-            } = await window.supabaseClient.auth.signInWithPassword({
-
-                email: email,
-
-                password: password
-            });
-
-
-            /* =============================================
-               HANDLE SUPABASE ERROR
-            ============================================= */
-
-            if (error) {
-
-                console.error(
-                    "PawPal Login Error:",
-                    error
+                showMessage(
+                    "Please enter your email address.",
+                    "error"
                 );
 
-                const errorText =
-                    String(error.message || "")
-                        .toLowerCase();
-
-                let errorMessage =
-                    "Unable to log in. Please check your email and password.";
-
-
-                if (
-                    errorText.includes("email not confirmed")
-                ) {
-
-                    errorMessage =
-                        "Please confirm your email address before logging in.";
-
-                } else if (
-                    errorText.includes("invalid login credentials")
-                ) {
-
-                    errorMessage =
-                        "Incorrect email or password.";
-
-                } else if (
-                    errorText.includes("too many requests")
-                ) {
-
-                    errorMessage =
-                        "Too many login attempts. Please wait a moment and try again.";
-
-                } else if (error.message) {
-
-                    errorMessage =
-                        error.message;
+                if (emailInput) {
+                    emailInput.focus();
                 }
 
+                return;
+            }
+
+
+            if (!password) {
 
                 showMessage(
-                    errorMessage,
+                    "Please enter your password.",
                     "error"
                 );
+
+                if (passwordInput) {
+                    passwordInput.focus();
+                }
 
                 return;
             }
 
 
-            /* =============================================
-               USER CHECK
-            ============================================= */
-
-            const user = data?.user;
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-            if (!user) {
+            if (!emailPattern.test(email)) {
 
                 showMessage(
-                    "Login failed. No user account was returned.",
+                    "Please enter a valid email address.",
                     "error"
                 );
+
+                if (emailInput) {
+                    emailInput.focus();
+                }
 
                 return;
             }
 
 
-            /* =============================================
-               CREATE CURRENT USER
-            ============================================= */
-
-            const currentUser =
-                createCurrentUser(user);
-
-
-            console.log(
-                "PawPal: Logged in user:",
-                currentUser
-            );
-
-
-            /* =============================================
-               SAVE CURRENT USER
-            ============================================= */
+            /* =================================================
+               CHECK SUPABASE
+            ================================================= */
 
             if (
-                window.PawPalAuth &&
-                typeof window.PawPalAuth.saveCurrentUser === "function"
+                typeof window.supabaseClient === "undefined" ||
+                !window.supabaseClient
             ) {
 
-                window.PawPalAuth.saveCurrentUser(
-                    currentUser
+                console.error(
+                    "PawPal Login: supabaseClient is unavailable."
                 );
 
-            } else {
-
-                localStorage.setItem(
-                    "pawpal-current-user",
-                    JSON.stringify(currentUser)
+                showMessage(
+                    "Authentication service is unavailable. Please refresh the page and try again.",
+                    "error"
                 );
+
+                return;
             }
 
 
-            /* =============================================
-               REMEMBER ME
-            ============================================= */
+            /* =================================================
+               LOADING
+            ================================================= */
 
-            if (rememberMe) {
+            setLoading(true);
 
-                if (rememberMe.checked) {
 
-                    localStorage.setItem(
-                        "pawpalRememberMe",
-                        "true"
-                    );
+            try {
+
+                /* =============================================
+                   REMOVE STALE LOCAL USER
+                ============================================= */
+
+                if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.clearCurrentUser === "function"
+                ) {
+
+                    window.PawPalAuth.clearCurrentUser();
 
                 } else {
 
                     localStorage.removeItem(
-                        "pawpalRememberMe"
+                        "pawpal-current-user"
                     );
                 }
-            }
 
 
-            /* =============================================
-               SUCCESS MESSAGE
-            ============================================= */
+                /* =============================================
+                   SUPABASE LOGIN
+                ============================================= */
 
-            showMessage(
-                `Welcome back, ${currentUser.name}! 🐾`,
-                "success"
-            );
+                const {
+                    data,
+                    error
+                } =
+                    await window.supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
 
 
-            /* =============================================
-               DASHBOARD
-            ============================================= */
+                /* =============================================
+                   HANDLE SUPABASE ERROR
+                ============================================= */
 
-            const dashboard =
-                getDashboardPath(
+                if (error) {
+
+                    console.error(
+                        "PawPal Login Error:",
+                        error
+                    );
+
+                    const errorText =
+                        String(error.message || "")
+                            .toLowerCase();
+
+                    let errorMessage =
+                        "Unable to log in. Please check your email and password.";
+
+
+                    if (
+                        errorText.includes(
+                            "email not confirmed"
+                        )
+                    ) {
+
+                        errorMessage =
+                            "Please confirm your email address before logging in.";
+
+                    } else if (
+                        errorText.includes(
+                            "invalid login credentials"
+                        )
+                    ) {
+
+                        errorMessage =
+                            "Incorrect email or password.";
+
+                    } else if (
+                        errorText.includes(
+                            "too many requests"
+                        )
+                    ) {
+
+                        errorMessage =
+                            "Too many login attempts. Please wait a moment and try again.";
+
+                    } else if (error.message) {
+
+                        errorMessage =
+                            error.message;
+                    }
+
+
+                    showMessage(
+                        errorMessage,
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* =============================================
+                   USER CHECK
+                ============================================= */
+
+                const user =
+                    data?.user;
+
+
+                if (!user) {
+
+                    showMessage(
+                        "Login failed. No user account was returned.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* =============================================
+                   FETCH PROFILE FROM DATABASE
+                   
+                   THIS IS THE IMPORTANT FIX.
+                   
+                   The role is stored in:
+                   public.profiles.role
+                   
+                   NOT necessarily in:
+                   auth.users.user_metadata.role
+                ============================================= */
+
+                const {
+                    data: profile,
+                    error: profileError
+                } =
+                    await window.supabaseClient
+                        .from("profiles")
+                        .select("full_name, role")
+                        .eq("id", user.id)
+                        .single();
+
+
+                /* =============================================
+                   PROFILE ERROR
+                ============================================= */
+
+                if (profileError) {
+
+                    console.error(
+                        "PawPal: Unable to load user profile:",
+                        profileError
+                    );
+
+                    showMessage(
+                        "Login succeeded, but your profile could not be loaded. Please try again.",
+                        "error"
+                    );
+
+                    /*
+                     * Sign out because we don't want the app
+                     * continuing with an unknown role.
+                     */
+
+                    try {
+
+                        await window.supabaseClient
+                            .auth
+                            .signOut();
+
+                    } catch (signOutError) {
+
+                        console.warn(
+                            "PawPal: Sign-out after profile error failed:",
+                            signOutError
+                        );
+                    }
+
+                    return;
+                }
+
+
+                /* =============================================
+                   CREATE CURRENT USER
+                ============================================= */
+
+                const currentUser =
+                    createCurrentUser(
+                        user,
+                        profile
+                    );
+
+
+                console.log(
+                    "PawPal: Logged in user:",
+                    currentUser
+                );
+
+
+                console.log(
+                    "PawPal: Database profile:",
+                    profile
+                );
+
+
+                /* =============================================
+                   SAVE CURRENT USER
+                ============================================= */
+
+                if (
+                    window.PawPalAuth &&
+                    typeof window.PawPalAuth.saveCurrentUser === "function"
+                ) {
+
+                    window.PawPalAuth.saveCurrentUser(
+                        currentUser
+                    );
+
+                } else {
+
+                    localStorage.setItem(
+                        "pawpal-current-user",
+                        JSON.stringify(currentUser)
+                    );
+                }
+
+
+                /* =============================================
+                   REMEMBER ME
+                ============================================= */
+
+                if (rememberMe) {
+
+                    if (rememberMe.checked) {
+
+                        localStorage.setItem(
+                            "pawpalRememberMe",
+                            "true"
+                        );
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "pawpalRememberMe"
+                        );
+                    }
+                }
+
+
+                /* =============================================
+                   SUCCESS MESSAGE
+                ============================================= */
+
+                showMessage(
+                    `Welcome back, ${currentUser.name}! 🐾`,
+                    "success"
+                );
+
+
+                /* =============================================
+                   DASHBOARD
+                ============================================= */
+
+                const dashboard =
+                    getDashboardPath(
+                        currentUser.role
+                    );
+
+
+                console.log(
+                    "PawPal: User role:",
                     currentUser.role
                 );
 
 
-            console.log(
-                "PawPal: Redirecting to:",
-                dashboard
-            );
+                console.log(
+                    "PawPal: Redirecting to:",
+                    dashboard
+                );
 
 
-            /* =============================================
-               REDIRECT
-            ============================================= */
+                /* =============================================
+                   REDIRECT
+                ============================================= */
 
-            setTimeout(function () {
+                setTimeout(
+                    function () {
 
-                window.location.href = dashboard;
+                        window.location.href =
+                            dashboard;
 
-            }, 700);
+                    },
+                    700
+                );
 
 
-        } catch (error) {
+            } catch (error) {
 
-            console.error(
-                "PawPal Login Exception:",
-                error
-            );
+                console.error(
+                    "PawPal Login Exception:",
+                    error
+                );
 
-            showMessage(
-                error?.message ||
-                "Something went wrong while logging in. Please try again.",
-                "error"
-            );
+                showMessage(
+                    error?.message ||
+                    "Something went wrong while logging in. Please try again.",
+                    "error"
+                );
 
-        } finally {
 
-            /*
-             * Re-enable button after a short delay.
-             */
-            setTimeout(function () {
+            } finally {
 
-                if (document.visibilityState === "visible") {
-                    setLoading(false);
-                }
+                /*
+                 * Re-enable button after a short delay.
+                 */
 
-            }, 1000);
+                setTimeout(
+                    function () {
+
+                        if (
+                            document.visibilityState === "visible"
+                        ) {
+
+                            setLoading(false);
+                        }
+
+                    },
+                    1000
+                );
+            }
+
         }
-
-    });
+    );
 
 
     /* =====================================================
@@ -622,7 +730,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const urlParams =
-        new URLSearchParams(window.location.search);
+        new URLSearchParams(
+            window.location.search
+        );
+
 
     if (
         urlParams.get("registered") === "true"
@@ -635,6 +746,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
-
-
-
